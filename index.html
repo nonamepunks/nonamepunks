@@ -197,9 +197,9 @@
         .video-player:hover .play-btn { background: var(--logo-red); border-color: var(--logo-red); transform: scale(1.1); box-shadow: 0 0 80px var(--logo-red); }
         .video-player:hover .play-btn::after { color: var(--white); }
 
-        /* MERCH - 新样式 */
+        /* MERCH - 图案最大化设计 */
         .merch-section { 
-            padding: 100px 30px; 
+            padding: 100px 0; 
             background: url('./image/blackbg.webp') repeat-y center top; 
             background-size: 100% auto; 
             position: relative;
@@ -208,108 +208,132 @@
 
         .merch-carousel-container {
             position: relative;
-            max-width: 1600px;
+            width: 100%;
+            max-width: 100%;
             margin: 0 auto;
-            padding: 0 60px;
+            padding: 0 50px;
         }
 
         .merch-grid {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
-            gap: 20px;
-            transition: transform 0.4s ease;
+            gap: 0;
+            width: 100%;
         }
 
         .merch-item {
             position: relative;
             aspect-ratio: 1;
-            background: #111;
+            background: rgba(0,0,0,0.3);
             cursor: pointer;
             overflow: hidden;
-            border: 1px solid rgba(220, 38, 38, 0.2);
-            transition: all 0.3s;
+            border: 1px solid rgba(220, 38, 38, 0.15);
+            margin: -0.5px;
+            transition: all 0.4s ease;
         }
 
         .merch-item:hover {
+            background: rgba(0,0,0,0.5);
             border-color: var(--logo-red);
-            box-shadow: 0 0 30px rgba(220, 38, 38, 0.3);
+            z-index: 10;
         }
 
         .merch-img-wrap {
-            position: relative;
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 75%;
+            height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 15px;
+            padding: 10px;
             overflow: hidden;
         }
 
         .merch-img {
-            max-width: 100%;
-            max-height: 100%;
+            width: 100%;
+            height: 100%;
             object-fit: contain;
-            transition: opacity 0.4s ease;
+            transition: all 0.4s ease;
         }
 
         .merch-img-hover {
             position: absolute;
-            max-width: 100%;
-            max-height: 100%;
+            width: 100%;
+            height: 100%;
             object-fit: contain;
             opacity: 0;
             transition: opacity 0.4s ease;
-            padding: 15px;
+            padding: 10px;
         }
 
-        .merch-item:hover .merch-img {
+        /* 单图产品 - Hover放大效果 */
+        .merch-item.single-img:hover .merch-img {
+            transform: scale(1.15);
+        }
+
+        /* 双图产品 - Hover淡出第一张，显示第二张 */
+        .merch-item.dual-img:hover .merch-img {
             opacity: 0;
+            transform: scale(1.1);
         }
 
-        .merch-item:hover .merch-img-hover {
+        .merch-item.dual-img:hover .merch-img-hover {
             opacity: 1;
+            transform: scale(1.15);
         }
 
+        /* 信息层 - 默认隐藏，Hover显示 */
         .merch-info {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
-            height: 25%;
-            padding: 10px;
-            background: linear-gradient(to top, rgba(0,0,0,0.95), rgba(0,0,0,0.8));
+            padding: 20px 10px;
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 50%, transparent 100%);
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-end;
             align-items: center;
             text-align: center;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            height: 40%;
+            pointer-events: none;
+        }
+
+        .merch-item:hover .merch-info {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .merch-name {
             font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-            font-size: 13px;
-            letter-spacing: 1px;
+            font-size: 14px;
+            letter-spacing: 2px;
             color: var(--white);
-            margin-bottom: 3px;
+            margin-bottom: 5px;
             text-transform: uppercase;
-            line-height: 1.2;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
         }
 
         .merch-category {
             font-family: 'Arial Black', Arial, sans-serif;
-            font-size: 10px;
+            font-size: 11px;
             color: var(--silver);
-            letter-spacing: 1px;
-            margin-bottom: 3px;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
             text-transform: uppercase;
         }
 
         .merch-price {
             font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-            font-size: 14px;
+            font-size: 16px;
             color: var(--logo-red);
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 20px rgba(220,38,38,0.8);
         }
 
         /* 轮播按钮 */
@@ -317,12 +341,12 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            width: 45px;
-            height: 45px;
-            background: rgba(0,0,0,0.8);
+            width: 40px;
+            height: 80px;
+            background: rgba(0,0,0,0.9);
             border: 2px solid var(--logo-red);
             color: var(--white);
-            font-size: 20px;
+            font-size: 18px;
             cursor: pointer;
             z-index: 100;
             display: flex;
@@ -333,102 +357,112 @@
 
         .merch-nav-btn:hover {
             background: var(--logo-red);
-            box-shadow: 0 0 20px rgba(220, 38, 38, 0.6);
+            box-shadow: 0 0 30px rgba(220, 38, 38, 0.8);
         }
 
-        .merch-nav-btn.prev { left: 0; }
-        .merch-nav-btn.next { right: 0; }
+        .merch-nav-btn.prev { left: 0; border-radius: 0 4px 4px 0; }
+        .merch-nav-btn.next { right: 0; border-radius: 4px 0 0 4px; }
 
         .merch-nav-btn:disabled {
-            opacity: 0.3;
+            opacity: 0.2;
             cursor: not-allowed;
+            border-color: #444;
         }
 
         .merch-btn-container { 
             text-align: center; 
-            margin-top: 50px;
+            margin-top: 60px;
         }
 
-        /* 平板端 - 一排3个 */
-        @media (max-width: 1024px) {
+        /* 平板端竖屏 - 一排3个，有按钮 */
+        @media (max-width: 1024px) and (min-width: 769px) {
             .merch-carousel-container {
-                padding: 0 50px;
+                padding: 0 45px;
             }
             .merch-grid {
                 grid-template-columns: repeat(3, 1fr);
-                gap: 15px;
             }
             .merch-nav-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 16px;
+                display: flex;
+                width: 35px;
+                height: 70px;
             }
         }
 
-        /* 移动端 - 一排3个，2排，边框到边缘 */
+        /* 移动端 - 一排3个，无按钮 */
         @media (max-width: 768px) {
             .merch-section {
                 padding: 60px 0;
             }
             .merch-carousel-container {
-                padding: 0 35px;
-                max-width: 100%;
+                padding: 0;
+                overflow-x: auto;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+            .merch-carousel-container::-webkit-scrollbar {
+                display: none;
             }
             .merch-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 8px;
+                grid-template-columns: repeat(3, 33.333vw);
+                grid-auto-flow: row;
+                width: max-content;
+                min-width: 100%;
             }
             .merch-item {
-                border-left: none;
-                border-right: none;
-            }
-            .merch-item:first-child {
-                border-left: 1px solid rgba(220, 38, 38, 0.2);
+                width: 33.333vw;
+                height: 33.333vw;
+                border: none;
+                border-right: 1px solid rgba(220, 38, 38, 0.1);
+                border-bottom: 1px solid rgba(220, 38, 38, 0.1);
+                margin: 0;
             }
             .merch-item:nth-child(3n) {
-                border-right: 1px solid rgba(220, 38, 38, 0.2);
-            }
-            .merch-item:hover {
-                border-color: rgba(220, 38, 38, 0.5);
+                border-right: none;
             }
             .merch-img-wrap {
-                padding: 8px;
-                height: 70%;
-            }
-            .merch-img-hover {
-                padding: 8px;
-            }
-            .merch-info {
-                height: 30%;
                 padding: 5px;
             }
+            .merch-img-hover {
+                padding: 5px;
+            }
+            .merch-info {
+                padding: 15px 5px;
+                height: 35%;
+                opacity: 0;
+            }
+            .merch-item:hover .merch-info,
+            .merch-item:active .merch-info {
+                opacity: 1;
+                transform: translateY(0);
+            }
             .merch-name {
-                font-size: 10px;
-                letter-spacing: 0.5px;
+                font-size: 11px;
+                letter-spacing: 1px;
             }
             .merch-category {
-                font-size: 8px;
+                font-size: 9px;
             }
             .merch-price {
-                font-size: 11px;
+                font-size: 12px;
             }
             .merch-nav-btn {
-                width: 30px;
-                height: 30px;
-                font-size: 14px;
-                border-width: 1px;
+                display: none;
             }
             .merch-btn-container {
                 margin-top: 40px;
             }
         }
 
-        @media (max-width: 380px) {
-            .merch-grid {
-                gap: 5px;
-            }
+        @media (max-width: 480px) {
             .merch-name {
-                font-size: 9px;
+                font-size: 10px;
+            }
+            .merch-category {
+                font-size: 8px;
+            }
+            .merch-price {
+                font-size: 11px;
             }
         }
 
@@ -883,7 +917,7 @@
         <div class="merch-carousel-container">
             <button class="merch-nav-btn prev" onclick="moveMerch(-1)">&#10094;</button>
             <div class="merch-grid" id="merchGrid">
-                <div class="merch-item" data-index="0">
+                <div class="merch-item dual-img" data-index="0">
                     <div class="merch-img-wrap">
                         <img src="./image/merchs/Anti-teeb1.png" alt="Anti- Tee" class="merch-img">
                         <img src="./image/merchs/Anti-teeb2.png" alt="Anti- Tee Back" class="merch-img-hover">
@@ -894,7 +928,7 @@
                         <div class="merch-price">$25.9</div>
                     </div>
                 </div>
-                <div class="merch-item" data-index="1">
+                <div class="merch-item single-img" data-index="1">
                     <div class="merch-img-wrap">
                         <img src="./image/merchs/DevilSukll-teeb1.png" alt="Devil Skull Tee" class="merch-img">
                     </div>
@@ -904,7 +938,7 @@
                         <div class="merch-price">$22.9</div>
                     </div>
                 </div>
-                <div class="merch-item" data-index="2">
+                <div class="merch-item dual-img" data-index="2">
                     <div class="merch-img-wrap">
                         <img src="./image/merchs/WNTT-tee1.png" alt="We Need The Truth Tee" class="merch-img">
                         <img src="./image/merchs/WNTT-tee2.png" alt="We Need The Truth Tee Back" class="merch-img-hover">
@@ -915,7 +949,7 @@
                         <div class="merch-price">$25.9</div>
                     </div>
                 </div>
-                <div class="merch-item" data-index="3">
+                <div class="merch-item single-img" data-index="3">
                     <div class="merch-img-wrap">
                         <img src="./image/merchs/cdg-ls1.png" alt="Coup De Grace Sweatshirt" class="merch-img">
                     </div>
@@ -925,7 +959,7 @@
                         <div class="merch-price">$35.9</div>
                     </div>
                 </div>
-                <div class="merch-item" data-index="4">
+                <div class="merch-item single-img" data-index="4">
                     <div class="merch-img-wrap">
                         <img src="./image/merchs/Button1.png" alt="CN Logo Button" class="merch-img">
                     </div>
@@ -935,7 +969,7 @@
                         <div class="merch-price">$12.9</div>
                     </div>
                 </div>
-                <div class="merch-item" data-index="5">
+                <div class="merch-item dual-img" data-index="5">
                     <div class="merch-img-wrap">
                         <img src="./image/merchs/fb-h1a.png" alt="Fortress Besieged Hoodie" class="merch-img">
                         <img src="./image/merchs/fb-h1b.png" alt="Fortress Besieged Hoodie Back" class="merch-img-hover">
@@ -946,7 +980,7 @@
                         <div class="merch-price">$39.9</div>
                     </div>
                 </div>
-                <div class="merch-item" data-index="6">
+                <div class="merch-item single-img" data-index="6">
                     <div class="merch-img-wrap">
                         <img src="./image/merchs/logo-cap1.png" alt="Anti- Cap" class="merch-img">
                     </div>
@@ -956,7 +990,7 @@
                         <div class="merch-price">$12.9</div>
                     </div>
                 </div>
-                <div class="merch-item" data-index="7">
+                <div class="merch-item single-img" data-index="7">
                     <div class="merch-img-wrap">
                         <img src="./image/merchs/fb-vinylb.png" alt="Fortress Besieged Vinyl" class="merch-img">
                     </div>
@@ -1160,12 +1194,13 @@
 
 // Merch轮播功能
         let merchCurrentPage = 0;
-        const merchItems = document.querySelectorAll('.merch-item');
-        const totalMerchItems = merchItems.length;
+        let merchStartX = 0;
+        let merchEndX = 0;
 
         function getItemsPerPage() {
-            if (window.innerWidth <= 768) return 6; // 移动端3x2
-            if (window.innerWidth <= 1024) return 6; // 平板3x2
+            const width = window.innerWidth;
+            if (width <= 768) return 6; // 移动端3x2
+            if (width <= 1024) return 6; // 平板3x2
             return 6; // 桌面6x1
         }
 
@@ -1175,31 +1210,44 @@
         }
 
         function updateMerchGrid() {
+            const items = document.querySelectorAll('.merch-item');
             const itemsPerPage = getItemsPerPage();
-            const itemsPerRow = getItemsPerRow();
-            const totalPages = Math.ceil(totalMerchItems / itemsPerPage);
+            const totalItems = items.length;
+            const totalPages = Math.ceil(totalItems / itemsPerPage);
 
             // 显示/隐藏物品
-            merchItems.forEach((item, index) => {
+            items.forEach((item, index) => {
                 const pageIndex = Math.floor(index / itemsPerPage);
-                if (pageIndex === merchCurrentPage) {
+                if (window.innerWidth <= 768) {
+                    // 移动端显示所有，通过滚动查看
                     item.style.display = 'block';
                 } else {
-                    item.style.display = 'none';
+                    item.style.display = pageIndex === merchCurrentPage ? 'block' : 'none';
                 }
             });
 
-            // 更新按钮状态
-            const prevBtn = document.querySelector('.merch-nav-btn.prev');
-            const nextBtn = document.querySelector('.merch-nav-btn.next');
+            // 更新按钮状态（仅桌面和平板）
+            if (window.innerWidth > 768) {
+                const prevBtn = document.querySelector('.merch-nav-btn.prev');
+                const nextBtn = document.querySelector('.merch-nav-btn.next');
 
-            if (prevBtn) prevBtn.disabled = merchCurrentPage === 0;
-            if (nextBtn) nextBtn.disabled = merchCurrentPage >= totalPages - 1;
+                if (prevBtn) prevBtn.style.display = 'flex';
+                if (nextBtn) nextBtn.style.display = 'flex';
+                if (prevBtn) prevBtn.disabled = merchCurrentPage === 0;
+                if (nextBtn) nextBtn.disabled = merchCurrentPage >= totalPages - 1;
+            } else {
+                // 移动端隐藏按钮
+                const prevBtn = document.querySelector('.merch-nav-btn.prev');
+                const nextBtn = document.querySelector('.merch-nav-btn.next');
+                if (prevBtn) prevBtn.style.display = 'none';
+                if (nextBtn) nextBtn.style.display = 'none';
+            }
         }
 
         function moveMerch(direction) {
+            const items = document.querySelectorAll('.merch-item');
             const itemsPerPage = getItemsPerPage();
-            const totalPages = Math.ceil(totalMerchItems / itemsPerPage);
+            const totalPages = Math.ceil(items.length / itemsPerPage);
 
             merchCurrentPage += direction;
 
@@ -1209,14 +1257,47 @@
             updateMerchGrid();
         }
 
+        // 触摸滑动支持（移动端）
+        function initMerchTouch() {
+            const container = document.querySelector('.merch-carousel-container');
+            if (!container) return;
+
+            container.addEventListener('touchstart', (e) => {
+                merchStartX = e.touches[0].clientX;
+            }, {passive: true});
+
+            container.addEventListener('touchend', (e) => {
+                merchEndX = e.changedTouches[0].clientX;
+                handleMerchSwipe();
+            }, {passive: true});
+        }
+
+        function handleMerchSwipe() {
+            const swipeThreshold = 50;
+            const diff = merchStartX - merchEndX;
+
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    moveMerch(1); // 向左滑，下一页
+                } else {
+                    moveMerch(-1); // 向右滑，上一页
+                }
+            }
+        }
+
         // 窗口大小改变时重置
         window.addEventListener('resize', () => {
-            merchCurrentPage = 0;
+            if (window.innerWidth > 768) {
+                merchCurrentPage = 0;
+            }
             updateMerchGrid();
         });
 
         // 初始化
-        document.addEventListener('DOMContentLoaded', updateMerchGrid);
+        document.addEventListener('DOMContentLoaded', () => {
+            updateMerchGrid();
+            initMerchTouch();
+        });
     </script>
     <script type="text/javascript">
        (function(){

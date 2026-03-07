@@ -452,12 +452,15 @@
         @media (max-width: 768px) {
             @keyframes dragonFlash {
                 0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
-                20% { transform: translate(-50%, -50%) scale(6); opacity: 1; }
-                50% { transform: translate(-50%, -50%) scale(8); opacity: 1; }
-                80% { transform: translate(-50%, -50%) scale(6); opacity: 1; }
+                20% { transform: translate(-50%, -50%) scale(0.85); opacity: 1; }
+                50% { transform: translate(-50%, -50%) scale(1.0); opacity: 1; }
+                80% { transform: translate(-50%, -50%) scale(0.85); opacity: 1; }
                 100% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
             }
             .dragon-star-ring { width: 50vmin; height: 50vmin; }
+            .dragon-clone {
+                filter: grayscale(0%) brightness(2.5) drop-shadow(0 0 60px #DC2626) drop-shadow(0 0 100px rgba(220,38,38,1));
+            }
         }
 </style>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
@@ -876,7 +879,7 @@
           });
        })();
     
-        // 龙点击动画
+        // 龙点击动画 - 使用img标签确保清晰度
         document.querySelectorAll('.nav-dragon').forEach(dragon => {
             dragon.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -885,11 +888,31 @@
                 const src = this.src;
                 const rect = this.getBoundingClientRect();
 
+                // 获取原始图片尺寸以保持比例
+                const naturalWidth = this.naturalWidth || 1191;
+                const naturalHeight = this.naturalHeight || 496;
+                const aspectRatio = naturalWidth / naturalHeight;
+
+                // 计算合适的显示尺寸（基于视口大小）
+                const isMobile = window.innerWidth <= 768;
+                const baseSize = isMobile ? Math.min(window.innerWidth * 0.6, 300) : Math.min(window.innerWidth * 0.5, 600);
+                const cloneWidth = baseSize;
+                const cloneHeight = baseSize / aspectRatio;
+
                 const clone = document.createElement('div');
                 clone.className = 'dragon-clone';
-                clone.style.backgroundImage = 'url(' + src + ')';
-                clone.style.width = rect.width + 'px';
-                clone.style.height = rect.height + 'px';
+                clone.style.width = cloneWidth + 'px';
+                clone.style.height = cloneHeight + 'px';
+
+                // 使用img标签确保清晰度
+                const img = document.createElement('img');
+                img.src = src;
+                img.alt = 'Dragon';
+                img.style.width = '100%';
+                img.style.height = '100%';
+                img.style.objectFit = 'contain';
+
+                clone.appendChild(img);
                 document.body.appendChild(clone);
 
                 const star = document.createElement('div');

@@ -292,7 +292,7 @@
                 height: 100% !important;
                 object-fit: contain !important;
                 object-position: center !important;
-      }
+            }
              
             /* 导航栏 */
             .nav-links { gap: 5px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding: 0 10px; justify-content: space-around; }
@@ -760,25 +760,6 @@
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.footer-dropdown')) {
                 document.querySelectorAll('.footer-dropdown').forEach(d => d.classList.remove('active'));
-            }
-        });
-
-        function playVideo() {
-            var player = document.getElementById('videoPlayer');
-            player.innerHTML = '<iframe src="https://www.youtube.com/embed/CFZik0yVglc?autoplay=1" allowfullscreen frameborder="0" scrolling="no" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>';
-            player.onclick = null;
-            player.style.cursor = 'default';
-        }
-    </script>
-    <script type="text/javascript">
-       (function(){
-          emailjs.init({
-            publicKey: "FQAG2S-gm0UgmyD4A",
-          });
-       })();
-    </script>
-</body>
-</html>ach(d => d.classList.remove('active'));
             }
         });
 

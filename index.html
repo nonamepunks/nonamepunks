@@ -452,16 +452,39 @@
             100% { transform: translate(-50%, -50%) scale(3) rotate(180deg); opacity: 0; }
         }
 
-        /* 移动端优化 - 放大到 scale 0.85，避免出屏 */
+        /* 移动端优化 - 缩小 scale 避免出屏 */
         @media (max-width: 768px) {
             @keyframes dragonFlash {
                 0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
-                20% { transform: translate(-50%, -50%) scale(0.75); opacity: 1; }
-                50% { transform: translate(-50%, -50%) scale(0.85); opacity: 1; }
-                80% { transform: translate(-50%, -50%) scale(0.75); opacity: 1; }
+                20% { transform: translate(-50%, -50%) scale(0.9); opacity: 1; }
+                50% { transform: translate(-50%, -50%) scale(1.0); opacity: 1; }
+                80% { transform: translate(-50%, -50%) scale(0.9); opacity: 1; }
                 100% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
             }
-            .dragon-star-ring { width: 50vmin; height: 50vmin; }
+            .dragon-star-ring { width: 45vmin; height: 45vmin; }
+        }
+
+        /* 竖屏模式特殊优化 */
+        @media (max-width: 768px) and (orientation: portrait) {
+            @keyframes dragonFlash {
+                0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
+                20% { transform: translate(-50%, -50%) scale(0.85); opacity: 1; }
+                50% { transform: translate(-50%, -50%) scale(0.95); opacity: 1; }
+                80% { transform: translate(-50%, -50%) scale(0.85); opacity: 1; }
+                100% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
+            }
+        }
+
+        /* 超小屏幕进一步优化 */
+        @media (max-width: 380px) {
+            @keyframes dragonFlash {
+                0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
+                20% { transform: translate(-50%, -50%) scale(0.8); opacity: 1; }
+                50% { transform: translate(-50%, -50%) scale(0.9); opacity: 1; }
+                80% { transform: translate(-50%, -50%) scale(0.8); opacity: 1; }
+                100% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
+            }
+            .dragon-star-ring { width: 40vmin; height: 40vmin; }
         }
 </style>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
@@ -880,7 +903,7 @@
           });
        })();
     
-        // 龙点击动画 - 优化清晰度版本
+        // 龙点击动画 - 优化清晰度版本（修复竖屏/移动端出屏问题）
         document.querySelectorAll('.nav-dragon').forEach(dragon => {
             dragon.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -891,25 +914,55 @@
                 img.src = src;
 
                 img.onload = () => {
-                    // 原始图片尺寸：1191×496
+                    // 原始图片尺寸：1191×496，宽高比约2.4:1
                     const naturalWidth = img.naturalWidth || 1191;
                     const naturalHeight = img.naturalHeight || 496;
-                    const aspectRatio = naturalWidth / naturalHeight; // 约2.4
+                    const aspectRatio = naturalWidth / naturalHeight;
 
-                    // 根据屏幕尺寸计算最佳显示尺寸
-                    const isMobile = window.innerWidth <= 768;
-                    const baseSize = isMobile ? 280 : 500; // 移动端基础高度280px，桌面端500px
+                    // 获取屏幕尺寸
+                    const screenWidth = window.innerWidth;
+                    const screenHeight = window.innerHeight;
+                    const isMobile = screenWidth <= 768;
+                    const isPortrait = screenHeight > screenWidth; // 竖屏检测
 
-                    // 保持原始宽高比计算尺寸
-                    const displayHeight = baseSize;
-                    const displayWidth = displayHeight * aspectRatio;
+                    // 计算最大允许尺寸（留出边距）
+                    const maxWidth = screenWidth * 0.85; // 最大占屏幕85%宽度
+                    const maxHeight = screenHeight * 0.5; // 最大占屏幕50%高度
+
+                    let displayWidth, displayHeight;
+
+                    if (isMobile) {
+                        // 移动端/竖屏：严格限制尺寸
+                        if (isPortrait) {
+                            // 竖屏模式：基于屏幕宽度计算，确保不超出
+                            displayWidth = Math.min(screenWidth * 0.75, 320); // 最大320px或75%屏幕宽
+                            displayHeight = displayWidth / aspectRatio;
+                        } else {
+                            // 横屏模式
+                            displayHeight = Math.min(screenHeight * 0.4, 180);
+                            displayWidth = displayHeight * aspectRatio;
+                        }
+                    } else {
+                        // 桌面端
+                        displayHeight = Math.min(500, screenHeight * 0.6);
+                        displayWidth = displayHeight * aspectRatio;
+                    }
+
+                    // 最终安全检查
+                    if (displayWidth > maxWidth) {
+                        displayWidth = maxWidth;
+                        displayHeight = displayWidth / aspectRatio;
+                    }
+                    if (displayHeight > maxHeight) {
+                        displayHeight = maxHeight;
+                        displayWidth = displayHeight * aspectRatio;
+                    }
 
                     const clone = document.createElement('div');
                     clone.className = 'dragon-clone';
                     clone.style.backgroundImage = 'url(' + src + ')';
                     clone.style.width = displayWidth + 'px';
                     clone.style.height = displayHeight + 'px';
-                    // 使用原始图片尺寸作为背景图尺寸以保证清晰度
                     clone.style.backgroundSize = 'contain';
                     document.body.appendChild(clone);
 

@@ -361,18 +361,23 @@
                 padding: 0 15px;
             }
             .hero-logo-img {
-                width: 65%;
-                max-width: 260px;
+                width: 58%;
+                max-width: 240px;
                 height: auto;
             }
-            /* 移动端保留红光效果，但稍微减弱 */
+            /* 移动端保留红光效果 */
             .hero-logo-img.active {
                 animation: logoFadeIn 1.5s ease-out forwards, logoGlowMobile 3s ease-in-out infinite 1.5s;
             }
 
             @keyframes logoGlowMobile {
-                0%, 100% { filter: drop-shadow(0 0 15px rgba(220, 38, 38, 0.6)) drop-shadow(0 0 30px rgba(220, 38, 38, 0.4)) drop-shadow(0 0 45px rgba(220, 38, 38, 0.2)); }
-                50% { filter: drop-shadow(0 0 25px rgba(220, 38, 38, 0.8)) drop-shadow(0 0 50px rgba(220, 38, 38, 0.5)) drop-shadow(0 0 75px rgba(220, 38, 38, 0.3)); }
+                0%, 100% { filter: drop-shadow(0 0 12px rgba(220, 38, 38, 0.7)) drop-shadow(0 0 25px rgba(220, 38, 38, 0.5)) drop-shadow(0 0 40px rgba(220, 38, 38, 0.3)); }
+                50% { filter: drop-shadow(0 0 20px rgba(220, 38, 38, 0.9)) drop-shadow(0 0 40px rgba(220, 38, 38, 0.6)) drop-shadow(0 0 60px rgba(220, 38, 38, 0.4)); }
+            }
+
+            /* hero logo下移 */
+            .hero-content {
+                bottom: 5%;
             }
 
             /* 彻底禁用爆闪动画 */
@@ -397,57 +402,45 @@
             .member-name { font-size: 16px; }
             .member-role { font-size: 12px; }
 
-            /* TOUR */
+            /* TOUR - 三排布局 */
             .tour-item { 
-                flex-direction: row; 
-                flex-wrap: nowrap;
-                gap: 6px; 
+                flex-direction: column; 
+                gap: 4px; 
                 text-align: center; 
-                padding: 6px 10px; 
-                margin-bottom: 2px;
-                font-size: 11px;
+                padding: 8px 15px; 
+                margin-bottom: 3px;
+                font-size: 12px;
             }
+            /* 第一排：日期 */
             .tour-date-col { 
-                text-align: left; 
-                min-width: 70px; 
-                font-size: 10px;
-                flex-shrink: 0;
-            }
-            .tour-city-col { 
                 text-align: center; 
-                flex: 1;
+                width: 100%;
+                font-size: 13px;
+                color: var(--logo-red);
+                font-weight: bold;
+                letter-spacing: 2px;
+            }
+            /* 第二排：城市 场地 国家 */
+            .tour-city-col, .tour-venue-col, .tour-country-col { 
+                text-align: center; 
+                width: auto;
                 font-size: 11px;
-                min-width: 0;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
+                display: inline;
             }
-            .tour-venue-col { 
-                text-align: center; 
-                flex: 1.2;
-                font-size: 10px;
-                min-width: 0;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-            }
-            .tour-country-col { 
-                text-align: center; 
-                min-width: 45px;
-                font-size: 10px;
-                flex-shrink: 0;
-            }
+            .tour-city-col::after { content: " / "; color: var(--silver); }
+            .tour-venue-col::after { content: " / "; color: var(--silver); }
+            /* 第三排：按钮 */
             .tour-btn-col { 
-                text-align: right; 
-                min-width: 60px;
-                flex-shrink: 0;
+                text-align: center; 
+                width: 100%;
+                margin-top: 4px;
             }
             .tour-btn {
-                padding: 4px 8px;
-                font-size: 9px;
-                min-height: 24px;
-                min-width: 50px;
-                letter-spacing: 1px;
+                padding: 6px 20px;
+                font-size: 11px;
+                min-height: 28px;
+                min-width: 80px;
+                letter-spacing: 2px;
             }
             .tour-section { padding-top: 20px; } 
             .section-title { font-size: 32px; letter-spacing: 6px; margin-bottom: 20px; }
@@ -472,7 +465,7 @@
         }
 
         @media (max-width: 380px) {
-            .hero-logo-img { width: 60%; max-width: 220px; }
+            .hero-logo-img { width: 55%; max-width: 200px; }
             .footer-nav-container .nav-dragon { display: block; width: 20px; height: 20px; }
         }
 

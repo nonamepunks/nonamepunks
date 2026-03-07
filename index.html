@@ -380,25 +380,30 @@
         .hero-noise, .hero-scanlines, .banner-grain, .banner-scanlines-dark { display: none !important; }
         .silver-line::after { animation: none; }
 
-        /* ===== 移动端 Hero 强制重写 ===== */
+        /* ===== 移动端 Hero 重新设计 ===== */
         .hero { 
             background: #000 !important;
             height: 100vh !important;
-            min-height: 500px !important;
+            min-height: 600px !important;
             position: relative !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: flex-start !important;
+            align-items: center !important;
+            padding-top: 5vh !important;
         }
 
-        /* 背景图 - 放大填满 */
+        /* 背景图 - 完整显示在上方 */
         .hero-bg { 
             background-image: url('./image/hero1.webp') !important;
-            background-size: 140% auto !important;
+            background-size: contain !important;
             background-repeat: no-repeat !important;
-            background-position: center 0 !important;
-            position: absolute !important;
-            top: 0 !important;
-            left: -20% !important;
-            width: 140% !important;
-            height: 80% !important;
+            background-position: center top !important;
+            position: relative !important;
+            width: 100% !important;
+            height: 60vh !important;
+            max-height: 500px !important;
+            flex-shrink: 0 !important;
         }
 
         /* 隐藏特效 */
@@ -406,20 +411,21 @@
             display: none !important; 
         }
 
-        /* Logo 容器 */
+        /* Logo 容器 - 在照片下方 */
         .hero-content {
-            position: absolute !important;
-            bottom: 3% !important;
-            left: 0 !important;
+            position: relative !important;
+            margin-top: 3vh !important;
             width: 100% !important;
             text-align: center !important;
             z-index: 10 !important;
+            flex-shrink: 0 !important;
         }
 
-        /* Logo - 小尺寸 */
+        /* Logo - 适中尺寸 */
         .hero-logo-img {
-            width: 40vw !important;
-            max-width: 160px !important;
+            width: 50vw !important;
+            max-width: 200px !important;
+            min-width: 150px !important;
             height: auto !important;
         }
 

@@ -725,6 +725,9 @@
     .merch-item {
         width: calc(100vw / 6);
     }
+    .merch-carousel-wrapper {
+        touch-action: pan-y;
+    }
     .merch-carousel-wrapper:hover .merch-nav-btn.visible {
         opacity: 1;
     }
@@ -742,6 +745,9 @@
     }
     .merch-prev-btn { left: 15px; }
     .merch-next-btn { right: 15px; }
+    .merch-carousel-wrapper {
+        touch-action: pan-y;
+    }
     .merch-carousel-wrapper:hover .merch-nav-btn.visible {
         opacity: 1;
     }
@@ -758,71 +764,90 @@
     }
 }
 
-/* 移动端 - 网格布局 */
+/* 移动端 - 触摸滑动轮播 */
 @media (max-width: 768px) {
     .merch-section {
         padding: 60px 0;
     }
     .merch-carousel-wrapper {
-        width: 100%;
-        margin-left: 0;
-        margin-right: 0;
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+        margin-right: calc(-50vw + 50%);
+        overflow: hidden;
+        touch-action: pan-y;
     }
     .merch-carousel {
-        width: 100%;
-        overflow: visible;
+        width: 100vw;
+        overflow: hidden;
     }
     .merch-track {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2px;
-        transform: none !important;
+        display: flex;
+        gap: 0;
+        transform: none;
+        transition: transform 0.3s ease;
     }
     .merch-item {
-        width: 100%;
+        width: calc(100vw / 3);
+        min-width: calc(100vw / 3);
         border: none;
     }
+    /* 移动端隐藏导航按钮 */
     .merch-nav-btn {
         display: none !important;
     }
-    /* 移动端始终显示信息 */
+    /* 移动端hover显示信息（触摸设备用active状态） */
     .merch-info {
-        position: relative;
-        transform: translateY(0);
-        padding: 10px 5px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 15px 10px;
         background: transparent;
+        transform: translateY(100%);
+        transition: transform 0.3s ease;
+    }
+    .merch-item:hover .merch-info,
+    .merch-item:active .merch-info {
+        transform: translateY(0);
     }
     .merch-name {
-        font-size: 10px;
-        letter-spacing: 1px;
-        margin-bottom: 3px;
-    }
-    .merch-category {
-        font-size: 8px;
-        margin-bottom: 5px;
-    }
-    .merch-price {
         font-size: 12px;
         letter-spacing: 1px;
+        margin-bottom: 3px;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.9), 0 0 15px rgba(0,0,0,0.9);
+    }
+    .merch-category {
+        font-size: 10px;
+        margin-bottom: 5px;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.9), 0 0 10px rgba(0,0,0,0.9);
+    }
+    .merch-price {
+        font-size: 14px;
+        letter-spacing: 1px;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.9), 0 0 10px rgba(0,0,0,0.9);
     }
     .merch-btn-container {
         margin-top: 30px;
     }
 }
 
-/* 超小屏幕 */
+/* 超小屏幕 - 2个产品 */
 @media (max-width: 480px) {
-    .merch-track {
-        grid-template-columns: repeat(2, 1fr);
+    .merch-item {
+        width: calc(100vw / 2);
+        min-width: calc(100vw / 2);
     }
     .merch-info {
-        padding: 8px 4px;
+        padding: 12px 8px;
     }
     .merch-name {
+        font-size: 11px;
+    }
+    .merch-category {
         font-size: 9px;
     }
     .merch-price {
-        font-size: 11px;
+        font-size: 13px;
     }
 }
 </style>
@@ -1412,6 +1437,7 @@
 
     let merchCurrentIndex = 0;
     let merchTrack, merchItems, prevBtn, nextBtn;
+    let isMobile = false;
 
     function initElements() {
         merchTrack = document.querySelector('.merch-track');
@@ -1424,43 +1450,45 @@
     function getItemsPerView() {
         const width = window.innerWidth;
         const isPortrait = window.innerHeight > window.innerWidth;
-        if (width <= 768) return null;
-        if (width >= 1025 && !isPortrait) return 6;
-        return 3;
+        isMobile = width <= 768;
+
+        if (width <= 480) return 2; // 超小屏2个
+        if (width <= 768) return 3; // 移动端3个
+        if (width >= 1025 && !isPortrait) return 6; // 桌面横屏6个
+        return 3; // 桌面竖屏3个
     }
 
     window.updateMerchCarousel = function() {
         if (!merchTrack || !merchItems.length) return;
 
         const itemsPerView = getItemsPerView();
-        if (!itemsPerView) {
-            merchTrack.style.transform = '';
-            return;
-        }
-
         const totalItems = merchItems.length;
         const maxIndex = Math.max(0, totalItems - itemsPerView);
 
+        // 限制索引
         merchCurrentIndex = Math.max(0, Math.min(merchCurrentIndex, maxIndex));
 
-        const itemWidth = window.innerWidth / itemsPerView;
+        // 计算位移
+        const containerWidth = isMobile ? window.innerWidth : window.innerWidth;
+        const itemWidth = containerWidth / itemsPerView;
         const offset = -merchCurrentIndex * itemWidth;
 
         merchTrack.style.transform = 'translateX(' + offset + 'px)';
 
-        if (totalItems > itemsPerView && prevBtn && nextBtn) {
-            prevBtn.classList.toggle('visible', merchCurrentIndex > 0);
-            nextBtn.classList.toggle('visible', merchCurrentIndex < maxIndex);
-        } else {
-            if (prevBtn) prevBtn.classList.remove('visible');
-            if (nextBtn) nextBtn.classList.remove('visible');
+        // 更新导航按钮（仅桌面端）
+        if (!isMobile && prevBtn && nextBtn) {
+            if (totalItems > itemsPerView) {
+                prevBtn.classList.toggle('visible', merchCurrentIndex > 0);
+                nextBtn.classList.toggle('visible', merchCurrentIndex < maxIndex);
+            } else {
+                prevBtn.classList.remove('visible');
+                nextBtn.classList.remove('visible');
+            }
         }
     };
 
     window.scrollMerch = function(direction) {
         const itemsPerView = getItemsPerView();
-        if (!itemsPerView) return;
-
         const totalItems = merchItems.length;
         const maxIndex = Math.max(0, totalItems - itemsPerView);
 
@@ -1493,23 +1521,88 @@
         init();
     }
 
-    // 触摸滑动
+    // 触摸滑动 - 所有设备都支持
     let touchStartX = 0;
-    document.addEventListener('touchstart', function(e) {
-        if (e.target.closest('.merch-carousel')) {
-            touchStartX = e.changedTouches[0].screenX;
-        }
+    let touchStartY = 0;
+    let isDragging = false;
+
+    merchTrack.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+        isDragging = true;
+        merchTrack.style.transition = 'none';
     }, {passive: true});
 
-    document.addEventListener('touchend', function(e) {
-        if (!e.target.closest('.merch-carousel')) return;
+    merchTrack.addEventListener('touchmove', function(e) {
+        if (!isDragging) return;
+
+        const touchX = e.changedTouches[0].screenX;
+        const touchY = e.changedTouches[0].screenY;
+        const diffX = touchStartX - touchX;
+        const diffY = touchStartY - touchY;
+
+        // 主要是水平滑动时才阻止默认行为
+        if (Math.abs(diffX) > Math.abs(diffY)) {
+            e.preventDefault();
+        }
+    }, {passive: false});
+
+    merchTrack.addEventListener('touchend', function(e) {
+        if (!isDragging) return;
+        isDragging = false;
+
+        merchTrack.style.transition = 'transform 0.3s ease';
+
         const touchEndX = e.changedTouches[0].screenX;
-        const diff = touchStartX - touchEndX;
+        const touchEndY = e.changedTouches[0].screenY;
+        const diffX = touchStartX - touchEndX;
+        const diffY = touchStartY - touchEndY;
 
-        if (Math.abs(diff) > 50 && window.innerWidth > 768) {
-            window.scrollMerch(diff > 0 ? 1 : -1);
+        // 水平滑动超过50px触发切换
+        if (Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY)) {
+            if (diffX > 0) {
+                window.scrollMerch(1); // 左滑 - 下一个
+            } else {
+                window.scrollMerch(-1); // 右滑 - 上一个
+            }
+        } else {
+            // 回弹到当前位置
+            window.updateMerchCarousel();
         }
     }, {passive: true});
+
+    // 鼠标拖拽（桌面端）
+    let mouseStartX = 0;
+    let isMouseDragging = false;
+
+    merchTrack.addEventListener('mousedown', function(e) {
+        mouseStartX = e.clientX;
+        isMouseDragging = true;
+        merchTrack.style.transition = 'none';
+        merchTrack.style.cursor = 'grabbing';
+    });
+
+    document.addEventListener('mousemove', function(e) {
+        if (!isMouseDragging) return;
+        e.preventDefault();
+    });
+
+    document.addEventListener('mouseup', function(e) {
+        if (!isMouseDragging) return;
+        isMouseDragging = false;
+
+        merchTrack.style.transition = 'transform 0.3s ease';
+        merchTrack.style.cursor = 'grab';
+
+        const diff = mouseStartX - e.clientX;
+        if (Math.abs(diff) > 50) {
+            window.scrollMerch(diff > 0 ? 1 : -1);
+        } else {
+            window.updateMerchCarousel();
+        }
+    });
+
+    merchTrack.style.cursor = 'grab';
 })();
 </script>
 

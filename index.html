@@ -345,7 +345,7 @@
         .silver-line::after { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, var(--white), transparent); animation: lineScan 2s linear infinite; }
 
         @media (max-width: 1200px) { .music-content-new { grid-template-columns: 1fr; gap: 40px; } .music-player-side { max-width: 600px; margin: 0 auto; width: 100%; } .album-cover { width: 350px; height: 350px; } .footer-main { grid-template-columns: 1fr; gap: 40px; } .footer-right { align-items: center; } }
-        @media (max-width: 1024px) { .members-grid { grid-template-columns: repeat(2, 1fr); } .merch-grid { grid-template-columns: repeat(2, 1fr); } .nav-links { gap: 25px; } .nav-links a { font-size: 14px; letter-spacing: 2px; } .hero-logo-img { max-width: 600px; } .album-cover { width: 300px; height: 300px; } .album-title { font-size: 36px; letter-spacing: 6px; } }
+        @media (max-width: 1024px) { .members-grid { grid-template-columns: 1fr 1fr !important; } .merch-grid { grid-template-columns: repeat(2, 1fr); } .nav-links { gap: 25px; } .nav-links a { font-size: 14px; letter-spacing: 2px; } .hero-logo-img { max-width: 600px; } .album-cover { width: 300px; height: 300px; } .album-title { font-size: 36px; letter-spacing: 6px; } }
         @media (max-width: 768px) { 
         /* 移动端移除爆闪效果 */
         .hero-noise, .hero-scanlines, .banner-grain, .banner-scanlines-dark { display: none !important; }
@@ -390,10 +390,22 @@
         .nav-dragon-left { margin-right: 8px; }
         .nav-dragon-right { margin-left: 8px; }
 
-        /* MEMBERS 一排2个 */
-        .members-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-        .member-avatar { width: 140px; height: 140px; }
-        .member-name { font-size: 18px; }
+        /* MEMBERS 一排2个 - 强制 */
+        .members-grid { 
+            grid-template-columns: 1fr 1fr !important; 
+            gap: 15px !important; 
+            max-width: 100% !important;
+        }
+        .member-card {
+            width: 100% !important;
+        }
+        .member-avatar { 
+            width: 120px !important; 
+            height: 120px !important; 
+            margin: 0 auto 15px !important;
+        }
+        .member-name { font-size: 16px !important; }
+        .member-role { font-size: 12px !important; }
 
         /* 底部导航栏不换行 - 强制所有链接一行 */
         .footer-nav-container {

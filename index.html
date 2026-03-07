@@ -77,14 +77,33 @@
         }
 
         .hero-logo-img { 
-            max-width: 800px; 
-            width: 80%; 
+            max-width: 1000px; 
+            width: 85%; 
             height: auto; 
             opacity: 0; 
         }
 
         .hero-logo-img.active { 
             animation: logoFadeIn 1.5s ease-out forwards, logoGlow 3s ease-in-out infinite 1.5s; 
+        }
+
+        /* 电脑竖屏和平板 - 缩小logo但保留红光效果 */
+        @media (max-width: 1024px) and (orientation: portrait) {
+            .hero-logo-img {
+                max-width: 500px;
+                width: 70%;
+            }
+            .hero-logo-img.active {
+                animation: logoFadeIn 1.5s ease-out forwards, logoGlow 3s ease-in-out infinite 1.5s;
+            }
+        }
+
+        /* 平板横屏也适当缩小 */
+        @media (max-width: 1024px) and (orientation: landscape) {
+            .hero-logo-img {
+                max-width: 600px;
+                width: 75%;
+            }
         }
 
         .hero-vignette { 
@@ -342,9 +361,18 @@
                 padding: 0 15px;
             }
             .hero-logo-img {
-                width: 85%;
-                max-width: 400px;
+                width: 75%;
+                max-width: 320px;
                 height: auto;
+            }
+            /* 移动端保留红光效果，但稍微减弱 */
+            .hero-logo-img.active {
+                animation: logoFadeIn 1.5s ease-out forwards, logoGlowMobile 3s ease-in-out infinite 1.5s;
+            }
+
+            @keyframes logoGlowMobile {
+                0%, 100% { filter: drop-shadow(0 0 15px rgba(220, 38, 38, 0.6)) drop-shadow(0 0 30px rgba(220, 38, 38, 0.4)) drop-shadow(0 0 45px rgba(220, 38, 38, 0.2)); }
+                50% { filter: drop-shadow(0 0 25px rgba(220, 38, 38, 0.8)) drop-shadow(0 0 50px rgba(220, 38, 38, 0.5)) drop-shadow(0 0 75px rgba(220, 38, 38, 0.3)); }
             }
 
             /* 彻底禁用爆闪动画 */
@@ -396,7 +424,7 @@
         }
 
         @media (max-width: 380px) {
-            .hero-logo-img { width: 80%; max-width: 320px; }
+            .hero-logo-img { width: 70%; max-width: 280px; }
             .footer-nav-container .nav-dragon { display: block; width: 20px; height: 20px; }
         }
 

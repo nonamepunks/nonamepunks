@@ -212,69 +212,7 @@
         .merch-item:hover .merch-info { transform: translateY(0); }
         .merch-name { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-size: 16px; letter-spacing: 2px; color: var(--white); margin-bottom: 5px; text-transform: uppercase; }
         .merch-price { font-family: 'Arial Black', Arial, sans-serif; font-size: 14px; color: var(--logo-red); letter-spacing: 1px; }
-        .merch-btn-container { text-align: center; margin-top: 40px; }
-
-        /* MERCH Carousel */
-        .merch-carousel { position: relative; width: 100vw; margin-left: calc(-50vw + 50%); margin-bottom: 60px; }
-        .merch-grid { display: flex; gap: 2px; overflow-x: auto; scroll-behavior: smooth; scrollbar-width: none; padding: 20px 0; width: 100%; }
-        .merch-grid::-webkit-scrollbar { display: none; }
-        .merch-item { flex: 0 0 calc(16.666% - 2px); min-width: calc(16.666% - 2px); aspect-ratio: 1; background: #111; cursor: pointer; overflow: hidden; }
-        .merch-img-wrap { width: 100%; height: 88%; display: flex; align-items: center; justify-content: center; padding: 3px; }
-        .merch-img, .merch-img-hover { max-width: 100%; max-height: 100%; object-fit: contain; }
-        .merch-info { padding: 3px; text-align: center; background: rgba(0,0,0,0.8); }
-        .merch-name { font-size: 13px; font-weight: bold; }
-        .merch-category { font-size: 10px; color: #999; }
-        .merch-price { font-size: 12px; color: #DC2626; }
-
-        .merch-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 30px; height: 80px; background: rgba(220,38,38,0.6); border: none; color: white; font-size: 16px; cursor: pointer; z-index: 10; }
-        .merch-arrow:hover { background: rgba(220,38,38,1); }
-        .merch-arrow-left { left: 0; border-radius: 0; }
-        .merch-arrow-right { right: 0; border-radius: 0; }
-
-        /* 电脑竖屏/平板 - 3个到边缘 */
-        @media (max-width: 1024px) and (min-width: 769px) {
-            .merch-item { 
-                flex: 0 0 calc(33.333% - 1px); 
-                min-width: calc(33.333% - 1px); 
-            }
-        }
-
-        /* Modal */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 100000; justify-content: center; align-items: center; }
-        .modal.active { display: flex; }
-        .modal-content { position: relative; max-width: 90vw; max-height: 90vh; text-align: center; }
-        .modal img { max-width: 100%; max-height: 80vh; object-fit: contain; transition: opacity 0.5s; }
-        .modal-info { margin-top: 20px; color: white; }
-        .modal-info h3 { font-size: 24px; margin-bottom: 10px; }
-        .modal-info p { font-size: 20px; color: #DC2626; }
-        .modal-close { position: absolute; top: 20px; right: 30px; font-size: 40px; color: white; cursor: pointer; z-index: 100001; }
-
-        @media (max-width: 768px) {
-            .merch-carousel { 
-                width: 100vw; 
-                margin-left: calc(-50vw + 50%); 
-                padding: 0; 
-            }
-            .merch-arrow { display: none; }
-            .merch-grid { 
-                display: grid; 
-                grid-template-columns: repeat(3, 1fr); 
-                gap: 1px; 
-                padding: 10px 0; 
-                width: 100%;
-            }
-            .merch-item { 
-                flex: none; 
-                min-width: auto; 
-                aspect-ratio: 1; 
-                border-radius: 0;
-            }
-            .merch-img-wrap { height: 85%; padding: 1px; }
-            .merch-info { padding: 2px; }
-            .merch-name { font-size: 10px; }
-            .merch-category { font-size: 8px; }
-            .merch-price { font-size: 9px; }
-        }
+        .merch-btn-container { text-align: center; }
 
         /* FOOTER */
         .footer-section { 
@@ -476,7 +414,103 @@
         .video-player img {
             -webkit-user-drag: none;
         }
-</style>
+
+/* MERCH */
+        .merch-section { padding: 100px 30px; background: url('./image/blackbg.webp') repeat-y center top; background-size: 100% auto; position: relative; }
+        .merch-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; max-width: 1400px; margin: 0 auto 50px; }
+        .merch-item { position: relative; aspect-ratio: 1; background: #111; cursor: pointer; transition: all 0.3s; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .merch-item:hover { transform: translateY(-10px); box-shadow: 0 20px 60px rgba(220, 38, 38, 0.3); }
+        .merch-img-wrap { position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .merch-img { max-width: 100%; max-height: 100%; object-fit: contain; transition: all 0.4s; }
+        .merch-img-hover { position: absolute; max-width: 100%; max-height: 100%; object-fit: contain; opacity: 0; transition: all 0.4s; padding: 20px; }
+        .merch-item.single-img:hover .merch-img { transform: scale(1.1); }
+        .merch-item.dual-img:hover .merch-img { opacity: 0; }
+        .merch-item.dual-img:hover .merch-img-hover { opacity: 1; }
+        .merch-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; background: linear-gradient(to top, rgba(0,0,0,0.95), transparent); transform: translateY(100%); transition: transform 0.3s; }
+        .merch-item:hover .merch-info { transform: translateY(0); }
+        .merch-name { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-size: 16px; letter-spacing: 2px; color: var(--white); margin-bottom: 5px; text-transform: uppercase; }
+        .merch-price { font-family: 'Arial Black', Arial, sans-serif; font-size: 14px; color: var(--logo-red); letter-spacing: 1px; }
+        .merch-btn-container { text-align: center; }
+
+        /* FOOTER */
+        .footer-section { 
+            width: 100%; 
+            background: 
+                url('./image/downbg.webp') repeat-y center top,
+                url('./image/blackbg.webp') repeat-y center top; 
+            position: relative; 
+            padding: 60px 0 0 0; 
+            background-size: 100% auto, 100% auto; 
+        }
+        .footer-section::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1; }
+        .footer-main { position: relative; z-index: 10; max-width: 1400px; margin: 0 auto; padding: 40px; display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 40px; }
+        .footer-left { display: flex; flex-direction: column; gap: 15px; }
+        .footer-dropdown { border: 1px solid rgba(220, 38, 38, 0.3); background: rgba(0,0,0,0.5); }
+        .dropdown-header { padding: 12px 20px; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-size: 14px; letter-spacing: 3px; color: var(--white); cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: all 0.3s; text-transform: uppercase; }
+        .dropdown-header:hover { background: rgba(220, 38, 38, 0.2); color: var(--logo-red); }
+        .dropdown-header::after { content: '+'; font-size: 20px; transition: transform 0.3s; }
+        .footer-dropdown.active .dropdown-header::after { transform: rotate(45deg); }
+        .dropdown-content { max-height: 0; overflow: hidden; transition: max-height 0.3s; }
+        .footer-dropdown.active .dropdown-content { max-height: 300px; }
+        .dropdown-content a { display: block; padding: 10px 20px; font-family: 'Arial Black', Arial, sans-serif; font-size: 12px; color: var(--silver); text-decoration: none; letter-spacing: 1px; transition: all 0.2s; border-top: 1px solid rgba(220, 38, 38, 0.1); }
+        .dropdown-content a:hover { color: var(--logo-red); padding-left: 30px; background: rgba(220, 38, 38, 0.1); }
+        .footer-center { text-align: center; display: flex; flex-direction: column; justify-content: center; }
+        .subscribe-title { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-size: 32px; letter-spacing: 4px; color: var(--white); margin-bottom: 15px; text-transform: uppercase; }
+        .subscribe-subtitle { font-family: 'Arial Black', Arial, sans-serif; font-size: 12px; color: var(--silver); letter-spacing: 2px; margin-bottom: 30px; }
+        .subscribe-form { display: flex; gap: 10px; justify-content: center; margin-bottom: 20px; }
+        .subscribe-input { flex: 1; max-width: 300px; padding: 15px 20px; background: transparent; border: 2px solid var(--logo-red); color: var(--white); font-family: 'Arial Black', Arial, sans-serif; font-size: 14px; letter-spacing: 1px; outline: none; transition: all 0.3s; }
+        .subscribe-input::placeholder { color: rgba(255,255,255,0.5); }
+        .subscribe-input:focus { box-shadow: 0 0 20px rgba(220, 38, 38, 0.5); background: rgba(220, 38, 38, 0.1); }
+        .subscribe-btn { padding: 15px 30px; background: transparent; border: 2px solid var(--logo-red); color: var(--white); font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-size: 14px; letter-spacing: 3px; cursor: pointer; transition: all 0.3s; text-transform: uppercase; }
+        .subscribe-btn:hover { background: var(--logo-red); box-shadow: 0 0 30px rgba(220, 38, 38, 0.6); }
+        .privacy-text { font-family: Arial, sans-serif; font-size: 10px; color: rgba(255,255,255,0.4); line-height: 1.6; max-width: 400px; margin: 0 auto; }
+        .footer-right { display: flex; flex-direction: column; align-items: flex-end; justify-content: center; }
+        .footer-right-title { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-size: 14px; letter-spacing: 3px; color: var(--white); margin-bottom: 20px; text-transform: uppercase; }
+        .social-grid { display: grid; grid-template-columns: repeat(4, 45px); gap: 12px; }
+        .social-icon { width: 45px; height: 45px; border: 2px solid rgba(220, 38, 38, 0.5); display: flex; align-items: center; justify-content: center; color: var(--white); text-decoration: none; transition: all 0.3s; background: rgba(0,0,0,0.5); }
+        .social-icon svg { width: 20px; height: 20px; fill: currentColor; }
+        .social-icon:hover { background: var(--logo-red); border-color: var(--logo-red); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(220, 38, 38, 0.5); }
+        .footer-nav { position: relative; z-index: 10; border-top: 1px solid rgba(220, 38, 38, 0.3); border-bottom: 1px solid rgba(220, 38, 38, 0.3); padding: 20px 0; margin-top: 20px; }
+        .footer-nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: center; align-items: center; gap: 40px; padding: 0 40px; }
+        .footer-nav a { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; color: var(--white); text-decoration: none; font-size: 14px; letter-spacing: 3px; text-transform: uppercase; transition: all 0.2s; }
+        .footer-nav a:hover { color: var(--logo-red); text-shadow: 0 0 10px var(--logo-red); }
+        .footer-bottom { position: relative; z-index: 10; padding: 30px; text-align: center; background: rgba(0,0,0,0.9); }
+        .footer-slogan { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-size: 24px; letter-spacing: 8px; color: var(--logo-red); margin-bottom: 20px; text-transform: uppercase; text-shadow: 0 0 20px rgba(220, 38, 38, 0.5); }
+        .footer-copyright { font-family: 'Arial Black', Arial, sans-serif; font-size: 11px; color: var(--silver); letter-spacing: 2px; line-height: 2; }
+        .footer-copyright a { color: var(--white); text-decoration: none; transition: color 0.2s; }
+        .footer-copyright a:hover { color: var(--logo-red); }
+
+        .btn, .banner-btn, .tour-btn, .btn-music { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; padding: 15px 35px; font-size: 16px; letter-spacing: 3px; text-transform: uppercase; border: 3px solid var(--logo-red); background: rgba(0,0,0,0.5); color: var(--white); cursor: pointer; position: relative; overflow: hidden; transition: all 0.2s; text-decoration: none; display: inline-block; box-shadow: 0 0 30px rgba(220, 38, 38, 0.4); touch-action: manipulation; -webkit-tap-highlight-color: rgba(220, 38, 38, 0.3); }
+        .btn::before, .banner-btn::before, .tour-btn::before, .btn-music::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: var(--logo-red); transition: left 0.2s steps(5); z-index: -1; }
+        .btn:hover::before, .banner-btn:hover::before, .tour-btn:hover::before, .btn-music:hover::before { left: 0; }
+        .btn:hover, .banner-btn:hover, .tour-btn:hover, .btn-music:hover { color: var(--white); transform: skewX(-5deg); box-shadow: 0 0 50px var(--logo-red), 0 0 80px rgba(220, 38, 38, 0.6); text-shadow: 0 0 15px var(--white); border-color: var(--logo-red); }
+        .banner-btn { position: absolute; bottom: 50px; z-index: 20; }
+        .banner-btn-center { left: 50%; transform: translateX(-50%); }
+        .banner-btn-center:hover { transform: translateX(-50%) skewX(-5deg); }
+        .banner-btn-right { right: 50px; }
+        .tour-btn { padding: 8px 16px; font-size: 12px; min-height: 36px; min-width: 80px; }
+        .tour-btn.sold-out { border-color: #444; color: #666; cursor: not-allowed; box-shadow: none; background: rgba(0,0,0,0.4); }
+        .tour-btn.sold-out::before { display: none; }
+        .tour-btn.sold-out:hover { color: #666; transform: none; text-shadow: none; border-color: #444; }
+        .tour-btn.limited { border-color: var(--logo-red); color: var(--logo-red); animation: pulse 1.5s infinite; box-shadow: 0 0 15px rgba(220, 38, 38, 0.3); }
+        .tour-btn.limited:hover { color: var(--white); border-color: var(--logo-red); }
+        .btn-music { padding: 18px 45px; font-size: 18px; }
+        .silver-line { height: 3px; background: var(--logo-red); position: relative; overflow: hidden; box-shadow: 0 0 20px rgba(220, 38, 38, 0.6); }
+        .silver-line::after { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, var(--white), transparent); animation: lineScan 2s linear infinite; }
+
+        /* ===== 响应式布局 ===== */
+
+        /* 1200px以下 */
+        @media (max-width: 1200px) { 
+            .music-content-new { grid-template-columns: 1fr; gap: 40px; } 
+            .music-player-side { max-width: 600px; margin: 0 auto; width: 100%; } 
+            .album-cover { width: 350px; height: 350px; } 
+            .footer-main { grid-template-columns: 1fr; gap: 40px; } 
+            .footer-right { align-items: center; } 
+        }
+
+        /* 1024px以下 - 平板 */
+        </style>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
@@ -682,97 +716,96 @@
         <div class="merch-carousel">
             <button class="merch-arrow merch-arrow-left" onclick="scrollMerch(-1)">&#10094;</button>
             <div class="merch-grid">
-                <div class="merch-item dual-img" onclick="openModal('Anti-', '$25.9', './image/merchs/Anti-teeb1.png', './image/merchs/Anti-teeb2.png')">
-                    <div class="merch-img-wrap">
-                        <img src="./image/merchs/Anti-teeb1.png" alt="Anti-" class="merch-img">
-                        <img src="./image/merchs/Anti-teeb2.png" alt="Anti- Hover" class="merch-img-hover">
-                    </div>
-                    <div class="merch-info">
-                        <div class="merch-name">Anti-</div>
-                        <div class="merch-category">Tee</div>
-                        <div class="merch-price">$25.9</div>
-                    </div>
+            <div class="merch-item dual-img" onclick="openModal('Anti-', '$25.9', './image/merchs/Anti-teeb1.png', './image/merchs/Anti-teeb2.png')">
+                <div class="merch-img-wrap">
+                    <img src="./image/merchs/Anti-teeb1.png" alt="Anti-" class="merch-img">
+                    <img src="./image/merchs/Anti-teeb2.png" alt="Anti- Hover" class="merch-img-hover">
                 </div>
-                <div class="merch-item single-img" onclick="openModal('Devil Skull', '$22.9', './image/merchs/DevilSukll-teeb1.png', null)">
-                    <div class="merch-img-wrap">
-                        <img src="./image/merchs/DevilSukll-teeb1.png" alt="Devil Skull" class="merch-img">
-                    </div>
-                    <div class="merch-info">
-                        <div class="merch-name">Devil Skull</div>
-                        <div class="merch-category">Tee</div>
-                        <div class="merch-price">$22.9</div>
-                    </div>
+                <div class="merch-info">
+                    <div class="merch-name">Anti-</div>
+                    <div class="merch-category">Tee</div>
+                    <div class="merch-price">$25.9</div>
                 </div>
-                <div class="merch-item dual-img" onclick="openModal('We Need The Truth', '$25.9', './image/merchs/WNTT-tee1.png', './image/merchs/WNTT-tee2.png')">
-                    <div class="merch-img-wrap">
-                        <img src="./image/merchs/WNTT-tee1.png" alt="We Need The Truth" class="merch-img">
-                        <img src="./image/merchs/WNTT-tee2.png" alt="We Need The Truth Hover" class="merch-img-hover">
-                    </div>
-                    <div class="merch-info">
-                        <div class="merch-name">We Need The Truth</div>
-                        <div class="merch-category">Tee</div>
-                        <div class="merch-price">$25.9</div>
-                    </div>
+            </div>
+            <div class="merch-item single-img" onclick="openModal('Devil Skull', '$22.9', './image/merchs/DevilSukll-teeb1.png', null)">
+                <div class="merch-img-wrap">
+                    <img src="./image/merchs/DevilSukll-teeb1.png" alt="Devil Skull" class="merch-img">
                 </div>
-                <div class="merch-item single-img" onclick="openModal('Coup De Grace', '$35.9', './image/merchs/cdg-ls1.png', null)">
-                    <div class="merch-img-wrap">
-                        <img src="./image/merchs/cdg-ls1.png" alt="Coup De Grace" class="merch-img">
-                    </div>
-                    <div class="merch-info">
-                        <div class="merch-name">Coup De Grace</div>
-                        <div class="merch-category">Sweatshirt</div>
-                        <div class="merch-price">$35.9</div>
-                    </div>
+                <div class="merch-info">
+                    <div class="merch-name">Devil Skull</div>
+                    <div class="merch-category">Tee</div>
+                    <div class="merch-price">$22.9</div>
                 </div>
-                <div class="merch-item single-img" onclick="openModal('CN Logo', '$12.9', './image/merchs/Button1.png', null)">
-                    <div class="merch-img-wrap">
-                        <img src="./image/merchs/Button1.png" alt="CN Logo" class="merch-img">
-                    </div>
-                    <div class="merch-info">
-                        <div class="merch-name">CN Logo</div>
-                        <div class="merch-category">Botton</div>
-                        <div class="merch-price">$12.9</div>
-                    </div>
+            </div>
+            <div class="merch-item dual-img" onclick="openModal('We Need The Truth', '$25.9', './image/merchs/WNTT-tee1.png', './image/merchs/WNTT-tee2.png')">
+                <div class="merch-img-wrap">
+                    <img src="./image/merchs/WNTT-tee1.png" alt="We Need The Truth" class="merch-img">
+                    <img src="./image/merchs/WNTT-tee2.png" alt="We Need The Truth Hover" class="merch-img-hover">
                 </div>
-                <div class="merch-item dual-img" onclick="openModal('Fortress Besieged', '$39.9', './image/merchs/fb-h1a.png', './image/merchs/fb-h1b.png')">
-                    <div class="merch-img-wrap">
-                        <img src="./image/merchs/fb-h1a.png" alt="Fortress Besieged" class="merch-img">
-                        <img src="./image/merchs/fb-h1b.png" alt="Fortress Besieged Hover" class="merch-img-hover">
-                    </div>
-                    <div class="merch-info">
-                        <div class="merch-name">Fortress Besieged</div>
-                        <div class="merch-category">Hoodies</div>
-                        <div class="merch-price">$39.9</div>
-                    </div>
+                <div class="merch-info">
+                    <div class="merch-name">We Need The Truth</div>
+                    <div class="merch-category">Tee</div>
+                    <div class="merch-price">$25.9</div>
                 </div>
-                <div class="merch-item single-img" onclick="openModal('Anti-', '$12.9', './image/merchs/logo-cap1.png', null)">
-                    <div class="merch-img-wrap">
-                        <img src="./image/merchs/logo-cap1.png" alt="Anti- Cap" class="merch-img">
-                    </div>
-                    <div class="merch-info">
-                        <div class="merch-name">Anti-</div>
-                        <div class="merch-category">Cap</div>
-                        <div class="merch-price">$12.9</div>
-                    </div>
+            </div>
+            <div class="merch-item single-img" onclick="openModal('Coup De Grace', '$35.9', './image/merchs/cdg-ls1.png', null)">
+                <div class="merch-img-wrap">
+                    <img src="./image/merchs/cdg-ls1.png" alt="Coup De Grace" class="merch-img">
                 </div>
-                <div class="merch-item single-img" onclick="openModal('Fortress Besieged', '$29.9', './image/merchs/fb-vinylb.png', null)">
-                    <div class="merch-img-wrap">
-                        <img src="./image/merchs/fb-vinylb.png" alt="Fortress Besieged Vinyl" class="merch-img">
-                    </div>
-                    <div class="merch-info">
-                        <div class="merch-name">Fortress Besieged</div>
-                        <div class="merch-category">Vinyl</div>
-                        <div class="merch-price">$29.9</div>
-                    </div>
+                <div class="merch-info">
+                    <div class="merch-name">Coup De Grace</div>
+                    <div class="merch-category">Sweatshirt</div>
+                    <div class="merch-price">$35.9</div>
                 </div>
+            </div>
+            <div class="merch-item single-img" onclick="openModal('CN Logo', '$12.9', './image/merchs/Button1.png', null)">
+                <div class="merch-img-wrap">
+                    <img src="./image/merchs/Button1.png" alt="CN Logo" class="merch-img">
+                </div>
+                <div class="merch-info">
+                    <div class="merch-name">CN Logo</div>
+                    <div class="merch-category">Botton</div>
+                    <div class="merch-price">$12.9</div>
+                </div>
+            </div>
+            <div class="merch-item dual-img" onclick="openModal('Fortress Besieged', '$39.9', './image/merchs/fb-h1a.png', './image/merchs/fb-h1b.png')">
+                <div class="merch-img-wrap">
+                    <img src="./image/merchs/fb-h1a.png" alt="Fortress Besieged" class="merch-img">
+                    <img src="./image/merchs/fb-h1b.png" alt="Fortress Besieged Hover" class="merch-img-hover">
+                </div>
+                <div class="merch-info">
+                    <div class="merch-name">Fortress Besieged</div>
+                    <div class="merch-category">Hoodies</div>
+                    <div class="merch-price">$39.9</div>
+                </div>
+            </div>
+            <div class="merch-item single-img" onclick="openModal('Anti- Cap', '$12.9', './image/merchs/logo-cap1.png', null)">
+                <div class="merch-img-wrap">
+                    <img src="./image/merchs/logo-cap1.png" alt="Anti- Cap" class="merch-img">
+                </div>
+                <div class="merch-info">
+                    <div class="merch-name">Anti-</div>
+                    <div class="merch-category">Cap</div>
+                    <div class="merch-price">$12.9</div>
+                </div>
+            </div>
+            <div class="merch-item single-img" onclick="openModal('Fortress Besieged Vinyl', '$29.9', './image/merchs/fb-vinylb.png', null)">
+                <div class="merch-img-wrap">
+                    <img src="./image/merchs/fb-vinylb.png" alt="Fortress Besieged Vinyl" class="merch-img">
+                </div>
+                <div class="merch-info">
+                    <div class="merch-name">Fortress Besieged</div>
+                    <div class="merch-category">Vinyl</div>
+                    <div class="merch-price">$29.9</div>
+                </div>
+            </div>
             </div>
             <button class="merch-arrow merch-arrow-right" onclick="scrollMerch(1)">&#10095;</button>
         </div>
         <div class="merch-btn-container reveal"><a href="./store.html" class="btn">VIEW ALL MERCH</a></div>
 
-        <!-- Modal -->
         <div id="imgModal" class="modal" onclick="closeModal()">
-            <span class="modal-close">&times;</span>
+            <span class="modal-close" onclick="closeModal()">&times;</span>
             <div class="modal-content" onclick="event.stopPropagation()">
                 <img id="modalImg" src="" alt="" onclick="toggleImage()">
                 <div class="modal-info">
@@ -968,8 +1001,15 @@
             player.onclick = null;
             player.style.cursor = 'default';
         }
-
-        // MERCH
+    </script>
+    <script type="text/javascript">
+       (function(){
+          emailjs.init({
+            publicKey: "FQAG2S-gm0UgmyD4A",
+          });
+       })();
+    
+// MERCH
         function scrollMerch(dir) {
             document.querySelector('.merch-grid').scrollBy({ left: dir * 300, behavior: 'smooth' });
         }
@@ -996,13 +1036,6 @@
             document.getElementById('imgModal').classList.remove('active');
             clearInterval(autoSwitch);
         }
-    </script>
-    <script type="text/javascript">
-       (function(){
-          emailjs.init({
-            publicKey: "FQAG2S-gm0UgmyD4A",
-          });
-       })();
-    </script>
+</script>
 </body>
 </html>

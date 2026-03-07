@@ -342,25 +342,33 @@
                 padding: 0 15px;
             }
             .hero-logo-img {
-                width: 60%;
-                max-width: 240px;
+                width: 65%;
+                max-width: 260px;
                 height: auto;
                 filter: drop-shadow(0 0 15px rgba(220, 38, 38, 0.6)) drop-shadow(0 0 30px rgba(220, 38, 38, 0.4));
             }
 
-            /* 电脑竖屏/手机竖屏 - logo更小 */
-            @media (max-width: 768px) and (orientation: portrait) {
+            /* 电脑竖屏 - logo小很多 (高度明显大于宽度) */
+            @media (max-width: 768px) and (orientation: portrait) and (min-aspect-ratio: 1/2) {
                 .hero-logo-img {
-                    width: 55%;
-                    max-width: 200px;
+                    width: 45%;
+                    max-width: 160px;
+                }
+            }
+
+            /* 手机竖屏 - 常规大小 */
+            @media (max-width: 768px) and (orientation: portrait) and (max-aspect-ratio: 1/2) {
+                .hero-logo-img {
+                    width: 60%;
+                    max-width: 220px;
                 }
             }
 
             /* 超小屏幕 */
             @media (max-width: 380px) {
                 .hero-logo-img {
-                    width: 50%;
-                    max-width: 180px;
+                    width: 55%;
+                    max-width: 200px;
                 }
             }
 

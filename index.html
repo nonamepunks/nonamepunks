@@ -62,42 +62,6 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        /* HERO 全局优化 */
-
-        :root { --logo-red: #DC2626; --blood-red: #B91C1C; --deep-red: #7F1D1D; --black: #000000; --white: #FFFFFF; --silver: #C0C0C0; --dark-gray: #1a1a1a; }
-        body {
-            background-color: #000;
-            background-image: url('./image/blackbg.webp');
-            background-repeat: repeat-y;
-            background-position: center top;
-            background-size: 100% auto;
-            color: var(--white); font-family: 'Arial Black', 'Helvetica Neue', Helvetica, Arial, sans-serif; overflow-x: hidden; cursor: crosshair; }
-
-        @keyframes hardGlitch { 0% { opacity: 0; transform: translateX(-10px); filter: hue-rotate(90deg); } 20% { opacity: 1; transform: translateX(5px); filter: hue-rotate(-90deg) drop-shadow(3px 0 var(--logo-red)); } 40% { transform: translateX(-3px); filter: hue-rotate(45deg) drop-shadow(-3px 0 var(--silver)); } 60% { transform: translateX(2px); filter: hue-rotate(0deg) drop-shadow(2px 0 var(--blood-red)); } 80% { transform: translateX(-1px); filter: drop-shadow(1px 0 var(--logo-red)); } 100% { opacity: 1; transform: translateX(0); filter: none; } }
-        @keyframes logoFadeIn { 0% { opacity: 0; transform: scale(0.95); filter: blur(20px) brightness(2); } 50% { opacity: 0.5; filter: blur(10px) brightness(1.5); } 100% { opacity: 1; transform: scale(1); filter: blur(0) brightness(1); } }
-        @keyframes logoGlow { 0%, 100% { filter: drop-shadow(0 0 30px rgba(220, 38, 38, 0.8)) drop-shadow(0 0 60px rgba(220, 38, 38, 0.5)) drop-shadow(0 0 90px rgba(220, 38, 38, 0.3)); } 50% { filter: drop-shadow(0 0 50px rgba(220, 38, 38, 1)) drop-shadow(0 0 100px rgba(220, 38, 38, 0.7)) drop-shadow(0 0 150px rgba(220, 38, 38, 0.4)); } }
-        @keyframes flashShine { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
-        @keyframes lineScan { 0% { left: -100%; } 100% { left: 100%; } }
-        @keyframes noise { 0%, 100% { transform: translate(0, 0); } 10% { transform: translate(-5%, -5%); } 20% { transform: translate(-10%, 5%); } 30% { transform: translate(5%, -10%); } 40% { transform: translate(-5%, 15%); } 50% { transform: translate(-10%, 5%); } 60% { transform: translate(15%, 0); } 70% { transform: translate(0, 10%); } 80% { transform: translate(-15%, 0); } 90% { transform: translate(10%, 5%); } }
-
-        .reveal { opacity: 0; }
-        .reveal.active { animation: hardGlitch 0.3s steps(5) forwards; }
-        .reveal-logo { opacity: 0; }
-        .reveal-logo.active { animation: logoFadeIn 1.5s ease-out forwards; }
-
-        /* ===== 导航栏 ===== */
-        .navbar { position: fixed; top: -100px; left: 0; width: 100%; background: rgba(0,0,0,0.95); border-bottom: 3px solid var(--logo-red); z-index: 1000; padding: 4px 0; transition: top 0.3s steps(3); }
-        .navbar.visible { top: 0; }
-        .navbar::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, transparent, var(--logo-red), transparent); animation: lineScan 3s linear infinite; }
-        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: center; align-items: center; padding: 0 30px; position: relative; }
-        .nav-dragon { width: 40px; height: 40px; cursor: pointer; transition: all 0.2s; filter: grayscale(100%) brightness(0.8); object-fit: contain; }
-        .nav-dragon:hover { filter: grayscale(0%) brightness(1.2) drop-shadow(0 0 10px var(--logo-red)); transform: scale(1.1); }
-        .nav-dragon-left { margin-right: 40px; }
-        .nav-dragon-right { margin-left: 40px; }
-        .nav-links { display: flex; gap: 50px; list-style: none; justify-content: center; }
-        .nav-links a { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; color: var(--white); text-decoration: none; font-size: 18px; letter-spacing: 4px; text-transform: uppercase; position: relative; transition: all 0.1s; padding: 10px 0; }
-        .nav-links a:hover { color: var(--logo-red); text-shadow: 0 0 10px var(--logo-red), 0 0 20px var(--logo-red), 0 0 30px var(--logo-red); transform: skewX(-5deg); }
-
         /* ===== HERO 区域 - 桌面端 ===== */
 
         /* ===== 其他区域样式 ===== */
@@ -389,6 +353,12 @@
         @media (max-width: 380px) {
 
             .footer-nav-container .nav-dragon { display: block !important; width: 20px; height: 20px; }
+        
+            .hero-logo-img {
+                width: 90vw !important;
+                max-width: 350px !important;
+                max-height: 40vh !important;
+            }
         }
 
         ::-webkit-scrollbar { width: 10px; }

@@ -279,8 +279,6 @@
             .hero {
                 height: 100vh !important;
                 min-height: 100vh !important;
-                width: 100% !important;
-                overflow: hidden !important;
             }
             .hero-bg {
                 position: absolute !important;
@@ -288,15 +286,10 @@
                 left: 0 !important;
                 width: 100% !important;
                 height: 100% !important;
-                display: flex !important;
-                align-items: center !important;
-                justify-content: center !important;
-                background: #000 !important;
             }
             .hero-bg img {
                 width: 100% !important;
                 height: 100% !important;
-                max-height: 100vh !important;
                 object-fit: cover !important;
                 object-position: center top !important;
             }
@@ -310,6 +303,14 @@
             .nav-dragon-right { margin-left: 8px; }
 
             /* HERO - 竖屏适配关键修复 */
+
+            /* 彻底禁用爆闪动画防止页面刷新 */
+            .reveal, .reveal.active, .reveal-logo, .reveal-logo.active {
+                opacity: 1 !important;
+                animation: none !important;
+                transform: none !important;
+                filter: none !important;
+            }
             .hero-logo-img {
                 width: 85vw !important;
                 max-width: 450px !important;
@@ -323,18 +324,6 @@
                 z-index: 10 !important;
                 text-align: center !important;
                 width: 100% !important;
-            }
-
-            /* 禁用爆闪动画防止页面刷新 */
-            .reveal, .reveal.active {
-                opacity: 1 !important;
-                animation: none !important;
-                transform: none !important;
-                filter: none !important;
-            }
-            .reveal-logo, .reveal-logo.active {
-                opacity: 1 !important;
-                animation: logoFadeIn 1.5s ease-out forwards, logoGlow 3s ease-in-out infinite 1.5s !important;
             }
 
             /* MEMBERS */
@@ -380,27 +369,7 @@
         ::-webkit-scrollbar-track { background: var(--black); }
         ::-webkit-scrollbar-thumb { background: var(--logo-red); border-radius: 5px; box-shadow: 0 0 15px rgba(220, 38, 38, 0.6); }
         ::-webkit-scrollbar-thumb:hover { background: var(--blood-red); box-shadow: 0 0 25px var(--logo-red); }
-    
-        /* 移动端竖屏照片强制适配 - 确保覆盖所有其他样式 */
-        @media (max-width: 768px) {
-            .hero .hero-bg img,
-            #hero .hero-bg img,
-            body .hero-bg img {
-                object-fit: cover !important;
-                object-position: center center !important;
-                width: 100% !important;
-                height: 100% !important;
-                max-height: 100vh !important;
-            }
-        }
-
-        /* 超小屏幕额外适配 */
-        @media (max-width: 480px) {
-            .hero .hero-bg img {
-                object-fit: cover !important;
-            }
-        }
-</style>
+    </style>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
@@ -815,26 +784,6 @@
             publicKey: "FQAG2S-gm0UgmyD4A",
           });
        })();
-    </script>
-
-    <script>
-        // 强制移动端竖屏照片使用cover填满屏幕
-        (function() {
-            function forceMobileCover() {
-                if (window.innerWidth <= 768) {
-                    const heroImg = document.querySelector('.hero-bg img');
-                    if (heroImg) {
-                        heroImg.style.objectFit = 'cover';
-                        heroImg.style.objectPosition = 'center top';
-                    }
-                }
-            }
-
-            // 页面加载时执行
-            window.addEventListener('load', forceMobileContain);
-            // 窗口大小改变时执行
-            window.addEventListener('resize', forceMobileContain);
-        })();
     </script>
 </body>
 </html>

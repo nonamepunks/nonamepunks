@@ -25,8 +25,8 @@
         
         /* ===== HERO 区域 - 全新构建 ===== */
         .hero {
+            height: 100vh;
             min-height: 100vh;
-            height: auto;
             width: 100%;
             position: relative;
             overflow: hidden;
@@ -43,8 +43,8 @@
         .hero-bg img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
-            object-position: center center;
+            object-fit: cover;
+            object-position: center top;
         }
         .hero-vignette {
             position: absolute;
@@ -67,10 +67,10 @@
             padding: 0 20px;
         }
         .hero-logo-img {
-            max-width: 900px;
-            width: 90vw;
+            max-width: 800px;
+            width: 85vw;
             height: auto;
-            max-height: 50vh;
+            max-height: 40vh;
             object-fit: contain;
             opacity: 0;
         }
@@ -349,8 +349,8 @@
                 min-height: 100vh !important;
             }
             .hero-bg img {
-                object-fit: contain !important;
-                object-position: center center !important;
+                object-fit: cover !important;
+                object-position: center top !important;
             }
             .hero-logo-img {
                 width: 85vw !important;
@@ -367,16 +367,16 @@
                 min-height: 100vh !important;
             }
             .hero-bg img {
-                object-fit: contain !important;
-                object-position: center center !important;
+                object-fit: cover !important;
+                object-position: center top !important;
             }
             .hero-content {
                 bottom: 5% !important;
             }
             .hero-logo-img {
-                width: 95vw !important;
-                max-width: 450px !important;
-                max-height: 35vh !important;
+                width: 90vw !important;
+                max-width: 400px !important;
+                max-height: 30vh !important;
                 object-fit: contain !important;
             }
         }
@@ -384,9 +384,9 @@
         /* ===== 超小屏幕 ===== */
         @media (max-width: 380px) {
             .hero-logo-img {
-                width: 95vw !important;
-                max-width: 320px !important;
-                max-height: 30vh !important;
+                width: 90vw !important;
+                max-width: 300px !important;
+                max-height: 25vh !important;
                 object-fit: contain !important;
             }
         }

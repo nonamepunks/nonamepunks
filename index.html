@@ -937,34 +937,44 @@
 }
 
 
-/* 视频区域优化 - 移动端用图片，桌面端用视频 */
-.video-fallback-image {
+/* 视频区域优化 */
+.video-banner {
+    min-height: 400px;
+    background: #000;
+    position: relative;
+}
+
+#bannerVideo {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.video-fallback {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('./image/banner3-fallback.webp') center/cover no-repeat;
-    display: block;
-}
-
-#bannerVideo {
-    display: none;
-}
-
-@media (min-width: 769px) {
-    .video-fallback-image {
-        display: none;
-    }
-    #bannerVideo {
-        display: block;
-    }
+    background: url('./image/banner3-fallback.webp') center/cover no-repeat, #000;
+    z-index: 0;
 }
 </style>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
     <!-- 预加载关键资源 -->
     <link rel="preload" href="./image/hero1.webp" as="image" fetchpriority="high">
+
+    <!-- 预连接 WIX 视频服务器 -->
+    <link rel="preconnect" href="https://video.wixstatic.com">
+    <link rel="dns-prefetch" href="https://video.wixstatic.com">
 </head>
 <body>
 
@@ -1104,12 +1114,21 @@
     <div class="silver-line"></div>
     <section class="banner-section video-banner-section" id="banner3">
         <div class="banner reveal video-banner" style="position: relative;">
-            <!-- 移动端显示静态图片 -->
-            <div class="video-fallback-image"></div>
-            <!-- 桌面端显示视频 -->
-            <video id="bannerVideo" autoplay muted loop playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover;">
-                <source src="./fbbg.mp4" type="video/mp4">
+            <!-- 视频背景 -->
+            <video id="bannerVideo" 
+                autoplay 
+                muted 
+                loop 
+                playsinline 
+                preload="auto" 
+                poster="./image/banner3-poster.jpg"
+                style="width: 100%; height: 100%; object-fit: cover;"
+                onloadeddata="this.style.opacity=1"
+                onerror="this.style.display='none'; document.querySelector('.video-fallback').style.display='block';">
+                <source src="https://video.wixstatic.com/video/d502ca_cae18d24aaad4b468c7b2b2160253319/720p/mp4/file.mp4" type="video/mp4">
+                Your browser does not support the video tag.
             </video>
+            <div class="video-fallback" style="display: none;"></div>
             <div class="banner-dark-effect">
                 <div class="banner-cinematic"></div>
             </div>

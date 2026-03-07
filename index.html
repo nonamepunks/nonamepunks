@@ -892,29 +892,31 @@
 /* 移动端适配 */
 @media (max-width: 768px) {
     .video-typewriter-container {
-        padding: 20px 12px 0;
-        top: 54%;
-        bottom: 3%;
+        padding: 15px 12px 0;
+        top: 53%;
+        bottom: 2%;
         height: auto;
+        min-height: 45%;
     }
     .video-typewriter-text {
         font-size: clamp(5px, 1.4vw, 9px);
-        line-height: 1.25;
+        line-height: 1.22;
         letter-spacing: 0;
         padding: 0;
         word-break: break-word;
-        will-change: contents;
     }
 }
 
 @media (max-width: 480px) {
     .video-typewriter-container {
-        padding: 15px 8px 0;
-        top: 52%;
+        padding: 12px 8px 0;
+        top: 51%;
+        bottom: 2%;
+        min-height: 47%;
     }
     .video-typewriter-text {
         font-size: clamp(5px, 2vw, 8px);
-        line-height: 1.2;
+        line-height: 1.18;
         letter-spacing: 0;
         padding: 0;
     }
@@ -923,8 +925,10 @@
 /* 超小屏 */
 @media (max-width: 360px) {
     .video-typewriter-container {
-        top: 50%;
+        top: 49%;
         padding: 10px 5px 0;
+        bottom: 1%;
+        min-height: 50%;
     }
     .video-typewriter-text {
         font-size: clamp(4px, 2.2vw, 7px);

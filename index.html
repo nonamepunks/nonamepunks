@@ -43,26 +43,30 @@
         /* ===== HERO 区域 - 桌面端 ===== */
         .hero { 
             min-height: 100vh;
+            height: auto; 
             width: 100%;
             background: #000; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: flex-end; 
+            align-items: center; 
             position: relative; 
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
+            overflow: hidden; 
         }
 
         .hero-bg { 
-            position: relative; 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
             width: 100%; 
-            flex: 1;
-            min-height: 0;
+            height: 100%; 
             z-index: 1; 
         }
 
         .hero-bg img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             object-position: center;
         }
 
@@ -84,11 +88,9 @@
         }
 
         .hero-logo-img { 
-            max-width: 600px; 
-            width: 80vw; 
-            height: auto;
-            max-height: 25vh;
-            object-fit: contain;
+            max-width: 1000px; 
+            width: 95vw; 
+            height: auto; 
             opacity: 0; 
         }
 
@@ -115,7 +117,7 @@
         .music-video-section { margin-top: 0; padding-top: 0; }
         .music-section-inner { padding-top: 40px; }
         .banner { width: 100%; background: var(--dark-gray); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-        .banner img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+        .banner img { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; }
         .banner-dark-effect { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; opacity: 0.3; }
         .banner-cinematic { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.6) 100%), linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, transparent 20%, transparent 80%, rgba(0,0,0,0.3) 100%), linear-gradient(to right, rgba(0,0,0,0.2) 0%, transparent 10%, transparent 90%, rgba(0,0,0,0.2) 100%); }
         .banner-grain { position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); opacity: 0.08; mix-blend-mode: overlay; animation: noise 0.2s steps(3) infinite; }
@@ -135,7 +137,7 @@
         .member-avatar { width: 200px; height: 200px; border-radius: 50%; background: var(--deep-red); margin: 0 auto 20px; border: 4px solid var(--logo-red); position: relative; overflow: hidden; box-shadow: 0 0 30px rgba(220, 38, 38, 0.4); transition: all 0.3s; }
         .member-card:hover .member-avatar { box-shadow: 0 0 50px var(--logo-red), 0 0 80px rgba(220, 38, 38, 0.6); }
         .member-avatar::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent 30%, rgba(220, 38, 38, 0.4) 50%, transparent 70%); animation: flashShine 3s infinite; }
-        .member-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .member-avatar img { width: 100%; height: 100%; object-fit: contain; }
         .member-name { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-size: 24px; letter-spacing: 3px; margin-bottom: 5px; color: var(--white); text-shadow: 0 0 15px rgba(220, 38, 38, 0.5); transition: all 0.2s; }
         .member-card:hover .member-name { color: var(--logo-red); text-shadow: 0 0 30px var(--logo-red); }
         .member-role { font-family: 'Arial Black', Arial, sans-serif; font-size: 14px; color: var(--silver); letter-spacing: 2px; }
@@ -180,7 +182,7 @@
         .album-cover { width: 420px; height: 420px; background: var(--dark-gray); margin: 0 auto 30px; border: 3px solid var(--logo-red); box-shadow: 0 0 60px rgba(220, 38, 38, 0.6); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; transition: all 0.3s; cursor: pointer; touch-action: manipulation; }
         .album-cover:hover { transform: scale(1.02); box-shadow: 0 0 80px rgba(220, 38, 38, 0.8); }
         .album-cover::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent 40%, rgba(220, 38, 38, 0.1) 50%, transparent 60%); animation: flashShine 4s infinite; }
-        .album-cover img { width: 100%; height: 100%; object-fit: cover; }
+        .album-cover img { width: 100%; height: 100%; object-fit: contain; }
         .album-title { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-size: 48px; letter-spacing: 10px; margin-bottom: 15px; color: var(--white); text-shadow: 0 0 30px rgba(220, 38, 38, 0.6); }
         .album-subtitle { font-family: 'Arial Black', Arial, sans-serif; font-size: 16px; color: var(--silver); letter-spacing: 3px; margin-bottom: 30px; }
         .video-section-inner { position: relative; z-index: 10; padding: 80px 40px; border-top: 1px solid rgba(220, 38, 38, 0.3); }
@@ -315,7 +317,7 @@
             .hero-bg img {
                 width: 100% !important;
                 height: 100% !important;
-                object-fit: cover !important;
+                object-fit: contain !important;
                 object-position: center !important;
             }
              
@@ -375,7 +377,7 @@
             .hero-bg img {
                 width: 100% !important;
                 height: 100% !important;
-                object-fit: cover !important;
+                object-fit: contain !important;
                 object-position: center top !important;
             }
 
@@ -563,7 +565,7 @@
     <div class="silver-line"></div>
     <section class="banner-section video-banner-section" id="banner3">
         <div class="banner reveal video-banner">
-            <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover;">
+            <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: contain;">
                 <source src="https://video.wixstatic.com/video/d502ca_c9a0037029ee4c2c9586d94dd655a1e4/1080p/mp4/file.mp4" type="video/mp4">
             </video>
             <div class="banner-dark-effect">

@@ -318,18 +318,18 @@
             width: 100%;
             max-width: 100%;
             margin: 0 auto 80px;
-            padding: 0 50px;
+            padding: 0 45px;
         }
 
         .merch-grid { 
             display: flex;
             flex-wrap: nowrap;
-            gap: 15px;
+            gap: 10px;
             overflow-x: auto;
             scroll-behavior: smooth;
             scrollbar-width: none;
             -ms-overflow-style: none;
-            padding: 30px 0;
+            padding: 20px 0;
         }
 
         .merch-grid::-webkit-scrollbar {
@@ -337,22 +337,21 @@
         }
 
         .merch-item {
-            flex: 0 0 calc(16.666% - 13px);
-            min-width: calc(16.666% - 13px);
+            flex: 0 0 calc(16.666% - 9px);
+            min-width: calc(16.666% - 9px);
             position: relative;
-            aspect-ratio: 0.8;
+            aspect-ratio: 0.75;
             background: #111;
-            cursor: pointer;
             overflow: hidden;
         }
 
         .merch-img-wrap {
             width: 100%;
-            height: 88%;
+            height: 90%;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 10px;
+            padding: 5px;
         }
 
         .merch-img, .merch-img-hover {
@@ -445,34 +444,37 @@
             .merch-grid {
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
-                gap: 12px;
+                gap: 3px;
                 overflow-x: visible;
-                padding: 20px 8px;
+                padding: 10px 2px;
             }
             .merch-item {
                 flex: none;
                 min-width: auto;
-                aspect-ratio: 0.75;
+                aspect-ratio: 0.65;
+                border: none;
             }
             .merch-img-wrap {
-                height: 85%;
-                padding: 8px;
+                height: 90%;
+                padding: 2px;
             }
             .merch-info {
-                padding: 8px 5px;
+                padding: 3px 2px;
             }
             .merch-name {
-                font-size: 12px;
-                letter-spacing: 0.5px;
+                font-size: 10px;
+                letter-spacing: 0.2px;
+                line-height: 1.1;
             }
             .merch-category {
-                font-size: 9px;
+                font-size: 8px;
+                margin-bottom: 1px;
             }
             .merch-price {
-                font-size: 11px;
+                font-size: 10px;
             }
             .merch-btn-container {
-                margin-top: 30px;
+                margin-top: 20px;
             }
         }
         .merch-item { position: relative; aspect-ratio: 1; background: #111; cursor: pointer; transition: all 0.3s; overflow: hidden; display: flex; align-items: center; justify-content: center; }
@@ -806,7 +808,7 @@
                 <div class="banner-glow"></div>
                 <div class="banner-border-glow"></div>
             </div>
-            <a href="#merch" class="banner-btn banner-btn-center">ORDER NOW</a>
+            <a href="./store.html" class="banner-btn banner-btn-center">ORDER NOW</a>
         </div>
     </section>
 
@@ -967,7 +969,7 @@
         <div class="merch-carousel">
             <button class="merch-arrow merch-arrow-left" onclick="scrollMerch(-1)">&#10094;</button>
             <div class="merch-grid">
-                <div class="merch-item dual-img" onclick="window.open('./store.html', '_self')">
+                <div class="merch-item dual-img" >
                     <div class="merch-img-wrap">
                         <img src="./image/merchs/Anti-teeb1.png" alt="Anti-" class="merch-img">
                         <img src="./image/merchs/Anti-teeb2.png" alt="Anti- Hover" class="merch-img-hover">
@@ -978,7 +980,7 @@
                         <div class="merch-price">$25.9</div>
                     </div>
                 </div>
-                <div class="merch-item single-img" onclick="window.open('./store.html', '_self')">
+                <div class="merch-item single-img" >
                     <div class="merch-img-wrap">
                         <img src="./image/merchs/DevilSukll-teeb1.png" alt="Devil Skull" class="merch-img">
                         
@@ -989,7 +991,7 @@
                         <div class="merch-price">$22.9</div>
                     </div>
                 </div>
-                <div class="merch-item dual-img" onclick="window.open('./store.html', '_self')">
+                <div class="merch-item dual-img" >
                     <div class="merch-img-wrap">
                         <img src="./image/merchs/WNTT-tee1.png" alt="We Need The Truth" class="merch-img">
                         <img src="./image/merchs/WNTT-tee2.png" alt="We Need The Truth Hover" class="merch-img-hover">
@@ -1000,7 +1002,7 @@
                         <div class="merch-price">$25.9</div>
                     </div>
                 </div>
-                <div class="merch-item single-img" onclick="window.open('./store.html', '_self')">
+                <div class="merch-item single-img" >
                     <div class="merch-img-wrap">
                         <img src="./image/merchs/cdg-ls1.png" alt="Coup De Grace" class="merch-img">
                         
@@ -1011,7 +1013,7 @@
                         <div class="merch-price">$35.9</div>
                     </div>
                 </div>
-                <div class="merch-item single-img" onclick="window.open('./store.html', '_self')">
+                <div class="merch-item single-img" >
                     <div class="merch-img-wrap">
                         <img src="./image/merchs/Button1.png" alt="CN Logo" class="merch-img">
                         
@@ -1022,7 +1024,7 @@
                         <div class="merch-price">$12.9</div>
                     </div>
                 </div>
-                <div class="merch-item dual-img" onclick="window.open('./store.html', '_self')">
+                <div class="merch-item dual-img" >
                     <div class="merch-img-wrap">
                         <img src="./image/merchs/fb-h1a.png" alt="Fortress Besieged" class="merch-img">
                         <img src="./image/merchs/fb-h1b.png" alt="Fortress Besieged Hover" class="merch-img-hover">
@@ -1033,7 +1035,7 @@
                         <div class="merch-price">$39.9</div>
                     </div>
                 </div>
-                <div class="merch-item single-img" onclick="window.open('./store.html', '_self')">
+                <div class="merch-item single-img" >
                     <div class="merch-img-wrap">
                         <img src="./image/merchs/logo-cap1.png" alt="Anti-" class="merch-img">
                         
@@ -1044,7 +1046,7 @@
                         <div class="merch-price">$12.9</div>
                     </div>
                 </div>
-                <div class="merch-item single-img" onclick="window.open('./store.html', '_self')">
+                <div class="merch-item single-img" >
                     <div class="merch-img-wrap">
                         <img src="./image/merchs/fb-vinylb.png" alt="Fortress Besieged" class="merch-img">
                         
@@ -1058,7 +1060,7 @@
             </div>
             <button class="merch-arrow merch-arrow-right" onclick="scrollMerch(1)">&#10095;</button>
         </div>
-        <div class="merch-btn-container reveal"><a href="./store.html" class="btn">VIEW ALL MERCH</a></div>
+        <div class="merch-btn-container reveal"><a href="./store.html" class="btn" style="display:inline-block;padding:15px 40px;">VIEW ALL MERCH</a></div>
     </section>
 
     <div class="silver-line"></div>

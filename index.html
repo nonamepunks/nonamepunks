@@ -48,16 +48,15 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(0);
-            filter: grayscale(0%) brightness(3) drop-shadow(0 0 60px var(--logo-red)) drop-shadow(0 0 120px rgba(220, 38, 38, 0.9));
+            filter: grayscale(0%) brightness(2) drop-shadow(0 0 60px var(--logo-red)) drop-shadow(0 0 120px rgba(220, 38, 38, 0.9));
             z-index: 99999;
             pointer-events: none;
             opacity: 0;
             transition: none;
-            image-rendering: -webkit-optimize-contrast;
-            image-rendering: crisp-edges;
-            object-fit: contain;
-            max-width: none;
-            max-height: none;
+            /* background-image方式通常渲染更清晰 */
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
         }
 
         .dragon-clone.animate {
@@ -65,11 +64,11 @@
         }
 
         @keyframes dragonFlash {
-            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
-            20% { transform: translate(-50%, -50%) scale(5); opacity: 1; }
-            50% { transform: translate(-50%, -50%) scale(6); opacity: 1; }
-            80% { transform: translate(-50%, -50%) scale(5); opacity: 1; }
-            100% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+            0% { transform: translate(-50%, -50%) scale(0.2); opacity: 0; }
+            25% { transform: translate(-50%, -50%) scale(0.8); opacity: 1; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+            75% { transform: translate(-50%, -50%) scale(0.8); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(0.2); opacity: 0; }
         }
 
         /* 五角星红光效果 - 使用clip-path */
@@ -111,11 +110,11 @@
         /* 移动端优化 */
         @media (max-width: 768px) {
             @keyframes dragonFlash {
-                0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
-                20% { transform: translate(-50%, -50%) scale(4); opacity: 1; }
-                50% { transform: translate(-50%, -50%) scale(5); opacity: 1; }
-                80% { transform: translate(-50%, -50%) scale(4); opacity: 1; }
-                100% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+                0% { transform: translate(-50%, -50%) scale(0.2); opacity: 0; }
+                25% { transform: translate(-50%, -50%) scale(0.6); opacity: 1; }
+                50% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+                75% { transform: translate(-50%, -50%) scale(0.6); opacity: 1; }
+                100% { transform: translate(-50%, -50%) scale(0.2); opacity: 0; }
             }
 
             .dragon-star-ring {
@@ -1007,17 +1006,20 @@
                 // 如果已有动画在进行，不处理
                 if (document.querySelector('.dragon-clone.animate')) return;
 
-                const rect = this.getBoundingClientRect();
                 const src = this.src;
+                const naturalWidth = this.naturalWidth;
+                const naturalHeight = this.naturalHeight;
 
-                // 创建克隆的龙元素 - 使用更大尺寸保持清晰
-                const clone = document.createElement('img');
-                clone.src = src;
+                // 创建克隆的龙元素 - 使用background-image确保清晰
+                const clone = document.createElement('div');
                 clone.className = 'dragon-clone';
-                // 使用原始图片尺寸，通过CSS scale控制大小，避免拉伸模糊
-                clone.style.width = '100px';
-                clone.style.height = '100px';
-                clone.style.objectFit = 'contain';
+                clone.style.backgroundImage = 'url(' + src + ')';
+                clone.style.backgroundSize = 'contain';
+                clone.style.backgroundRepeat = 'no-repeat';
+                clone.style.backgroundPosition = 'center';
+                // 使用原图自然尺寸
+                clone.style.width = naturalWidth + 'px';
+                clone.style.height = naturalHeight + 'px';
                 document.body.appendChild(clone);
 
                 // 创建五角星红光

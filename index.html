@@ -71,7 +71,7 @@
 
         .hero-content { 
             position: absolute;
-            bottom: 8%;
+            bottom: 5%;
             left: 0;
             right: 0;
             z-index: 10; 
@@ -274,7 +274,26 @@
         }
 
         /* 768px以下 - 移动端 */
-        @media (max-width: 768px) { 
+        @media (max-width: 768px) {
+            /* 强制全屏 */
+            .hero {
+                height: 100vh !important;
+                min-height: 100vh !important;
+            }
+            .hero-bg {
+                position: absolute !important;
+                top: 0 !important;
+                left: 0 !important;
+                width: 100% !important;
+                height: 100% !important;
+            }
+            .hero-bg img {
+                width: 100% !important;
+                height: 100% !important;
+                object-fit: cover !important;
+                object-position: center !important;
+            }
+             
             /* 导航栏 */
             .nav-links { gap: 5px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding: 0 10px; justify-content: space-around; }
             .nav-links::-webkit-scrollbar { display: none; }
@@ -747,7 +766,7 @@
        })();
     </script>
 </body>
-</html>active'));
+</html>ach(d => d.classList.remove('active'));
             }
         });
 

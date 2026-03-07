@@ -45,6 +45,10 @@
             height: 100vh; 
             width: 100%;
             background: #000; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: flex-end; 
+            align-items: center; 
             position: relative; 
             overflow: hidden; 
         }
@@ -62,7 +66,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center center;
+            object-position: center;
         }
 
         /* 桌面端竖屏支持 */
@@ -109,7 +113,10 @@
         .video-banner { overflow: hidden; margin-bottom: 0; }
         .video-banner video { display: block; }
         .video-banner-section { margin-bottom: 0; background: url('./image/blackbg.webp') repeat-y center top; background-size: 100% auto; }
-        .music-video-section { margin-top: 0; padding-top: 0; }
+        .music-video-section { 
+    margin-top: 0; 
+    padding-top: 0; 
+}
         .music-section-inner { padding-top: 40px; }
         .banner { width: 100%; background: var(--dark-gray); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
         .banner img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
@@ -153,7 +160,16 @@
 
         @keyframes pulse { 0%, 100% { opacity: 1; box-shadow: 0 0 10px rgba(220, 38, 38, 0.3); } 50% { opacity: 0.8; box-shadow: 0 0 20px rgba(220, 38, 38, 0.5); } }
 
-        .music-video-section { width: 100%; background: url('./image/blackbg.webp') repeat center top; background-size: 100% auto; position: relative; min-height: 100vh; }
+        .music-video-section { 
+    width: 100%; 
+    background: 
+        linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 15%, rgba(0,0,0,0.4) 85%, rgba(0,0,0,0.85) 100%),
+        url('./image/musicbg.webp') repeat center top,
+        url('./image/blackbg.webp') repeat center top; 
+    background-size: 100% auto, 100% auto, 100% auto; 
+    position: relative; 
+    min-height: 100vh; 
+}
         .music-video-section::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 15%, rgba(0,0,0,0.4) 85%, rgba(0,0,0,0.85) 100%); z-index: 1; }
         .music-video-section::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.15) 2px, rgba(0,0,0,0.15) 4px); pointer-events: none; z-index: 2; }
         .music-section-inner { position: relative; z-index: 10; padding: 80px 40px; }
@@ -197,7 +213,15 @@
         .merch-btn-container { text-align: center; }
 
         /* FOOTER */
-        .footer-section { width: 100%; background: #000 url('./image/blackbg.webp') repeat-y center top; position: relative; padding: 60px 0 0 0; background-size: 100% auto; }
+        .footer-section { 
+    width: 100%; 
+    background: 
+        url('./image/downbg.webp') repeat-y center top,
+        url('./image/blackbg.webp') repeat-y center top; 
+    position: relative; 
+    padding: 60px 0 0 0; 
+    background-size: 100% auto, 100% auto; 
+}
         .footer-section::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1; }
         .footer-main { position: relative; z-index: 10; max-width: 1400px; margin: 0 auto; padding: 40px; display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 40px; }
         .footer-left { display: flex; flex-direction: column; gap: 15px; }
@@ -278,6 +302,17 @@
 
         /* 768px以下 - 移动端 */
         @media (max-width: 768px) {
+        /* 移动端播放按钮优化 */
+        .play-btn {
+            width: 80px;
+            height: 80px;
+            border-width: 3px;
+        }
+        .play-btn::after {
+            font-size: 30px;
+            margin-left: 5px;
+        }
+
             /* 强制全屏 */
             .hero {
                 height: 100vh !important;
@@ -815,69 +850,6 @@
             publicKey: "FQAG2S-gm0UgmyD4A",
           });
        })();
-    </script>
-
-    <script>
-        // 强制应用移动端样式
-        (function() {
-            function applyMobileStyles() {
-                var width = window.innerWidth;
-                var hero = document.querySelector('.hero');
-                var heroBg = document.querySelector('.hero-bg');
-                var heroImg = document.querySelector('.hero-bg img');
-                var heroContent = document.querySelector('.hero-content');
-                var heroLogo = document.querySelector('.hero-logo-img');
-
-                if (width <= 768) {
-                    if (hero) {
-                        hero.style.height = '100vh';
-                        hero.style.minHeight = '100vh';
-                        hero.style.width = '100%';
-                        hero.style.position = 'relative';
-                        hero.style.overflow = 'hidden';
-                    }
-                    if (heroBg) {
-                        heroBg.style.position = 'absolute';
-                        heroBg.style.top = '0';
-                        heroBg.style.left = '0';
-                        heroBg.style.width = '100%';
-                        heroBg.style.height = '100%';
-                        heroBg.style.zIndex = '1';
-                    }
-                    if (heroImg) {
-                        heroImg.style.width = '100%';
-                        heroImg.style.height = '100%';
-                        heroImg.style.objectFit = 'cover';
-                        heroImg.style.objectPosition = 'center top';
-                    }
-                    if (heroContent) {
-                        heroContent.style.position = 'absolute';
-                        heroContent.style.bottom = '5%';
-                        heroContent.style.left = '0';
-                        heroContent.style.right = '0';
-                        heroContent.style.zIndex = '100';
-                        heroContent.style.textAlign = 'center';
-                        heroContent.style.width = '100%';
-                    }
-                    if (heroLogo) {
-                        heroLogo.style.width = '90vw';
-                        heroLogo.style.maxWidth = '500px';
-                        heroLogo.style.height = 'auto';
-                    }
-                } else {
-                    if (heroContent) {
-                        heroContent.style.bottom = '8%';
-                    }
-                }
-            }
-
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', applyMobileStyles);
-            } else {
-                applyMobileStyles();
-            }
-            window.addEventListener('resize', applyMobileStyles);
-        })();
     </script>
 </body>
 </html>

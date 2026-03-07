@@ -101,9 +101,9 @@
         /* 桌面端竖屏 - 视频文字上移并增加显示行数 */
         @media (min-width: 769px) and (orientation: portrait) {
             .video-typewriter-container {
-                top: 52%;
+                top: 54%;
                 padding: 30px 40px 0;
-                min-height: 48%;
+                min-height: 46%;
             }
             .video-typewriter-text {
                 font-size: clamp(11px, 1.6vw, 20px);
@@ -412,7 +412,8 @@
 
             /* 导航栏 */
             .nav-links { gap: 5px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding: 0 10px; justify-content: space-around; }
-            .nav-links a { font-size: 12px; white-space: nowrap; padding: 8px 3px; letter-spacing: 1px; }
+            .nav-links a { font-size: 12px; white-space: nowrap; padding: 8px 2px; letter-spacing: 0.5px; }
+            .nav-links a[href*="antiipa"] { letter-spacing: 0; font-size: 11px; }
             .nav-dragon { width: 35px; height: 35px; }
             .nav-dragon-left { margin-right: 8px; }
             .nav-dragon-right { margin-left: 8px; }
@@ -913,8 +914,8 @@
 @media (max-width: 768px) {
     .video-typewriter-container {
         padding: 15px 12px 0;
-        top: 53%;
-        bottom: 2%;
+        top: 53.5%;
+        bottom: 1.5%;
         height: auto;
         min-height: 45%;
     }
@@ -1216,7 +1217,7 @@
             <button class="merch-nav-btn merch-prev-btn" onclick="scrollMerch(-1)">&#10094;</button>
             <div class="merch-carousel">
                 <div class="merch-track">
-                    <div class="merch-item reveal dual-img">
+<div class="merch-item reveal dual-img">
                         <div class="merch-img-wrap">
                             <img loading="lazy" src="./image/merchs/Anti-teeb1.png" alt="Anti-" class="merch-img">
                             <img loading="lazy" src="./image/merchs/Anti-teeb2.png" alt="Anti- Back" class="merch-img-hover">
@@ -1227,7 +1228,7 @@
                             <div class="merch-price">$25.9</div>
                         </div>
                     </div>
-                    <div class="merch-item reveal">
+<div class="merch-item reveal">
                         <div class="merch-img-wrap">
                             <img loading="lazy" src="./image/merchs/DevilSukll-teeb1.png" alt="Devil Skull" class="merch-img">
 
@@ -1238,7 +1239,7 @@
                             <div class="merch-price">$22.9</div>
                         </div>
                     </div>
-                    <div class="merch-item reveal dual-img">
+<div class="merch-item reveal dual-img">
                         <div class="merch-img-wrap">
                             <img loading="lazy" src="./image/merchs/WNTT-tee1.png" alt="We Need The Truth" class="merch-img">
                             <img loading="lazy" src="./image/merchs/WNTT-tee2.png" alt="We Need The Truth Back" class="merch-img-hover">
@@ -1249,7 +1250,7 @@
                             <div class="merch-price">$25.9</div>
                         </div>
                     </div>
-                    <div class="merch-item reveal">
+<div class="merch-item reveal">
                         <div class="merch-img-wrap">
                             <img loading="lazy" src="./image/merchs/cdg-ls1.png" alt="Coup De Grace" class="merch-img">
 
@@ -1260,7 +1261,7 @@
                             <div class="merch-price">$35.9</div>
                         </div>
                     </div>
-                    <div class="merch-item reveal">
+<div class="merch-item reveal">
                         <div class="merch-img-wrap">
                             <img loading="lazy" src="./image/merchs/Button1.png" alt="CN Logo" class="merch-img">
 
@@ -1271,7 +1272,7 @@
                             <div class="merch-price">$12.9</div>
                         </div>
                     </div>
-                    <div class="merch-item reveal dual-img">
+<div class="merch-item reveal dual-img">
                         <div class="merch-img-wrap">
                             <img loading="lazy" src="./image/merchs/fb-h1a.png" alt="Fortress Besieged" class="merch-img">
                             <img loading="lazy" src="./image/merchs/fb-h1b.png" alt="Fortress Besieged Back" class="merch-img-hover">
@@ -1282,7 +1283,7 @@
                             <div class="merch-price">$39.9</div>
                         </div>
                     </div>
-                    <div class="merch-item reveal">
+<div class="merch-item reveal">
                         <div class="merch-img-wrap">
                             <img loading="lazy" src="./image/merchs/logo-cap1.png" alt="Anti-" class="merch-img">
 
@@ -1293,7 +1294,7 @@
                             <div class="merch-price">$12.9</div>
                         </div>
                     </div>
-                    <div class="merch-item reveal">
+<div class="merch-item reveal">
                         <div class="merch-img-wrap">
                             <img loading="lazy" src="./image/merchs/fb-vinylb.png" alt="Fortress Besieged" class="merch-img">
 
@@ -1304,7 +1305,7 @@
                             <div class="merch-price">$29.9</div>
                         </div>
                     </div>
-                    <div class="merch-item reveal">
+<div class="merch-item reveal">
                         <div class="merch-img-wrap">
                             <img loading="lazy" src="./image/merchs/Anarchy-tee.png" alt="Anarchy" class="merch-img">
                         </div>
@@ -1314,9 +1315,41 @@
                             <div class="merch-price">$22.9</div>
                         </div>
                     </div>
+                    <div class="merch-item reveal dual-img">
+                        <div class="merch-img-wrap">
+                            <img loading="lazy" src="./image/merchs/Anti-teeb1.png" alt="Anti- Limited" class="merch-img">
+                            <img loading="lazy" src="./image/merchs/Anti-teeb2.png" alt="Anti- Limited Back" class="merch-img-hover">
+                        </div>
+                        <div class="merch-info">
+                            <div class="merch-name">Anti- Limited</div>
+                            <div class="merch-category">Tee</div>
+                            <div class="merch-price">$29.9</div>
+                        </div>
+                    </div>
+                    <div class="merch-item reveal">
+                        <div class="merch-img-wrap">
+                            <img loading="lazy" src="./image/merchs/DevilSukll-teeb1.png" alt="Devil Skull V2" class="merch-img">
+                        </div>
+                        <div class="merch-info">
+                            <div class="merch-name">Devil Skull V2</div>
+                            <div class="merch-category">Tee</div>
+                            <div class="merch-price">$24.9</div>
+                        </div>
+                    </div>
+                    <div class="merch-item reveal dual-img">
+                        <div class="merch-img-wrap">
+                            <img loading="lazy" src="./image/merchs/fb-h1a.png" alt="Fortress Besieged V2" class="merch-img">
+                            <img loading="lazy" src="./image/merchs/fb-h1b.png" alt="Fortress Besieged V2 Back" class="merch-img-hover">
+                        </div>
+                        <div class="merch-info">
+                            <div class="merch-name">Fortress Besieged V2</div>
+                            <div class="merch-category">Hoodies</div>
+                            <div class="merch-price">$42.9</div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <button class="merch-nav-btn merch-next-btn" onclick="scrollMerch(1)">&#10095;</button>
+        </div>
+        <button class="merch-nav-btn merch-next-btn" onclick="scrollMerch(1)">&#10095;</button>
         </div>
         <div class="merch-btn-container reveal"><a href="./store.html" class="btn">VIEW ALL MERCH</a></div>
     </section>
@@ -1667,8 +1700,19 @@
         window.updateMerchCarousel();
     };
 
+    function shuffleMerchItems() {
+        if (!merchTrack) return;
+        const items = Array.from(merchTrack.children);
+        // Fisher-Yates 洗牌算法
+        for (let i = items.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            merchTrack.appendChild(items[j]);
+        }
+    }
+
     function init() {
         if (initElements()) {
+            shuffleMerchItems(); // 随机排序商品
             window.updateMerchCarousel();
         }
     }

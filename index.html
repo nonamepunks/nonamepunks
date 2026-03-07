@@ -771,7 +771,7 @@
     }
 }
 
-/* 移动端 - 触摸滑动轮播 */
+/* 移动端 - 3x3网格布局 */
 @media (max-width: 768px) {
     .merch-section {
         padding: 60px 0;
@@ -780,23 +780,25 @@
         width: 100vw;
         margin-left: calc(-50vw + 50%);
         margin-right: calc(-50vw + 50%);
-        overflow: hidden;
-        touch-action: pan-y;
+        overflow: visible;
+        touch-action: auto;
     }
     .merch-carousel {
         width: 100vw;
-        overflow: hidden;
+        overflow: visible;
     }
     .merch-track {
-        display: flex;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
         gap: 0;
         transform: none;
-        transition: transform 0.3s ease;
+        transition: none;
     }
     .merch-item {
-        width: calc(100vw / 3);
-        min-width: calc(100vw / 3);
+        width: 100%;
+        min-width: auto;
         border: none;
+        aspect-ratio: 1;
     }
     /* 移动端隐藏导航按钮 */
     .merch-nav-btn {
@@ -838,11 +840,11 @@
     }
 }
 
-/* 超小屏幕 - 2个产品 */
+/* 超小屏幕 - 保持3个产品 */
 @media (max-width: 480px) {
     .merch-item {
-        width: calc(100vw / 2);
-        min-width: calc(100vw / 2);
+        width: 100%;
+        min-width: auto;
     }
     .merch-info {
         padding: 12px 8px;
@@ -1295,6 +1297,16 @@
                             <div class="merch-name">Fortress Besieged</div>
                             <div class="merch-category">Vinyl</div>
                             <div class="merch-price">$29.9</div>
+                        </div>
+                    </div>
+                    <div class="merch-item reveal">
+                        <div class="merch-img-wrap">
+                            <img loading="lazy" src="./image/merchs/Anarchy-tee.png" alt="Anarchy" class="merch-img">
+                        </div>
+                        <div class="merch-info">
+                            <div class="merch-name">Anarchy</div>
+                            <div class="merch-category">Tee</div>
+                            <div class="merch-price">$22.9</div>
                         </div>
                     </div>
                 </div>

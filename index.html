@@ -969,11 +969,95 @@
         <div class="merch-carousel">
             <button class="merch-arrow merch-arrow-left" onclick="scrollMerch(-1)">&#10094;</button>
             <div class="merch-grid">
-                <div class="merch-item dual-img" >
+                <div class="merch-item dual-img" onclick="openMerchModal('Anti-', '$25.9', './image/merchs/Anti-teeb1.png', 'Anti-teeb2.png')">
                     <div class="merch-img-wrap">
                         <img src="./image/merchs/Anti-teeb1.png" alt="Anti-" class="merch-img">
                         <img src="./image/merchs/Anti-teeb2.png" alt="Anti- Hover" class="merch-img-hover">
                     </div>
+                    <div class="merch-info">
+                        <div class="merch-name">Anti-</div>
+                        <div class="merch-category">Tee</div>
+                        <div class="merch-price">$25.9</div>
+                    </div>
+                </div>
+                <div class="merch-item single-img" onclick="openMerchModal('Devil Skull', '$22.9', './image/merchs/DevilSukll-teeb1.png', null)">
+                    <div class="merch-img-wrap">
+                        <img src="./image/merchs/DevilSukll-teeb1.png" alt="Devil Skull" class="merch-img">
+                        
+                    </div>
+                    <div class="merch-info">
+                        <div class="merch-name">Devil Skull</div>
+                        <div class="merch-category">Tee</div>
+                        <div class="merch-price">$22.9</div>
+                    </div>
+                </div>
+                <div class="merch-item dual-img" onclick="openMerchModal('We Need The Truth', '$25.9', './image/merchs/WNTT-tee1.png', 'WNTT-tee2.png')">
+                    <div class="merch-img-wrap">
+                        <img src="./image/merchs/WNTT-tee1.png" alt="We Need The Truth" class="merch-img">
+                        <img src="./image/merchs/WNTT-tee2.png" alt="We Need The Truth Hover" class="merch-img-hover">
+                    </div>
+                    <div class="merch-info">
+                        <div class="merch-name">We Need The Truth</div>
+                        <div class="merch-category">Tee</div>
+                        <div class="merch-price">$25.9</div>
+                    </div>
+                </div>
+                <div class="merch-item single-img" onclick="openMerchModal('Coup De Grace', '$35.9', './image/merchs/cdg-ls1.png', null)">
+                    <div class="merch-img-wrap">
+                        <img src="./image/merchs/cdg-ls1.png" alt="Coup De Grace" class="merch-img">
+                        
+                    </div>
+                    <div class="merch-info">
+                        <div class="merch-name">Coup De Grace</div>
+                        <div class="merch-category">Sweatshirt</div>
+                        <div class="merch-price">$35.9</div>
+                    </div>
+                </div>
+                <div class="merch-item single-img" onclick="openMerchModal('CN Logo', '$12.9', './image/merchs/Button1.png', null)">
+                    <div class="merch-img-wrap">
+                        <img src="./image/merchs/Button1.png" alt="CN Logo" class="merch-img">
+                        
+                    </div>
+                    <div class="merch-info">
+                        <div class="merch-name">CN Logo</div>
+                        <div class="merch-category">Botton</div>
+                        <div class="merch-price">$12.9</div>
+                    </div>
+                </div>
+                <div class="merch-item dual-img" onclick="openMerchModal('Fortress Besieged', '$39.9', './image/merchs/fb-h1a.png', 'fb-h1b.png')">
+                    <div class="merch-img-wrap">
+                        <img src="./image/merchs/fb-h1a.png" alt="Fortress Besieged" class="merch-img">
+                        <img src="./image/merchs/fb-h1b.png" alt="Fortress Besieged Hover" class="merch-img-hover">
+                    </div>
+                    <div class="merch-info">
+                        <div class="merch-name">Fortress Besieged</div>
+                        <div class="merch-category">Hoodies</div>
+                        <div class="merch-price">$39.9</div>
+                    </div>
+                </div>
+                <div class="merch-item single-img" onclick="openMerchModal('Anti-', '$12.9', './image/merchs/logo-cap1.png', null)">
+                    <div class="merch-img-wrap">
+                        <img src="./image/merchs/logo-cap1.png" alt="Anti-" class="merch-img">
+                        
+                    </div>
+                    <div class="merch-info">
+                        <div class="merch-name">Anti-</div>
+                        <div class="merch-category">Cap</div>
+                        <div class="merch-price">$12.9</div>
+                    </div>
+                </div>
+                <div class="merch-item single-img" onclick="openMerchModal('Fortress Besieged', '$29.9', './image/merchs/fb-vinylb.png', null)">
+                    <div class="merch-img-wrap">
+                        <img src="./image/merchs/fb-vinylb.png" alt="Fortress Besieged" class="merch-img">
+                        
+                    </div>
+                    <div class="merch-info">
+                        <div class="merch-name">Fortress Besieged</div>
+                        <div class="merch-category">Vinyl</div>
+                        <div class="merch-price">$29.9</div>
+                    </div>
+                </div>
+            </div>
                     <div class="merch-info">
                         <div class="merch-name">Anti-</div>
                         <div class="merch-category">Tee</div>
@@ -1061,6 +1145,19 @@
             <button class="merch-arrow merch-arrow-right" onclick="scrollMerch(1)">&#10095;</button>
         </div>
         <div class="merch-btn-container reveal"><a href="./store.html" class="btn" style="display:inline-block;padding:15px 40px;">VIEW ALL MERCH</a></div>
+
+        <!-- 图片弹出层 -->
+        <div class="merch-modal" id="merchModal" onclick="closeMerchModal(event)">
+            <span class="merch-modal-close" onclick="closeMerchModal(event)">&times;</span>
+            <div class="merch-modal-content" onclick="event.stopPropagation()">
+                <img src="" alt="" class="merch-modal-img" id="modalImg" onclick="switchModalImage()">
+                <div class="merch-modal-info">
+                    <div class="merch-modal-name" id="modalName"></div>
+                    <div class="merch-modal-price" id="modalPrice"></div>
+                </div>
+                <button class="merch-modal-switch" id="modalSwitch" onclick="switchModalImage()" style="display:none;">切换图片</button>
+            </div>
+        </div>
     </section>
 
     <div class="silver-line"></div>
@@ -1254,6 +1351,63 @@
             const grid = document.querySelector('.merch-grid');
             const scrollAmount = grid.clientWidth * 0.8;
             grid.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+        }
+
+        // MERCH弹出层
+        let modalImg1 = '';
+        let modalImg2 = null;
+        let currentModalImg = 1;
+        let autoSwitchInterval = null;
+
+        function openMerchModal(name, price, img1, img2) {
+            modalImg1 = img1;
+            modalImg2 = img2;
+            currentModalImg = 1;
+
+            document.getElementById('modalName').textContent = name;
+            document.getElementById('modalPrice').textContent = price;
+            document.getElementById('modalImg').src = img1;
+
+            const switchBtn = document.getElementById('modalSwitch');
+            if (img2) {
+                switchBtn.style.display = 'block';
+                // 3秒自动切换
+                autoSwitchInterval = setInterval(() => {
+                    switchModalImage();
+                }, 3000);
+            } else {
+                switchBtn.style.display = 'none';
+            }
+
+            document.getElementById('merchModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function switchModalImage() {
+            const img = document.getElementById('modalImg');
+            img.classList.add('fade');
+
+            setTimeout(() => {
+                if (currentModalImg === 1 && modalImg2) {
+                    img.src = modalImg2;
+                    currentModalImg = 2;
+                } else {
+                    img.src = modalImg1;
+                    currentModalImg = 1;
+                }
+                img.classList.remove('fade');
+            }, 500);
+        }
+
+        function closeMerchModal(event) {
+            if (event.target.classList.contains('merch-modal') || event.target.classList.contains('merch-modal-close')) {
+                document.getElementById('merchModal').classList.remove('active');
+                document.body.style.overflow = '';
+                if (autoSwitchInterval) {
+                    clearInterval(autoSwitchInterval);
+                    autoSwitchInterval = null;
+                }
+            }
         }
 
         // 龙图案点击动画 - 稳定版本（使用克隆避免布局问题）

@@ -366,11 +366,23 @@
 
             /* 超小屏幕 */
             @media (max-width: 380px) {
-                .hero-logo-img {
+            .hero-logo-img {
                     width: 75%;
                     max-width: 340px;
                 }
+            /* 合并的样式 */
+            .hero-logo-img { width: 80%; max-width: 320px; }
+            .footer-nav-container .nav-dragon { display: block; width: 20px; height: 20px; }
+            /* 合并的样式 */
+            @keyframes dragonFlash {
+                0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
+                20% { transform: translate(-50%, -50%) scale(0.8); opacity: 1; }
+                50% { transform: translate(-50%, -50%) scale(0.9); opacity: 1; }
+                80% { transform: translate(-50%, -50%) scale(0.8); opacity: 1; }
+                100% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
             }
+            .dragon-star-ring { width: 40vmin; height: 40vmin; }
+        }
 
             /* 彻底禁用爆闪动画 */
             .reveal, .reveal.active, .reveal-logo, .reveal-logo.active {
@@ -427,7 +439,7 @@
                 max-width: 120px;
                 text-align: center;
                 flex: 0 1 auto;
-                margin: 0 18px;
+                margin: 0 20px;
                 color: var(--silver);
                 white-space: normal;
                 word-break: break-word;
@@ -465,12 +477,19 @@
             .footer-nav-container::-webkit-scrollbar { display: none; }
             .footer-nav a { font-size: 10px; white-space: nowrap; letter-spacing: 0.5px; padding: 5px 2px; flex-shrink: 0; }
             .footer-nav-container .nav-dragon { display: block; width: 35px; height: 35px; }
+        
+            /* 从第二个媒体查询合并 */
+            @keyframes dragonFlash {
+                0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
+                20% { transform: translate(-50%, -50%) scale(0.9); opacity: 1; }
+                50% { transform: translate(-50%, -50%) scale(1.0); opacity: 1; }
+                80% { transform: translate(-50%, -50%) scale(0.9); opacity: 1; }
+                100% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
+            }
+            .dragon-star-ring { width: 45vmin; height: 45vmin; }
         }
 
-        @media (max-width: 380px) {
-            .hero-logo-img { width: 80%; max-width: 320px; }
-            .footer-nav-container .nav-dragon { display: block; width: 20px; height: 20px; }
-        }
+        
 
         ::-webkit-scrollbar { width: 10px; }
         ::-webkit-scrollbar-track { background: var(--black); }
@@ -525,16 +544,7 @@
         }
 
         /* 移动端优化 - 缩小 scale 避免出屏 */
-        @media (max-width: 768px) {
-            @keyframes dragonFlash {
-                0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
-                20% { transform: translate(-50%, -50%) scale(0.9); opacity: 1; }
-                50% { transform: translate(-50%, -50%) scale(1.0); opacity: 1; }
-                80% { transform: translate(-50%, -50%) scale(0.9); opacity: 1; }
-                100% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
-            }
-            .dragon-star-ring { width: 45vmin; height: 45vmin; }
-        }
+        
 
         /* 竖屏模式特殊优化 */
         @media (max-width: 768px) and (orientation: portrait) {
@@ -548,16 +558,7 @@
         }
 
         /* 超小屏幕进一步优化 */
-        @media (max-width: 380px) {
-            @keyframes dragonFlash {
-                0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
-                20% { transform: translate(-50%, -50%) scale(0.8); opacity: 1; }
-                50% { transform: translate(-50%, -50%) scale(0.9); opacity: 1; }
-                80% { transform: translate(-50%, -50%) scale(0.8); opacity: 1; }
-                100% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
-            }
-            .dragon-star-ring { width: 40vmin; height: 40vmin; }
-        }
+        
 </style>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>

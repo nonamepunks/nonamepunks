@@ -34,8 +34,8 @@
         .nav-links a { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; color: var(--white); text-decoration: none; font-size: 18px; letter-spacing: 4px; text-transform: uppercase; position: relative; transition: all 0.1s; padding: 10px 0; }
         .nav-links a:hover { color: var(--logo-red); text-shadow: 0 0 10px var(--logo-red), 0 0 20px var(--logo-red), 0 0 30px var(--logo-red); transform: skewX(-5deg); }
 
-        .hero { height: 100vh; background: url('./image/blackbg.webp') repeat-y center top; background-size: 100% auto; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; position: relative; overflow: hidden; padding-bottom: 5vh; }
-        .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('./image/hero1.webp') center top/contain no-repeat; z-index: 1; }
+        .hero { height: 100vh; background: #000; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; position: relative; overflow: hidden; padding-bottom: 5vh; }
+        .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('./image/hero1.webp') center center/contain no-repeat; z-index: 1; }
         .hero-chromatic { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('./image/hero1.webp') center/cover no-repeat; z-index: 1; opacity: 0.5; mix-blend-mode: screen; filter: hue-rotate(10deg); transform: translateX(3px); pointer-events: none; }
         .hero-noise { position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); opacity: 0.08; z-index: 2; animation: noise 0.5s steps(10) infinite; pointer-events: none; mix-blend-mode: overlay; }
         .hero-scanlines { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(0deg, rgba(0,0,0,0.15), rgba(0,0,0,0.15) 1px, transparent 1px, transparent 2px); z-index: 3; pointer-events: none; animation: tvFlicker 0.15s infinite; }
@@ -215,7 +215,7 @@
 
         @keyframes pulse { 0%, 100% { opacity: 1; box-shadow: 0 0 10px rgba(220, 38, 38, 0.3); } 50% { opacity: 0.8; box-shadow: 0 0 20px rgba(220, 38, 38, 0.5); } }
 
-        .music-video-section { width: 100%; background: url('./image/blackbg.webp') repeat-y center top; background-size: 100% auto; position: relative; }
+        .music-video-section { width: 100%; background: url('./image/blackbg.webp') repeat center top; background-size: 100% auto; position: relative; min-height: 100vh; }
         .music-video-section::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 15%, rgba(0,0,0,0.4) 85%, rgba(0,0,0,0.85) 100%); z-index: 1; }
         .music-video-section::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.15) 2px, rgba(0,0,0,0.15) 4px); pointer-events: none; z-index: 2; }
         .music-section-inner { position: relative; z-index: 10; padding: 80px 40px; }
@@ -261,10 +261,10 @@
         /* 底部区域 - 移除爆闪效果 */
         .footer-section { 
             width: 100%; 
-            background: url('./image/blackbg.webp') repeat-y center top; 
+            background: #000 url('./image/blackbg.webp') repeat-y center top !important; 
             position: relative; 
             padding: 60px 0 0 0;
-            background-size: 100% auto;
+            background-size: 100% auto !important;
         }
         .footer-section::before { 
             content: ''; 
@@ -363,29 +363,22 @@
             width: 90vw !important;
         }
 
-        /* 顶部导航栏 ANTI-IPA 不换行 */
+        /* 顶部导航栏 */
         .nav-links { 
-            gap: 8px !important; 
-            flex-wrap: nowrap !important;
+            gap: 5px;
+            flex-wrap: nowrap;
             overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
-            width: 100%;
-            justify-content: space-between;
-            padding: 0 5px;
+            padding: 0 10px;
+            justify-content: space-around;
         }
         .nav-links::-webkit-scrollbar { display: none; }
         .nav-links a { 
-            font-size: 10px !important; 
-            letter-spacing: 0.5px !important;
-            white-space: nowrap !important;
-            padding: 8px 2px !important;
-            flex-shrink: 0;
+            font-size: 12px;
+            white-space: nowrap;
+            padding: 8px 3px;
         }
-        /* 超小屏幕隐藏龙图 */
-        @media (max-width: 380px) {
-            .nav-dragon { display: none; }
-        }
+        .nav-dragon { display: none; }
         .nav-dragon { width: 25px; height: 25px; }
         .nav-dragon-left { margin-right: 8px; }
         .nav-dragon-right { margin-left: 8px; }
@@ -433,6 +426,14 @@
         ::-webkit-scrollbar-track { background: var(--black); }
         ::-webkit-scrollbar-thumb { background: var(--logo-red); border-radius: 5px; box-shadow: 0 0 15px rgba(220, 38, 38, 0.6); }
         ::-webkit-scrollbar-thumb:hover { background: var(--blood-red); box-shadow: 0 0 25px var(--logo-red); }
+    /* 全局底部背景 */
+        .footer-section, footer {
+            background-color: #000 !important;
+            background-image: url('./image/blackbg.webp') !important;
+            background-repeat: repeat-y !important;
+            background-position: center top !important;
+            background-size: 100% auto !important;
+        }
     </style>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
@@ -573,7 +574,8 @@
         </div>
     </section>
 
-    <!-- Video Banner 3 - 无分割线，与 MUSIC 融合 -->
+    <!-- Video Banner 3 - 有顶部分割线 -->
+    <div class="silver-line"></div>
     <section class="banner-section video-banner-section" id="banner3">
         <div class="banner reveal video-banner">
             <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover;">

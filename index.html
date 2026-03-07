@@ -366,44 +366,50 @@
         @media (max-width: 1024px) { 
         .members-grid { grid-template-columns: 1fr 1fr !important; }
 
-        /* 平板/小桌面 hero 优化 */
+        /* 平板/小桌面 hero */
+        .hero {
+            height: 100vh !important;
+            min-height: 100vh !important;
+        }
         .hero-bg {
-            background-size: 120% auto !important;
-            background-position: center 10% !important;
-            height: 80% !important;
+            background-size: cover !important;
+            background-position: center top !important;
+            height: 85% !important;
+            width: 100% !important;
+            margin-left: 0 !important;
+        }
+        .hero-content {
+            bottom: 5% !important;
         }
         .hero-logo-img {
-            max-width: 280px !important;
+            max-width: 220px !important;
         } .merch-grid { grid-template-columns: repeat(2, 1fr); } .nav-links { gap: 25px; } .nav-links a { font-size: 14px; letter-spacing: 2px; } .hero-logo-img { max-width: 600px; } .album-cover { width: 300px; height: 300px; } .album-title { font-size: 36px; letter-spacing: 6px; } }
         @media (max-width: 768px) { 
         /* 移动端移除爆闪效果 */
         .hero-noise, .hero-scanlines, .banner-grain, .banner-scanlines-dark { display: none !important; }
         .silver-line::after { animation: none; }
 
-        /* ===== 移动端 Hero 重新设计 ===== */
+        /* ===== 移动端 Hero 最终版 ===== */
         .hero { 
             background: #000 !important;
             height: 100vh !important;
-            min-height: 600px !important;
+            min-height: 100vh !important;
             position: relative !important;
-            display: flex !important;
-            flex-direction: column !important;
-            justify-content: flex-start !important;
-            align-items: center !important;
-            padding-top: 5vh !important;
+            overflow: hidden !important;
         }
 
-        /* 背景图 - 完整显示在上方 */
+        /* 背景图 - 填满整个屏幕 */
         .hero-bg { 
             background-image: url('./image/hero1.webp') !important;
-            background-size: contain !important;
+            background-size: cover !important;
             background-repeat: no-repeat !important;
             background-position: center top !important;
-            position: relative !important;
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
             width: 100% !important;
-            height: 60vh !important;
-            max-height: 500px !important;
-            flex-shrink: 0 !important;
+            height: 85% !important;
+            z-index: 1 !important;
         }
 
         /* 隐藏特效 */
@@ -411,21 +417,20 @@
             display: none !important; 
         }
 
-        /* Logo 容器 - 在照片下方 */
+        /* Logo 容器 - 紧贴照片底部 */
         .hero-content {
-            position: relative !important;
-            margin-top: 3vh !important;
+            position: absolute !important;
+            bottom: 5% !important;
+            left: 0 !important;
             width: 100% !important;
             text-align: center !important;
             z-index: 10 !important;
-            flex-shrink: 0 !important;
         }
 
-        /* Logo - 适中尺寸 */
+        /* Logo - 放在照片底部 */
         .hero-logo-img {
-            width: 50vw !important;
-            max-width: 200px !important;
-            min-width: 150px !important;
+            width: 55vw !important;
+            max-width: 220px !important;
             height: auto !important;
         }
 

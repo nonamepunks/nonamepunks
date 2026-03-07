@@ -1190,15 +1190,68 @@
     .merch-popup-prev { left: -50px; }
     .merch-popup-next { right: -50px; }
 }
+
+        /* 性能优化 */
+        .merch-item, .merch-img, .merch-img-hover {
+            will-change: transform;
+            contain: layout style paint;
+        }
+
+        .banner img, .hero-bg img {
+            will-change: transform;
+            content-visibility: auto;
+        }
+
+        #bannerVideo {
+            will-change: opacity;
+        }
+
+        /* 减少动画对性能的影响 */
+        @media (prefers-reduced-motion: reduce) {
+            .merch-item, .merch-img, .banner img {
+                transition: none !important;
+                animation: none !important;
+            }
+        }
 </style>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
     <!-- 预加载关键资源 -->
     <link rel="preload" href="./image/hero1.webp" as="image" fetchpriority="high">
 
-    <!-- 预连接 WIX 视频服务器 -->
-    <link rel="preconnect" href="https://video.wixstatic.com">
+    <!-- 预连接优化 -->
+    <link rel="preconnect" href="https://video.wixstatic.com" crossorigin>
     <link rel="dns-prefetch" href="https://video.wixstatic.com">
+    <link rel="preconnect" href="https://open.spotify.com">
+    <link rel="dns-prefetch" href="https://open.spotify.com">
+    <link rel="preconnect" href="https://bandcamp.com">
+    <link rel="dns-prefetch" href="https://bandcamp.com">
+    <link rel="preconnect" href="https://www.youtube.com">
+    <link rel="dns-prefetch" href="https://www.youtube.com">
+    <link rel="preconnect" href="https://img.youtube.com">
+    <link rel="dns-prefetch" href="https://img.youtube.com">
+<!-- MERCH 延迟加载优化 -->
+<script>
+// 延迟初始化 merch 轮播，等页面主要内容加载完成
+if ('IntersectionObserver' in window) {
+    const merchObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // 当 merch 区域进入视口时再初始化
+                window.merchShouldInit = true;
+                merchObserver.disconnect();
+            }
+        });
+    }, { rootMargin: '100px' });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const merchSection = document.getElementById('merch');
+        if (merchSection) {
+            merchObserver.observe(merchSection);
+        }
+    });
+}
+</script>
 </head>
 <body>
 
@@ -1337,21 +1390,36 @@
 
     <div class="silver-line"></div>
     <section class="banner-section video-banner-section" id="banner3">
-        <div class="banner reveal video-banner" style="position: relative; aspect-ratio: 1280/672; overflow: hidden;">
+        <div class="banner reveal video-banner" style="position: relative; aspect-ratio: 1280/672; overflow: hidden; background: #000;">
+            <!-- 静态背景图优先显示，视频后台加载 -->
+            <div class="video-static-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('./image/banner3-poster.jpg') center/cover no-repeat; z-index: 0;"></div>
             <!-- 视频背景 -->
             <video id="bannerVideo" 
                 autoplay 
                 muted 
                 loop 
                 playsinline 
-                preload="auto" 
+                preload="metadata" 
                 poster="./image/banner3-poster.jpg"
-                style="width: 100%; height: 100%; object-fit: cover;"
+                style="width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.5s;"
                 onloadeddata="this.style.opacity=1"
-                onerror="this.style.display='none'; document.querySelector('.video-fallback').style.display='block';">
+                oncanplay="this.style.opacity=1"
+                onerror="handleVideoError(this)">
                 <source src="https://video.wixstatic.com/video/d502ca_cae18d24aaad4b468c7b2b2160253319/720p/mp4/file.mp4" type="video/mp4">
-                Your browser does not support the video tag.
             </video>
+            <script>
+                function handleVideoError(video) {
+                    video.style.display='none';
+                    document.querySelector('.video-fallback').style.display='block';
+                }
+                // 延迟加载视频，优先保证页面其他内容
+                setTimeout(function() {
+                    var video = document.getElementById('bannerVideo');
+                    if (video && video.load) {
+                        video.load();
+                    }
+                }, 2000);
+            </script>
             <div class="video-fallback" style="display: none;"></div>
             <div class="banner-dark-effect">
                 <div class="banner-cinematic"></div>
@@ -1421,8 +1489,8 @@
                 <div class="merch-track">
 <div class="merch-item reveal dual-img" data-img1="./image/merchs/Anti-teeb1.png" data-img2="./image/merchs/Anti-teeb2.png" data-name="Anti-" data-category="Tee" data-price="$25.9" onclick="openMerchPopup(this)">
                         <div class="merch-img-wrap">
-                            <img loading="lazy" src="./image/merchs/Anti-teeb1.png" alt="Anti-" class="merch-img">
-                            <img loading="lazy" src="./image/merchs/Anti-teeb2.png" alt="Anti- Back" class="merch-img-hover">
+                            <img loading="lazy" decoding="async" src="./image/merchs/Anti-teeb1.png" alt="Anti-" class="merch-img">
+                            <img loading="lazy" decoding="async" src="./image/merchs/Anti-teeb2.png" alt="Anti- Back" class="merch-img-hover">
                         </div>
                         <div class="merch-info">
                             <div class="merch-name">Anti-</div>
@@ -1432,7 +1500,7 @@
                     </div>
 <div class="merch-item reveal" data-img1="./image/merchs/DevilSukll-teeb1.png" data-img2="" data-name="Devil Skull" data-category="Tee" data-price="$22.9" onclick="openMerchPopup(this)">
                         <div class="merch-img-wrap">
-                            <img loading="lazy" src="./image/merchs/DevilSukll-teeb1.png" alt="Devil Skull" class="merch-img">
+                            <img loading="lazy" decoding="async" src="./image/merchs/DevilSukll-teeb1.png" alt="Devil Skull" class="merch-img">
 
                         </div>
                         <div class="merch-info">
@@ -1443,8 +1511,8 @@
                     </div>
 <div class="merch-item reveal dual-img" data-img1="./image/merchs/WNTT-tee1.png" data-img2="./image/merchs/WNTT-tee2.png" data-name="We Need The Truth" data-category="Tee" data-price="$25.9" onclick="openMerchPopup(this)">
                         <div class="merch-img-wrap">
-                            <img loading="lazy" src="./image/merchs/WNTT-tee1.png" alt="We Need The Truth" class="merch-img">
-                            <img loading="lazy" src="./image/merchs/WNTT-tee2.png" alt="We Need The Truth Back" class="merch-img-hover">
+                            <img loading="lazy" decoding="async" src="./image/merchs/WNTT-tee1.png" alt="We Need The Truth" class="merch-img">
+                            <img loading="lazy" decoding="async" src="./image/merchs/WNTT-tee2.png" alt="We Need The Truth Back" class="merch-img-hover">
                         </div>
                         <div class="merch-info">
                             <div class="merch-name">We Need The Truth</div>
@@ -1454,7 +1522,7 @@
                     </div>
 <div class="merch-item reveal" data-img1="./image/merchs/cdg-ls1.png" data-img2="" data-name="Coup De Grace" data-category="Sweatshirt" data-price="$35.9" onclick="openMerchPopup(this)">
                         <div class="merch-img-wrap">
-                            <img loading="lazy" src="./image/merchs/cdg-ls1.png" alt="Coup De Grace" class="merch-img">
+                            <img loading="lazy" decoding="async" src="./image/merchs/cdg-ls1.png" alt="Coup De Grace" class="merch-img">
 
                         </div>
                         <div class="merch-info">
@@ -1465,7 +1533,7 @@
                     </div>
 <div class="merch-item reveal" data-img1="./image/merchs/Button1.png" data-img2="" data-name="CN Logo" data-category="Botton" data-price="$12.9" onclick="openMerchPopup(this)">
                         <div class="merch-img-wrap">
-                            <img loading="lazy" src="./image/merchs/Button1.png" alt="CN Logo" class="merch-img">
+                            <img loading="lazy" decoding="async" src="./image/merchs/Button1.png" alt="CN Logo" class="merch-img">
 
                         </div>
                         <div class="merch-info">
@@ -1476,8 +1544,8 @@
                     </div>
 <div class="merch-item reveal dual-img" data-img1="./image/merchs/fb-h1a.png" data-img2="./image/merchs/fb-h1b.png" data-name="Fortress Besieged" data-category="Hoodies" data-price="$39.9" onclick="openMerchPopup(this)">
                         <div class="merch-img-wrap">
-                            <img loading="lazy" src="./image/merchs/fb-h1a.png" alt="Fortress Besieged" class="merch-img">
-                            <img loading="lazy" src="./image/merchs/fb-h1b.png" alt="Fortress Besieged Back" class="merch-img-hover">
+                            <img loading="lazy" decoding="async" src="./image/merchs/fb-h1a.png" alt="Fortress Besieged" class="merch-img">
+                            <img loading="lazy" decoding="async" src="./image/merchs/fb-h1b.png" alt="Fortress Besieged Back" class="merch-img-hover">
                         </div>
                         <div class="merch-info">
                             <div class="merch-name">Fortress Besieged</div>
@@ -1487,7 +1555,7 @@
                     </div>
 <div class="merch-item reveal" data-img1="./image/merchs/logo-cap1.png" data-img2="" data-name="Anti-" data-category="Cap" data-price="$12.9" onclick="openMerchPopup(this)">
                         <div class="merch-img-wrap">
-                            <img loading="lazy" src="./image/merchs/logo-cap1.png" alt="Anti-" class="merch-img">
+                            <img loading="lazy" decoding="async" src="./image/merchs/logo-cap1.png" alt="Anti-" class="merch-img">
 
                         </div>
                         <div class="merch-info">
@@ -1498,7 +1566,7 @@
                     </div>
 <div class="merch-item reveal" data-img1="./image/merchs/fb-vinylb.png" data-img2="" data-name="Fortress Besieged" data-category="Vinyl" data-price="$29.9" onclick="openMerchPopup(this)">
                         <div class="merch-img-wrap">
-                            <img loading="lazy" src="./image/merchs/fb-vinylb.png" alt="Fortress Besieged" class="merch-img">
+                            <img loading="lazy" decoding="async" src="./image/merchs/fb-vinylb.png" alt="Fortress Besieged" class="merch-img">
 
                         </div>
                         <div class="merch-info">
@@ -1509,7 +1577,7 @@
                     </div>
 <div class="merch-item reveal" data-img1="./image/merchs/Anarchy-tee.png" data-img2="" data-name="Anarchy" data-category="Tee" data-price="$22.9" onclick="openMerchPopup(this)">
                         <div class="merch-img-wrap">
-                            <img loading="lazy" src="./image/merchs/Anarchy-tee.png" alt="Anarchy" class="merch-img">
+                            <img loading="lazy" decoding="async" src="./image/merchs/Anarchy-tee.png" alt="Anarchy" class="merch-img">
                         </div>
                         <div class="merch-info">
                             <div class="merch-name">Anarchy</div>
@@ -1886,7 +1954,16 @@
     function init() {
         if (initElements()) {
             shuffleMerchItems(); // 随机排序商品
-            window.updateMerchCarousel();
+            // 使用 requestIdleCallback 或 setTimeout 延迟初始化，避免阻塞主线程
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(function() {
+                    window.updateMerchCarousel();
+                }, { timeout: 2000 });
+            } else {
+                setTimeout(function() {
+                    window.updateMerchCarousel();
+                }, 100);
+            }
         }
     }
 
@@ -2369,5 +2446,30 @@ document.querySelectorAll('a[href="#merch"]').forEach(function(link) {
         </div>
     </div>
 </div>
+<!-- 图片加载优化 -->
+<script>
+// 图片懒加载优化
+document.addEventListener('DOMContentLoaded', function() {
+    // 延迟加载非首屏图片
+    const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.classList.add('loaded');
+                    observer.unobserve(img);
+                }
+            });
+        }, {
+            rootMargin: '50px 0px',
+            threshold: 0.01
+        });
+
+        lazyImages.forEach(img => imageObserver.observe(img));
+    }
+});
+</script>
 </body>
 </html>

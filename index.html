@@ -742,6 +742,14 @@
             });
         }
 
+        // 绑定表单提交事件
+        document.addEventListener('DOMContentLoaded', function() {
+            const subscribeForm = document.getElementById('subscribeForm');
+            if (subscribeForm) {
+                subscribeForm.addEventListener('submit', handleSubscribe);
+            }
+        });
+
         // 点击外部关闭下拉菜单
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.footer-dropdown')) {

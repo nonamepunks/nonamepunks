@@ -71,7 +71,7 @@
 
         .hero-content { 
             position: absolute;
-            bottom: 5%;
+            bottom: 8%;
             left: 0;
             right: 0;
             z-index: 10; 
@@ -349,7 +349,32 @@
         ::-webkit-scrollbar-track { background: var(--black); }
         ::-webkit-scrollbar-thumb { background: var(--logo-red); border-radius: 5px; box-shadow: 0 0 15px rgba(220, 38, 38, 0.6); }
         ::-webkit-scrollbar-thumb:hover { background: var(--blood-red); box-shadow: 0 0 25px var(--logo-red); }
-    </style>
+    
+        /* 移动端爆闪效果优化 - 只播放一次，避免页面闪烁 */
+        @media (max-width: 768px) {
+            /* 初始状态可见，避免闪烁 */
+            .reveal {
+                opacity: 1;
+            }
+            /* 爆闪动画只播放一次 */
+            .reveal.active {
+                animation: hardGlitch 0.3s steps(5) forwards;
+            }
+            /* 动画完成后保持状态 */
+            .reveal.hard-glitch-done {
+                animation: none !important;
+                opacity: 1 !important;
+            }
+        }
+
+        /* 超小屏幕Logo适配 */
+        @media (max-width: 380px) {
+            .hero-logo-img {
+                width: 85vw !important;
+                max-width: 380px !important;
+            }
+        }
+</style>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>

@@ -77,8 +77,8 @@
         }
 
         .hero-logo-img { 
-            max-width: 900px; 
-            width: 85%; 
+            max-width: 1000px; 
+            width: 90%; 
             height: auto; 
             opacity: 0; 
         }
@@ -342,10 +342,26 @@
                 padding: 0 15px;
             }
             .hero-logo-img {
-                width: 70%;
-                max-width: 280px;
+                width: 60%;
+                max-width: 240px;
                 height: auto;
                 filter: drop-shadow(0 0 15px rgba(220, 38, 38, 0.6)) drop-shadow(0 0 30px rgba(220, 38, 38, 0.4));
+            }
+
+            /* 电脑竖屏/手机竖屏 - logo更小 */
+            @media (max-width: 768px) and (orientation: portrait) {
+                .hero-logo-img {
+                    width: 55%;
+                    max-width: 200px;
+                }
+            }
+
+            /* 超小屏幕 */
+            @media (max-width: 380px) {
+                .hero-logo-img {
+                    width: 50%;
+                    max-width: 180px;
+                }
             }
 
             /* 彻底禁用爆闪动画 */

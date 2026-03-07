@@ -86,6 +86,14 @@
         .hero-logo-img.active { 
             animation: logoFadeIn 1.5s ease-out forwards, logoGlow 3s ease-in-out infinite 1.5s; 
         }
+        /* 桌面端竖屏 - LOGO缩小到2/3 */
+        @media (min-width: 769px) and (orientation: portrait) {
+            .hero-logo-img {
+                max-width: 660px;
+                width: 60%;
+            }
+        }
+
 
         .hero-vignette { 
             position: absolute; 
@@ -386,10 +394,57 @@
             .member-name { font-size: 16px; }
             .member-role { font-size: 12px; }
 
-            /* TOUR */
-            .tour-item { flex-direction: column; gap: 8px; text-align: center; padding: 10px 15px; }
-            .tour-date-col, .tour-city-col, .tour-venue-col, .tour-country-col { text-align: center; width: 100%; min-width: auto; }
-            .tour-btn-col { text-align: center; min-width: auto; }
+            /* TOUR - 移动端三排布局 */
+            .tour-item { 
+                display: flex;
+                flex-direction: row; 
+                flex-wrap: wrap;
+                gap: 0;
+                row-gap: 12px;
+                text-align: center; 
+                padding: 12px 15px;
+                justify-content: center;
+                align-items: center;
+            }
+            .tour-date-col { 
+                order: 1; 
+                width: 100%; 
+                text-align: center;
+                color: var(--logo-red);
+                font-weight: bold;
+                font-size: 16px;
+            }
+            .tour-city-col { 
+                order: 2; 
+                width: auto;
+                text-align: center;
+                flex: 0 0 auto;
+                white-space: nowrap;
+            }
+            .tour-venue-col { 
+                order: 3; 
+                width: auto;
+                max-width: 120px;
+                text-align: center;
+                flex: 0 1 auto;
+                margin: 0 18px;
+                color: var(--silver);
+                white-space: normal;
+                word-break: break-word;
+            }
+            .tour-country-col { 
+                order: 4; 
+                width: auto;
+                text-align: center;
+                flex: 0 0 auto;
+                white-space: nowrap;
+            }
+            .tour-btn-col { 
+                order: 5; 
+                width: 100%; 
+                text-align: center;
+                margin-top: 0;
+            }
             .tour-section { padding-top: 30px; } 
             .section-title { font-size: 36px; letter-spacing: 8px; margin-bottom: 30px; }
 

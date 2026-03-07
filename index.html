@@ -41,10 +41,21 @@
         .nav-links a:hover { color: var(--logo-red); text-shadow: 0 0 10px var(--logo-red), 0 0 20px var(--logo-red), 0 0 30px var(--logo-red); transform: skewX(-5deg); }
 
         .hero { height: 100vh; background: #000; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; position: relative; overflow: hidden; padding-bottom: 5vh; }
-        .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('./image/hero1.webp') center center/contain no-repeat; z-index: 1; }
-        .hero-chromatic { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('./image/hero1.webp') center/cover no-repeat; z-index: 1; opacity: 0.5; mix-blend-mode: screen; filter: hue-rotate(10deg); transform: translateX(3px); pointer-events: none; }
-        .hero-noise { position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); opacity: 0.08; z-index: 2; animation: noise 0.5s steps(10) infinite; pointer-events: none; mix-blend-mode: overlay; }
-        .hero-scanlines { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(0deg, rgba(0,0,0,0.15), rgba(0,0,0,0.15) 1px, transparent 1px, transparent 2px); z-index: 3; pointer-events: none; animation: tvFlicker 0.15s infinite; }
+        .hero-bg { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background-image: url('./image/hero1.webp');
+            background-size: contain;
+            background-position: center center;
+            background-repeat: no-repeat;
+            z-index: 1; 
+        }
+        .hero-chromatic { display: none !important; }
+        .hero-noise { display: none !important; }
+        .hero-scanlines { display: none !important; }
         .hero-vignette { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(ellipse at center, transparent 0%, transparent 50%, rgba(0,0,0,0.7) 100%); z-index: 4; pointer-events: none; }
         .hero-content { position: relative; z-index: 10; text-align: center; margin-bottom: 20px; }
         .hero-logo-img { max-width: 1000px; width: 85vw; height: auto; opacity: 0; }

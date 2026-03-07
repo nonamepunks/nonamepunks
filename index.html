@@ -1405,6 +1405,9 @@ if ('IntersectionObserver' in window) {
                 onloadeddata="this.style.opacity=1"
                 oncanplay="this.style.opacity=1"
                 onerror="handleVideoError(this)">
+                <!-- WebM 格式优先（体积更小，加载更快） -->
+                <source src="https://video.wixstatic.com/video/d502ca_02f77ea8c1204a13ad02d6ebd762d136/720p/webm/file.webm" type="video/webm">
+                <!-- MP4 后备格式 -->
                 <source src="https://video.wixstatic.com/video/d502ca_cae18d24aaad4b468c7b2b2160253319/720p/mp4/file.mp4" type="video/mp4">
             </video>
             <script>

@@ -32,102 +32,8 @@
         .navbar.visible { top: 0; }
         .navbar::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, transparent, var(--logo-red), transparent); animation: lineScan 3s linear infinite; }
         .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: center; align-items: center; padding: 0 30px; position: relative; }
-        .nav-dragon { width: 50px; height: 50px; cursor: pointer; transition: all 0.2s; filter: grayscale(100%) brightness(0.8); object-fit: contain; }
+        .nav-dragon { width: 40px; height: 40px; cursor: pointer; transition: all 0.2s; filter: grayscale(100%) brightness(0.8); object-fit: contain; }
         .nav-dragon:hover { filter: grayscale(0%) brightness(1.2) drop-shadow(0 0 10px var(--logo-red)); transform: scale(1.1); }
-
-        /* 龙点击动画 - 五角星版本 */
-        .nav-dragon {
-            image-rendering: -webkit-optimize-contrast;
-            image-rendering: crisp-edges;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        /* 克隆的龙动画元素 */
-        .dragon-clone {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            filter: grayscale(0%) brightness(2) drop-shadow(0 0 60px var(--logo-red)) drop-shadow(0 0 120px rgba(220, 38, 38, 0.9));
-            z-index: 99999;
-            pointer-events: none;
-            opacity: 0;
-            transition: none;
-            /* background-image方式通常渲染更清晰 */
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-        }
-
-        .dragon-clone.animate {
-            animation: dragonFlash 1.2s ease-out forwards;
-        }
-
-        @keyframes dragonFlash {
-            0% { transform: translate(-50%, -50%) scale(0.2); opacity: 0; }
-            25% { transform: translate(-50%, -50%) scale(0.8); opacity: 1; }
-            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
-            75% { transform: translate(-50%, -50%) scale(0.8); opacity: 1; }
-            100% { transform: translate(-50%, -50%) scale(0.2); opacity: 0; }
-        }
-
-        /* 五角星红光效果 - 使用clip-path */
-        .dragon-star-ring {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            width: 60vmin;
-            height: 60vmin;
-            background: rgba(220, 38, 38, 0.9);
-            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-            transform: translate(-50%, -50%) scale(0) rotate(0deg);
-            z-index: 99998;
-            pointer-events: none;
-            box-shadow: inset 0 0 100px rgba(255, 100, 100, 0.8);
-        }
-
-        .dragon-star-ring::before {
-            content: '';
-            position: absolute;
-            top: 10%;
-            left: 10%;
-            width: 80%;
-            height: 80%;
-            background: rgba(139, 0, 0, 0.6);
-            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-        }
-
-        .dragon-star-ring.animate {
-            animation: starExpand 1.2s ease-out forwards;
-        }
-
-        @keyframes starExpand {
-            0% { transform: translate(-50%, -50%) scale(0) rotate(0deg); opacity: 0; }
-            30% { opacity: 1; }
-            100% { transform: translate(-50%, -50%) scale(3) rotate(180deg); opacity: 0; }
-        }
-
-        /* 移动端优化 */
-        @media (max-width: 768px) {
-            @keyframes dragonFlash {
-                0% { transform: translate(-50%, -50%) scale(0.2); opacity: 0; }
-                25% { transform: translate(-50%, -50%) scale(0.65); opacity: 1; }
-                50% { transform: translate(-50%, -50%) scale(0.85); opacity: 1; }
-                75% { transform: translate(-50%, -50%) scale(0.65); opacity: 1; }
-                100% { transform: translate(-50%, -50%) scale(0.2); opacity: 0; }
-            }
-
-            /* 移动端限制最大宽度，但尽量大 */
-            .dragon-clone {
-                max-width: 95vw !important;
-                max-height: 50vh !important;
-            }
-
-            .dragon-star-ring {
-                width: 50vmin;
-                height: 50vmin;
-            }
-        }
         .nav-dragon-left { margin-right: 40px; }
         .nav-dragon-right { margin-left: 40px; }
         .nav-links { display: flex; gap: 50px; list-style: none; justify-content: center; }
@@ -171,33 +77,14 @@
         }
 
         .hero-logo-img { 
-            max-width: 1000px; 
-            width: 85%; 
+            max-width: 800px; 
+            width: 80%; 
             height: auto; 
             opacity: 0; 
         }
 
         .hero-logo-img.active { 
             animation: logoFadeIn 1.5s ease-out forwards, logoGlow 3s ease-in-out infinite 1.5s; 
-        }
-
-        /* 电脑竖屏和平板 - 缩小logo但保留红光效果 */
-        @media (max-width: 1024px) and (orientation: portrait) {
-            .hero-logo-img {
-                max-width: 500px;
-                width: 70%;
-            }
-            .hero-logo-img.active {
-                animation: logoFadeIn 1.5s ease-out forwards, logoGlow 3s ease-in-out infinite 1.5s;
-            }
-        }
-
-        /* 平板横屏也适当缩小 */
-        @media (max-width: 1024px) and (orientation: landscape) {
-            .hero-logo-img {
-                max-width: 600px;
-                width: 75%;
-            }
         }
 
         .hero-vignette { 
@@ -312,171 +199,7 @@
 
         /* MERCH */
         .merch-section { padding: 100px 30px; background: url('./image/blackbg.webp') repeat-y center top; background-size: 100% auto; position: relative; }
-        /* MERCH轮播 */
-        .merch-carousel {
-            position: relative;
-            width: 100%;
-            max-width: 100%;
-            margin: 0 auto 80px;
-            padding: 0 45px;
-        }
-
-        .merch-grid { 
-            display: flex;
-            flex-wrap: nowrap;
-            gap: 10px;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-            padding: 20px 0;
-        }
-
-        .merch-grid::-webkit-scrollbar {
-            display: none;
-        }
-
-        .merch-item {
-            flex: 0 0 calc(16.666% - 9px);
-            min-width: calc(16.666% - 9px);
-            position: relative;
-            aspect-ratio: 0.75;
-            background: #111;
-            overflow: hidden;
-        }
-
-        .merch-img-wrap {
-            width: 100%;
-            height: 90%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 5px;
-        }
-
-        .merch-img, .merch-img-hover {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-
-        .merch-img-wrap {
-            width: 100%;
-            height: 85%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 15px;
-        }
-
-        .merch-img, .merch-img-hover {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-
-        .merch-info {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 12px;
-            background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
-            text-align: center;
-        }
-
-        .merch-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 45px;
-            height: 80px;
-            background: rgba(220, 38, 38, 0.4);
-            border: none;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            z-index: 10;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .merch-arrow:hover {
-            background: rgba(220, 38, 38, 0.8);
-        }
-
-        .merch-arrow-left {
-            left: 0;
-            border-radius: 0 5px 5px 0;
-        }
-
-        .merch-arrow-right {
-            right: 0;
-            border-radius: 5px 0 0 5px;
-        }
-
-        .merch-category {
-            font-family: 'Arial Black', Arial, sans-serif;
-            font-size: 11px;
-            color: var(--silver);
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 3px;
-        }
-
-        @media (max-width: 1200px) {
-            .merch-item {
-                flex: 0 0 calc(33.333% - 14px);
-                min-width: calc(33.333% - 14px);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .merch-carousel {
-                padding: 0;
-                margin-bottom: 60px;
-            }
-            .merch-arrow {
-                display: none;
-            }
-            .merch-grid {
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                gap: 3px;
-                overflow-x: visible;
-                padding: 10px 2px;
-            }
-            .merch-item {
-                flex: none;
-                min-width: auto;
-                aspect-ratio: 0.65;
-                border: none;
-            }
-            .merch-img-wrap {
-                height: 90%;
-                padding: 2px;
-            }
-            .merch-info {
-                padding: 3px 2px;
-            }
-            .merch-name {
-                font-size: 9px;
-                letter-spacing: 0;
-                line-height: 1;
-            }
-            .merch-category {
-                font-size: 7px;
-                margin-bottom: 0;
-            }
-            .merch-price {
-                font-size: 8px;
-            }
-            .merch-btn-container {
-                margin-top: 20px;
-            }
-        }
+        .merch-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; max-width: 1400px; margin: 0 auto 50px; }
         .merch-item { position: relative; aspect-ratio: 1; background: #111; cursor: pointer; transition: all 0.3s; overflow: hidden; display: flex; align-items: center; justify-content: center; }
         .merch-item:hover { transform: translateY(-10px); box-shadow: 0 20px 60px rgba(220, 38, 38, 0.3); }
         .merch-img-wrap { position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; padding: 20px; }
@@ -489,11 +212,45 @@
         .merch-item:hover .merch-info { transform: translateY(0); }
         .merch-name { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-size: 16px; letter-spacing: 2px; color: var(--white); margin-bottom: 5px; text-transform: uppercase; }
         .merch-price { font-family: 'Arial Black', Arial, sans-serif; font-size: 14px; color: var(--logo-red); letter-spacing: 1px; }
-        .merch-category { font-family: 'Arial Black', Arial, sans-serif; font-size: 12px; color: var(--silver); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 3px; }
-        .merch-btn-container { 
-            text-align: center; 
-            margin-top: 40px;
-            padding-bottom: 20px;
+        .merch-btn-container { text-align: center; margin-top: 40px; }
+
+        /* MERCH Carousel */
+        .merch-carousel { position: relative; width: 100%; padding: 0 45px; margin-bottom: 60px; }
+        .merch-grid { display: flex; gap: 10px; overflow-x: auto; scroll-behavior: smooth; scrollbar-width: none; padding: 20px 0; }
+        .merch-grid::-webkit-scrollbar { display: none; }
+        .merch-item { flex: 0 0 calc(16.666% - 9px); min-width: calc(16.666% - 9px); aspect-ratio: 0.75; background: #111; cursor: pointer; overflow: hidden; }
+        .merch-img-wrap { width: 100%; height: 90%; display: flex; align-items: center; justify-content: center; padding: 5px; }
+        .merch-img, .merch-img-hover { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .merch-info { padding: 5px; text-align: center; background: rgba(0,0,0,0.8); }
+        .merch-name { font-size: 14px; font-weight: bold; }
+        .merch-category { font-size: 11px; color: #999; }
+        .merch-price { font-size: 13px; color: #DC2626; }
+
+        .merch-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 80px; background: rgba(220,38,38,0.4); border: none; color: white; font-size: 20px; cursor: pointer; z-index: 10; }
+        .merch-arrow:hover { background: rgba(220,38,38,0.8); }
+        .merch-arrow-left { left: 0; border-radius: 0 5px 5px 0; }
+        .merch-arrow-right { right: 0; border-radius: 5px 0 0 5px; }
+
+        /* Modal */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 100000; justify-content: center; align-items: center; }
+        .modal.active { display: flex; }
+        .modal-content { position: relative; max-width: 90vw; max-height: 90vh; text-align: center; }
+        .modal img { max-width: 100%; max-height: 80vh; object-fit: contain; transition: opacity 0.5s; }
+        .modal-info { margin-top: 20px; color: white; }
+        .modal-info h3 { font-size: 24px; margin-bottom: 10px; }
+        .modal-info p { font-size: 20px; color: #DC2626; }
+        .modal-close { position: absolute; top: 20px; right: 30px; font-size: 40px; color: white; cursor: pointer; z-index: 100001; }
+
+        @media (max-width: 768px) {
+            .merch-carousel { padding: 0; }
+            .merch-arrow { display: none; }
+            .merch-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; padding: 10px 2px; }
+            .merch-item { flex: none; min-width: auto; aspect-ratio: 0.65; }
+            .merch-img-wrap { height: 90%; padding: 2px; }
+            .merch-info { padding: 3px; }
+            .merch-name { font-size: 10px; }
+            .merch-category { font-size: 8px; }
+            .merch-price { font-size: 9px; }
         }
 
         /* FOOTER */
@@ -576,7 +333,7 @@
         /* 1024px以下 - 平板 */
         @media (max-width: 1024px) { 
             .members-grid { grid-template-columns: 1fr 1fr; }
-            .merch-grid { grid-template-columns: repeat(3, 1fr); gap: 15px; } 
+            .merch-grid { grid-template-columns: repeat(2, 1fr); } 
             .nav-links { gap: 25px; } 
             .nav-links a { font-size: 14px; letter-spacing: 2px; } 
             .album-cover { width: 300px; height: 300px; } 
@@ -624,23 +381,9 @@
                 padding: 0 15px;
             }
             .hero-logo-img {
-                width: 58%;
-                max-width: 240px;
+                width: 85%;
+                max-width: 400px;
                 height: auto;
-            }
-            /* 移动端保留红光效果 */
-            .hero-logo-img.active {
-                animation: logoFadeIn 1.5s ease-out forwards, logoGlowMobile 3s ease-in-out infinite 1.5s;
-            }
-
-            @keyframes logoGlowMobile {
-                0%, 100% { filter: drop-shadow(0 0 12px rgba(220, 38, 38, 0.7)) drop-shadow(0 0 25px rgba(220, 38, 38, 0.5)) drop-shadow(0 0 40px rgba(220, 38, 38, 0.3)); }
-                50% { filter: drop-shadow(0 0 20px rgba(220, 38, 38, 0.9)) drop-shadow(0 0 40px rgba(220, 38, 38, 0.6)) drop-shadow(0 0 60px rgba(220, 38, 38, 0.4)); }
-            }
-
-            /* hero logo下移 */
-            .hero-content {
-                bottom: 5%;
             }
 
             /* 彻底禁用爆闪动画 */
@@ -655,7 +398,7 @@
             .nav-links { gap: 5px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding: 0 10px; justify-content: space-around; }
             .nav-links::-webkit-scrollbar { display: none; }
             .nav-links a { font-size: 12px; white-space: nowrap; padding: 8px 3px; letter-spacing: 1px; }
-            .nav-dragon { width: 35px; height: 35px; }
+            .nav-dragon { width: 25px; height: 25px; }
             .nav-dragon-left { margin-right: 8px; }
             .nav-dragon-right { margin-left: 8px; }
 
@@ -665,65 +408,12 @@
             .member-name { font-size: 16px; }
             .member-role { font-size: 12px; }
 
-            /* TOUR - 三排布局 */
-            .tour-item { 
-                display: flex;
-                flex-direction: row;
-                flex-wrap: wrap;
-                justify-content: center;
-                align-items: center;
-                gap: 12px 20px; 
-                text-align: center; 
-                padding: 16px 15px; 
-                margin-bottom: 8px;
-                font-size: 12px;
-            }
-            /* 第一排：日期 - 占满整行 */
-            .tour-date-col { 
-                order: 1;
-                width: 100%;
-                text-align: center; 
-                font-size: 15px;
-                color: var(--logo-red);
-                font-weight: bold;
-                letter-spacing: 2px;
-            }
-            /* 第二排：城市 场地 国家 - 同一行 */
-            .tour-city-col { 
-                order: 2;
-                width: auto;
-                text-align: center; 
-                font-size: 13px;
-            }
-            .tour-venue-col { 
-                order: 3;
-                width: auto;
-                text-align: center; 
-                font-size: 12px;
-                color: var(--silver);
-            }
-            .tour-country-col { 
-                order: 4;
-                width: auto;
-                text-align: center; 
-                font-size: 13px;
-            }
-            /* 第三排：按钮 - 占满整行 */
-            .tour-btn-col { 
-                order: 5;
-                width: 100%;
-                text-align: center; 
-                margin-top: 4px;
-            }
-            .tour-btn {
-                padding: 10px 30px;
-                font-size: 12px;
-                min-height: 36px;
-                min-width: 100px;
-                letter-spacing: 2px;
-            }
-            .tour-section { padding-top: 20px; } 
-            .section-title { font-size: 32px; letter-spacing: 6px; margin-bottom: 20px; }
+            /* TOUR */
+            .tour-item { flex-direction: column; gap: 8px; text-align: center; padding: 10px 15px; }
+            .tour-date-col, .tour-city-col, .tour-venue-col, .tour-country-col { text-align: center; width: 100%; min-width: auto; }
+            .tour-btn-col { text-align: center; min-width: auto; }
+            .tour-section { padding-top: 30px; } 
+            .section-title { font-size: 36px; letter-spacing: 8px; margin-bottom: 30px; }
 
             /* MUSIC */
             .album-cover { width: 260px; height: 260px; } 
@@ -745,8 +435,8 @@
         }
 
         @media (max-width: 380px) {
-            .hero-logo-img { width: 55%; max-width: 200px; }
-            .footer-nav-container .nav-dragon { display: block; width: 30px; height: 30px; }
+            .hero-logo-img { width: 80%; max-width: 320px; }
+            .footer-nav-container .nav-dragon { display: block; width: 20px; height: 20px; }
         }
 
         ::-webkit-scrollbar { width: 10px; }
@@ -808,7 +498,7 @@
                 <div class="banner-glow"></div>
                 <div class="banner-border-glow"></div>
             </div>
-            <a href="./store.html" class="banner-btn banner-btn-center">ORDER NOW</a>
+            <a href="#" class="banner-btn banner-btn-center">ORDER NOW</a>
         </div>
     </section>
 
@@ -824,7 +514,7 @@
                 <div class="banner-glow"></div>
                 <div class="banner-border-glow"></div>
             </div>
-            <a href="https://open.spotify.com/album/0F8d8XWxzm8HHxsHdmsbZH?si=R54ErTWATG-Ozl7IN4ShZQ" target="_blank" class="banner-btn banner-btn-right">STREAM NOW</a>
+            <a href="#" class="banner-btn banner-btn-right">STREAM NOW</a>
         </div>
     </section>
 
@@ -929,7 +619,7 @@
                 </div>
                 <div class="music-player-side reveal">
                     <h3 class="music-player-title">BANDCAMP</h3>
-                    <iframe class="music-player-embed" style="border: 0; width: 100%; height: 470px;" src="https://bandcamp.com/EmbeddedPlayer/album=1097170438/size=large/bgcol=333333/linkcol=e32c14/transparent=true/" seamless><a href="https://nonamepunks.bandcamp.com/album/anti">ANTI- by The NONAME</a></iframe>
+                    <iframe class="music-player-embed" style="border: 0; width: 100%; height: 470px;" src="https://bandcamp.com/EmbeddedPlayer/album=4205936417/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/transparent=true/" seamless><a href="https://nonamepunks.bandcamp.com/album/boston-to-xian">Boston To Xi'an by The NONAME</a></iframe>
                 </div>
             </div>
         </div>
@@ -969,7 +659,7 @@
         <div class="merch-carousel">
             <button class="merch-arrow merch-arrow-left" onclick="scrollMerch(-1)">&#10094;</button>
             <div class="merch-grid">
-                <div class="merch-item dual-img" onclick="openMerchModal('Anti-', '$25.9', './image/merchs/Anti-teeb1.png', 'Anti-teeb2.png')">
+                <div class="merch-item dual-img" onclick="openModal('Anti-', '$25.9', './image/merchs/Anti-teeb1.png', './image/merchs/Anti-teeb2.png')">
                     <div class="merch-img-wrap">
                         <img src="./image/merchs/Anti-teeb1.png" alt="Anti-" class="merch-img">
                         <img src="./image/merchs/Anti-teeb2.png" alt="Anti- Hover" class="merch-img-hover">
@@ -980,10 +670,9 @@
                         <div class="merch-price">$25.9</div>
                     </div>
                 </div>
-                <div class="merch-item single-img" onclick="openMerchModal('Devil Skull', '$22.9', './image/merchs/DevilSukll-teeb1.png', null)">
+                <div class="merch-item single-img" onclick="openModal('Devil Skull', '$22.9', './image/merchs/DevilSukll-teeb1.png', null)">
                     <div class="merch-img-wrap">
                         <img src="./image/merchs/DevilSukll-teeb1.png" alt="Devil Skull" class="merch-img">
-                        
                     </div>
                     <div class="merch-info">
                         <div class="merch-name">Devil Skull</div>
@@ -991,7 +680,7 @@
                         <div class="merch-price">$22.9</div>
                     </div>
                 </div>
-                <div class="merch-item dual-img" onclick="openMerchModal('We Need The Truth', '$25.9', './image/merchs/WNTT-tee1.png', 'WNTT-tee2.png')">
+                <div class="merch-item dual-img" onclick="openModal('We Need The Truth', '$25.9', './image/merchs/WNTT-tee1.png', './image/merchs/WNTT-tee2.png')">
                     <div class="merch-img-wrap">
                         <img src="./image/merchs/WNTT-tee1.png" alt="We Need The Truth" class="merch-img">
                         <img src="./image/merchs/WNTT-tee2.png" alt="We Need The Truth Hover" class="merch-img-hover">
@@ -1002,10 +691,9 @@
                         <div class="merch-price">$25.9</div>
                     </div>
                 </div>
-                <div class="merch-item single-img" onclick="openMerchModal('Coup De Grace', '$35.9', './image/merchs/cdg-ls1.png', null)">
+                <div class="merch-item single-img" onclick="openModal('Coup De Grace', '$35.9', './image/merchs/cdg-ls1.png', null)">
                     <div class="merch-img-wrap">
                         <img src="./image/merchs/cdg-ls1.png" alt="Coup De Grace" class="merch-img">
-                        
                     </div>
                     <div class="merch-info">
                         <div class="merch-name">Coup De Grace</div>
@@ -1013,10 +701,9 @@
                         <div class="merch-price">$35.9</div>
                     </div>
                 </div>
-                <div class="merch-item single-img" onclick="openMerchModal('CN Logo', '$12.9', './image/merchs/Button1.png', null)">
+                <div class="merch-item single-img" onclick="openModal('CN Logo', '$12.9', './image/merchs/Button1.png', null)">
                     <div class="merch-img-wrap">
                         <img src="./image/merchs/Button1.png" alt="CN Logo" class="merch-img">
-                        
                     </div>
                     <div class="merch-info">
                         <div class="merch-name">CN Logo</div>
@@ -1024,7 +711,7 @@
                         <div class="merch-price">$12.9</div>
                     </div>
                 </div>
-                <div class="merch-item dual-img" onclick="openMerchModal('Fortress Besieged', '$39.9', './image/merchs/fb-h1a.png', 'fb-h1b.png')">
+                <div class="merch-item dual-img" onclick="openModal('Fortress Besieged', '$39.9', './image/merchs/fb-h1a.png', './image/merchs/fb-h1b.png')">
                     <div class="merch-img-wrap">
                         <img src="./image/merchs/fb-h1a.png" alt="Fortress Besieged" class="merch-img">
                         <img src="./image/merchs/fb-h1b.png" alt="Fortress Besieged Hover" class="merch-img-hover">
@@ -1035,10 +722,9 @@
                         <div class="merch-price">$39.9</div>
                     </div>
                 </div>
-                <div class="merch-item single-img" onclick="openMerchModal('Anti-', '$12.9', './image/merchs/logo-cap1.png', null)">
+                <div class="merch-item single-img" onclick="openModal('Anti-', '$12.9', './image/merchs/logo-cap1.png', null)">
                     <div class="merch-img-wrap">
-                        <img src="./image/merchs/logo-cap1.png" alt="Anti-" class="merch-img">
-                        
+                        <img src="./image/merchs/logo-cap1.png" alt="Anti- Cap" class="merch-img">
                     </div>
                     <div class="merch-info">
                         <div class="merch-name">Anti-</div>
@@ -1046,94 +732,9 @@
                         <div class="merch-price">$12.9</div>
                     </div>
                 </div>
-                <div class="merch-item single-img" onclick="openMerchModal('Fortress Besieged', '$29.9', './image/merchs/fb-vinylb.png', null)">
+                <div class="merch-item single-img" onclick="openModal('Fortress Besieged', '$29.9', './image/merchs/fb-vinylb.png', null)">
                     <div class="merch-img-wrap">
-                        <img src="./image/merchs/fb-vinylb.png" alt="Fortress Besieged" class="merch-img">
-                        
-                    </div>
-                    <div class="merch-info">
-                        <div class="merch-name">Fortress Besieged</div>
-                        <div class="merch-category">Vinyl</div>
-                        <div class="merch-price">$29.9</div>
-                    </div>
-                </div>
-            </div>
-                    <div class="merch-info">
-                        <div class="merch-name">Anti-</div>
-                        <div class="merch-category">Tee</div>
-                        <div class="merch-price">$25.9</div>
-                    </div>
-                </div>
-                <div class="merch-item single-img" >
-                    <div class="merch-img-wrap">
-                        <img src="./image/merchs/DevilSukll-teeb1.png" alt="Devil Skull" class="merch-img">
-                        
-                    </div>
-                    <div class="merch-info">
-                        <div class="merch-name">Devil Skull</div>
-                        <div class="merch-category">Tee</div>
-                        <div class="merch-price">$22.9</div>
-                    </div>
-                </div>
-                <div class="merch-item dual-img" >
-                    <div class="merch-img-wrap">
-                        <img src="./image/merchs/WNTT-tee1.png" alt="We Need The Truth" class="merch-img">
-                        <img src="./image/merchs/WNTT-tee2.png" alt="We Need The Truth Hover" class="merch-img-hover">
-                    </div>
-                    <div class="merch-info">
-                        <div class="merch-name">We Need The Truth</div>
-                        <div class="merch-category">Tee</div>
-                        <div class="merch-price">$25.9</div>
-                    </div>
-                </div>
-                <div class="merch-item single-img" >
-                    <div class="merch-img-wrap">
-                        <img src="./image/merchs/cdg-ls1.png" alt="Coup De Grace" class="merch-img">
-                        
-                    </div>
-                    <div class="merch-info">
-                        <div class="merch-name">Coup De Grace</div>
-                        <div class="merch-category">Sweatshirt</div>
-                        <div class="merch-price">$35.9</div>
-                    </div>
-                </div>
-                <div class="merch-item single-img" >
-                    <div class="merch-img-wrap">
-                        <img src="./image/merchs/Button1.png" alt="CN Logo" class="merch-img">
-                        
-                    </div>
-                    <div class="merch-info">
-                        <div class="merch-name">CN Logo</div>
-                        <div class="merch-category">Botton</div>
-                        <div class="merch-price">$12.9</div>
-                    </div>
-                </div>
-                <div class="merch-item dual-img" >
-                    <div class="merch-img-wrap">
-                        <img src="./image/merchs/fb-h1a.png" alt="Fortress Besieged" class="merch-img">
-                        <img src="./image/merchs/fb-h1b.png" alt="Fortress Besieged Hover" class="merch-img-hover">
-                    </div>
-                    <div class="merch-info">
-                        <div class="merch-name">Fortress Besieged</div>
-                        <div class="merch-category">Hoodies</div>
-                        <div class="merch-price">$39.9</div>
-                    </div>
-                </div>
-                <div class="merch-item single-img" >
-                    <div class="merch-img-wrap">
-                        <img src="./image/merchs/logo-cap1.png" alt="Anti-" class="merch-img">
-                        
-                    </div>
-                    <div class="merch-info">
-                        <div class="merch-name">Anti-</div>
-                        <div class="merch-category">Cap</div>
-                        <div class="merch-price">$12.9</div>
-                    </div>
-                </div>
-                <div class="merch-item single-img" >
-                    <div class="merch-img-wrap">
-                        <img src="./image/merchs/fb-vinylb.png" alt="Fortress Besieged" class="merch-img">
-                        
+                        <img src="./image/merchs/fb-vinylb.png" alt="Fortress Besieged Vinyl" class="merch-img">
                     </div>
                     <div class="merch-info">
                         <div class="merch-name">Fortress Besieged</div>
@@ -1144,18 +745,17 @@
             </div>
             <button class="merch-arrow merch-arrow-right" onclick="scrollMerch(1)">&#10095;</button>
         </div>
-        <div class="merch-btn-container reveal"><a href="./store.html" class="btn" style="display:inline-block;padding:15px 40px;">VIEW ALL MERCH</a></div>
+        <div class="merch-btn-container reveal"><a href="./store.html" class="btn">VIEW ALL MERCH</a></div>
 
-        <!-- 图片弹出层 -->
-        <div class="merch-modal" id="merchModal" onclick="closeMerchModal(event)">
-            <span class="merch-modal-close" onclick="closeMerchModal(event)">&times;</span>
-            <div class="merch-modal-content" onclick="event.stopPropagation()">
-                <img src="" alt="" class="merch-modal-img" id="modalImg" onclick="switchModalImage()">
-                <div class="merch-modal-info">
-                    <div class="merch-modal-name" id="modalName"></div>
-                    <div class="merch-modal-price" id="modalPrice"></div>
+        <!-- Modal -->
+        <div id="imgModal" class="modal" onclick="closeModal()">
+            <span class="modal-close">&times;</span>
+            <div class="modal-content" onclick="event.stopPropagation()">
+                <img id="modalImg" src="" alt="" onclick="toggleImage()">
+                <div class="modal-info">
+                    <h3 id="modalTitle"></h3>
+                    <p id="modalPrice"></p>
                 </div>
-                <button class="merch-modal-switch" id="modalSwitch" onclick="switchModalImage()" style="display:none;">切换图片</button>
             </div>
         </div>
     </section>
@@ -1346,117 +946,33 @@
             player.style.cursor = 'default';
         }
 
-        // MERCH轮播
-        function scrollMerch(direction) {
-            const grid = document.querySelector('.merch-grid');
-            const scrollAmount = grid.clientWidth * 0.8;
-            grid.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+        // MERCH
+        function scrollMerch(dir) {
+            document.querySelector('.merch-grid').scrollBy({ left: dir * 300, behavior: 'smooth' });
         }
 
-        // MERCH弹出层
-        let modalImg1 = '';
-        let modalImg2 = null;
-        let currentModalImg = 1;
-        let autoSwitchInterval = null;
-
-        function openMerchModal(name, price, img1, img2) {
-            modalImg1 = img1;
-            modalImg2 = img2;
-            currentModalImg = 1;
-
-            document.getElementById('modalName').textContent = name;
-            document.getElementById('modalPrice').textContent = price;
+        let modalImg1, modalImg2, currentImg = 1, autoSwitch;
+        function openModal(name, price, img1, img2) {
+            modalImg1 = img1; modalImg2 = img2; currentImg = 1;
             document.getElementById('modalImg').src = img1;
-
-            const switchBtn = document.getElementById('modalSwitch');
-            if (img2) {
-                switchBtn.style.display = 'block';
-                // 3秒自动切换
-                autoSwitchInterval = setInterval(() => {
-                    switchModalImage();
-                }, 3000);
-            } else {
-                switchBtn.style.display = 'none';
-            }
-
-            document.getElementById('merchModal').classList.add('active');
-            document.body.style.overflow = 'hidden';
+            document.getElementById('modalTitle').textContent = name;
+            document.getElementById('modalPrice').textContent = price;
+            document.getElementById('imgModal').classList.add('active');
+            if (img2) autoSwitch = setInterval(toggleImage, 3000);
         }
-
-        function switchModalImage() {
-            const img = document.getElementById('modalImg');
-            img.classList.add('fade');
-
+        function toggleImage() {
+            if (!modalImg2) return;
+            currentImg = currentImg === 1 ? 2 : 1;
+            document.getElementById('modalImg').style.opacity = 0;
             setTimeout(() => {
-                if (currentModalImg === 1 && modalImg2) {
-                    img.src = modalImg2;
-                    currentModalImg = 2;
-                } else {
-                    img.src = modalImg1;
-                    currentModalImg = 1;
-                }
-                img.classList.remove('fade');
+                document.getElementById('modalImg').src = currentImg === 1 ? modalImg1 : modalImg2;
+                document.getElementById('modalImg').style.opacity = 1;
             }, 500);
         }
-
-        function closeMerchModal(event) {
-            if (event.target.classList.contains('merch-modal') || event.target.classList.contains('merch-modal-close')) {
-                document.getElementById('merchModal').classList.remove('active');
-                document.body.style.overflow = '';
-                if (autoSwitchInterval) {
-                    clearInterval(autoSwitchInterval);
-                    autoSwitchInterval = null;
-                }
-            }
+        function closeModal() {
+            document.getElementById('imgModal').classList.remove('active');
+            clearInterval(autoSwitch);
         }
-
-        // 龙图案点击动画 - 稳定版本（使用克隆避免布局问题）
-        document.querySelectorAll('.nav-dragon').forEach(dragon => {
-            dragon.addEventListener('click', function(e) {
-                e.preventDefault();
-
-                // 如果已有动画在进行，不处理
-                if (document.querySelector('.dragon-clone.animate')) return;
-
-                const src = this.src;
-                const naturalWidth = this.naturalWidth;
-                const naturalHeight = this.naturalHeight;
-
-                // 创建克隆的龙元素 - 使用background-image确保清晰
-                const clone = document.createElement('div');
-                clone.className = 'dragon-clone';
-                clone.style.backgroundImage = 'url(' + src + ')';
-                clone.style.backgroundSize = 'contain';
-                clone.style.backgroundRepeat = 'no-repeat';
-                clone.style.backgroundPosition = 'center';
-                // 使用原图自然尺寸
-                clone.style.width = naturalWidth + 'px';
-                clone.style.height = naturalHeight + 'px';
-                document.body.appendChild(clone);
-
-                // 创建五角星红光
-                const ring = document.createElement('div');
-                ring.className = 'dragon-star-ring';
-                document.body.appendChild(ring);
-
-                // 触发重绘后开始动画
-                requestAnimationFrame(() => {
-                    clone.classList.add('animate');
-                    ring.classList.add('animate');
-                });
-
-                // 动画结束后清理
-                setTimeout(() => {
-                    clone.remove();
-                    ring.remove();
-                }, 1200);
-
-                // 延迟执行返回顶部
-                setTimeout(() => {
-                    window.scrollTo({top: 0, behavior: 'smooth'});
-                }, 300);
-            });
-        });
     </script>
     <script type="text/javascript">
        (function(){

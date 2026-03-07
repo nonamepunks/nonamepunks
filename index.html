@@ -10,7 +10,7 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root { --logo-red: #DC2626; --blood-red: #B91C1C; --deep-red: #7F1D1D; --black: #000000; --white: #FFFFFF; --silver: #C0C0C0; --dark-gray: #1a1a1a; }
-        body {
+        body { 
             background-color: #000;
             background-image: url('./image/blackbg.webp');
             background-repeat: repeat-y;
@@ -44,19 +44,19 @@
         .nav-links a:hover { color: var(--logo-red); text-shadow: 0 0 10px var(--logo-red), 0 0 20px var(--logo-red), 0 0 30px var(--logo-red); transform: skewX(-5deg); }
 
         /* ===== HERO 区域 - 桌面端 ===== */
-        .hero {
+        .hero { 
             width: 100%;
-            background: #000;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            align-items: center;
-            position: relative;
+            background: #000; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: flex-end; 
+            align-items: center; 
+            position: relative; 
             overflow: hidden;
             line-height: 0;
         }
 
-        .hero-bg {
+        .hero-bg { 
             position: relative;
             width: 100%;
             line-height: 0;
@@ -68,26 +68,26 @@
             display: block;
         }
 
-        .hero-content {
+        .hero-content { 
             position: absolute;
             bottom: 5%;
             left: 0;
             right: 0;
-            z-index: 10;
-            text-align: center;
+            z-index: 10; 
+            text-align: center; 
             width: 100%;
             line-height: normal;
         }
 
-        .hero-logo-img {
-            max-width: 1000px;
-            width: 90%;
-            height: auto;
-            opacity: 0;
+        .hero-logo-img { 
+            max-width: 1000px; 
+            width: 90%; 
+            height: auto; 
+            opacity: 0; 
         }
 
-        .hero-logo-img.active {
-            animation: logoFadeIn 1.5s ease-out forwards, logoGlow 3s ease-in-out infinite 1.5s;
+        .hero-logo-img.active { 
+            animation: logoFadeIn 1.5s ease-out forwards, logoGlow 3s ease-in-out infinite 1.5s; 
         }
         /* 桌面端竖屏 - LOGO缩小到2/3 */
         @media (min-width: 769px) and (orientation: portrait) {
@@ -111,15 +111,16 @@
             }
         }
 
-        .hero-vignette {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(ellipse at center, transparent 0%, transparent 50%, rgba(0,0,0,0.7) 100%);
-            z-index: 4;
-            pointer-events: none;
+
+        .hero-vignette { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: radial-gradient(ellipse at center, transparent 0%, transparent 50%, rgba(0,0,0,0.7) 100%); 
+            z-index: 4; 
+            pointer-events: none; 
         }
 
         /* ===== 其他区域样式 ===== */
@@ -171,17 +172,17 @@
 
         @keyframes pulse { 0%, 100% { opacity: 1; box-shadow: 0 0 10px rgba(220, 38, 38, 0.3); } 50% { opacity: 0.8; box-shadow: 0 0 20px rgba(220, 38, 38, 0.5); } }
 
-        .music-video-section {
-            width: 100%;
-            background:
+        .music-video-section { 
+            width: 100%; 
+            background: 
                 linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 15%, rgba(0,0,0,0.4) 85%, rgba(0,0,0,0.85) 100%),
                 url('./image/musicbg.webp'),
-                url('./image/blackbg.webp');
-            background-size: cover, cover, cover;
+                url('./image/blackbg.webp'); 
+            background-size: cover, cover, cover; 
             background-position: center, center, center;
             background-repeat: no-repeat, no-repeat, no-repeat;
-            position: relative;
-            min-height: 100vh;
+            position: relative; 
+            min-height: 100vh; 
         }
         .music-video-section::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 15%, rgba(0,0,0,0.4) 85%, rgba(0,0,0,0.85) 100%); z-index: 1; }
         .music-video-section::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.15) 2px, rgba(0,0,0,0.15) 4px); pointer-events: none; z-index: 2; }
@@ -203,16 +204,16 @@
         .video-player { width: 100%; aspect-ratio: 16 / 9; max-height: 600px; background: rgba(0,0,0,0.5); border: 3px solid var(--logo-red); display: flex; align-items: center; justify-content: center; margin-bottom: 30px; position: relative; cursor: pointer; box-shadow: 0 0 60px rgba(220, 38, 38, 0.4); transition: all 0.3s; overflow: hidden; touch-action: manipulation; -webkit-tap-highlight-color: rgba(220, 38, 38, 0.3); }
         .video-player:hover { box-shadow: 0 0 100px rgba(220, 38, 38, 0.6); border-color: var(--logo-red); }
         .video-player iframe { width: 100%; height: 100%; border: none; }
-        .play-btn {
-            width: 120px;
-            height: 120px;
-            border: 5px solid var(--logo-red);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-            box-shadow: 0 0 50px rgba(220, 38, 38, 0.7);
+        .play-btn { 
+            width: 120px; 
+            height: 120px; 
+            border: 5px solid var(--logo-red); 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            transition: all 0.3s; 
+            box-shadow: 0 0 50px rgba(220, 38, 38, 0.7); 
             background: rgba(0,0,0,0.6);
             position: relative;
             z-index: 100;
@@ -233,20 +234,20 @@
         .merch-item.dual-img:hover .merch-img { opacity: 0; }
         .merch-item.dual-img:hover .merch-img-hover { opacity: 1; }
         .merch-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; background: linear-gradient(to top, rgba(0,0,0,0.95), transparent); transform: translateY(100%); transition: transform 0.3s; }
-        .merch-item:hover
+        .merch-item:hover .merch-info { transform: translateY(0); }
         .merch-name { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-size: 16px; letter-spacing: 2px; color: var(--white); margin-bottom: 5px; text-transform: uppercase; }
         .merch-price { font-family: 'Arial Black', Arial, sans-serif; font-size: 14px; color: var(--logo-red); letter-spacing: 1px; }
         .merch-btn-container { text-align: center; }
 
         /* FOOTER */
-        .footer-section {
-            width: 100%;
-            background:
+        .footer-section { 
+            width: 100%; 
+            background: 
                 url('./image/downbg.webp') repeat-y center top,
-                url('./image/blackbg.webp') repeat-y center top;
-            position: relative;
-            padding: 60px 0 0 0;
-            background-size: 100% auto, 100% auto;
+                url('./image/blackbg.webp') repeat-y center top; 
+            position: relative; 
+            padding: 60px 0 0 0; 
+            background-size: 100% auto, 100% auto; 
         }
         .footer-section::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1; }
         .footer-main { position: relative; z-index: 10; max-width: 1400px; margin: 0 auto; padding: 40px; display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 40px; }
@@ -307,21 +308,21 @@
         /* ===== 响应式布局 ===== */
 
         /* 1200px以下 */
-        @media (max-width: 1200px) {
-            .music-content-new { grid-template-columns: 1fr; gap: 40px; }
-            .music-player-side { max-width: 600px; margin: 0 auto; width: 100%; }
-            .album-cover { width: 350px; height: 350px; }
-            .footer-main { grid-template-columns: 1fr; gap: 40px; }
-            .footer-right { align-items: center; }
+        @media (max-width: 1200px) { 
+            .music-content-new { grid-template-columns: 1fr; gap: 40px; } 
+            .music-player-side { max-width: 600px; margin: 0 auto; width: 100%; } 
+            .album-cover { width: 350px; height: 350px; } 
+            .footer-main { grid-template-columns: 1fr; gap: 40px; } 
+            .footer-right { align-items: center; } 
         }
 
         /* 1024px以下 - 平板 */
-        @media (max-width: 1024px) {
+        @media (max-width: 1024px) { 
             .members-grid { grid-template-columns: 1fr 1fr; }
-            .merch-grid { grid-template-columns: repeat(2, 1fr); }
-            .nav-links { gap: 25px; }
-            .nav-links a { font-size: 14px; letter-spacing: 2px; }
-            .album-cover { width: 300px; height: 300px; }
+            .merch-grid { grid-template-columns: repeat(2, 1fr); } 
+            .nav-links { gap: 25px; } 
+            .nav-links a { font-size: 14px; letter-spacing: 2px; } 
+            .album-cover { width: 300px; height: 300px; } 
             .album-title { font-size: 36px; letter-spacing: 6px; }
             .music-player-embed { height: 470px !important; }
         }
@@ -334,15 +335,6 @@
                 height: 60px;
                 border-width: 3px;
                 background: rgba(0,0,0,0.7);
-            }
-
-            /* 移动端龙动画（缩小版） */
-            @keyframes dragonFlash {
-                0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
-                20% { transform: translate(-50%, -50%) scale(0.85); opacity: 1; }
-                50% { transform: translate(-50%, -50%) scale(0.95); opacity: 1; }
-                80% { transform: translate(-50%, -50%) scale(0.85); opacity: 1; }
-                100% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
             }
             .play-btn::after {
                 font-size: 24px;
@@ -396,16 +388,18 @@
                     width: 75%;
                     max-width: 340px;
                 }
-            
+            /* 合并的样式 */
             .hero-logo-img { width: 80%; max-width: 320px; }
             .footer-nav-container .nav-dragon { display: block; width: 20px; height: 20px; }
-
+            /* 合并的样式 */
+            @keyframes dragonFlash {
+                0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
                 20% { transform: translate(-50%, -50%) scale(0.8); opacity: 1; }
                 50% { transform: translate(-50%, -50%) scale(0.9); opacity: 1; }
                 80% { transform: translate(-50%, -50%) scale(0.8); opacity: 1; }
                 100% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
             }
-            
+            .dragon-star-ring { width: 40vmin; height: 40vmin; }
         }
 
             /* 彻底禁用爆闪动画 */
@@ -431,34 +425,34 @@
             .member-role { font-size: 12px; }
 
             /* TOUR - 移动端三排布局 */
-            .tour-item {
+            .tour-item { 
                 display: flex;
-                flex-direction: row;
+                flex-direction: row; 
                 flex-wrap: wrap;
                 gap: 0;
                 row-gap: 12px;
-                text-align: center;
+                text-align: center; 
                 padding: 12px 15px;
                 justify-content: center;
                 align-items: center;
             }
-            .tour-date-col {
-                order: 1;
-                width: 100%;
+            .tour-date-col { 
+                order: 1; 
+                width: 100%; 
                 text-align: center;
                 color: var(--logo-red);
                 font-weight: bold;
                 font-size: 16px;
             }
-            .tour-city-col {
-                order: 2;
+            .tour-city-col { 
+                order: 2; 
                 width: auto;
                 text-align: center;
                 flex: 0 0 auto;
                 white-space: nowrap;
             }
-            .tour-venue-col {
-                order: 3;
+            .tour-venue-col { 
+                order: 3; 
                 width: auto;
                 max-width: 120px;
                 text-align: center;
@@ -468,49 +462,53 @@
                 white-space: normal;
                 word-break: break-word;
             }
-            .tour-country-col {
-                order: 4;
+            .tour-country-col { 
+                order: 4; 
                 width: auto;
                 text-align: center;
                 flex: 0 0 auto;
                 white-space: nowrap;
             }
-            .tour-btn-col {
-                order: 5;
-                width: 100%;
+            .tour-btn-col { 
+                order: 5; 
+                width: 100%; 
                 text-align: center;
                 margin-top: 0;
             }
-            .tour-section { padding-top: 30px; }
+            .tour-section { padding-top: 30px; } 
             .section-title { font-size: 36px; letter-spacing: 8px; margin-bottom: 30px; }
 
             /* MUSIC */
-            .album-cover { width: 260px; height: 260px; }
-            .album-title { font-size: 28px; letter-spacing: 4px; }
-            .music-section-inner, .video-section-inner { padding: 50px 20px; }
+            .album-cover { width: 260px; height: 260px; } 
+            .album-title { font-size: 28px; letter-spacing: 4px; } 
+            .music-section-inner, .video-section-inner { padding: 50px 20px; } 
 
             /* BANNER */
-            .banner-btn { padding: 8px 25px; font-size: 14px; bottom: 30px; }
-            .banner-btn-right { right: 20px; }
+            .banner-btn { padding: 8px 25px; font-size: 14px; bottom: 30px; } 
+            .banner-btn-right { right: 20px; } 
 
             /* FOOTER */
-            .footer-main { padding: 30px 20px; }
-            .subscribe-form { flex-direction: column; align-items: center; }
-            .subscribe-input { width: 100%; max-width: 280px; }
+            .footer-main { padding: 30px 20px; } 
+            .subscribe-form { flex-direction: column; align-items: center; } 
+            .subscribe-input { width: 100%; max-width: 280px; } 
             .footer-nav-container { flex-wrap: nowrap; gap: 8px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 0 10px; justify-content: space-between; }
             .footer-nav a { font-size: 10px; white-space: nowrap; letter-spacing: 0.5px; padding: 5px 2px; flex-shrink: 0; }
             .footer-nav-container .nav-dragon { display: block; width: 35px; height: 35px; }
-
+        
             /* 从第二个媒体查询合并 */
-
+            @keyframes dragonFlash {
+                0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
                 20% { transform: translate(-50%, -50%) scale(0.9); opacity: 1; }
                 50% { transform: translate(-50%, -50%) scale(1.0); opacity: 1; }
                 80% { transform: translate(-50%, -50%) scale(0.9); opacity: 1; }
                 100% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
             }
-            
+            .dragon-star-ring { width: 45vmin; height: 45vmin; }
         }
 
+        
+
+    
         /* iOS 防止默认视频播放按钮 */
         .video-player {
             -webkit-user-select: none;
@@ -535,7 +533,8 @@
         .dragon-clone.animate { animation: dragonFlash 1.2s ease-out forwards; }
 
         /* 桌面端动画 - 放大到 scale 1.2 */
-
+        @keyframes dragonFlash {
+            0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
             20% { transform: translate(-50%, -50%) scale(1.0); opacity: 1; }
             50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
             80% { transform: translate(-50%, -50%) scale(1.0); opacity: 1; }
@@ -558,10 +557,12 @@
         }
 
         /* 移动端优化 - 缩小 scale 避免出屏 */
+        
 
         /* 竖屏模式特殊优化 */
         @media (max-width: 768px) and (orientation: portrait) {
-
+            @keyframes dragonFlash {
+                0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
                 20% { transform: translate(-50%, -50%) scale(0.85); opacity: 1; }
                 50% { transform: translate(-50%, -50%) scale(0.95); opacity: 1; }
                 80% { transform: translate(-50%, -50%) scale(0.85); opacity: 1; }
@@ -570,6 +571,8 @@
         }
 
         /* 超小屏幕进一步优化 */
+        
+
 
 /* ===== MERCH 区域新样式 ===== */
 .merch-carousel-wrapper {
@@ -590,12 +593,12 @@
     transition: transform 0.5s ease;
 }
 
-.merch-item {
-    position: relative;
+.merch-item { 
+    position: relative; 
     background: rgba(0,0,0,0.6);
-    cursor: pointer;
-    transition: all 0.4s ease;
-    overflow: hidden;
+    cursor: pointer; 
+    transition: all 0.4s ease; 
+    overflow: hidden; 
     flex-shrink: 0;
     border: 1px solid rgba(220, 38, 38, 0.1);
 }
@@ -604,57 +607,89 @@
     box-shadow: inset 0 0 30px rgba(220, 38, 38, 0.2);
 }
 
-.merch-img-wrap {
-    position: relative;
+.merch-img-wrap { 
+    position: relative; 
     width: 100%;
-    aspect-ratio: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    aspect-ratio: 1; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
     overflow: hidden;
     background: rgba(0,0,0,0.4);
 }
 
-.merch-img {
-    max-width: 90%;
-    max-height: 90%;
-    object-fit: contain;
+.merch-img { 
+    max-width: 90%; 
+    max-height: 90%; 
+    object-fit: contain; 
     transition: transform 0.4s ease, opacity 0.6s ease 1s;
 }
 
-.merch-img-hover {
-    position: absolute;
-    max-width: 90%;
-    max-height: 90%;
-    object-fit: contain;
-    opacity: 0;
-    transition: opacity 0.6s ease 1s, transform 0.4s ease;
+.merch-img-hover { 
+    position: absolute; 
+    max-width: 90%; 
+    max-height: 90%; 
+    object-fit: contain; 
+    opacity: 0; 
+    transition: opacity 0.6s ease 1s, transform 0.4s ease; 
 }
 
-.merch-item:hover .merch-img {
-    transform: scale(1.15);
+.merch-item:hover .merch-img { 
+    transform: scale(1.15); 
 }
 
-.merch-item.dual-img:hover .merch-img {
-    opacity: 0;
+.merch-item.dual-img:hover .merch-img { 
+    opacity: 0; 
 }
 
-.merch-item.dual-img:hover .merch-img-hover {
-    opacity: 1;
-    transform: scale(1.15);
+.merch-item.dual-img:hover .merch-img-hover { 
+    opacity: 1; 
+    transform: scale(1.15); 
 }
 
 /* 产品信息 - 默认隐藏，hover 时显示 */
+.merch-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px 15px;
+    text-align: center;
+    background: transparent;
+    transform: translateY(100%);
+    transition: transform 0.4s ease;
+    z-index: 10;
+}
 
-.merch-item:hover
+.merch-item:hover .merch-info {
+    transform: translateY(0);
+}
+
+.merch-name { 
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; 
+    font-size: 16px; 
+    letter-spacing: 2px; 
+    color: var(--white); 
+    margin-bottom: 5px; 
+    text-transform: uppercase;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.8);
+}
 
 .merch-category {
-    font-family: 'Arial Black', Arial, sans-serif;
-    font-size: 12px;
-    color: var(--silver);
-    letter-spacing: 1px;
+    font-family: 'Arial Black', Arial, sans-serif; 
+    font-size: 12px; 
+    color: var(--silver); 
+    letter-spacing: 1px; 
     margin-bottom: 8px;
     text-transform: uppercase;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.9), 0 0 15px rgba(0,0,0,0.8);
+}
+
+.merch-price { 
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 20px; 
+    color: var(--logo-red); 
+    letter-spacing: 2px;
     text-shadow: 0 2px 4px rgba(0,0,0,0.9), 0 0 15px rgba(0,0,0,0.8);
 }
 
@@ -776,16 +811,36 @@
         display: none !important;
     }
     /* 移动端hover显示信息（触摸设备用active状态） */
-
+    .merch-info {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 15px 10px;
+        background: transparent;
+        transform: translateY(100%);
+        transition: transform 0.3s ease;
+    }
     .merch-item:hover .merch-info,
-    .merch-item:active
-
+    .merch-item:active .merch-info {
+        transform: translateY(0);
+    }
+    .merch-name {
+        font-size: 12px;
+        letter-spacing: 1px;
+        margin-bottom: 3px;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.9), 0 0 15px rgba(0,0,0,0.9);
+    }
     .merch-category {
         font-size: 10px;
         margin-bottom: 5px;
         text-shadow: 0 2px 4px rgba(0,0,0,0.9), 0 0 10px rgba(0,0,0,0.9);
     }
-
+    .merch-price {
+        font-size: 14px;
+        letter-spacing: 1px;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.9), 0 0 10px rgba(0,0,0,0.9);
+    }
     .merch-btn-container {
         margin-top: 30px;
     }
@@ -797,12 +852,20 @@
         width: 100%;
         min-width: auto;
     }
-
+    .merch-info {
+        padding: 12px 8px;
+    }
+    .merch-name {
+        font-size: 11px;
+    }
     .merch-category {
         font-size: 9px;
     }
-
+    .merch-price {
+        font-size: 13px;
+    }
 }
+
 
 /* 视频区域打字机效果 */
 .video-typewriter-container {
@@ -825,7 +888,7 @@
     font-size: clamp(10px, 1.4vw, 18px);
     line-height: 1.5;
     color: #fff;
-    text-shadow:
+    text-shadow: 
         0 0 8px rgba(220, 38, 38, 0.9),
         0 0 16px rgba(220, 38, 38, 0.7),
         0 0 24px rgba(220, 38, 38, 0.5),
@@ -844,14 +907,6 @@
 
 @keyframes cursorBlink {
     0%, 50% { opacity: 1; }
-
-        @keyframes dragonFlash {
-            0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
-            20% { transform: translate(-50%, -50%) scale(1.0); opacity: 1; }
-            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
-            80% { transform: translate(-50%, -50%) scale(1.0); opacity: 1; }
-            100% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
-        }
     51%, 100% { opacity: 0; }
 }
 
@@ -901,6 +956,7 @@
         line-height: 1.15;
     }
 }
+
 
 /* 视频区域优化 */
 .video-banner {
@@ -998,6 +1054,16 @@
     -webkit-user-select: none;
     -webkit-drag: none;
     pointer-events: auto;
+}
+
+.merch-popup-img {
+    position: absolute;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    cursor: pointer;
 }
 
 .merch-popup-img.active {
@@ -1127,8 +1193,10 @@
 </style>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
+    <!-- 预加载关键资源 -->
     <link rel="preload" href="./image/hero1.webp" as="image" fetchpriority="high">
 
+    <!-- 预连接 WIX 视频服务器 -->
     <link rel="preconnect" href="https://video.wixstatic.com">
     <link rel="dns-prefetch" href="https://video.wixstatic.com">
 </head>
@@ -1270,16 +1338,19 @@
     <div class="silver-line"></div>
     <section class="banner-section video-banner-section" id="banner3">
         <div class="banner reveal video-banner" style="position: relative; aspect-ratio: 1280/672; overflow: hidden;">
-
-            <video id="bannerVideo"
-                muted
-                loop
-                playsinline
-                preload="none"
+            <!-- 视频背景 -->
+            <video id="bannerVideo" 
+                autoplay 
+                muted 
+                loop 
+                playsinline 
+                preload="auto" 
                 poster="./image/banner3-poster.jpg"
-                style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.5s;"
-                onloadeddata="this.style.opacity=1">
-                <source src="https://video.wixstatic.com/video/d502ca_cae18d24aaad4b468c7b2b2160253319/480p/mp4/file.mp4" type="video/mp4">
+                style="width: 100%; height: 100%; object-fit: cover;"
+                onloadeddata="this.style.opacity=1"
+                onerror="this.style.display='none'; document.querySelector('.video-fallback').style.display='block';">
+                <source src="https://video.wixstatic.com/video/d502ca_cae18d24aaad4b468c7b2b2160253319/720p/mp4/file.mp4" type="video/mp4">
+                Your browser does not support the video tag.
             </video>
             <div class="video-fallback" style="display: none;"></div>
             <div class="banner-dark-effect">
@@ -1677,7 +1748,7 @@
             publicKey: "FQAG2S-gm0UgmyD4A",
           });
        })();
-
+    
         // 龙点击动画 - 优化清晰度版本（修复竖屏/移动端出屏问题）
         document.querySelectorAll('.nav-dragon').forEach(dragon => {
             dragon.addEventListener('click', function(e) {
@@ -1762,6 +1833,8 @@
         });
 </script>
 
+
+<!-- MERCH 轮播功能 -->
 <script>
 (function() {
     'use strict';
@@ -1829,7 +1902,15 @@
         window.updateMerchCarousel();
     };
 
-    function shuffleMerchItems() { /* 禁用随机排序以提高性能 */ }
+    function shuffleMerchItems() {
+        if (!merchTrack) return;
+        const items = Array.from(merchTrack.children);
+        // Fisher-Yates 洗牌算法
+        for (let i = items.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            merchTrack.appendChild(items[j]);
+        }
+    }
 
     function init() {
         if (initElements()) {
@@ -1940,6 +2021,7 @@
 })();
 </script>
 
+<!-- 键盘导航 -->
 <script>
 document.addEventListener('keydown', function(e) {
     const merchSection = document.getElementById('merch');
@@ -1959,6 +2041,7 @@ document.addEventListener('keydown', function(e) {
     }
 });
 </script>
+
 
 <script>
 // MERCH 弹出大图功能
@@ -2017,7 +2100,7 @@ function closeMerchPopup(event) {
     // 如果提供了 event，检查点击的是否是内容区域
     if (event) {
         const target = event.target;
-        const isContent = target.closest('.merch-popup-content') ||
+        const isContent = target.closest('.merch-popup-content') || 
                          target.classList.contains('merch-popup-nav') ||
                          target.classList.contains('merch-popup-dot') ||
                          target.classList.contains('merch-popup-img');
@@ -2209,8 +2292,12 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
+
+
+
 </script>
 
+<!-- Banner 1 平滑滚动 -->
 <script>
 document.querySelectorAll('a[href="#merch"]').forEach(function(link) {
     link.addEventListener('click', function(e) {
@@ -2226,6 +2313,8 @@ document.querySelectorAll('a[href="#merch"]').forEach(function(link) {
 });
 </script>
 
+
+<!-- 视频区域打字机效果 -->
 <script>
 (function() {
     const text = `The NONAME is a Chinese punk rock institution with nearly 30 years of history. Here comes a blast of the hottest punk rock import from the Far East—straight from Xi'an, China! Masterminded by vocalist and band head honcho Ray, who is sick and tired of the ruling order, he finds his kind of freedom in music by starting his own revolution against all false hope in the world. Furthermore, these maniacs show their tough attitude straight to people's faces and fight against all limits. Their music can be described as a mix between pure 1980s punk rock and straight hardcore, with heavy guitars, groovy bass lines, and powerful vocals. THE NONAME creates a wall of sound to scream along with; this music is the kind of revolution Ray wanted and hoped would never stop inspiring.`;
@@ -2291,6 +2380,7 @@ document.querySelectorAll('a[href="#merch"]').forEach(function(link) {
 })();
 </script>
 
+<!-- MERCH 弹出大图 -->
 <div class="merch-popup-overlay" id="merchPopup" onclick="closeMerchPopup(event)">
     <div class="merch-popup-content" onclick="event.stopPropagation()">
         <button class="merch-popup-close" onclick="closeMerchPopup()">&times;</button>
@@ -2308,19 +2398,5 @@ document.querySelectorAll('a[href="#merch"]').forEach(function(link) {
         </div>
     </div>
 </div>
-
-<script>
-// 延迟加载 banner3 视频
-window.addEventListener('load', function() {
-    setTimeout(function() {
-        var video = document.getElementById('bannerVideo');
-        if (video && video.preload === 'none') {
-            video.preload = 'metadata';
-            video.load();
-            video.play().catch(function() {});
-        }
-    }, 3000); // 3秒后加载视频
-});
-</script>
 </body>
 </html>

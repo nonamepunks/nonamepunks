@@ -36,40 +36,85 @@
         .nav-dragon:hover { filter: grayscale(0%) brightness(1.2) drop-shadow(0 0 10px var(--logo-red)); transform: scale(1.1); }
 
         /* 龙点击动画 */
+        .nav-dragon {
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+            image-rendering: pixelated;
+        }
+
         .nav-dragon.animating {
             position: fixed !important;
             top: 50% !important;
             left: 50% !important;
             transform: translate(-50%, -50%) scale(12) !important;
-            filter: grayscale(0%) brightness(2) drop-shadow(0 0 60px var(--logo-red)) drop-shadow(0 0 120px rgba(220, 38, 38, 0.8)) !important;
+            filter: grayscale(0%) brightness(2.5) 
+                drop-shadow(0 0 80px var(--logo-red)) 
+                drop-shadow(0 0 160px rgba(220, 38, 38, 1))
+                drop-shadow(0 0 240px rgba(220, 38, 38, 0.8))
+                drop-shadow(0 0 320px rgba(139, 0, 0, 0.6)) !important;
             z-index: 99999 !important;
             transition: all 0.3s ease-out;
             margin: 0 !important;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
         }
 
+        /* 多层烟雾效果 */
         .nav-dragon.animating::before {
+            content: '';
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 300vmax;
+            height: 300vmax;
+            background: radial-gradient(ellipse at center, 
+                rgba(220, 38, 38, 0.9) 0%, 
+                rgba(180, 20, 20, 0.7) 10%,
+                rgba(100, 0, 0, 0.5) 25%, 
+                rgba(50, 50, 50, 0.4) 40%, 
+                rgba(0, 0, 0, 0.9) 60%, 
+                transparent 80%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            animation: dragonCloudExpand 1.2s ease-out forwards;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* 第二层烟雾 */
+        .nav-dragon.animating::after {
             content: '';
             position: fixed;
             top: 50%;
             left: 50%;
             width: 200vmax;
             height: 200vmax;
-            background: radial-gradient(ellipse at center, 
-                rgba(220, 38, 38, 0.6) 0%, 
-                rgba(100, 100, 100, 0.3) 20%, 
-                rgba(0, 0, 0, 0.8) 50%, 
-                transparent 70%);
+            background: radial-gradient(circle at 30% 30%, 
+                rgba(255, 100, 100, 0.6) 0%, 
+                transparent 30%),
+                radial-gradient(circle at 70% 70%, 
+                rgba(139, 0, 0, 0.5) 0%, 
+                transparent 40%),
+                radial-gradient(ellipse at center, 
+                rgba(220, 38, 38, 0.4) 0%, 
+                transparent 60%);
             border-radius: 50%;
             transform: translate(-50%, -50%) scale(0);
-            animation: dragonCloudExpand 1s ease-out forwards;
+            animation: dragonCloudExpand2 1s ease-out 0.1s forwards;
             pointer-events: none;
-            z-index: -1;
+            z-index: -2;
         }
 
         @keyframes dragonCloudExpand {
             0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
-            50% { opacity: 1; }
-            100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+            30% { opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+        }
+
+        @keyframes dragonCloudExpand2 {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translate(-50%, -50%) scale(1.2); opacity: 0; }
         }
 
         .nav-dragon.returning {

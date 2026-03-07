@@ -4,35 +4,101 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Banner3 视频测试 - The Noname</title>
+    
+    <!-- 预连接视频源 -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://nonamepunks.github.io">
+    <link rel="dns-prefetch" href="https://nonamepunks.github.io">
+    <link rel="preconnect" href="https://video.wixstatic.com">
+    <link rel="dns-prefetch" href="https://video.wixstatic.com">
+    
     <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
             background: #000; 
             color: #fff; 
-            font-family: Arial, sans-serif; 
+            font-family: 'Arial Black', Arial, sans-serif; 
             padding: 20px;
-            margin: 0;
+            line-height: 1.6;
         }
         .test-container { 
             max-width: 1200px; 
             margin: 0 auto; 
         }
-        h1 { color: #DC2626; text-align: center; }
+        h1 { 
+            color: #DC2626; 
+            text-align: center; 
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #C0C0C0;
+            font-size: 14px;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+        }
         .status-box {
             background: #1a1a1a;
             border: 2px solid #DC2626;
             padding: 20px;
             margin: 20px 0;
-            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        .status-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #DC2626, transparent);
+            animation: scan 2s linear infinite;
+        }
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        .status-box h3 {
+            color: #DC2626;
+            font-family: Impact, sans-serif;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
         }
         .status-item {
-            padding: 10px;
-            margin: 5px 0;
+            padding: 12px 15px;
+            margin: 8px 0;
             background: #000;
             border-left: 4px solid #444;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            transition: all 0.3s;
         }
-        .status-item.success { border-left-color: #22c55e; background: #052e16; }
-        .status-item.error { border-left-color: #ef4444; background: #450a0a; }
-        .status-item.warning { border-left-color: #f59e0b; background: #451a03; }
+        .status-item.success { 
+            border-left-color: #22c55e; 
+            background: #052e16; 
+            color: #86efac;
+        }
+        .status-item.error { 
+            border-left-color: #ef4444; 
+            background: #450a0a; 
+            color: #fca5a5;
+        }
+        .status-item.warning { 
+            border-left-color: #f59e0b; 
+            background: #451a03; 
+            color: #fcd34d;
+        }
+        .status-item.active {
+            border-left-color: #DC2626;
+            background: #7F1D1D;
+            color: #fff;
+        }
         
         /* 视频区域样式 */
         .video-banner {
@@ -42,6 +108,7 @@
             background: #000;
             overflow: hidden;
             margin: 20px 0;
+            border: 2px solid #333;
         }
         video {
             width: 100%;
@@ -56,51 +123,117 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('./image/banner3-fallback.webp') center/cover no-repeat, #333;
+            background: #1a1a1a;
             display: none;
             align-items: center;
             justify-content: center;
+            flex-direction: column;
             color: #DC2626;
             font-size: 24px;
             font-weight: bold;
+            text-align: center;
+        }
+        .video-fallback::before {
+            content: '⚠️';
+            font-size: 48px;
+            margin-bottom: 10px;
         }
         
         .log-box {
             background: #0a0a0a;
             border: 1px solid #333;
             padding: 15px;
-            font-family: monospace;
+            font-family: 'Courier New', monospace;
             font-size: 12px;
-            max-height: 300px;
+            max-height: 250px;
             overflow-y: auto;
             white-space: pre-wrap;
+            line-height: 1.8;
+        }
+        
+        .control-panel {
+            text-align: center;
+            margin: 20px 0;
+            padding: 20px;
+            background: #111;
+            border: 1px solid #333;
         }
         
         .test-btn {
-            background: #DC2626;
+            background: transparent;
             color: #fff;
-            border: none;
-            padding: 10px 20px;
+            border: 2px solid #DC2626;
+            padding: 12px 25px;
             margin: 5px;
             cursor: pointer;
             font-family: Impact, sans-serif;
             letter-spacing: 2px;
+            font-size: 14px;
+            transition: all 0.2s;
+            text-transform: uppercase;
         }
-        .test-btn:hover { background: #b91c1c; }
+        .test-btn:hover { 
+            background: #DC2626; 
+            box-shadow: 0 0 20px rgba(220, 38, 38, 0.6);
+            transform: skewX(-5deg);
+        }
+        .test-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .source-info {
+            background: #111;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 3px solid #DC2626;
+            font-family: monospace;
+            font-size: 12px;
+            word-break: break-all;
+        }
+        
+        .timer {
+            display: inline-block;
+            background: #DC2626;
+            color: #fff;
+            padding: 2px 8px;
+            margin-left: 10px;
+            font-family: monospace;
+        }
     </style>
 </head>
 <body>
     <div class="test-container">
         <h1>🎬 BANNER3 双模式加载测试</h1>
+        <p class="subtitle">文件位置: 仓库根目录 (banner3.webm)</p>
+        
+        <!-- 视频源信息 -->
+        <div class="status-box">
+            <h3>🔗 视频源配置</h3>
+            <div class="source-info">
+                <strong>源1 (WebM/jsDelivr):</strong><br>
+                https://cdn.jsdelivr.net/gh/nonamepunks/bandwebsite@main/banner3.webm
+            </div>
+            <div class="source-info">
+                <strong>源2 (WebM/GitHub Pages):</strong><br>
+                https://nonamepunks.github.io/bandwebsite/banner3.webm
+            </div>
+            <div class="source-info">
+                <strong>源3 (MP4/Wix):</strong><br>
+                https://video.wixstatic.com/video/d502ca_cae18d24aaad4b468c7b2b2160253319/720p/mp4/file.mp4
+            </div>
+        </div>
         
         <!-- 状态显示 -->
         <div class="status-box">
-            <h3>📊 加载状态监控</h3>
+            <h3>📊 加载状态监控 <span class="timer" id="timer">00:00</span></h3>
             <div id="statusContainer">
-                <div class="status-item" id="status-webm">⏳ WebM (GitHub): 等待中...</div>
-                <div class="status-item" id="status-mp4">⏳ MP4 (Wix): 等待中...</div>
-                <div class="status-item" id="status-fallback">⏳ Fallback 图片: 等待中...</div>
-                <div class="status-item" id="status-playback">⏳ 播放状态: 等待中...</div>
+                <div class="status-item" id="status-jsdelivr">⏳ jsDelivr WebM: 等待中...</div>
+                <div class="status-item" id="status-ghpages">⏳ GitHub Pages WebM: 等待中...</div>
+                <div class="status-item" id="status-wix">⏳ Wix MP4: 等待中...</div>
+                <div class="status-item" id="status-fallback">⏳ Fallback 图片: 待机</div>
+                <div class="status-item" id="status-final">⏳ 最终结果: 检测中...</div>
             </div>
         </div>
         
@@ -114,40 +247,51 @@
                 preload="metadata"
                 poster="./image/banner3-poster.jpg">
                 
-                <!-- 源1: GitHub WebM -->
-                <source src="https://raw.githubusercontent.com/nonamepunks/bandwebsite/main/videos/banner3.webm" 
+                <!-- 源1: jsDelivr CDN -->
+                <source src="https://cdn.jsdelivr.net/gh/nonamepunks/bandwebsite@main/banner3.webm" 
                         type="video/webm"
-                        data-source="webm">
+                        data-source="jsdelivr"
+                        data-index="0">
                 
-                <!-- 源2: Wix MP4 -->
+                <!-- 源2: GitHub Pages -->
+                <source src="https://nonamepunks.github.io/bandwebsite/banner3.webm" 
+                        type="video/webm"
+                        data-source="ghpages"
+                        data-index="1">
+                
+                <!-- 源3: Wix MP4 -->
                 <source src="https://video.wixstatic.com/video/d502ca_cae18d24aaad4b468c7b2b2160253319/720p/mp4/file.mp4" 
                         type="video/mp4"
-                        data-source="mp4">
+                        data-source="wix"
+                        data-index="2">
             </video>
             
             <!-- 回退图片 -->
             <div class="video-fallback" id="videoFallback">
-                FALLBACK IMAGE
+                VIDEO UNAVAILABLE<br>
+                <span style="font-size:14px; color:#888; margin-top:10px;">使用静态图片回退</span>
             </div>
         </div>
         
         <!-- 控制按钮 -->
-        <div style="text-align: center; margin: 20px 0;">
-            <button class="test-btn" onclick="testReload()">🔄 重新加载视频</button>
-            <button class="test-btn" onclick="testWebMOnly()">🔴 仅测试 WebM</button>
-            <button class="test-btn" onclick="testMP4Only()">🟢 仅测试 MP4</button>
+        <div class="control-panel">
+            <button class="test-btn" onclick="testReload()" id="btn-reload">🔄 重新加载</button>
+            <button class="test-btn" onclick="testSource(0)">🔴 仅测试 jsDelivr</button>
+            <button class="test-btn" onclick="testSource(1)">🟠 仅测试 GitHub Pages</button>
+            <button class="test-btn" onclick="testSource(2)">🟢 仅测试 Wix MP4</button>
+            <button class="test-btn" onclick="testOriginal()">⚪ 恢复三源模式</button>
             <button class="test-btn" onclick="clearLog()">🗑️ 清除日志</button>
         </div>
         
         <!-- 日志输出 -->
         <div class="status-box">
             <h3>📝 详细日志</h3>
-            <div class="log-box" id="logBox">等待开始测试...</div>
+            <div class="log-box" id="logBox">等待开始测试...\n</div>
         </div>
         
         <!-- 网络信息 -->
         <div class="status-box">
-            <h3>🌐 浏览器信息</h3>
+            <h3>🌐 浏览器与环境信息</h3>
             <div id="browserInfo" class="log-box"></div>
         </div>
     </div>
@@ -156,13 +300,29 @@
         const video = document.getElementById('testVideo');
         const fallback = document.getElementById('videoFallback');
         const logBox = document.getElementById('logBox');
+        const sources = video.querySelectorAll('source');
         let currentSource = null;
+        let startTime = Date.now();
+        let timerInterval;
+        
+        // 计时器
+        function startTimer() {
+            startTime = Date.now();
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                const elapsed = Math.floor((Date.now() - startTime) / 1000);
+                const mins = String(Math.floor(elapsed / 60)).padStart(2, '0');
+                const secs = String(elapsed % 60).padStart(2, '0');
+                document.getElementById('timer').textContent = `${mins}:${secs}`;
+            }, 1000);
+        }
         
         // 日志函数
         function log(msg, type = 'info') {
             const time = new Date().toLocaleTimeString();
             const prefix = type === 'error' ? '❌' : type === 'success' ? '✅' : type === 'warning' ? '⚠️' : 'ℹ️';
-            logBox.innerHTML += `[${time}] ${prefix} ${msg}\n`;
+            const line = `[${time}] ${prefix} ${msg}\n`;
+            logBox.innerHTML += line;
             logBox.scrollTop = logBox.scrollHeight;
             console.log(`[Banner3 Test] ${msg}`);
         }
@@ -170,45 +330,86 @@
         // 更新状态显示
         function updateStatus(id, status, msg) {
             const el = document.getElementById(id);
-            el.className = 'status-item ' + status;
-            el.innerHTML = msg;
+            if (el) {
+                el.className = 'status-item ' + status;
+                el.innerHTML = msg;
+            }
         }
         
-        // 检测实际使用的源
-        function detectSource() {
-            const sources = video.querySelectorAll('source');
+        // 检测当前使用的源
+        function detectActiveSource() {
+            const currentSrc = video.currentSrc || '';
             for (let src of sources) {
-                if (!src.error && video.currentSrc.includes(src.src.split('/').pop())) {
-                    return src.getAttribute('data-source');
+                if (currentSrc.includes(src.src.split('/').pop().split('?')[0])) {
+                    return {
+                        name: src.getAttribute('data-source'),
+                        index: parseInt(src.getAttribute('data-index')),
+                        url: src.src
+                    };
                 }
             }
-            return 'unknown';
+            return null;
         }
         
-        // 事件监听
+        // 显示最终成功状态
+        function showSuccess(sourceInfo) {
+            const sourceNames = {
+                'jsdelivr': 'jsDelivr WebM',
+                'ghpages': 'GitHub Pages WebM',
+                'wix': 'Wix MP4'
+            };
+            const name = sourceNames[sourceInfo.name] || sourceInfo.name;
+            
+            updateStatus('status-final', 'success', `✅ 最终结果: 成功使用 ${name}`);
+            log(`视频成功播放！使用源: ${name}`, 'success');
+            
+            // 标记其他源为未使用
+            sources.forEach((src, idx) => {
+                const srcName = src.getAttribute('data-source');
+                if (srcName !== sourceInfo.name) {
+                    const statusId = `status-${srcName}`;
+                    const el = document.getElementById(statusId);
+                    if (el && !el.classList.contains('error')) {
+                        updateStatus(statusId, 'warning', `⏭️ ${statusId.replace('status-', '').toUpperCase()}: 未使用（被跳过）`);
+                    }
+                }
+            });
+        }
+        
+        // 显示失败状态
+        function showFailure() {
+            updateStatus('status-final', 'error', '❌ 最终结果: 所有视频源失败');
+            updateStatus('status-fallback', 'success', '✅ Fallback 图片: 已激活');
+            log('所有视频源加载失败，已切换到 fallback 图片', 'error');
+            
+            video.style.display = 'none';
+            fallback.style.display = 'flex';
+        }
+        
+        // 视频事件监听
         video.addEventListener('loadstart', () => {
             log('视频开始加载...');
-            updateStatus('status-playback', 'warning', '⏳ 播放状态: 加载中...');
+            updateStatus('status-final', 'warning', '⏳ 最终结果: 加载中...');
+        });
+        
+        video.addEventListener('loadedmetadata', () => {
+            const info = detectActiveSource();
+            if (info) {
+                log(`元数据加载完成，当前源: ${info.name}`, 'success');
+                updateStatus(`status-${info.name}`, 'active', `🔄 ${info.name.toUpperCase()}: 正在加载...`);
+            }
         });
         
         video.addEventListener('loadeddata', () => {
-            const source = detectSource();
-            currentSource = source;
-            log(`视频数据加载完成！使用源: ${source.toUpperCase()}`, 'success');
-            video.style.opacity = '1';
-            
-            if (source === 'webm') {
-                updateStatus('status-webm', 'success', '✅ WebM (GitHub): 加载成功');
-                updateStatus('status-mp4', 'success', '⏭️ MP4 (Wix): 未使用（WebM优先）');
-            } else {
-                updateStatus('status-webm', 'error', '❌ WebM (GitHub): 失败或不可用');
-                updateStatus('status-mp4', 'success', '✅ MP4 (Wix): 加载成功（回退）');
+            const info = detectActiveSource();
+            if (info) {
+                video.style.opacity = '1';
+                showSuccess(info);
             }
         });
         
         video.addEventListener('playing', () => {
-            log('视频开始播放', 'success');
-            updateStatus('status-playback', 'success', '▶️ 播放状态: 正在播放 (' + currentSource + ')');
+            log('视频开始播放');
         });
         
         video.addEventListener('error', (e) => {
@@ -216,67 +417,106 @@
             let errorMsg = '未知错误';
             if (error) {
                 switch(error.code) {
-                    case 1: errorMsg = '下载中断'; break;
+                    case 1: errorMsg = '下载被中断'; break;
                     case 2: errorMsg = '网络错误'; break;
-                    case 3: errorMsg = '解码错误'; break;
+                    case 3: errorMsg = '解码错误(格式不支持)'; break;
                     case 4: errorMsg = '格式不支持'; break;
                 }
             }
             log(`视频错误: ${errorMsg} (code: ${error?.code})`, 'error');
-            updateStatus('status-playback', 'error', `❌ 播放状态: 错误 - ${errorMsg}`);
-            showFallback();
+            showFailure();
         });
         
         video.addEventListener('stalled', () => {
-            log('视频加载停滞', 'warning');
+            log('视频加载停滞，网络可能缓慢', 'warning');
         });
         
-        // 源错误监听
-        video.querySelectorAll('source').forEach(src => {
+        video.addEventListener('waiting', () => {
+            log('视频缓冲中...', 'warning');
+        });
+        
+        // 各个源的错误监听
+        sources.forEach((src, index) => {
             src.addEventListener('error', () => {
-                const type = src.getAttribute('data-source');
-                log(`${type.toUpperCase()} 源加载失败: ${src.src.substring(0, 50)}...`, 'error');
-                if (type === 'webm') {
-                    updateStatus('status-webm', 'error', '❌ WebM (GitHub): 加载失败');
-                } else {
-                    updateStatus('status-mp4', 'error', '❌ MP4 (Wix): 加载失败');
-                    showFallback();
-                }
+                const name = src.getAttribute('data-source');
+                const displayName = name === 'jsdelivr' ? 'jsDelivr WebM' : 
+                                   name === 'ghpages' ? 'GitHub Pages WebM' : 'Wix MP4';
+                log(`${displayName} 加载失败: ${src.src.substring(0, 60)}...`, 'error');
+                updateStatus(`status-${name}`, 'error', `❌ ${displayName}: 失败`);
             });
         });
         
-        // 显示回退
-        function showFallback() {
-            video.style.display = 'none';
-            fallback.style.display = 'flex';
-            updateStatus('status-fallback', 'success', '✅ Fallback 图片: 已显示');
-            log('已切换到 fallback 图片', 'warning');
-        }
+        // 3秒后备检查
+        setTimeout(() => {
+            if (video.readyState < 2 && video.style.display !== 'none') {
+                log('警告：3秒后视频仍未就绪，可能加载缓慢或失败', 'warning');
+                updateStatus('status-final', 'warning', '⏳ 最终结果: 加载缓慢...');
+            }
+        }, 3000);
+        
+        // 8秒最终检查
+        setTimeout(() => {
+            if (video.readyState < 2 && video.style.display !== 'none') {
+                log('8秒超时：视频无法播放', 'error');
+                showFailure();
+            }
+        }, 8000);
         
         // 测试功能
         function testReload() {
-            log('重新加载视频...');
+            log('重新加载视频...', 'info');
             video.style.opacity = '0';
             video.style.display = 'block';
             fallback.style.display = 'none';
+            
+            // 重置状态
+            sources.forEach(src => {
+                const name = src.getAttribute('data-source');
+                updateStatus(`status-${name}`, '', `⏳ ${name.toUpperCase()}: 等待中...`);
+            });
+            updateStatus('status-fallback', '', '⏳ Fallback 图片: 待机');
+            updateStatus('status-final', 'warning', '⏳ 最终结果: 检测中...');
+            
+            startTimer();
             video.load();
         }
         
-        function testWebMOnly() {
-            log('测试仅 WebM 模式...');
-            video.innerHTML = `
-                <source src="https://raw.githubusercontent.com/nonamepunks/bandwebsite/main/videos/banner3.webm" 
-                        type="video/webm" data-source="webm">
-            `;
+        function testSource(index) {
+            const targetSrc = sources[index];
+            const name = targetSrc.getAttribute('data-source');
+            log(`单独测试: ${name.toUpperCase()}`, 'info');
+            
+            // 只保留指定源
+            video.innerHTML = '';
+            video.appendChild(targetSrc.cloneNode(true));
+            
+            // 重置
+            video.style.opacity = '0';
+            video.style.display = 'block';
+            fallback.style.display = 'none';
+            
+            startTimer();
             video.load();
         }
         
-        function testMP4Only() {
-            log('测试仅 MP4 模式...');
-            video.innerHTML = `
-                <source src="https://video.wixstatic.com/video/d502ca_cae18d24aaad4b468c7b2b2160253319/720p/mp4/file.mp4" 
-                        type="video/mp4" data-source="mp4">
-            `;
+        function testOriginal() {
+            log('恢复原始三源模式', 'info');
+            video.innerHTML = '';
+            sources.forEach(src => video.appendChild(src.cloneNode(true)));
+            
+            // 重新绑定事件
+            video.querySelectorAll('source').forEach((src, index) => {
+                src.addEventListener('error', () => {
+                    const name = src.getAttribute('data-source');
+                    updateStatus(`status-${name}`, 'error', `❌ ${name.toUpperCase()}: 失败`);
+                });
+            });
+            
+            video.style.opacity = '0';
+            video.style.display = 'block';
+            fallback.style.display = 'none';
+            
+            startTimer();
             video.load();
         }
         
@@ -288,12 +528,15 @@
         function showBrowserInfo() {
             const info = {
                 'User Agent': navigator.userAgent,
-                '支持 WebM': MediaSource.isTypeSupported('video/webm; codecs="vp9"') ? '是' : '否',
-                '支持 MP4': MediaSource.isTypeSupported('video/mp4; codecs="avc1.42E01E"') ? '是' : '否',
-                '网络状态': navigator.onLine ? '在线' : '离线',
-                '连接类型': navigator.connection?.effectiveType || '未知',
+                '支持 WebM VP9': MediaSource.isTypeSupported('video/webm; codecs="vp9"') ? '✅ 是' : '❌ 否',
+                '支持 WebM VP8': MediaSource.isTypeSupported('video/webm; codecs="vp8"') ? '✅ 是' : '❌ 否',
+                '支持 MP4 H.264': MediaSource.isTypeSupported('video/mp4; codecs="avc1.42E01E"') ? '✅ 是' : '❌ 否',
+                '网络状态': navigator.onLine ? '🟢 在线' : '🔴 离线',
+                '连接类型': navigator.connection?.effectiveType?.toUpperCase() || '未知',
+                '下行速度': navigator.connection?.downlink ? `${navigator.connection.downlink} Mbps` : '未知',
                 '屏幕尺寸': `${window.innerWidth}x${window.innerHeight}`,
-                '设备像素比': window.devicePixelRatio
+                '设备像素比': window.devicePixelRatio,
+                '内存': navigator.deviceMemory ? `${navigator.deviceMemory} GB` : '未知'
             };
             
             document.getElementById('browserInfo').innerHTML = 
@@ -302,14 +545,9 @@
         
         // 初始化
         showBrowserInfo();
+        startTimer();
         log('测试页面已加载，开始检测视频...');
-        
-        // 3秒后备检查
-        setTimeout(() => {
-            if (video.readyState < 2) {
-                log('警告：视频 3 秒后仍未就绪', 'warning');
-            }
-        }, 3000);
+        log(`浏览器${MediaSource.isTypeSupported('video/webm; codecs="vp9"') ? '支持' : '不支持'} WebM VP9`);
     </script>
 </body>
 </html>

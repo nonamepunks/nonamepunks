@@ -363,7 +363,18 @@
         .silver-line::after { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, var(--white), transparent); animation: lineScan 2s linear infinite; }
 
         @media (max-width: 1200px) { .music-content-new { grid-template-columns: 1fr; gap: 40px; } .music-player-side { max-width: 600px; margin: 0 auto; width: 100%; } .album-cover { width: 350px; height: 350px; } .footer-main { grid-template-columns: 1fr; gap: 40px; } .footer-right { align-items: center; } }
-        @media (max-width: 1024px) { .members-grid { grid-template-columns: 1fr 1fr !important; } .merch-grid { grid-template-columns: repeat(2, 1fr); } .nav-links { gap: 25px; } .nav-links a { font-size: 14px; letter-spacing: 2px; } .hero-logo-img { max-width: 600px; } .album-cover { width: 300px; height: 300px; } .album-title { font-size: 36px; letter-spacing: 6px; } }
+        @media (max-width: 1024px) { 
+        .members-grid { grid-template-columns: 1fr 1fr !important; }
+
+        /* 平板/小桌面 hero 优化 */
+        .hero-bg {
+            background-size: 120% auto !important;
+            background-position: center 10% !important;
+            height: 80% !important;
+        }
+        .hero-logo-img {
+            max-width: 280px !important;
+        } .merch-grid { grid-template-columns: repeat(2, 1fr); } .nav-links { gap: 25px; } .nav-links a { font-size: 14px; letter-spacing: 2px; } .hero-logo-img { max-width: 600px; } .album-cover { width: 300px; height: 300px; } .album-title { font-size: 36px; letter-spacing: 6px; } }
         @media (max-width: 768px) { 
         /* 移动端移除爆闪效果 */
         .hero-noise, .hero-scanlines, .banner-grain, .banner-scanlines-dark { display: none !important; }

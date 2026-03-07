@@ -5,71 +5,126 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>The Noname無名 - Official</title>
     <style>
-        /* ===== HERO 区域 - 基础样式 ===== */
-        .hero {
-            height: 100vh;
-            min-height: 100vh;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --logo-red: #DC2626; --blood-red: #B91C1C; --deep-red: #7F1D1D; --black: #000000; --white: #FFFFFF; --silver: #C0C0C0; --dark-gray: #1a1a1a; }
+        body { 
+            background-color: #000;
+            background-image: url('./image/blackbg.webp');
+            background-repeat: repeat-y;
+            background-position: center top;
+            background-size: 100% auto;
+            color: var(--white); font-family: 'Arial Black', 'Helvetica Neue', Helvetica, Arial, sans-serif; overflow-x: hidden; cursor: crosshair; }
+
+        @keyframes hardGlitch { 0% { opacity: 0; transform: translateX(-10px); filter: hue-rotate(90deg); } 20% { opacity: 1; transform: translateX(5px); filter: hue-rotate(-90deg) drop-shadow(3px 0 var(--logo-red)); } 40% { transform: translateX(-3px); filter: hue-rotate(45deg) drop-shadow(-3px 0 var(--silver)); } 60% { transform: translateX(2px); filter: hue-rotate(0deg) drop-shadow(2px 0 var(--blood-red)); } 80% { transform: translateX(-1px); filter: drop-shadow(1px 0 var(--logo-red)); } 100% { opacity: 1; transform: translateX(0); filter: none; } }
+        @keyframes logoFadeIn { 0% { opacity: 0; transform: scale(0.95); filter: blur(20px) brightness(2); } 50% { opacity: 0.5; filter: blur(10px) brightness(1.5); } 100% { opacity: 1; transform: scale(1); filter: blur(0) brightness(1); } }
+        @keyframes logoGlow { 0%, 100% { filter: drop-shadow(0 0 30px rgba(220, 38, 38, 0.8)) drop-shadow(0 0 60px rgba(220, 38, 38, 0.5)) drop-shadow(0 0 90px rgba(220, 38, 38, 0.3)); } 50% { filter: drop-shadow(0 0 50px rgba(220, 38, 38, 1)) drop-shadow(0 0 100px rgba(220, 38, 38, 0.7)) drop-shadow(0 0 150px rgba(220, 38, 38, 0.4)); } }
+        @keyframes flashShine { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
+        @keyframes lineScan { 0% { left: -100%; } 100% { left: 100%; } }
+        @keyframes noise { 0%, 100% { transform: translate(0, 0); } 10% { transform: translate(-5%, -5%); } 20% { transform: translate(-10%, 5%); } 30% { transform: translate(5%, -10%); } 40% { transform: translate(-5%, 15%); } 50% { transform: translate(-10%, 5%); } 60% { transform: translate(15%, 0); } 70% { transform: translate(0, 10%); } 80% { transform: translate(-15%, 0); } 90% { transform: translate(10%, 5%); } }
+
+        .reveal { opacity: 0; }
+        .reveal.active { animation: hardGlitch 0.3s steps(5) forwards; }
+        .reveal-logo { opacity: 0; }
+        .reveal-logo.active { animation: logoFadeIn 1.5s ease-out forwards; }
+
+        /* ===== 导航栏 ===== */
+        .navbar { position: fixed; top: -100px; left: 0; width: 100%; background: rgba(0,0,0,0.95); border-bottom: 3px solid var(--logo-red); z-index: 1000; padding: 4px 0; transition: top 0.3s steps(3); }
+        .navbar.visible { top: 0; }
+        .navbar::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, transparent, var(--logo-red), transparent); animation: lineScan 3s linear infinite; }
+        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: center; align-items: center; padding: 0 30px; position: relative; }
+        .nav-dragon { width: 40px; height: 40px; cursor: pointer; transition: all 0.2s; filter: grayscale(100%) brightness(0.8); object-fit: contain; }
+        .nav-dragon:hover { filter: grayscale(0%) brightness(1.2) drop-shadow(0 0 10px var(--logo-red)); transform: scale(1.1); }
+        .nav-dragon-left { margin-right: 40px; }
+        .nav-dragon-right { margin-left: 40px; }
+        .nav-links { display: flex; gap: 50px; list-style: none; justify-content: center; }
+        .nav-links a { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; color: var(--white); text-decoration: none; font-size: 18px; letter-spacing: 4px; text-transform: uppercase; position: relative; transition: all 0.1s; padding: 10px 0; }
+        .nav-links a:hover { color: var(--logo-red); text-shadow: 0 0 10px var(--logo-red), 0 0 20px var(--logo-red), 0 0 30px var(--logo-red); transform: skewX(-5deg); }
+
+        /* ===== HERO 区域 - 桌面端 ===== */
+        .hero { 
+            height: 100vh; 
             width: 100%;
-            position: relative;
-            overflow: hidden;
-            background: #000;
+            background: #000; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: flex-end; 
+            align-items: center; 
+            position: relative; 
+            overflow: hidden; 
         }
-        .hero-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
+
+        .hero-bg { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            z-index: 1; 
         }
+
         .hero-bg img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center center;
+            object-position: center;
         }
-        .hero-vignette {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(ellipse at center, transparent 0%, transparent 50%, rgba(0,0,0,0.7) 100%);
-            z-index: 4;
-            pointer-events: none;
+
+        /* 桌面端竖屏支持 */
+        @media screen and (min-width: 769px) and (orientation: portrait) {
+            .hero {
+                height: 100vh !important;
+                min-height: 100vh !important;
+            }
+            .hero-bg img {
+                object-fit: cover !important;
+                object-position: center center !important;
+            }
+            .hero-logo-img {
+                width: 80vw !important;
+                max-width: 700px !important;
+                max-height: 40vh !important;
+            }
         }
-        .hero-content {
+
+        .hero-content { 
             position: absolute;
             bottom: 8%;
             left: 0;
             right: 0;
-            z-index: 10;
-            text-align: center;
+            z-index: 10; 
+            text-align: center; 
             width: 100%;
-            padding: 0 20px;
-        }
-        .hero-logo-img {
-            max-width: 900px;
-            width: 90vw;
-            height: auto;
-            max-height: 50vh;
-            object-fit: contain;
-            opacity: 0;
-        }
-        .hero-logo-img.active {
-            animation: logoFadeIn 1.5s ease-out forwards, logoGlow 3s ease-in-out infinite 1.5s;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        .hero-logo-img { 
+            max-width: 1000px; 
+            width: 95vw; 
+            height: auto; 
+            opacity: 0; 
+        }
 
-        /* ===== HERO 区域 - 桌面端 ===== */
+        .hero-logo-img.active { 
+            animation: logoFadeIn 1.5s ease-out forwards, logoGlow 3s ease-in-out infinite 1.5s; 
+        }
+
+        .hero-vignette { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: radial-gradient(ellipse at center, transparent 0%, transparent 50%, rgba(0,0,0,0.7) 100%); 
+            z-index: 4; 
+            pointer-events: none; 
+        }
 
         /* ===== 其他区域样式 ===== */
         .banner-section { width: 100%; background: url('./image/blackbg.webp') repeat-y center top; background-size: 100% auto; position: relative; }
         .video-banner { overflow: hidden; margin-bottom: 0; }
         .video-banner video { display: block; }
         .video-banner-section { margin-bottom: 0; background: url('./image/blackbg.webp') repeat-y center top; background-size: 100% auto; }
-
+        .music-video-section { margin-top: 0; padding-top: 0; }
+        .music-section-inner { padding-top: 40px; }
         .banner { width: 100%; background: var(--dark-gray); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
         .banner img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
         .banner-dark-effect { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; opacity: 0.3; }
@@ -112,18 +167,7 @@
 
         @keyframes pulse { 0%, 100% { opacity: 1; box-shadow: 0 0 10px rgba(220, 38, 38, 0.3); } 50% { opacity: 0.8; box-shadow: 0 0 20px rgba(220, 38, 38, 0.5); } }
 
-        .music-video-section {
-    width: 100%;
-    background:
-        linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 15%, rgba(0,0,0,0.4) 85%, rgba(0,0,0,0.85) 100%),
-        url('./image/musicbg.webp'),
-        url('./image/blackbg.webp');
-    background-size: cover, cover, cover;
-    background-position: center, center, center;
-    background-repeat: no-repeat, no-repeat, no-repeat;
-    position: relative;
-    min-height: 100vh;
-}
+        .music-video-section { width: 100%; background: url('./image/blackbg.webp') repeat center top; background-size: 100% auto; position: relative; min-height: 100vh; }
         .music-video-section::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 15%, rgba(0,0,0,0.4) 85%, rgba(0,0,0,0.85) 100%); z-index: 1; }
         .music-video-section::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.15) 2px, rgba(0,0,0,0.15) 4px); pointer-events: none; z-index: 2; }
         .music-section-inner { position: relative; z-index: 10; padding: 80px 40px; }
@@ -144,20 +188,7 @@
         .video-player { width: 100%; aspect-ratio: 16 / 9; max-height: 600px; background: rgba(0,0,0,0.5); border: 3px solid var(--logo-red); display: flex; align-items: center; justify-content: center; margin-bottom: 30px; position: relative; cursor: pointer; box-shadow: 0 0 60px rgba(220, 38, 38, 0.4); transition: all 0.3s; overflow: hidden; touch-action: manipulation; -webkit-tap-highlight-color: rgba(220, 38, 38, 0.3); }
         .video-player:hover { box-shadow: 0 0 100px rgba(220, 38, 38, 0.6); border-color: var(--logo-red); }
         .video-player iframe { width: 100%; height: 100%; border: none; }
-        .play-btn {
-            width: 120px;
-            height: 120px;
-            border: 5px solid var(--logo-red);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-            box-shadow: 0 0 50px rgba(220, 38, 38, 0.7);
-            background: rgba(0,0,0,0.6);
-            position: relative;
-            z-index: 100;
-        }
+        .play-btn { width: 120px; height: 120px; border: 5px solid var(--logo-red); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s; box-shadow: 0 0 50px rgba(220, 38, 38, 0.7); background: rgba(0,0,0,0.6); }
         .play-btn::after { content: '▶'; font-size: 50px; margin-left: 10px; color: var(--logo-red); }
         .video-player:hover .play-btn { background: var(--logo-red); border-color: var(--logo-red); transform: scale(1.1); box-shadow: 0 0 80px var(--logo-red); }
         .video-player:hover .play-btn::after { color: var(--white); }
@@ -180,15 +211,7 @@
         .merch-btn-container { text-align: center; }
 
         /* FOOTER */
-        .footer-section {
-    width: 100%;
-    background:
-        url('./image/downbg.webp') repeat-y center top,
-        url('./image/blackbg.webp') repeat-y center top;
-    position: relative;
-    padding: 60px 0 0 0;
-    background-size: 100% auto, 100% auto;
-}
+        .footer-section { width: 100%; background: #000 url('./image/blackbg.webp') repeat-y center top; position: relative; padding: 60px 0 0 0; background-size: 100% auto; }
         .footer-section::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1; }
         .footer-main { position: relative; z-index: 10; max-width: 1400px; margin: 0 auto; padding: 40px; display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 40px; }
         .footer-left { display: flex; flex-direction: column; gap: 15px; }
@@ -248,54 +271,46 @@
         /* ===== 响应式布局 ===== */
 
         /* 1200px以下 */
-        @media (max-width: 1200px) {
-            .music-content-new { grid-template-columns: 1fr; gap: 40px; }
-            .music-player-side { max-width: 600px; margin: 0 auto; width: 100%; }
-            .album-cover { width: 350px; height: 350px; }
-            .footer-main { grid-template-columns: 1fr; gap: 40px; }
-            .footer-right { align-items: center; }
+        @media (max-width: 1200px) { 
+            .music-content-new { grid-template-columns: 1fr; gap: 40px; } 
+            .music-player-side { max-width: 600px; margin: 0 auto; width: 100%; } 
+            .album-cover { width: 350px; height: 350px; } 
+            .footer-main { grid-template-columns: 1fr; gap: 40px; } 
+            .footer-right { align-items: center; } 
         }
 
         /* 1024px以下 - 平板 */
-        @media (max-width: 1024px) {
+        @media (max-width: 1024px) { 
             .members-grid { grid-template-columns: 1fr 1fr; }
-            .merch-grid { grid-template-columns: repeat(2, 1fr); }
-            .nav-links { gap: 25px; }
-            .nav-links a { font-size: 14px; letter-spacing: 2px; }
-
-            .album-cover { width: 300px; height: 300px; }
-            .album-title { font-size: 36px; letter-spacing: 6px; }
+            .merch-grid { grid-template-columns: repeat(2, 1fr); } 
+            .nav-links { gap: 25px; } 
+            .nav-links a { font-size: 14px; letter-spacing: 2px; } 
+            .hero-logo-img { max-width: 1000px; } 
+            .album-cover { width: 300px; height: 300px; } 
+            .album-title { font-size: 36px; letter-spacing: 6px; } 
         }
 
         /* 768px以下 - 移动端 */
         @media (max-width: 768px) {
-        /* 移动端播放按钮优化 */
-        .play-btn {
-            width: 60px !important;
-            height: 60px !important;
-            border-width: 3px !important;
-            background: rgba(0,0,0,0.7) !important;
-        }
-        .play-btn::after {
-            content: '▶' !important;
-            font-size: 24px !important;
-            margin-left: 3px !important;
-            color: var(--logo-red) !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            width: 100% !important;
-            height: 100% !important;
-        }
-        .video-player:hover .play-btn {
-            background: var(--logo-red) !important;
-        }
-        .video-player:hover .play-btn::after {
-            color: var(--white) !important;
-        }
-
             /* 强制全屏 */
-
+            .hero {
+                height: 100vh !important;
+                min-height: 100vh !important;
+            }
+            .hero-bg {
+                position: absolute !important;
+                top: 0 !important;
+                left: 0 !important;
+                width: 100% !important;
+                height: 100% !important;
+            }
+            .hero-bg img {
+                width: 100% !important;
+                height: 100% !important;
+                object-fit: cover !important;
+                object-position: center !important;
+            }
+             
             /* 导航栏 */
             .nav-links { gap: 5px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding: 0 10px; justify-content: space-around; }
             .nav-links::-webkit-scrollbar { display: none; }
@@ -305,6 +320,26 @@
             .nav-dragon-right { margin-left: 8px; }
 
             /* HERO - 竖屏适配关键修复 */
+            .hero-logo-img {
+                width: 92vw !important;
+                max-width: 500px !important;
+                max-height: 45vh !important;
+                object-fit: contain !important;
+            }
+            .hero-content {
+                position: absolute !important;
+                bottom: 5% !important;
+                left: 0 !important;
+                right: 0 !important;
+                z-index: 100 !important;
+                text-align: center !important;
+                width: 100% !important;
+                padding: 0 20px !important;
+                pointer-events: none !important;
+            }
+            .hero-content img {
+                pointer-events: auto !important;
+            }
 
             /* 彻底禁用爆闪动画 */
             .reveal, .reveal.active, .reveal-logo, .reveal-logo.active {
@@ -315,6 +350,27 @@
             }
 
             /* 强制图片填满屏幕 */
+            .hero {
+                height: 100vh !important;
+                min-height: 100vh !important;
+                width: 100% !important;
+                position: relative !important;
+                overflow: hidden !important;
+            }
+            .hero-bg {
+                position: absolute !important;
+                top: 0 !important;
+                left: 0 !important;
+                width: 100% !important;
+                height: 100% !important;
+                z-index: 1 !important;
+            }
+            .hero-bg img {
+                width: 100% !important;
+                height: 100% !important;
+                object-fit: cover !important;
+                object-position: center top !important;
+            }
 
             /* MEMBERS */
             .members-grid { grid-template-columns: 1fr 1fr; gap: 15px; max-width: 100%; }
@@ -326,109 +382,45 @@
             .tour-item { flex-direction: column; gap: 8px; text-align: center; padding: 10px 15px; }
             .tour-date-col, .tour-city-col, .tour-venue-col, .tour-country-col { text-align: center; width: 100%; min-width: auto; }
             .tour-btn-col { text-align: center; min-width: auto; }
-            .tour-section { padding-top: 30px; }
+            .tour-section { padding-top: 30px; } 
             .section-title { font-size: 36px; letter-spacing: 8px; margin-bottom: 30px; }
 
             /* MUSIC */
-            .album-cover { width: 260px; height: 260px; }
-            .album-title { font-size: 28px; letter-spacing: 4px; }
-            .music-section-inner, .video-section-inner { padding: 50px 20px; }
+            .album-cover { width: 260px; height: 260px; } 
+            .album-title { font-size: 28px; letter-spacing: 4px; } 
+            .music-section-inner, .video-section-inner { padding: 50px 20px; } 
 
             /* BANNER */
-            .banner-btn { padding: 8px 25px; font-size: 14px; bottom: 30px; }
-            .banner-btn-right { right: 20px; }
+            .banner-btn { padding: 8px 25px; font-size: 14px; bottom: 30px; } 
+            .banner-btn-right { right: 20px; } 
 
             /* FOOTER - 确保龙图案显示 */
-            .footer-main { padding: 30px 20px; }
-            .subscribe-form { flex-direction: column; align-items: center; }
-            .subscribe-input { width: 100%; max-width: 280px; }
+            .footer-main { padding: 30px 20px; } 
+            .subscribe-form { flex-direction: column; align-items: center; } 
+            .subscribe-input { width: 100%; max-width: 280px; } 
             .footer-nav-container { flex-wrap: nowrap; gap: 8px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 0 10px; justify-content: space-between; }
             .footer-nav-container::-webkit-scrollbar { display: none; }
             .footer-nav a { font-size: 10px; white-space: nowrap; letter-spacing: 0.5px; padding: 5px 2px; flex-shrink: 0; }
             /* 底部导航栏龙图案强制显示 */
             .footer-nav-container .nav-dragon { display: block !important; width: 25px; height: 25px; }
         }
+            .hero-logo-img {
+                width: 92vw !important;
+                max-width: 500px !important;
+                max-height: 45vh !important;
+            }
 
         /* 380px以下 - 超小屏幕 */
         @media (max-width: 380px) {
-
+            .hero-logo-img { width: 75vw; max-width: 350px; }
             .footer-nav-container .nav-dragon { display: block !important; width: 20px; height: 20px; }
-        
-            .hero-logo-img {
-                width: 90vw !important;
-                max-width: 350px !important;
-                max-height: 40vh !important;
-            }
         }
 
         ::-webkit-scrollbar { width: 10px; }
         ::-webkit-scrollbar-track { background: var(--black); }
         ::-webkit-scrollbar-thumb { background: var(--logo-red); border-radius: 5px; box-shadow: 0 0 15px rgba(220, 38, 38, 0.6); }
         ::-webkit-scrollbar-thumb:hover { background: var(--blood-red); box-shadow: 0 0 25px var(--logo-red); }
-
-        /* iOS 防止默认视频播放按钮 */
-        .video-player {
-            -webkit-user-select: none;
-            -webkit-touch-callout: none;
-            -webkit-tap-highlight-color: transparent;
-        }
-        .video-player img {
-            -webkit-user-drag: none;
-        }
-
-        /* ===== 桌面端竖屏 ===== */
-        @media screen and (min-width: 769px) and (orientation: portrait) {
-            .hero {
-                height: 100vh !important;
-                min-height: 100vh !important;
-            }
-            .hero-bg img {
-                object-fit: cover !important;
-                object-position: center center !important;
-            }
-            .hero-logo-img {
-                width: 80vw !important;
-                max-width: 700px !important;
-                max-height: 40vh !important;
-            }
-        }
-
-        /* ===== 平板和手机端 ===== */
-        @media (max-width: 768px) {
-            .hero {
-                height: 100vh !important;
-                min-height: 100vh !important;
-            }
-            .hero-bg img {
-                object-fit: cover !important;
-                object-position: center center !important;
-            }
-            .hero-content {
-                bottom: 10% !important;
-            }
-            .hero-logo-img {
-                width: 92vw !important;
-                max-width: 500px !important;
-                max-height: 45vh !important;
-            }
-            /* 禁用爆闪动画 */
-            .reveal, .reveal.active, .reveal-logo, .reveal-logo.active {
-                opacity: 1 !important;
-                animation: none !important;
-                transform: none !important;
-                filter: none !important;
-            }
-        }
-
-        /* ===== 超小屏幕 ===== */
-        @media (max-width: 380px) {
-            .hero-logo-img {
-                width: 90vw !important;
-                max-width: 350px !important;
-                max-height: 40vh !important;
-            }
-        }
-</style>
+    </style>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
@@ -444,7 +436,7 @@
                 <li><a href="#video">VIDEO</a></li>
                 <li><a href="#merch">STORE</a></li>
                 <li><a href="#footer">Contact</a></li>
-                <li><a href="http://emanonent.wixstudio.com/livegigs/antiipa" target="_blank">ANTI-IPA</a></li>
+                <li><a href="#">ANTI-IPA</a></li>
             </ul>
             <a href="#hero" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">
                 <img src="./image/dragonR.png" alt="Dragon Right" class="nav-dragon nav-dragon-right">
@@ -601,10 +593,9 @@
         <div class="video-section-inner" id="video">
             <h2 class="section-title reveal">VIDEO</h2>
             <div class="video-container">
-                <div class="video-player reveal" id="videoPlayer" onclick="playVideo()" style="cursor: pointer; position: relative; overflow: hidden;">
-                    <img src="https://img.youtube.com/vi/CFZik0yVglc/maxresdefault.jpg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;" alt="Video Thumbnail">
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 1;"></div>
-                    <div class="play-btn" style="position: relative; z-index: 100; pointer-events: none;"></div>
+                <div class="video-player reveal" id="videoPlayer" onclick="playVideo()" style="cursor: pointer; position: relative; background: url('https://img.youtube.com/vi/CFZik0yVglc/maxresdefault.jpg') center/cover no-repeat;">
+                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.3);"></div>
+                    <div class="play-btn" style="position: relative; z-index: 10;"></div>
                 </div>
                 <a href="https://www.youtube.com/channel/UCv2-Y8NFUHXkf-2hDQUzLKw" target="_blank" class="btn">WATCH VIDEO</a>
             </div>
@@ -623,7 +614,7 @@
                 <div class="banner-glow"></div>
                 <div class="banner-border-glow"></div>
             </div>
-            <a href="http://emanonent.wixstudio.com/livegigs/antiipa" target="_blank" class="banner-btn banner-btn-center">CHEERS</a>
+            <a href="#" class="banner-btn banner-btn-center">SHOP NOW</a>
         </div>
     </section>
 
@@ -729,7 +720,7 @@
                 <a href="#video" data-editable>VIDEO</a>
                 <a href="#merch" data-editable>STORE</a>
                 <a href="#footer" data-editable>CONTACT</a>
-                <a href="http://emanonent.wixstudio.com/livegigs/antiipa" target="_blank" data-editable>ANTI-IPA</a>
+                <a href="#" data-editable>ANTI-IPA</a>
                 <a href="#hero" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">
                     <img src="./image/dragonR.png" alt="Dragon Right" class="nav-dragon nav-dragon-right">
                 </a>
@@ -738,7 +729,7 @@
         <div class="footer-bottom">
             <div class="footer-slogan">REAL PUNK ROCK NEVER DEAD</div>
             <div class="footer-copyright">
-                <p>© 2021~2026  The Noname | <a href="https://www.privacy.epitaph.com/" target="_blank" data-editable>Privacy Policy</a> | <a href="https://www.privacy.epitaph.com/cookiepolicy" target="_blank" data-editable>Cookie Policy</a> | <a href="https://www.privacy.epitaph.com/terms" target="_blank" data-editable>Terms of Use</a> | <a href="#" data-editable>Do Not Sell or Share My Personal Information</a></p>
+                <p>© 2026 Epitaph Records | <a href="#" data-editable>Privacy Policy</a> | <a href="#" data-editable>Cookie Policy</a> | <a href="#" data-editable>Terms of Use</a> | <a href="#" data-editable>Do Not Sell or Share My Personal Information</a></p>
             </div>
         </div>
     </footer>

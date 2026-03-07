@@ -404,42 +404,59 @@
 
             /* TOUR - 三排布局 */
             .tour-item { 
-                flex-direction: column; 
-                gap: 4px; 
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+                gap: 12px 20px; 
                 text-align: center; 
-                padding: 8px 15px; 
-                margin-bottom: 3px;
+                padding: 16px 15px; 
+                margin-bottom: 8px;
                 font-size: 12px;
             }
-            /* 第一排：日期 */
+            /* 第一排：日期 - 占满整行 */
             .tour-date-col { 
-                text-align: center; 
+                order: 1;
                 width: 100%;
-                font-size: 13px;
+                text-align: center; 
+                font-size: 15px;
                 color: var(--logo-red);
                 font-weight: bold;
                 letter-spacing: 2px;
             }
-            /* 第二排：城市 场地 国家 */
-            .tour-city-col, .tour-venue-col, .tour-country-col { 
-                text-align: center; 
+            /* 第二排：城市 场地 国家 - 同一行 */
+            .tour-city-col { 
+                order: 2;
                 width: auto;
-                font-size: 11px;
-                display: inline;
-            }
-            .tour-city-col::after { content: " / "; color: var(--silver); }
-            .tour-venue-col::after { content: " / "; color: var(--silver); }
-            /* 第三排：按钮 */
-            .tour-btn-col { 
                 text-align: center; 
+                font-size: 13px;
+            }
+            .tour-venue-col { 
+                order: 3;
+                width: auto;
+                text-align: center; 
+                font-size: 12px;
+                color: var(--silver);
+            }
+            .tour-country-col { 
+                order: 4;
+                width: auto;
+                text-align: center; 
+                font-size: 13px;
+            }
+            /* 第三排：按钮 - 占满整行 */
+            .tour-btn-col { 
+                order: 5;
                 width: 100%;
+                text-align: center; 
                 margin-top: 4px;
             }
             .tour-btn {
-                padding: 6px 20px;
-                font-size: 11px;
-                min-height: 28px;
-                min-width: 80px;
+                padding: 10px 30px;
+                font-size: 12px;
+                min-height: 36px;
+                min-width: 100px;
                 letter-spacing: 2px;
             }
             .tour-section { padding-top: 20px; } 

@@ -1031,9 +1031,29 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    touch-action: pan-y;
+    touch-action: pan-y pan-x;
     user-select: none;
     -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    cursor: pointer;
+}
+
+.merch-popup-images:active {
+    cursor: grabbing;
+}
+
+.merch-popup-img {
+    position: absolute;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-drag: none;
+    pointer-events: auto;
 }
 
 .merch-popup-img {
@@ -2155,7 +2175,7 @@ function stopMerchAutoSlide() {
     }
 }
 
-// 点击大图切换和触摸滑动
+// 点击大图切换、触摸滑动和鼠标拖拽
 function initMerchImageClick() {
     const img1El = document.getElementById('merchPopupImg1');
     const img2El = document.getElementById('merchPopupImg2');
@@ -2178,52 +2198,87 @@ function initMerchImageClick() {
         });
     }
 
-    // 触摸滑动支持
+    // 触摸滑动和鼠标拖拽支持
     if (imagesContainer) {
-        let touchStartX = 0;
-        let touchEndX = 0;
-        let touchStartY = 0;
-        let isSwiping = false;
+        let startX = 0;
+        let startY = 0;
+        let isDragging = false;
+        let isTouch = false;
 
+        // 处理滑动逻辑（内联，避免闭包问题）
+        const processSwipe = (diffX, diffY) => {
+            // 水平滑动超过 50px 且水平距离大于垂直距离才触发
+            if (Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY)) {
+                if (diffX > 0) {
+                    switchMerchImage(1); // 左滑 - 下一张
+                } else {
+                    switchMerchImage(-1); // 右滑 - 上一张
+                }
+            }
+        };
+
+        // 触摸事件
         imagesContainer.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-            touchStartY = e.changedTouches[0].screenY;
-            isSwiping = true;
+            isTouch = true;
+            startX = e.changedTouches[0].screenX;
+            startY = e.changedTouches[0].screenY;
+            isDragging = true;
         }, { passive: true });
 
         imagesContainer.addEventListener('touchmove', (e) => {
-            if (!isSwiping) return;
+            if (!isDragging || !isTouch) return;
 
             const touchX = e.changedTouches[0].screenX;
             const touchY = e.changedTouches[0].screenY;
-            const diffX = touchStartX - touchX;
-            const diffY = touchStartY - touchY;
+            const diffX = startX - touchX;
+            const diffY = startY - touchY;
 
-            // 主要是水平滑动时才阻止默认行为
             if (Math.abs(diffX) > Math.abs(diffY)) {
                 e.preventDefault();
             }
         }, { passive: false });
 
         imagesContainer.addEventListener('touchend', (e) => {
-            if (!isSwiping) return;
-            isSwiping = false;
+            if (!isDragging || !isTouch) return;
+            isDragging = false;
+            isTouch = false;
 
-            touchEndX = e.changedTouches[0].screenX;
-            const diffX = touchStartX - touchEndX;
-            const diffY = touchStartY - e.changedTouches[0].screenY;
-
-            // 水平滑动超过 50px 才触发切换
-            if (Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY)) {
-                if (diffX > 0) {
-                    // 左滑 - 下一张
-                    switchMerchImage(1);
-                } else {
-                    // 右滑 - 上一张
-                    switchMerchImage(-1);
-                }
-            }
+            const endX = e.changedTouches[0].screenX;
+            const endY = e.changedTouches[0].screenY;
+            processSwipe(startX - endX, startY - endY);
         }, { passive: true });
+
+        // 鼠标拖拽事件（桌面端支持）
+        imagesContainer.addEventListener('mousedown', (e) => {
+            if (e.button !== 0) return; // 左键才触发
+
+            isTouch = false;
+            startX = e.clientX;
+            startY = e.clientY;
+            isDragging = true;
+
+            e.preventDefault();
+            imagesContainer.style.cursor = 'grabbing';
+        });
+
+        document.addEventListener('mouseup', (e) => {
+            if (!isDragging || isTouch) return;
+
+            isDragging = false;
+            imagesContainer.style.cursor = 'pointer';
+
+            processSwipe(startX - e.clientX, startY - e.clientY);
+        });
+
+        // 鼠标离开窗口时取消拖拽
+        document.addEventListener('mouseleave', () => {
+            if (isDragging && !isTouch) {
+                isDragging = false;
+                imagesContainer.style.cursor = 'pointer';
+            }
+        });
+
+        imagesContainer.style.cursor = 'pointer';
     }
 }
 

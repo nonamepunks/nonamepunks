@@ -164,9 +164,11 @@
     width: 100%; 
     background: 
         linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 15%, rgba(0,0,0,0.4) 85%, rgba(0,0,0,0.85) 100%),
-        url('./image/musicbg.webp') repeat center top,
-        url('./image/blackbg.webp') repeat center top; 
-    background-size: 100% auto, 100% auto, 100% auto; 
+        url('./image/musicbg.webp'),
+        url('./image/blackbg.webp'); 
+    background-size: cover, cover, cover; 
+    background-position: center, center, center;
+    background-repeat: no-repeat, no-repeat, no-repeat;
     position: relative; 
     min-height: 100vh; 
 }
@@ -190,7 +192,20 @@
         .video-player { width: 100%; aspect-ratio: 16 / 9; max-height: 600px; background: rgba(0,0,0,0.5); border: 3px solid var(--logo-red); display: flex; align-items: center; justify-content: center; margin-bottom: 30px; position: relative; cursor: pointer; box-shadow: 0 0 60px rgba(220, 38, 38, 0.4); transition: all 0.3s; overflow: hidden; touch-action: manipulation; -webkit-tap-highlight-color: rgba(220, 38, 38, 0.3); }
         .video-player:hover { box-shadow: 0 0 100px rgba(220, 38, 38, 0.6); border-color: var(--logo-red); }
         .video-player iframe { width: 100%; height: 100%; border: none; }
-        .play-btn { width: 120px; height: 120px; border: 5px solid var(--logo-red); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s; box-shadow: 0 0 50px rgba(220, 38, 38, 0.7); background: rgba(0,0,0,0.6); }
+        .play-btn { 
+            width: 120px; 
+            height: 120px; 
+            border: 5px solid var(--logo-red); 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            transition: all 0.3s; 
+            box-shadow: 0 0 50px rgba(220, 38, 38, 0.7); 
+            background: rgba(0,0,0,0.6);
+            position: relative;
+            z-index: 100;
+        }
         .play-btn::after { content: '▶'; font-size: 50px; margin-left: 10px; color: var(--logo-red); }
         .video-player:hover .play-btn { background: var(--logo-red); border-color: var(--logo-red); transform: scale(1.1); box-shadow: 0 0 80px var(--logo-red); }
         .video-player:hover .play-btn::after { color: var(--white); }
@@ -304,13 +319,27 @@
         @media (max-width: 768px) {
         /* 移动端播放按钮优化 */
         .play-btn {
-            width: 80px;
-            height: 80px;
-            border-width: 3px;
+            width: 60px !important;
+            height: 60px !important;
+            border-width: 3px !important;
+            background: rgba(0,0,0,0.7) !important;
         }
         .play-btn::after {
-            font-size: 30px;
-            margin-left: 5px;
+            content: '▶' !important;
+            font-size: 24px !important;
+            margin-left: 3px !important;
+            color: var(--logo-red) !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 100% !important;
+            height: 100% !important;
+        }
+        .video-player:hover .play-btn {
+            background: var(--logo-red) !important;
+        }
+        .video-player:hover .play-btn::after {
+            color: var(--white) !important;
         }
 
             /* 强制全屏 */
@@ -435,7 +464,17 @@
         ::-webkit-scrollbar-track { background: var(--black); }
         ::-webkit-scrollbar-thumb { background: var(--logo-red); border-radius: 5px; box-shadow: 0 0 15px rgba(220, 38, 38, 0.6); }
         ::-webkit-scrollbar-thumb:hover { background: var(--blood-red); box-shadow: 0 0 25px var(--logo-red); }
-    </style>
+    
+        /* iOS 防止默认视频播放按钮 */
+        .video-player {
+            -webkit-user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .video-player img {
+            -webkit-user-drag: none;
+        }
+</style>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
@@ -608,9 +647,10 @@
         <div class="video-section-inner" id="video">
             <h2 class="section-title reveal">VIDEO</h2>
             <div class="video-container">
-                <div class="video-player reveal" id="videoPlayer" onclick="playVideo()" style="cursor: pointer; position: relative; background: url('https://img.youtube.com/vi/CFZik0yVglc/maxresdefault.jpg') center/cover no-repeat;">
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.3);"></div>
-                    <div class="play-btn" style="position: relative; z-index: 10;"></div>
+                <div class="video-player reveal" id="videoPlayer" onclick="playVideo()" style="cursor: pointer; position: relative; overflow: hidden;">
+                    <img src="https://img.youtube.com/vi/CFZik0yVglc/maxresdefault.jpg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;" alt="Video Thumbnail">
+                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 1;"></div>
+                    <div class="play-btn" style="position: relative; z-index: 100; pointer-events: none;"></div>
                 </div>
                 <a href="https://www.youtube.com/channel/UCv2-Y8NFUHXkf-2hDQUzLKw" target="_blank" class="btn">WATCH VIDEO</a>
             </div>

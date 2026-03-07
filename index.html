@@ -419,25 +419,22 @@
         .nav-dragon { image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges; }
 
         .dragon-clone {
-            position: fixed; top: 50%; left: 50%; 
-            transform: translate(-50%, -50%) scale(0);
-            filter: grayscale(0%) brightness(2.5) drop-shadow(0 0 80px #DC2626) drop-shadow(0 0 150px rgba(220,38,38,1));
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0);
+            filter: grayscale(0%) brightness(3) drop-shadow(0 0 60px #DC2626) drop-shadow(0 0 120px rgba(220,38,38,0.9));
             z-index: 99999; pointer-events: none; opacity: 0;
-            background-size: contain; background-repeat: no-repeat; background-position: center;
-            image-rendering: -webkit-optimize-contrast;
-            image-rendering: crisp-edges;
-            image-rendering: pixelated;
+            background-repeat: no-repeat; background-position: center;
             will-change: transform, opacity;
         }
 
         .dragon-clone.animate { animation: dragonFlash 1.2s ease-out forwards; }
 
+        /* 桌面端动画 - 放大到 scale 1.2 */
         @keyframes dragonFlash {
-            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
-            20% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+            0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
+            20% { transform: translate(-50%, -50%) scale(1.0); opacity: 1; }
             50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
-            80% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
-            100% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+            80% { transform: translate(-50%, -50%) scale(1.0); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
         }
 
         .dragon-star-ring {
@@ -446,6 +443,7 @@
             clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
             transform: translate(-50%, -50%) scale(0) rotate(0deg); z-index: 99998;
             animation: starExpand 1.2s ease-out forwards;
+            will-change: transform, opacity;
         }
 
         @keyframes starExpand {
@@ -454,13 +452,14 @@
             100% { transform: translate(-50%, -50%) scale(3) rotate(180deg); opacity: 0; }
         }
 
+        /* 移动端优化 - 放大到 scale 0.85，避免出屏 */
         @media (max-width: 768px) {
             @keyframes dragonFlash {
-                0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
-                20% { transform: translate(-50%, -50%) scale(0.85); opacity: 1; }
+                0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
+                20% { transform: translate(-50%, -50%) scale(0.75); opacity: 1; }
                 50% { transform: translate(-50%, -50%) scale(0.85); opacity: 1; }
-                80% { transform: translate(-50%, -50%) scale(0.85); opacity: 1; }
-                100% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+                80% { transform: translate(-50%, -50%) scale(0.75); opacity: 1; }
+                100% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
             }
             .dragon-star-ring { width: 50vmin; height: 50vmin; }
         }
@@ -509,7 +508,7 @@
                 <div class="banner-glow"></div>
                 <div class="banner-border-glow"></div>
             </div>
-            <a href="#merch" class="banner-btn banner-btn-center">ORDER NOW</a>
+            <a href="#" class="banner-btn banner-btn-center">ORDER NOW</a>
         </div>
     </section>
 
@@ -881,38 +880,56 @@
           });
        })();
     
-        // 龙点击动画
+        // 龙点击动画 - 优化清晰度版本
         document.querySelectorAll('.nav-dragon').forEach(dragon => {
             dragon.addEventListener('click', function(e) {
                 e.preventDefault();
                 if (document.querySelector('.dragon-clone.animate')) return;
 
                 const src = this.src;
-                const rect = this.getBoundingClientRect();
+                const img = new Image();
+                img.src = src;
 
-                const clone = document.createElement('div');
-                clone.className = 'dragon-clone';
-                clone.style.backgroundImage = 'url(' + src + ')';
-                clone.style.width = rect.width + 'px';
-                clone.style.height = rect.height + 'px';
-                document.body.appendChild(clone);
+                img.onload = () => {
+                    // 原始图片尺寸：1191×496
+                    const naturalWidth = img.naturalWidth || 1191;
+                    const naturalHeight = img.naturalHeight || 496;
+                    const aspectRatio = naturalWidth / naturalHeight; // 约2.4
 
-                const star = document.createElement('div');
-                star.className = 'dragon-star-ring';
-                document.body.appendChild(star);
+                    // 根据屏幕尺寸计算最佳显示尺寸
+                    const isMobile = window.innerWidth <= 768;
+                    const baseSize = isMobile ? 280 : 500; // 移动端基础高度280px，桌面端500px
 
-                requestAnimationFrame(() => {
-                    clone.classList.add('animate');
-                });
+                    // 保持原始宽高比计算尺寸
+                    const displayHeight = baseSize;
+                    const displayWidth = displayHeight * aspectRatio;
 
-                setTimeout(() => {
-                    clone.remove();
-                    star.remove();
-                }, 1200);
+                    const clone = document.createElement('div');
+                    clone.className = 'dragon-clone';
+                    clone.style.backgroundImage = 'url(' + src + ')';
+                    clone.style.width = displayWidth + 'px';
+                    clone.style.height = displayHeight + 'px';
+                    // 使用原始图片尺寸作为背景图尺寸以保证清晰度
+                    clone.style.backgroundSize = 'contain';
+                    document.body.appendChild(clone);
 
-                setTimeout(() => {
-                    window.scrollTo({top: 0, behavior: 'smooth'});
-                }, 300);
+                    const star = document.createElement('div');
+                    star.className = 'dragon-star-ring';
+                    document.body.appendChild(star);
+
+                    requestAnimationFrame(() => {
+                        clone.classList.add('animate');
+                    });
+
+                    setTimeout(() => {
+                        clone.remove();
+                        star.remove();
+                    }, 1200);
+
+                    setTimeout(() => {
+                        window.scrollTo({top: 0, behavior: 'smooth'});
+                    }, 300);
+                };
             });
         });
 </script>

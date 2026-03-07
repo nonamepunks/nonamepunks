@@ -48,10 +48,10 @@
             left: 50% !important;
             transform: translate(-50%, -50%) scale(12) !important;
             filter: grayscale(0%) brightness(2.5) 
-                drop-shadow(0 0 80px var(--logo-red)) 
-                drop-shadow(0 0 160px rgba(220, 38, 38, 1))
-                drop-shadow(0 0 240px rgba(220, 38, 38, 0.8))
-                drop-shadow(0 0 320px rgba(139, 0, 0, 0.6)) !important;
+                drop-shadow(0 0 100px var(--logo-red)) 
+                drop-shadow(0 0 200px rgba(220, 38, 38, 1))
+                drop-shadow(0 0 300px rgba(220, 38, 38, 0.9))
+                drop-shadow(0 0 400px rgba(139, 0, 0, 0.8)) !important;
             z-index: 99999 !important;
             transition: all 0.3s ease-out;
             margin: 0 !important;
@@ -59,62 +59,65 @@
             image-rendering: crisp-edges;
         }
 
-        /* 多层烟雾效果 */
-        .nav-dragon.animating::before {
-            content: '';
+        /* 烟雾容器 */
+        .dragon-smoke-container {
             position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 99998;
+            overflow: hidden;
+        }
+
+        .dragon-smoke {
+            position: absolute;
             top: 50%;
             left: 50%;
-            width: 300vmax;
-            height: 300vmax;
+            width: 150vmax;
+            height: 150vmax;
             background: radial-gradient(ellipse at center, 
-                rgba(220, 38, 38, 0.9) 0%, 
-                rgba(180, 20, 20, 0.7) 10%,
-                rgba(100, 0, 0, 0.5) 25%, 
-                rgba(50, 50, 50, 0.4) 40%, 
-                rgba(0, 0, 0, 0.9) 60%, 
-                transparent 80%);
+                rgba(220, 38, 38, 1) 0%, 
+                rgba(180, 20, 20, 0.9) 15%,
+                rgba(100, 0, 0, 0.7) 30%, 
+                rgba(50, 0, 0, 0.5) 50%, 
+                rgba(0, 0, 0, 0.8) 70%, 
+                transparent 90%);
             border-radius: 50%;
             transform: translate(-50%, -50%) scale(0);
-            animation: dragonCloudExpand 1.2s ease-out forwards;
-            pointer-events: none;
-            z-index: -1;
+            animation: dragonSmokeExpand 1.5s ease-out forwards;
         }
 
-        /* 第二层烟雾 */
-        .nav-dragon.animating::after {
-            content: '';
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            width: 200vmax;
-            height: 200vmax;
-            background: radial-gradient(circle at 30% 30%, 
-                rgba(255, 100, 100, 0.6) 0%, 
-                transparent 30%),
-                radial-gradient(circle at 70% 70%, 
-                rgba(139, 0, 0, 0.5) 0%, 
-                transparent 40%),
+        .dragon-smoke:nth-child(2) {
+            width: 120vmax;
+            height: 120vmax;
+            background: radial-gradient(circle at 40% 40%, 
+                rgba(255, 80, 80, 0.9) 0%, 
+                transparent 35%),
+                radial-gradient(circle at 60% 60%, 
+                rgba(180, 0, 0, 0.7) 0%, 
+                transparent 45%),
                 radial-gradient(ellipse at center, 
-                rgba(220, 38, 38, 0.4) 0%, 
-                transparent 60%);
-            border-radius: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            animation: dragonCloudExpand2 1s ease-out 0.1s forwards;
-            pointer-events: none;
-            z-index: -2;
+                rgba(220, 38, 38, 0.6) 0%, 
+                transparent 65%);
+            animation-delay: 0.1s;
         }
 
-        @keyframes dragonCloudExpand {
-            0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
-            30% { opacity: 1; }
-            100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+        .dragon-smoke:nth-child(3) {
+            width: 180vmax;
+            height: 180vmax;
+            background: radial-gradient(ellipse at center, 
+                rgba(139, 0, 0, 0.5) 0%, 
+                transparent 55%);
+            animation-delay: 0.2s;
         }
 
-        @keyframes dragonCloudExpand2 {
+        @keyframes dragonSmokeExpand {
             0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
-            50% { opacity: 0.8; }
-            100% { transform: translate(-50%, -50%) scale(1.2); opacity: 0; }
+            20% { opacity: 1; }
+            60% { opacity: 0.8; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
         }
 
         .nav-dragon.returning {
@@ -1003,6 +1006,7 @@
                 if (this.classList.contains('animating')) return;
 
                 e.preventDefault();
+                e.stopPropagation();
 
                 const originalPosition = this.getBoundingClientRect();
                 const parent = this.parentElement;
@@ -1021,6 +1025,21 @@
 
                 // 添加动画类 - 立即定位到屏幕中央
                 this.classList.add('animating');
+
+                // 创建烟雾效果
+                const smokeContainer = document.createElement('div');
+                smokeContainer.className = 'dragon-smoke-container';
+                for(let i=0; i<3; i++) {
+                    const smoke = document.createElement('div');
+                    smoke.className = 'dragon-smoke';
+                    smokeContainer.appendChild(smoke);
+                }
+                document.body.appendChild(smokeContainer);
+
+                // 1.5秒后移除烟雾
+                setTimeout(() => {
+                    smokeContainer.remove();
+                }, 1500);
 
                 // 延迟后开始返回
                 setTimeout(() => {
@@ -1043,13 +1062,11 @@
                         this.style.transform = '';
                         this.style.margin = '';
                         placeholder.remove();
-                    }, 500);
-                }, 800);
 
-                // 同时执行返回顶部
-                setTimeout(() => {
-                    window.scrollTo({top: 0, behavior: 'smooth'});
-                }, 300);
+                        // 动画完全结束后才滚动
+                        window.scrollTo({top: 0, behavior: 'smooth'});
+                    }, 500);
+                }, 1000);
             });
         });
     </script>

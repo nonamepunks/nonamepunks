@@ -394,7 +394,6 @@
 
             /* 导航栏 */
             .nav-links { gap: 5px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding: 0 10px; justify-content: space-around; }
-            .nav-links::-webkit-scrollbar { display: none; }
             .nav-links a { font-size: 12px; white-space: nowrap; padding: 8px 3px; letter-spacing: 1px; }
             .nav-dragon { width: 35px; height: 35px; }
             .nav-dragon-left { margin-right: 8px; }
@@ -474,7 +473,6 @@
             .subscribe-form { flex-direction: column; align-items: center; } 
             .subscribe-input { width: 100%; max-width: 280px; } 
             .footer-nav-container { flex-wrap: nowrap; gap: 8px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 0 10px; justify-content: space-between; }
-            .footer-nav-container::-webkit-scrollbar { display: none; }
             .footer-nav a { font-size: 10px; white-space: nowrap; letter-spacing: 0.5px; padding: 5px 2px; flex-shrink: 0; }
             .footer-nav-container .nav-dragon { display: block; width: 35px; height: 35px; }
         
@@ -491,10 +489,6 @@
 
         
 
-        ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: var(--black); }
-        ::-webkit-scrollbar-thumb { background: var(--logo-red); border-radius: 5px; box-shadow: 0 0 15px rgba(220, 38, 38, 0.6); }
-        ::-webkit-scrollbar-thumb:hover { background: var(--blood-red); box-shadow: 0 0 25px var(--logo-red); }
     
         /* iOS 防止默认视频播放按钮 */
         .video-player {
@@ -850,6 +844,85 @@
         font-size: 13px;
     }
 }
+
+
+/* 视频区域打字机效果 */
+.video-typewriter-container {
+    position: absolute;
+    top: 52%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    padding: 0 20px;
+    z-index: 10;
+    text-align: center;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.video-typewriter-text {
+    font-family: 'Courier New', monospace;
+    font-size: clamp(10px, 1.4vw, 18px);
+    line-height: 1.5;
+    color: #fff;
+    text-shadow: 
+        0 0 8px rgba(220, 38, 38, 0.9),
+        0 0 16px rgba(220, 38, 38, 0.7),
+        0 0 24px rgba(220, 38, 38, 0.5),
+        2px 2px 4px rgba(0,0,0,1);
+    letter-spacing: 0.3px;
+    max-width: 100%;
+    padding: 0 10px;
+}
+
+.video-typewriter-text::after {
+    content: '|';
+    animation: cursorBlink 1s infinite;
+    color: var(--logo-red);
+    text-shadow: 0 0 10px var(--logo-red);
+}
+
+@keyframes cursorBlink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .video-typewriter-container {
+        padding: 0 15px;
+        top: 50%;
+    }
+    .video-typewriter-text {
+        font-size: clamp(9px, 2.2vw, 14px);
+        line-height: 1.45;
+        letter-spacing: 0.2px;
+        padding: 0 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .video-typewriter-container {
+        padding: 0 10px;
+        top: 48%;
+    }
+    .video-typewriter-text {
+        font-size: clamp(8px, 2.8vw, 12px);
+        line-height: 1.35;
+        letter-spacing: 0.1px;
+        padding: 0 3px;
+    }
+}
+
+/* 超小屏 */
+@media (max-width: 360px) {
+    .video-typewriter-text {
+        font-size: clamp(7px, 3vw, 10px);
+        line-height: 1.3;
+    }
+}
 </style>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
@@ -990,12 +1063,15 @@
 
     <div class="silver-line"></div>
     <section class="banner-section video-banner-section" id="banner3">
-        <div class="banner reveal video-banner">
+        <div class="banner reveal video-banner" style="position: relative;">
             <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover;">
                 <source src="https://video.wixstatic.com/video/d502ca_c9a0037029ee4c2c9586d94dd655a1e4/1080p/mp4/file.mp4" type="video/mp4">
             </video>
             <div class="banner-dark-effect">
                 <div class="banner-cinematic"></div>
+            </div>
+            <div class="video-typewriter-container">
+                <div class="video-typewriter-text" id="typewriterText"></div>
             </div>
         </div>
     </section>
@@ -1641,6 +1717,56 @@ document.querySelectorAll('a[href="#merch"]').forEach(function(link) {
         }
     });
 });
+</script>
+
+
+<!-- 视频区域打字机效果 -->
+<script>
+(function() {
+    const text = `The NONAME is a Chinese punk rock institution with nearly 30 years of history. Here comes a blast of the hottest punk rock import from the Far East—straight from Xi'an, China! Masterminded by vocalist and band head honcho Ray, who is sick and tired of the ruling order, he finds his kind of freedom in music by starting his own revolution against all false hope in the world. Furthermore, these maniacs show their tough attitude straight to people's faces and fight against all limits. Their music can be described as a mix between pure 1980s punk rock and straight hardcore, with heavy guitars, groovy bass lines, and powerful vocals. THE NONAME creates a wall of sound to scream along with; this music is the kind of revolution Ray wanted and hoped would never stop inspiring.`;
+    const element = document.getElementById('typewriterText');
+    let index = 0;
+    let isTyping = false;
+
+    function typeWriter() {
+        if (!element) return;
+        if (index < text.length) {
+            element.innerHTML += text.charAt(index);
+            index++;
+            // 根据字符类型调整打字速度
+            let speed = 30; // 默认速度
+            const char = text.charAt(index - 1);
+            if (char === '.' || char === '!' || char === '?') {
+                speed = 400; // 句子结束停顿
+            } else if (char === ',' || char === ';') {
+                speed = 200; // 逗号停顿
+            } else if (char === ' ') {
+                speed = 50; // 空格稍快
+            }
+            setTimeout(typeWriter, speed);
+        } else {
+            isTyping = false;
+            // 打字完成后，3秒后开始闪烁光标，然后隐藏
+            setTimeout(function() {
+                if (element) element.style.borderRight = 'none';
+            }, 3000);
+        }
+    }
+
+    // 页面加载后开始打字
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(typeWriter, 500);
+        });
+    } else {
+        setTimeout(typeWriter, 500);
+    }
+
+    // 每次刷新都重新打字（通过清空内容）
+    if (element) {
+        element.innerHTML = '';
+    }
+})();
 </script>
 </body>
 </html>

@@ -32,7 +32,7 @@
         .navbar.visible { top: 0; }
         .navbar::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, transparent, var(--logo-red), transparent); animation: lineScan 3s linear infinite; }
         .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: center; align-items: center; padding: 0 30px; position: relative; }
-        .nav-dragon { width: 40px; height: 40px; cursor: pointer; transition: all 0.2s; filter: grayscale(100%) brightness(0.8); object-fit: cover; }
+        .nav-dragon { width: 40px; height: 40px; cursor: pointer; transition: all 0.2s; filter: grayscale(100%) brightness(0.8); object-fit: contain; }
         .nav-dragon:hover { filter: grayscale(0%) brightness(1.2) drop-shadow(0 0 10px var(--logo-red)); transform: scale(1.1); }
         .nav-dragon-left { margin-right: 40px; }
         .nav-dragon-right { margin-left: 40px; }
@@ -182,8 +182,8 @@
         .merch-item { position: relative; aspect-ratio: 1; background: #111; cursor: pointer; transition: all 0.3s; overflow: hidden; display: flex; align-items: center; justify-content: center; }
         .merch-item:hover { transform: translateY(-10px); box-shadow: 0 20px 60px rgba(220, 38, 38, 0.3); }
         .merch-img-wrap { position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; padding: 20px; }
-        .merch-img { max-width: 100%; max-height: 100%; object-fit: cover; transition: all 0.4s; }
-        .merch-img-hover { position: absolute; max-width: 100%; max-height: 100%; object-fit: cover; opacity: 0; transition: all 0.4s; padding: 20px; }
+        .merch-img { max-width: 100%; max-height: 100%; object-fit: contain; transition: all 0.4s; }
+        .merch-img-hover { position: absolute; max-width: 100%; max-height: 100%; object-fit: contain; opacity: 0; transition: all 0.4s; padding: 20px; }
         .merch-item.single-img:hover .merch-img { transform: scale(1.1); }
         .merch-item.dual-img:hover .merch-img { opacity: 0; }
         .merch-item.dual-img:hover .merch-img-hover { opacity: 1; }
@@ -283,7 +283,7 @@
             .nav-dragon-left { margin-right: 8px; }
             .nav-dragon-right { margin-left: 8px; }
 
-            /* HERO - 竖屏适配 */
+            /* HERO - 竖屏适配关键修复 */
             .hero-logo-img { width: 85vw; max-width: 450px; }
             .hero-content { bottom: 3vh; }
 

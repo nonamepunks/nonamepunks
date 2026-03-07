@@ -939,9 +939,10 @@
 
 /* 视频区域优化 */
 .video-banner {
-    min-height: 400px;
+    aspect-ratio: 1280 / 672;
     background: #000;
     position: relative;
+    overflow: hidden;
 }
 
 #bannerVideo {
@@ -1113,7 +1114,7 @@
 
     <div class="silver-line"></div>
     <section class="banner-section video-banner-section" id="banner3">
-        <div class="banner reveal video-banner" style="position: relative;">
+        <div class="banner reveal video-banner" style="position: relative; aspect-ratio: 1280/672; overflow: hidden;">
             <!-- 视频背景 -->
             <video id="bannerVideo" 
                 autoplay 

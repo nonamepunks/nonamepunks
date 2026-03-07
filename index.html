@@ -342,33 +342,25 @@
                 padding: 0 15px;
             }
             .hero-logo-img {
-                width: 65%;
-                max-width: 260px;
+                width: 75%;
+                max-width: 300px;
                 height: auto;
                 filter: drop-shadow(0 0 15px rgba(220, 38, 38, 0.6)) drop-shadow(0 0 30px rgba(220, 38, 38, 0.4));
             }
 
-            /* 电脑竖屏 - logo小很多 (高度明显大于宽度) */
+            /* 电脑竖屏 - logo小到2/3 */
             @media (max-width: 768px) and (orientation: portrait) and (min-aspect-ratio: 1/2) {
                 .hero-logo-img {
-                    width: 45%;
-                    max-width: 160px;
-                }
-            }
-
-            /* 手机竖屏 - 常规大小 */
-            @media (max-width: 768px) and (orientation: portrait) and (max-aspect-ratio: 1/2) {
-                .hero-logo-img {
-                    width: 60%;
-                    max-width: 220px;
+                    width: 50%;
+                    max-width: 200px;
                 }
             }
 
             /* 超小屏幕 */
             @media (max-width: 380px) {
                 .hero-logo-img {
-                    width: 55%;
-                    max-width: 200px;
+                    width: 70%;
+                    max-width: 280px;
                 }
             }
 

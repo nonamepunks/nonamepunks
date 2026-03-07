@@ -361,8 +361,8 @@
                 padding: 0 15px;
             }
             .hero-logo-img {
-                width: 75%;
-                max-width: 320px;
+                width: 65%;
+                max-width: 260px;
                 height: auto;
             }
             /* 移动端保留红光效果，但稍微减弱 */
@@ -398,11 +398,59 @@
             .member-role { font-size: 12px; }
 
             /* TOUR */
-            .tour-item { flex-direction: column; gap: 8px; text-align: center; padding: 10px 15px; }
-            .tour-date-col, .tour-city-col, .tour-venue-col, .tour-country-col { text-align: center; width: 100%; min-width: auto; }
-            .tour-btn-col { text-align: center; min-width: auto; }
-            .tour-section { padding-top: 30px; } 
-            .section-title { font-size: 36px; letter-spacing: 8px; margin-bottom: 30px; }
+            .tour-item { 
+                flex-direction: row; 
+                flex-wrap: nowrap;
+                gap: 6px; 
+                text-align: center; 
+                padding: 6px 10px; 
+                margin-bottom: 2px;
+                font-size: 11px;
+            }
+            .tour-date-col { 
+                text-align: left; 
+                min-width: 70px; 
+                font-size: 10px;
+                flex-shrink: 0;
+            }
+            .tour-city-col { 
+                text-align: center; 
+                flex: 1;
+                font-size: 11px;
+                min-width: 0;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .tour-venue-col { 
+                text-align: center; 
+                flex: 1.2;
+                font-size: 10px;
+                min-width: 0;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .tour-country-col { 
+                text-align: center; 
+                min-width: 45px;
+                font-size: 10px;
+                flex-shrink: 0;
+            }
+            .tour-btn-col { 
+                text-align: right; 
+                min-width: 60px;
+                flex-shrink: 0;
+            }
+            .tour-btn {
+                padding: 4px 8px;
+                font-size: 9px;
+                min-height: 24px;
+                min-width: 50px;
+                letter-spacing: 1px;
+            }
+            .tour-section { padding-top: 20px; } 
+            .section-title { font-size: 32px; letter-spacing: 6px; margin-bottom: 20px; }
 
             /* MUSIC */
             .album-cover { width: 260px; height: 260px; } 
@@ -424,7 +472,7 @@
         }
 
         @media (max-width: 380px) {
-            .hero-logo-img { width: 70%; max-width: 280px; }
+            .hero-logo-img { width: 60%; max-width: 220px; }
             .footer-nav-container .nav-dragon { display: block; width: 20px; height: 20px; }
         }
 

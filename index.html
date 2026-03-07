@@ -380,16 +380,47 @@
         .hero-noise, .hero-scanlines, .banner-grain, .banner-scanlines-dark { display: none !important; }
         .silver-line::after { animation: none; }
 
-        /* 移动端 hero 图片完整显示，不重复 */
-        .hero-bg { 
-            background-size: contain !important; 
-            background-repeat: no-repeat !important;
-            background-position: center top !important;
+        /* ===== 移动端 Hero 强制重写 ===== */
+        .hero { 
+            background: #000 !important;
+            height: 100vh !important;
+            min-height: 500px !important;
+            position: relative !important;
         }
-        /* 移动端 logo 适配 */
+
+        /* 背景图 - 放大填满 */
+        .hero-bg { 
+            background-image: url('./image/hero1.webp') !important;
+            background-size: 140% auto !important;
+            background-repeat: no-repeat !important;
+            background-position: center 0 !important;
+            position: absolute !important;
+            top: 0 !important;
+            left: -20% !important;
+            width: 140% !important;
+            height: 80% !important;
+        }
+
+        /* 隐藏特效 */
+        .hero-chromatic, .hero-noise, .hero-scanlines, .hero-vignette { 
+            display: none !important; 
+        }
+
+        /* Logo 容器 */
+        .hero-content {
+            position: absolute !important;
+            bottom: 3% !important;
+            left: 0 !important;
+            width: 100% !important;
+            text-align: center !important;
+            z-index: 10 !important;
+        }
+
+        /* Logo - 小尺寸 */
         .hero-logo-img {
-            max-width: 90vw !important;
-            width: 90vw !important;
+            width: 40vw !important;
+            max-width: 160px !important;
+            height: auto !important;
         }
 
         /* 顶部导航栏 */

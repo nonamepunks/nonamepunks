@@ -5,22 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>The Noname無名 - Official</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        /* HERO 全局优化 */
+        /* ===== HERO 区域 - 基础样式 ===== */
         .hero {
             height: 100vh;
             min-height: 100vh;
             width: 100%;
             position: relative;
             overflow: hidden;
+            background: #000;
         }
-
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
         .hero-bg img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             object-position: center center;
+        }
+        .hero-vignette {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, transparent 0%, transparent 50%, rgba(0,0,0,0.7) 100%);
+            z-index: 4;
+            pointer-events: none;
         }
         .hero-content {
             position: absolute;
@@ -38,7 +54,16 @@
             height: auto;
             max-height: 50vh;
             object-fit: contain;
+            opacity: 0;
         }
+        .hero-logo-img.active {
+            animation: logoFadeIn 1.5s ease-out forwards, logoGlow 3s ease-in-out infinite 1.5s;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* HERO 全局优化 */
+
         :root { --logo-red: #DC2626; --blood-red: #B91C1C; --deep-red: #7F1D1D; --black: #000000; --white: #FFFFFF; --silver: #C0C0C0; --dark-gray: #1a1a1a; }
         body {
             background-color: #000;
@@ -74,59 +99,6 @@
         .nav-links a:hover { color: var(--logo-red); text-shadow: 0 0 10px var(--logo-red), 0 0 20px var(--logo-red), 0 0 30px var(--logo-red); transform: skewX(-5deg); }
 
         /* ===== HERO 区域 - 桌面端 ===== */
-
-        /* 桌面端竖屏支持 */
-        @media screen and (min-width: 769px) and (orientation: portrait) {
-            .hero {
-                height: 100vh !important;
-                min-height: 100vh !important;
-            }
-            .hero-bg {
-                position: absolute !important;
-                top: 0 !important;
-                left: 0 !important;
-                width: 100% !important;
-                height: 100% !important;
-            }
-            .hero-bg img {
-                width: 100% !important;
-                height: 100% !important;
-                object-fit: cover !important;
-                object-position: center center !important;
-            }
-            .hero-content {
-                position: absolute !important;
-                bottom: 10% !important;
-                left: 0 !important;
-                right: 0 !important;
-                z-index: 10 !important;
-                text-align: center !important;
-                width: 100% !important;
-                padding: 0 20px !important;
-            }
-            .hero-logo-img {
-                width: 80vw !important;
-                max-width: 700px !important;
-                height: auto !important;
-                max-height: 40vh !important;
-                object-fit: contain !important;
-            }
-        }
-
-        .hero-logo-img.active {
-            animation: logoFadeIn 1.5s ease-out forwards, logoGlow 3s ease-in-out infinite 1.5s;
-        }
-
-        .hero-vignette {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(ellipse at center, transparent 0%, transparent 50%, rgba(0,0,0,0.7) 100%);
-            z-index: 4;
-            pointer-events: none;
-        }
 
         /* ===== 其他区域样式 ===== */
         .banner-section { width: 100%; background: url('./image/blackbg.webp') repeat-y center top; background-size: 100% auto; position: relative; }
@@ -359,23 +331,6 @@
         }
 
             /* 强制全屏 */
-            .hero {
-                height: 100vh !important;
-                min-height: 100vh !important;
-            }
-            .hero-bg {
-                position: absolute !important;
-                top: 0 !important;
-                left: 0 !important;
-                width: 100% !important;
-                height: 100% !important;
-            }
-            .hero-bg img {
-                width: 100% !important;
-                height: 100% !important;
-                object-fit: cover !important;
-                object-position: center !important;
-            }
 
             /* 导航栏 */
             .nav-links { gap: 5px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding: 0 10px; justify-content: space-around; }
@@ -386,27 +341,6 @@
             .nav-dragon-right { margin-left: 8px; }
 
             /* HERO - 竖屏适配关键修复 */
-            .hero-logo-img {
-                width: 90vw !important;
-                max-width: 500px !important;
-                height: auto !important;
-                max-height: 45vh !important;
-                object-fit: contain !important;
-            }
-            .hero-content {
-                position: absolute !important;
-                bottom: 5% !important;
-                left: 0 !important;
-                right: 0 !important;
-                z-index: 100 !important;
-                text-align: center !important;
-                width: 100% !important;
-                padding: 0 20px !important;
-                pointer-events: none !important;
-            }
-            .hero-content img {
-                pointer-events: auto !important;
-            }
 
             /* 彻底禁用爆闪动画 */
             .reveal, .reveal.active, .reveal-logo, .reveal-logo.active {
@@ -417,27 +351,6 @@
             }
 
             /* 强制图片填满屏幕 */
-            .hero {
-                height: 100vh !important;
-                min-height: 100vh !important;
-                width: 100% !important;
-                position: relative !important;
-                overflow: hidden !important;
-            }
-            .hero-bg {
-                position: absolute !important;
-                top: 0 !important;
-                left: 0 !important;
-                width: 100% !important;
-                height: 100% !important;
-                z-index: 1 !important;
-            }
-            .hero-bg img {
-                width: 100% !important;
-                height: 100% !important;
-                object-fit: cover !important;
-                object-position: center top !important;
-            }
 
             /* MEMBERS */
             .members-grid { grid-template-columns: 1fr 1fr; gap: 15px; max-width: 100%; }
@@ -491,6 +404,59 @@
         }
         .video-player img {
             -webkit-user-drag: none;
+        }
+
+        /* ===== 桌面端竖屏 ===== */
+        @media screen and (min-width: 769px) and (orientation: portrait) {
+            .hero {
+                height: 100vh !important;
+                min-height: 100vh !important;
+            }
+            .hero-bg img {
+                object-fit: cover !important;
+                object-position: center center !important;
+            }
+            .hero-logo-img {
+                width: 80vw !important;
+                max-width: 700px !important;
+                max-height: 40vh !important;
+            }
+        }
+
+        /* ===== 平板和手机端 ===== */
+        @media (max-width: 768px) {
+            .hero {
+                height: 100vh !important;
+                min-height: 100vh !important;
+            }
+            .hero-bg img {
+                object-fit: cover !important;
+                object-position: center center !important;
+            }
+            .hero-content {
+                bottom: 10% !important;
+            }
+            .hero-logo-img {
+                width: 92vw !important;
+                max-width: 500px !important;
+                max-height: 45vh !important;
+            }
+            /* 禁用爆闪动画 */
+            .reveal, .reveal.active, .reveal-logo, .reveal-logo.active {
+                opacity: 1 !important;
+                animation: none !important;
+                transform: none !important;
+                filter: none !important;
+            }
+        }
+
+        /* ===== 超小屏幕 ===== */
+        @media (max-width: 380px) {
+            .hero-logo-img {
+                width: 90vw !important;
+                max-width: 350px !important;
+                max-height: 40vh !important;
+            }
         }
 </style>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>

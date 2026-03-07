@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>The Noname無名 - Official</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -27,6 +27,7 @@
         .reveal-logo { opacity: 0; }
         .reveal-logo.active { animation: logoFadeIn 1.5s ease-out forwards; }
 
+        /* ===== 导航栏 ===== */
         .navbar { position: fixed; top: -100px; left: 0; width: 100%; background: rgba(0,0,0,0.95); border-bottom: 3px solid var(--logo-red); z-index: 1000; padding: 4px 0; transition: top 0.3s steps(3); }
         .navbar.visible { top: 0; }
         .navbar::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, transparent, var(--logo-red), transparent); animation: lineScan 3s linear infinite; }
@@ -39,7 +40,7 @@
         .nav-links a { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; color: var(--white); text-decoration: none; font-size: 18px; letter-spacing: 4px; text-transform: uppercase; position: relative; transition: all 0.1s; padding: 10px 0; }
         .nav-links a:hover { color: var(--logo-red); text-shadow: 0 0 10px var(--logo-red), 0 0 20px var(--logo-red), 0 0 30px var(--logo-red); transform: skewX(-5deg); }
 
-        /* ===== HERO 区域 - 基础定义（仅一次） ===== */
+        /* ===== HERO 区域 - 桌面端 ===== */
         .hero { 
             height: 100vh; 
             width: 100%;
@@ -58,18 +59,21 @@
             left: 0; 
             width: 100%; 
             height: 100%; 
-            background-image: url('./image/hero1.webp');
-            background-size: cover;
-            background-position: center top;
-            background-repeat: no-repeat;
             z-index: 1; 
+        }
+
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
         }
 
         .hero-content { 
             position: relative; 
             z-index: 10; 
             text-align: center; 
-            margin-bottom: 5vh;
+            margin-bottom: 2vh;
             width: 100%;
         }
 
@@ -95,6 +99,7 @@
             pointer-events: none; 
         }
 
+        /* ===== 其他区域样式 ===== */
         .banner-section { width: 100%; background: url('./image/blackbg.webp') repeat-y center top; background-size: 100% auto; position: relative; }
         .video-banner { overflow: hidden; margin-bottom: 0; }
         .video-banner video { display: block; }
@@ -128,101 +133,18 @@
         .member-role { font-family: 'Arial Black', Arial, sans-serif; font-size: 14px; color: var(--silver); letter-spacing: 2px; }
 
         /* TOUR DATES */
-        .tour-section { 
-            width: 100%; 
-            background: url('./image/dragonbg.webp'); 
-            background-position: center top;
-            background-repeat: repeat-y;
-            background-size: 100% auto;
-            position: relative; 
-            overflow: hidden; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: flex-start; 
-            align-items: center; 
-            padding: 40px 0;
-            min-height: 100vh;
-        }
-        .tour-section::before { 
-            content: ''; 
-            position: absolute; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            background: linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 30%, rgba(0,0,0,0.5) 70%, rgba(0,0,0,0.85) 100%); 
-            z-index: 1; 
-        }
-        .tour-content { 
-            position: relative; 
-            z-index: 10; 
-            width: 100%; 
-            max-width: 1280px; 
-            padding: 0 40px; 
-            margin-top: 10px; 
-            flex: 1;
-        }
-        .tour-list { 
-            width: 100%;
-            overflow-y: visible;
-            padding-right: 0;
-        }
-        .tour-item { 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            padding: 8px 20px;
-            border-bottom: 1px solid rgba(220, 38, 38, 0.3); 
-            font-family: 'Arial Black', Arial, sans-serif; 
-            font-size: 13px; 
-            letter-spacing: 1px; 
-            transition: all 0.2s; 
-            background: rgba(0,0,0,0.5); 
-            margin-bottom: 4px;
-            gap: 20px;
-            text-align: center;
-        }
-        .tour-item:hover { 
-            background: rgba(220, 38, 38, 0.15); 
-            box-shadow: inset 0 0 20px rgba(220, 38, 38, 0.2); 
-        }
+        .tour-section { width: 100%; background: url('./image/dragonbg.webp'); background-position: center top; background-repeat: repeat-y; background-size: 100% auto; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; padding: 40px 0; min-height: 100vh; }
+        .tour-section::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 30%, rgba(0,0,0,0.5) 70%, rgba(0,0,0,0.85) 100%); z-index: 1; }
+        .tour-content { position: relative; z-index: 10; width: 100%; max-width: 1280px; padding: 0 40px; margin-top: 10px; flex: 1; }
+        .tour-list { width: 100%; overflow-y: visible; padding-right: 0; }
+        .tour-item { display: flex; justify-content: center; align-items: center; padding: 8px 20px; border-bottom: 1px solid rgba(220, 38, 38, 0.3); font-family: 'Arial Black', Arial, sans-serif; font-size: 13px; letter-spacing: 1px; transition: all 0.2s; background: rgba(0,0,0,0.5); margin-bottom: 4px; gap: 20px; text-align: center; }
+        .tour-item:hover { background: rgba(220, 38, 38, 0.15); box-shadow: inset 0 0 20px rgba(220, 38, 38, 0.2); }
         .tour-item.expired { display: none !important; }
-        .tour-date-col { 
-            color: var(--logo-red); 
-            min-width: 120px; 
-            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; 
-            text-shadow: 0 0 10px rgba(220, 38, 38, 0.5); 
-            font-size: 14px;
-            text-align: left;
-        }
-        .tour-city-col { 
-            flex: 1;
-            text-align: center;
-            text-transform: uppercase;
-            color: var(--white);
-            letter-spacing: 1px;
-            font-size: 13px;
-        }
-        .tour-venue-col { 
-            flex: 1.5;
-            text-align: center;
-            text-transform: uppercase;
-            color: var(--white);
-            letter-spacing: 1px;
-            font-size: 13px;
-        }
-        .tour-country-col { 
-            flex: 0.8;
-            text-align: center;
-            text-transform: uppercase;
-            color: var(--white);
-            letter-spacing: 1px;
-            font-size: 13px;
-        }
-        .tour-btn-col { 
-            min-width: 100px;
-            text-align: right;
-        }
+        .tour-date-col { color: var(--logo-red); min-width: 120px; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; text-shadow: 0 0 10px rgba(220, 38, 38, 0.5); font-size: 14px; text-align: left; }
+        .tour-city-col { flex: 1; text-align: center; text-transform: uppercase; color: var(--white); letter-spacing: 1px; font-size: 13px; }
+        .tour-venue-col { flex: 1.5; text-align: center; text-transform: uppercase; color: var(--white); letter-spacing: 1px; font-size: 13px; }
+        .tour-country-col { flex: 0.8; text-align: center; text-transform: uppercase; color: var(--white); letter-spacing: 1px; font-size: 13px; }
+        .tour-btn-col { min-width: 100px; text-align: right; }
 
         @keyframes pulse { 0%, 100% { opacity: 1; box-shadow: 0 0 10px rgba(220, 38, 38, 0.3); } 50% { opacity: 0.8; box-shadow: 0 0 20px rgba(220, 38, 38, 0.5); } }
 
@@ -270,33 +192,9 @@
         .merch-btn-container { text-align: center; }
 
         /* FOOTER */
-        .footer-section { 
-            width: 100%; 
-            background: #000 url('./image/blackbg.webp') repeat-y center top; 
-            position: relative; 
-            padding: 60px 0 0 0;
-            background-size: 100% auto;
-        }
-        .footer-section::before { 
-            content: ''; 
-            position: absolute; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            background: rgba(0,0,0,0.9); 
-            z-index: 1; 
-        }
-        .footer-main { 
-            position: relative; 
-            z-index: 10; 
-            max-width: 1400px; 
-            margin: 0 auto; 
-            padding: 40px; 
-            display: grid; 
-            grid-template-columns: 1fr 1.2fr 1fr; 
-            gap: 40px; 
-        }
+        .footer-section { width: 100%; background: #000 url('./image/blackbg.webp') repeat-y center top; position: relative; padding: 60px 0 0 0; background-size: 100% auto; }
+        .footer-section::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1; }
+        .footer-main { position: relative; z-index: 10; max-width: 1400px; margin: 0 auto; padding: 40px; display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 40px; }
         .footer-left { display: flex; flex-direction: column; gap: 15px; }
         .footer-dropdown { border: 1px solid rgba(220, 38, 38, 0.3); background: rgba(0,0,0,0.5); }
         .dropdown-header { padding: 12px 20px; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-size: 14px; letter-spacing: 3px; color: var(--white); cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: all 0.3s; text-transform: uppercase; }
@@ -368,7 +266,7 @@
             .merch-grid { grid-template-columns: repeat(2, 1fr); } 
             .nav-links { gap: 25px; } 
             .nav-links a { font-size: 14px; letter-spacing: 2px; } 
-            .hero-logo-img { max-width: 500px; } 
+            .hero-logo-img { max-width: 550px; } 
             .album-cover { width: 300px; height: 300px; } 
             .album-title { font-size: 36px; letter-spacing: 6px; } 
         }
@@ -383,9 +281,9 @@
             .nav-dragon-left { margin-right: 8px; }
             .nav-dragon-right { margin-left: 8px; }
 
-            /* HERO - 竖屏适配 */
-            .hero-logo-img { width: 70vw; max-width: 300px; }
-            .hero-content { margin-bottom: 8vh; }
+            /* HERO - 竖屏适配关键修复 */
+            .hero-logo-img { width: 85vw; max-width: 450px; }
+            .hero-content { margin-bottom: 2vh; }
 
             /* MEMBERS */
             .members-grid { grid-template-columns: 1fr 1fr; gap: 15px; max-width: 100%; }
@@ -409,19 +307,21 @@
             .banner-btn { padding: 8px 25px; font-size: 14px; bottom: 30px; } 
             .banner-btn-right { right: 20px; } 
 
-            /* FOOTER */
+            /* FOOTER - 确保龙图案显示 */
             .footer-main { padding: 30px 20px; } 
             .subscribe-form { flex-direction: column; align-items: center; } 
             .subscribe-input { width: 100%; max-width: 280px; } 
             .footer-nav-container { flex-wrap: nowrap; gap: 8px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 0 10px; justify-content: space-between; }
             .footer-nav-container::-webkit-scrollbar { display: none; }
             .footer-nav a { font-size: 10px; white-space: nowrap; letter-spacing: 0.5px; padding: 5px 2px; flex-shrink: 0; }
+            /* 底部导航栏龙图案强制显示 */
+            .footer-nav-container .nav-dragon { display: block !important; width: 25px; height: 25px; }
         }
 
         /* 380px以下 - 超小屏幕 */
         @media (max-width: 380px) {
-            .footer-nav-container .nav-dragon { display: none; }
-            .hero-logo-img { width: 75vw; max-width: 260px; }
+            .hero-logo-img { width: 90vw; max-width: 400px; }
+            .footer-nav-container .nav-dragon { display: block !important; width: 20px; height: 20px; }
         }
 
         ::-webkit-scrollbar { width: 10px; }
@@ -453,7 +353,9 @@
     </nav>
 
     <section class="hero" id="hero">
-        <div class="hero-bg"></div>
+        <div class="hero-bg">
+            <img src="./image/hero1.webp" alt="Hero Background">
+        </div>
         <div class="hero-vignette"></div>
         <div class="hero-content">
             <img src="./image/logocn.png" alt="NONAME LOGO" class="hero-logo-img reveal-logo">
@@ -461,8 +363,7 @@
     </section>
 
     <div class="silver-line"></div>
-
-    <section class="banner-section" id="banner1">
+<section class="banner-section" id="banner1">
         <div class="banner reveal">
             <img src="./image/banner1.webp" alt="Banner 1">
             <div class="banner-dark-effect">

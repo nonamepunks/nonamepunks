@@ -988,6 +988,188 @@
     background: url('./image/banner3-fallback.webp') center/cover no-repeat, #000;
     z-index: 0;
 }
+
+/* ===== MERCH 弹出大图样式 ===== */
+.merch-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.merch-popup-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.merch-popup-content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: default;
+}
+
+.merch-popup-images {
+    position: relative;
+    width: 600px;
+    height: 600px;
+    max-width: 80vw;
+    max-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.merch-popup-img {
+    position: absolute;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    cursor: pointer;
+}
+
+.merch-popup-img.active {
+    opacity: 1;
+}
+
+.merch-popup-info {
+    margin-top: 30px;
+    text-align: center;
+    color: var(--white);
+}
+
+.merch-popup-name {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 28px;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.merch-popup-category {
+    font-family: 'Arial Black', Arial, sans-serif;
+    font-size: 16px;
+    color: var(--silver);
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.merch-popup-price {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 24px;
+    color: var(--logo-red);
+    letter-spacing: 2px;
+}
+
+.merch-popup-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: rgba(220, 38, 38, 0.8);
+    border: 2px solid var(--logo-red);
+    color: var(--white);
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    z-index: 10;
+}
+
+.merch-popup-nav:hover {
+    background: var(--logo-red);
+    box-shadow: 0 0 30px rgba(220, 38, 38, 0.8);
+}
+
+.merch-popup-prev { left: -70px; }
+.merch-popup-next { right: -70px; }
+
+.merch-popup-dots {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.merch-popup-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.merch-popup-dot.active {
+    background: var(--logo-red);
+    box-shadow: 0 0 10px var(--logo-red);
+}
+
+.merch-popup-close {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: 2px solid var(--logo-red);
+    color: var(--white);
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.merch-popup-close:hover {
+    background: var(--logo-red);
+    transform: rotate(90deg);
+}
+
+/* 单图时不显示导航 */
+.merch-popup-images.single-image .merch-popup-nav,
+.merch-popup-images.single-image .merch-popup-dots {
+    display: none;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .merch-popup-images {
+        width: 85vw;
+        height: 50vh;
+    }
+    .merch-popup-name {
+        font-size: 20px;
+    }
+    .merch-popup-nav {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+    .merch-popup-prev { left: -50px; }
+    .merch-popup-next { right: -50px; }
+}
 </style>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
@@ -1217,7 +1399,7 @@
             <button class="merch-nav-btn merch-prev-btn" onclick="scrollMerch(-1)">&#10094;</button>
             <div class="merch-carousel">
                 <div class="merch-track">
-<div class="merch-item reveal dual-img">
+<div class="merch-item reveal dual-img" data-img1="./image/merchs/Anti-teeb1.png" data-img2="./image/merchs/Anti-teeb2.png" data-name="Anti-" data-category="Tee" data-price="$25.9" onclick="openMerchPopup(this)">
                         <div class="merch-img-wrap">
                             <img loading="lazy" src="./image/merchs/Anti-teeb1.png" alt="Anti-" class="merch-img">
                             <img loading="lazy" src="./image/merchs/Anti-teeb2.png" alt="Anti- Back" class="merch-img-hover">
@@ -1228,7 +1410,7 @@
                             <div class="merch-price">$25.9</div>
                         </div>
                     </div>
-<div class="merch-item reveal">
+<div class="merch-item reveal" data-img1="./image/merchs/DevilSukll-teeb1.png" data-img2="" data-name="Devil Skull" data-category="Tee" data-price="$22.9" onclick="openMerchPopup(this)">
                         <div class="merch-img-wrap">
                             <img loading="lazy" src="./image/merchs/DevilSukll-teeb1.png" alt="Devil Skull" class="merch-img">
 
@@ -1239,7 +1421,7 @@
                             <div class="merch-price">$22.9</div>
                         </div>
                     </div>
-<div class="merch-item reveal dual-img">
+<div class="merch-item reveal dual-img" data-img1="./image/merchs/WNTT-tee1.png" data-img2="./image/merchs/WNTT-tee2.png" data-name="We Need The Truth" data-category="Tee" data-price="$25.9" onclick="openMerchPopup(this)">
                         <div class="merch-img-wrap">
                             <img loading="lazy" src="./image/merchs/WNTT-tee1.png" alt="We Need The Truth" class="merch-img">
                             <img loading="lazy" src="./image/merchs/WNTT-tee2.png" alt="We Need The Truth Back" class="merch-img-hover">
@@ -1250,7 +1432,7 @@
                             <div class="merch-price">$25.9</div>
                         </div>
                     </div>
-<div class="merch-item reveal">
+<div class="merch-item reveal" data-img1="./image/merchs/cdg-ls1.png" data-img2="" data-name="Coup De Grace" data-category="Sweatshirt" data-price="$35.9" onclick="openMerchPopup(this)">
                         <div class="merch-img-wrap">
                             <img loading="lazy" src="./image/merchs/cdg-ls1.png" alt="Coup De Grace" class="merch-img">
 
@@ -1261,7 +1443,7 @@
                             <div class="merch-price">$35.9</div>
                         </div>
                     </div>
-<div class="merch-item reveal">
+<div class="merch-item reveal" data-img1="./image/merchs/Button1.png" data-img2="" data-name="CN Logo" data-category="Botton" data-price="$12.9" onclick="openMerchPopup(this)">
                         <div class="merch-img-wrap">
                             <img loading="lazy" src="./image/merchs/Button1.png" alt="CN Logo" class="merch-img">
 
@@ -1272,7 +1454,7 @@
                             <div class="merch-price">$12.9</div>
                         </div>
                     </div>
-<div class="merch-item reveal dual-img">
+<div class="merch-item reveal dual-img" data-img1="./image/merchs/fb-h1a.png" data-img2="./image/merchs/fb-h1b.png" data-name="Fortress Besieged" data-category="Hoodies" data-price="$39.9" onclick="openMerchPopup(this)">
                         <div class="merch-img-wrap">
                             <img loading="lazy" src="./image/merchs/fb-h1a.png" alt="Fortress Besieged" class="merch-img">
                             <img loading="lazy" src="./image/merchs/fb-h1b.png" alt="Fortress Besieged Back" class="merch-img-hover">
@@ -1283,7 +1465,7 @@
                             <div class="merch-price">$39.9</div>
                         </div>
                     </div>
-<div class="merch-item reveal">
+<div class="merch-item reveal" data-img1="./image/merchs/logo-cap1.png" data-img2="" data-name="Anti-" data-category="Cap" data-price="$12.9" onclick="openMerchPopup(this)">
                         <div class="merch-img-wrap">
                             <img loading="lazy" src="./image/merchs/logo-cap1.png" alt="Anti-" class="merch-img">
 
@@ -1294,7 +1476,7 @@
                             <div class="merch-price">$12.9</div>
                         </div>
                     </div>
-<div class="merch-item reveal">
+<div class="merch-item reveal" data-img1="./image/merchs/fb-vinylb.png" data-img2="" data-name="Fortress Besieged" data-category="Vinyl" data-price="$29.9" onclick="openMerchPopup(this)">
                         <div class="merch-img-wrap">
                             <img loading="lazy" src="./image/merchs/fb-vinylb.png" alt="Fortress Besieged" class="merch-img">
 
@@ -1305,7 +1487,7 @@
                             <div class="merch-price">$29.9</div>
                         </div>
                     </div>
-<div class="merch-item reveal">
+<div class="merch-item reveal" data-img1="./image/merchs/Anarchy-tee.png" data-img2="" data-name="Anarchy" data-category="Tee" data-price="$22.9" onclick="openMerchPopup(this)">
                         <div class="merch-img-wrap">
                             <img loading="lazy" src="./image/merchs/Anarchy-tee.png" alt="Anarchy" class="merch-img">
                         </div>
@@ -1315,7 +1497,7 @@
                             <div class="merch-price">$22.9</div>
                         </div>
                     </div>
-                    <div class="merch-item reveal dual-img">
+                    <div class="merch-item reveal dual-img" data-img1="./image/merchs/Anti-teeb1.png" data-img2="./image/merchs/Anti-teeb2.png" data-name="Anti- Limited" data-category="Tee" data-price="$29.9" onclick="openMerchPopup(this)">
                         <div class="merch-img-wrap">
                             <img loading="lazy" src="./image/merchs/Anti-teeb1.png" alt="Anti- Limited" class="merch-img">
                             <img loading="lazy" src="./image/merchs/Anti-teeb2.png" alt="Anti- Limited Back" class="merch-img-hover">
@@ -1326,7 +1508,7 @@
                             <div class="merch-price">$29.9</div>
                         </div>
                     </div>
-                    <div class="merch-item reveal">
+                    <div class="merch-item reveal" data-img1="./image/merchs/DevilSukll-teeb1.png" data-img2="" data-name="Devil Skull V2" data-category="Tee" data-price="$24.9" onclick="openMerchPopup(this)">
                         <div class="merch-img-wrap">
                             <img loading="lazy" src="./image/merchs/DevilSukll-teeb1.png" alt="Devil Skull V2" class="merch-img">
                         </div>
@@ -1336,7 +1518,7 @@
                             <div class="merch-price">$24.9</div>
                         </div>
                     </div>
-                    <div class="merch-item reveal dual-img">
+                    <div class="merch-item reveal dual-img" data-img1="./image/merchs/fb-h1a.png" data-img2="./image/merchs/fb-h1b.png" data-name="Fortress Besieged V2" data-category="Hoodies" data-price="$42.9" onclick="openMerchPopup(this)">
                         <div class="merch-img-wrap">
                             <img loading="lazy" src="./image/merchs/fb-h1a.png" alt="Fortress Besieged V2" class="merch-img">
                             <img loading="lazy" src="./image/merchs/fb-h1b.png" alt="Fortress Besieged V2 Back" class="merch-img-hover">
@@ -1840,6 +2022,226 @@ document.addEventListener('keydown', function(e) {
 });
 </script>
 
+
+<script>
+// MERCH 弹出大图功能
+let merchPopupInterval = null;
+let merchCurrentImage = 0;
+let merchTotalImages = 1;
+
+function openMerchPopup(element) {
+    const img1 = element.getAttribute('data-img1');
+    const img2 = element.getAttribute('data-img2');
+    const name = element.getAttribute('data-name');
+    const category = element.getAttribute('data-category');
+    const price = element.getAttribute('data-price');
+
+    const popup = document.getElementById('merchPopup');
+    const img1El = document.getElementById('merchPopupImg1');
+    const img2El = document.getElementById('merchPopupImg2');
+    const imagesContainer = document.getElementById('merchPopupImages');
+    const dotsContainer = document.getElementById('merchPopupDots');
+
+    // 设置图片
+    img1El.src = img1;
+    img1El.classList.add('active');
+
+    if (img2) {
+        img2El.src = img2;
+        img2El.classList.remove('active');
+        imagesContainer.classList.remove('single-image');
+        merchTotalImages = 2;
+
+        // 创建指示点
+        dotsContainer.innerHTML = '<div class="merch-popup-dot active" onclick="goToMerchImage(0)"></div><div class="merch-popup-dot" onclick="goToMerchImage(1)"></div>';
+
+        // 启动自动轮播
+        startMerchAutoSlide();
+    } else {
+        img2El.src = '';
+        imagesContainer.classList.add('single-image');
+        merchTotalImages = 1;
+        dotsContainer.innerHTML = '';
+    }
+
+    // 设置信息
+    document.getElementById('merchPopupName').textContent = name;
+    document.getElementById('merchPopupCategory').textContent = category;
+    document.getElementById('merchPopupPrice').textContent = price;
+
+    merchCurrentImage = 0;
+
+    // 显示弹出框
+    popup.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeMerchPopup(event) {
+    // 如果提供了 event，检查点击的是否是内容区域
+    if (event) {
+        const target = event.target;
+        const isContent = target.closest('.merch-popup-content') || 
+                         target.classList.contains('merch-popup-nav') ||
+                         target.classList.contains('merch-popup-dot') ||
+                         target.classList.contains('merch-popup-img');
+        if (isContent) {
+            return;
+        }
+    }
+
+    const popup = document.getElementById('merchPopup');
+    popup.classList.remove('active');
+    document.body.style.overflow = '';
+
+    // 停止自动轮播
+    stopMerchAutoSlide();
+}
+
+function switchMerchImage(direction) {
+    if (merchTotalImages <= 1) return;
+
+    merchCurrentImage = (merchCurrentImage + direction + merchTotalImages) % merchTotalImages;
+    updateMerchImageDisplay();
+
+    // 重置自动轮播计时器
+    stopMerchAutoSlide();
+    startMerchAutoSlide();
+}
+
+function goToMerchImage(index) {
+    if (merchTotalImages <= 1) return;
+
+    merchCurrentImage = index;
+    updateMerchImageDisplay();
+
+    // 重置自动轮播计时器
+    stopMerchAutoSlide();
+    startMerchAutoSlide();
+}
+
+function updateMerchImageDisplay() {
+    const img1El = document.getElementById('merchPopupImg1');
+    const img2El = document.getElementById('merchPopupImg2');
+    const dots = document.querySelectorAll('.merch-popup-dot');
+
+    if (merchCurrentImage === 0) {
+        img1El.classList.add('active');
+        img2El.classList.remove('active');
+    } else {
+        img1El.classList.remove('active');
+        img2El.classList.add('active');
+    }
+
+    // 更新指示点
+    dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === merchCurrentImage);
+    });
+}
+
+function startMerchAutoSlide() {
+    if (merchTotalImages <= 1) return;
+
+    stopMerchAutoSlide();
+    merchPopupInterval = setInterval(() => {
+        merchCurrentImage = (merchCurrentImage + 1) % merchTotalImages;
+        updateMerchImageDisplay();
+    }, 3000);
+}
+
+function stopMerchAutoSlide() {
+    if (merchPopupInterval) {
+        clearInterval(merchPopupInterval);
+        merchPopupInterval = null;
+    }
+}
+
+// 点击大图切换和触摸滑动
+function initMerchImageClick() {
+    const img1El = document.getElementById('merchPopupImg1');
+    const img2El = document.getElementById('merchPopupImg2');
+    const imagesContainer = document.getElementById('merchPopupImages');
+
+    // 点击图片切换
+    if (img1El) {
+        img1El.addEventListener('click', () => {
+            if (merchTotalImages > 1) {
+                switchMerchImage(1);
+            }
+        });
+    }
+
+    if (img2El) {
+        img2El.addEventListener('click', () => {
+            if (merchTotalImages > 1) {
+                switchMerchImage(1);
+            }
+        });
+    }
+
+    // 触摸滑动支持
+    if (imagesContainer) {
+        let touchStartX = 0;
+        let touchEndX = 0;
+        let touchStartY = 0;
+        let isSwiping = false;
+
+        imagesContainer.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
+            isSwiping = true;
+        }, { passive: true });
+
+        imagesContainer.addEventListener('touchmove', (e) => {
+            if (!isSwiping) return;
+
+            const touchX = e.changedTouches[0].screenX;
+            const touchY = e.changedTouches[0].screenY;
+            const diffX = touchStartX - touchX;
+            const diffY = touchStartY - touchY;
+
+            // 主要是水平滑动时才阻止默认行为
+            if (Math.abs(diffX) > Math.abs(diffY)) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        imagesContainer.addEventListener('touchend', (e) => {
+            if (!isSwiping) return;
+            isSwiping = false;
+
+            touchEndX = e.changedTouches[0].screenX;
+            const diffX = touchStartX - touchEndX;
+            const diffY = touchStartY - e.changedTouches[0].screenY;
+
+            // 水平滑动超过 50px 才触发切换
+            if (Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY)) {
+                if (diffX > 0) {
+                    // 左滑 - 下一张
+                    switchMerchImage(1);
+                } else {
+                    // 右滑 - 上一张
+                    switchMerchImage(-1);
+                }
+            }
+        }, { passive: true });
+    }
+}
+
+// 初始化
+document.addEventListener('DOMContentLoaded', initMerchImageClick);
+
+// ESC 键关闭
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeMerchPopup();
+    }
+});
+
+
+
+
+</script>
+
 <!-- Banner 1 平滑滚动 -->
 <script>
 document.querySelectorAll('a[href="#merch"]').forEach(function(link) {
@@ -1922,5 +2324,24 @@ document.querySelectorAll('a[href="#merch"]').forEach(function(link) {
     }
 })();
 </script>
+
+<!-- MERCH 弹出大图 -->
+<div class="merch-popup-overlay" id="merchPopup" onclick="closeMerchPopup(event)">
+    <div class="merch-popup-content" onclick="event.stopPropagation()">
+        <button class="merch-popup-close" onclick="closeMerchPopup()">&times;</button>
+        <div class="merch-popup-images" id="merchPopupImages">
+            <img src="" alt="" class="merch-popup-img" id="merchPopupImg1">
+            <img src="" alt="" class="merch-popup-img" id="merchPopupImg2">
+            <button class="merch-popup-nav merch-popup-prev" onclick="switchMerchImage(-1)">&#10094;</button>
+            <button class="merch-popup-nav merch-popup-next" onclick="switchMerchImage(1)">&#10095;</button>
+        </div>
+        <div class="merch-popup-dots" id="merchPopupDots"></div>
+        <div class="merch-popup-info">
+            <div class="merch-popup-name" id="merchPopupName"></div>
+            <div class="merch-popup-category" id="merchPopupCategory"></div>
+            <div class="merch-popup-price" id="merchPopupPrice"></div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

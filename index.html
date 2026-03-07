@@ -218,7 +218,7 @@
         .merch-carousel { position: relative; width: 100%; padding: 0 45px; margin-bottom: 60px; }
         .merch-grid { display: flex; gap: 10px; overflow-x: auto; scroll-behavior: smooth; scrollbar-width: none; padding: 20px 0; }
         .merch-grid::-webkit-scrollbar { display: none; }
-        .merch-item { flex: 0 0 calc(16.666% - 9px); min-width: calc(16.666% - 9px); aspect-ratio: 0.75; background: #111; cursor: pointer; overflow: hidden; }
+        .merch-item { flex: 0 0 calc(16.666% - 9px); min-width: calc(16.666% - 9px); aspect-ratio: 1; background: #111; cursor: pointer; overflow: hidden; }
         .merch-img-wrap { width: 100%; height: 90%; display: flex; align-items: center; justify-content: center; padding: 5px; }
         .merch-img, .merch-img-hover { max-width: 100%; max-height: 100%; object-fit: contain; }
         .merch-info { padding: 5px; text-align: center; background: rgba(0,0,0,0.8); }
@@ -245,8 +245,8 @@
             .merch-carousel { padding: 0; }
             .merch-arrow { display: none; }
             .merch-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; padding: 10px 2px; }
-            .merch-item { flex: none; min-width: auto; aspect-ratio: 0.65; }
-            .merch-img-wrap { height: 90%; padding: 2px; }
+            .merch-item { flex: none; min-width: auto; aspect-ratio: 1; }
+            .merch-img-wrap { height: 85%; padding: 2px; }
             .merch-info { padding: 3px; }
             .merch-name { font-size: 10px; }
             .merch-category { font-size: 8px; }

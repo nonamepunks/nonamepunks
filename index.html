@@ -156,7 +156,18 @@
 
         @keyframes pulse { 0%, 100% { opacity: 1; box-shadow: 0 0 10px rgba(220, 38, 38, 0.3); } 50% { opacity: 0.8; box-shadow: 0 0 20px rgba(220, 38, 38, 0.5); } }
 
-        .music-video-section { width: 100%; background: url('./image/blackbg.webp') repeat center top; background-size: 100% auto; position: relative; min-height: 100vh; }
+        .music-video-section { 
+    width: 100%; 
+    background: 
+        linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 15%, rgba(0,0,0,0.4) 85%, rgba(0,0,0,0.85) 100%),
+        url('./image/musicbg.webp'),
+        url('./image/blackbg.webp'); 
+    background-size: cover, cover, cover; 
+    background-position: center, center, center;
+    background-repeat: no-repeat, no-repeat, no-repeat;
+    position: relative; 
+    min-height: 100vh; 
+}
         .music-video-section::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 15%, rgba(0,0,0,0.4) 85%, rgba(0,0,0,0.85) 100%); z-index: 1; }
         .music-video-section::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.15) 2px, rgba(0,0,0,0.15) 4px); pointer-events: none; z-index: 2; }
         .music-section-inner { position: relative; z-index: 10; padding: 80px 40px; }
@@ -200,7 +211,15 @@
         .merch-btn-container { text-align: center; }
 
         /* FOOTER */
-        .footer-section { width: 100%; background: #000 url('./image/blackbg.webp') repeat-y center top; position: relative; padding: 60px 0 0 0; background-size: 100% auto; }
+        .footer-section { 
+    width: 100%; 
+    background: 
+        url('./image/downbg.webp') repeat-y center top,
+        url('./image/blackbg.webp') repeat-y center top; 
+    position: relative; 
+    padding: 60px 0 0 0; 
+    background-size: 100% auto, 100% auto; 
+}
         .footer-section::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1; }
         .footer-main { position: relative; z-index: 10; max-width: 1400px; margin: 0 auto; padding: 40px; display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 40px; }
         .footer-left { display: flex; flex-direction: column; gap: 15px; }
@@ -419,7 +438,7 @@
                 <li><a href="#video">VIDEO</a></li>
                 <li><a href="#merch">STORE</a></li>
                 <li><a href="#footer">Contact</a></li>
-                <li><a href="#">ANTI-IPA</a></li>
+                <li><a href="http://emanonent.wixstudio.com/livegigs/antiipa" target="_blank">ANTI-IPA</a></li>
             </ul>
             <a href="#hero" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">
                 <img src="./image/dragonR.png" alt="Dragon Right" class="nav-dragon nav-dragon-right">
@@ -597,7 +616,7 @@
                 <div class="banner-glow"></div>
                 <div class="banner-border-glow"></div>
             </div>
-            <a href="#" class="banner-btn banner-btn-center">SHOP NOW</a>
+            <a href="http://emanonent.wixstudio.com/livegigs/antiipa" target="_blank" class="banner-btn banner-btn-center">CHEERS</a>
         </div>
     </section>
 
@@ -703,7 +722,7 @@
                 <a href="#video" data-editable>VIDEO</a>
                 <a href="#merch" data-editable>STORE</a>
                 <a href="#footer" data-editable>CONTACT</a>
-                <a href="#" data-editable>ANTI-IPA</a>
+                <a href="http://emanonent.wixstudio.com/livegigs/antiipa" target="_blank" data-editable>ANTI-IPA</a>
                 <a href="#hero" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">
                     <img src="./image/dragonR.png" alt="Dragon Right" class="nav-dragon nav-dragon-right">
                 </a>
@@ -712,7 +731,7 @@
         <div class="footer-bottom">
             <div class="footer-slogan">REAL PUNK ROCK NEVER DEAD</div>
             <div class="footer-copyright">
-                <p>© 2026 Epitaph Records | <a href="#" data-editable>Privacy Policy</a> | <a href="#" data-editable>Cookie Policy</a> | <a href="#" data-editable>Terms of Use</a> | <a href="#" data-editable>Do Not Sell or Share My Personal Information</a></p>
+                <p>© 2021~2026  The Noname | <a href="https://www.privacy.epitaph.com/" target="_blank" data-editable>Privacy Policy</a> | <a href="https://www.privacy.epitaph.com/cookiepolicy" target="_blank" data-editable>Cookie Policy</a> | <a href="https://www.privacy.epitaph.com/terms" target="_blank" data-editable>Terms of Use</a> | <a href="#" data-editable>Do Not Sell or Share My Personal Information</a></p>
             </div>
         </div>
     </footer>

@@ -7,7 +7,7 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root { --logo-red: #DC2626; --blood-red: #B91C1C; --deep-red: #7F1D1D; --black: #000000; --white: #FFFFFF; --silver: #C0C0C0; --dark-gray: #1a1a1a; }
-        body { background: var(--black); color: var(--white); font-family: 'Arial Black', 'Helvetica Neue', Helvetica, Arial, sans-serif; overflow-x: hidden; cursor: crosshair; }
+        body { background: url('./image/blackbg.webp') repeat-y center top; background-size: 100% auto; color: var(--white); font-family: 'Arial Black', 'Helvetica Neue', Helvetica, Arial, sans-serif; overflow-x: hidden; cursor: crosshair; }
 
         @keyframes hardGlitch { 0% { opacity: 0; transform: translateX(-10px); filter: hue-rotate(90deg); } 20% { opacity: 1; transform: translateX(5px); filter: hue-rotate(-90deg) drop-shadow(3px 0 var(--logo-red)); } 40% { transform: translateX(-3px); filter: hue-rotate(45deg) drop-shadow(-3px 0 var(--silver)); } 60% { transform: translateX(2px); filter: hue-rotate(0deg) drop-shadow(2px 0 var(--blood-red)); } 80% { transform: translateX(-1px); filter: drop-shadow(1px 0 var(--logo-red)); } 100% { opacity: 1; transform: translateX(0); filter: none; } }
         @keyframes logoFadeIn { 0% { opacity: 0; transform: scale(0.95); filter: blur(20px) brightness(2); } 50% { opacity: 0.5; filter: blur(10px) brightness(1.5); } 100% { opacity: 1; transform: scale(1); filter: blur(0) brightness(1); } }
@@ -34,8 +34,8 @@
         .nav-links a { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; color: var(--white); text-decoration: none; font-size: 18px; letter-spacing: 4px; text-transform: uppercase; position: relative; transition: all 0.1s; padding: 10px 0; }
         .nav-links a:hover { color: var(--logo-red); text-shadow: 0 0 10px var(--logo-red), 0 0 20px var(--logo-red), 0 0 30px var(--logo-red); transform: skewX(-5deg); }
 
-        .hero { height: 100vh; background: var(--black); display: flex; flex-direction: column; justify-content: flex-end; align-items: center; position: relative; overflow: hidden; padding-bottom: 5vh; }
-        .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('./image/hero1.webp') center/cover no-repeat; z-index: 1; }
+        .hero { height: 100vh; background: url('./image/blackbg.webp') repeat-y center top; background-size: 100% auto; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; position: relative; overflow: hidden; padding-bottom: 5vh; }
+        .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('./image/hero1.webp') center top/contain no-repeat; z-index: 1; }
         .hero-chromatic { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('./image/hero1.webp') center/cover no-repeat; z-index: 1; opacity: 0.5; mix-blend-mode: screen; filter: hue-rotate(10deg); transform: translateX(3px); pointer-events: none; }
         .hero-noise { position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); opacity: 0.08; z-index: 2; animation: noise 0.5s steps(10) infinite; pointer-events: none; mix-blend-mode: overlay; }
         .hero-scanlines { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(0deg, rgba(0,0,0,0.15), rgba(0,0,0,0.15) 1px, transparent 1px, transparent 2px); z-index: 3; pointer-events: none; animation: tvFlicker 0.15s infinite; }
@@ -44,7 +44,12 @@
         .hero-logo-img { max-width: 1000px; width: 85vw; height: auto; opacity: 0; }
         .hero-logo-img.active { animation: logoFadeIn 1.5s ease-out forwards, logoGlow 3s ease-in-out infinite 1.5s; }
 
-        .banner-section { width: 100%; background: var(--black); position: relative; }
+        .banner-section { width: 100%; background: url('./image/blackbg.webp') repeat-y center top; background-size: 100% auto; position: relative; }
+        .video-banner { overflow: hidden; margin-bottom: 0; }
+        .video-banner video { display: block; }
+        .video-banner-section { margin-bottom: 0; background: url('./image/blackbg.webp') repeat-y center top; background-size: 100% auto; }
+        .music-video-section { margin-top: 0; padding-top: 0; }
+        .music-section-inner { padding-top: 40px; }
         .banner { width: 100%; background: var(--dark-gray); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
         .banner img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
         .banner-dark-effect { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; opacity: 0.3; }
@@ -210,17 +215,17 @@
 
         @keyframes pulse { 0%, 100% { opacity: 1; box-shadow: 0 0 10px rgba(220, 38, 38, 0.3); } 50% { opacity: 0.8; box-shadow: 0 0 20px rgba(220, 38, 38, 0.5); } }
 
-        .music-video-section { width: 100%; background: url('./image/musicbg.webp') center/cover no-repeat; position: relative; background-attachment: fixed; }
+        .music-video-section { width: 100%; background: url('./image/blackbg.webp') repeat-y center top; background-size: 100% auto; position: relative; }
         .music-video-section::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 15%, rgba(0,0,0,0.4) 85%, rgba(0,0,0,0.85) 100%); z-index: 1; }
         .music-video-section::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.15) 2px, rgba(0,0,0,0.15) 4px); pointer-events: none; z-index: 2; }
         .music-section-inner { position: relative; z-index: 10; padding: 80px 40px; }
         .music-content-new { width: 100%; max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.3fr 1fr; gap: 60px; align-items: center; }
-        .music-player-side { background: rgba(0,0,0,0.7); border: 2px solid rgba(255,255,255,0.2); padding: 20px; text-align: center; backdrop-filter: blur(10px); transition: all 0.3s; }
+        .music-player-side { background: rgba(0,0,0,0.7); border: 2px solid rgba(255,255,255,0.2); padding: 20px; text-align: center; backdrop-filter: blur(10px); transition: all 0.3s; cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
         .music-player-side:hover { border-color: var(--logo-red); box-shadow: 0 0 30px rgba(220, 38, 38, 0.3); }
         .music-player-title { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-size: 20px; letter-spacing: 3px; margin-bottom: 15px; color: var(--white); border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 10px; }
         .music-player-embed { width: 100%; border: none; background: rgba(0,0,0,0.3); }
         .music-center { text-align: center; padding: 20px; }
-        .album-cover { width: 420px; height: 420px; background: var(--dark-gray); margin: 0 auto 30px; border: 3px solid var(--logo-red); box-shadow: 0 0 60px rgba(220, 38, 38, 0.6); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; transition: all 0.3s; }
+        .album-cover { width: 420px; height: 420px; background: var(--dark-gray); margin: 0 auto 30px; border: 3px solid var(--logo-red); box-shadow: 0 0 60px rgba(220, 38, 38, 0.6); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; transition: all 0.3s; cursor: pointer; touch-action: manipulation; }
         .album-cover:hover { transform: scale(1.02); box-shadow: 0 0 80px rgba(220, 38, 38, 0.8); }
         .album-cover::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent 40%, rgba(220, 38, 38, 0.1) 50%, transparent 60%); animation: flashShine 4s infinite; }
         .album-cover img { width: 100%; height: 100%; object-fit: cover; }
@@ -228,7 +233,7 @@
         .album-subtitle { font-family: 'Arial Black', Arial, sans-serif; font-size: 16px; color: var(--silver); letter-spacing: 3px; margin-bottom: 30px; }
         .video-section-inner { position: relative; z-index: 10; padding: 80px 40px; border-top: 1px solid rgba(220, 38, 38, 0.3); }
         .video-container { width: 100%; max-width: 1200px; margin: 0 auto; text-align: center; }
-        .video-player { width: 100%; aspect-ratio: 16 / 9; max-height: 600px; background: rgba(0,0,0,0.5); border: 3px solid var(--logo-red); display: flex; align-items: center; justify-content: center; margin-bottom: 30px; position: relative; cursor: pointer; box-shadow: 0 0 60px rgba(220, 38, 38, 0.4); transition: all 0.3s; overflow: hidden; }
+        .video-player { width: 100%; aspect-ratio: 16 / 9; max-height: 600px; background: rgba(0,0,0,0.5); border: 3px solid var(--logo-red); display: flex; align-items: center; justify-content: center; margin-bottom: 30px; position: relative; cursor: pointer; box-shadow: 0 0 60px rgba(220, 38, 38, 0.4); transition: all 0.3s; overflow: hidden; touch-action: manipulation; -webkit-tap-highlight-color: rgba(220, 38, 38, 0.3); }
         .video-player:hover { box-shadow: 0 0 100px rgba(220, 38, 38, 0.6); border-color: var(--logo-red); }
         .video-player iframe { width: 100%; height: 100%; border: none; }
         .play-btn { width: 120px; height: 120px; border: 5px solid var(--logo-red); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s; box-shadow: 0 0 50px rgba(220, 38, 38, 0.7); background: rgba(0,0,0,0.6); }
@@ -237,7 +242,7 @@
         .video-player:hover .play-btn::after { color: var(--white); }
 
         /* MERCH区域 */
-        .merch-section { padding: 100px 30px; background: var(--black); position: relative; }
+        .merch-section { padding: 100px 30px; background: url('./image/blackbg.webp') repeat-y center top; background-size: 100% auto; position: relative; }
         .merch-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; max-width: 1400px; margin: 0 auto 50px; }
         .merch-item { position: relative; aspect-ratio: 1; background: #111; cursor: pointer; transition: all 0.3s; overflow: hidden; display: flex; align-items: center; justify-content: center; }
         .merch-item:hover { transform: translateY(-10px); box-shadow: 0 20px 60px rgba(220, 38, 38, 0.3); }
@@ -256,10 +261,10 @@
         /* 底部区域 - 移除爆闪效果 */
         .footer-section { 
             width: 100%; 
-            background: url('./image/downbg.webp') center top repeat; 
+            background: url('./image/blackbg.webp') repeat-y center top; 
             position: relative; 
             padding: 60px 0 0 0;
-            background-size: auto;
+            background-size: 100% auto;
         }
         .footer-section::before { 
             content: ''; 
@@ -321,7 +326,7 @@
         .footer-copyright a { color: var(--white); text-decoration: none; transition: color 0.2s; }
         .footer-copyright a:hover { color: var(--logo-red); }
 
-        .btn, .banner-btn, .tour-btn, .btn-music { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; padding: 15px 35px; font-size: 16px; letter-spacing: 3px; text-transform: uppercase; border: 3px solid var(--logo-red); background: transparent; color: var(--white); cursor: pointer; position: relative; overflow: hidden; transition: all 0.2s; text-decoration: none; display: inline-block; box-shadow: 0 0 30px rgba(220, 38, 38, 0.4); }
+        .btn, .banner-btn, .tour-btn, .btn-music { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; padding: 15px 35px; font-size: 16px; letter-spacing: 3px; text-transform: uppercase; border: 3px solid var(--logo-red); background: rgba(0,0,0,0.5); color: var(--white); cursor: pointer; position: relative; overflow: hidden; transition: all 0.2s; text-decoration: none; display: inline-block; box-shadow: 0 0 30px rgba(220, 38, 38, 0.4); touch-action: manipulation; -webkit-tap-highlight-color: rgba(220, 38, 38, 0.3); }
         .btn::before, .banner-btn::before, .tour-btn::before, .btn-music::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: var(--logo-red); transition: left 0.2s steps(5); z-index: -1; }
         .btn:hover::before, .banner-btn:hover::before, .tour-btn:hover::before, .btn-music:hover::before { left: 0; }
         .btn:hover, .banner-btn:hover, .tour-btn:hover, .btn-music:hover { color: var(--white); transform: skewX(-5deg); box-shadow: 0 0 50px var(--logo-red), 0 0 80px rgba(220, 38, 38, 0.6); text-shadow: 0 0 15px var(--white); border-color: var(--logo-red); }
@@ -329,7 +334,7 @@
         .banner-btn-center { left: 50%; transform: translateX(-50%); }
         .banner-btn-center:hover { transform: translateX(-50%) skewX(-5deg); }
         .banner-btn-right { right: 50px; }
-        .tour-btn { padding: 6px 18px; font-size: 11px; }
+        .tour-btn { padding: 8px 16px; font-size: 12px; min-height: 36px; min-width: 80px; }
         .tour-btn.sold-out { border-color: #444; color: #666; cursor: not-allowed; box-shadow: none; background: rgba(0,0,0,0.4); }
         .tour-btn.sold-out::before { display: none; }
         .tour-btn.sold-out:hover { color: #666; transform: none; text-shadow: none; border-color: #444; }
@@ -341,7 +346,77 @@
 
         @media (max-width: 1200px) { .music-content-new { grid-template-columns: 1fr; gap: 40px; } .music-player-side { max-width: 600px; margin: 0 auto; width: 100%; } .album-cover { width: 350px; height: 350px; } .footer-main { grid-template-columns: 1fr; gap: 40px; } .footer-right { align-items: center; } }
         @media (max-width: 1024px) { .members-grid { grid-template-columns: repeat(2, 1fr); } .merch-grid { grid-template-columns: repeat(2, 1fr); } .nav-links { gap: 25px; } .nav-links a { font-size: 14px; letter-spacing: 2px; } .hero-logo-img { max-width: 600px; } .album-cover { width: 300px; height: 300px; } .album-title { font-size: 36px; letter-spacing: 6px; } }
-        @media (max-width: 768px) { .nav-links { gap: 15px; } .nav-links a { font-size: 12px; letter-spacing: 1px; } .nav-dragon { width: 30px; height: 30px; } .nav-dragon-left { margin-right: 15px; } .nav-dragon-right { margin-left: 15px; } .hero-logo-img { max-width: 400px; width: 90vw; } .hero { padding-bottom: 3vh; } .members-grid { grid-template-columns: 1fr; } .merch-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; } .tour-item { flex-direction: column; gap: 10px; text-align: center; padding: 6px 15px; } .tour-section { padding-top: 30px; } .section-title { font-size: 36px; letter-spacing: 8px; margin-bottom: 30px; } .album-cover { width: 260px; height: 260px; } .album-title { font-size: 28px; letter-spacing: 4px; } .music-section-inner, .video-section-inner { padding: 50px 20px; } .banner-btn { padding: 8px 25px; font-size: 14px; bottom: 30px; } .banner-btn-right { right: 20px; } .footer-main { padding: 30px 20px; } .subscribe-form { flex-direction: column; align-items: center; } .subscribe-input { width: 100%; max-width: 280px; } .footer-nav-container { flex-wrap: wrap; gap: 20px; } .social-grid { grid-template-columns: repeat(4, 40px); } }
+        @media (max-width: 768px) { 
+        /* 移动端移除爆闪效果 */
+        .hero-noise, .hero-scanlines, .banner-grain, .banner-scanlines-dark { display: none !important; }
+        .silver-line::after { animation: none; }
+
+        /* 移动端 hero 图片完整显示，不重复 */
+        .hero-bg { 
+            background-size: contain !important; 
+            background-repeat: no-repeat !important;
+            background-position: center top !important;
+        }
+        /* 移动端 logo 适配 */
+        .hero-logo-img {
+            max-width: 90vw !important;
+            width: 90vw !important;
+        }
+
+        /* 顶部导航栏 ANTI-IPA 不换行 */
+        .nav-links { 
+            gap: 8px !important; 
+            flex-wrap: nowrap !important;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            width: 100%;
+            justify-content: space-between;
+            padding: 0 5px;
+        }
+        .nav-links::-webkit-scrollbar { display: none; }
+        .nav-links a { 
+            font-size: 10px !important; 
+            letter-spacing: 0.5px !important;
+            white-space: nowrap !important;
+            padding: 8px 2px !important;
+            flex-shrink: 0;
+        }
+        /* 超小屏幕隐藏龙图 */
+        @media (max-width: 380px) {
+            .nav-dragon { display: none; }
+        }
+        .nav-dragon { width: 25px; height: 25px; }
+        .nav-dragon-left { margin-right: 8px; }
+        .nav-dragon-right { margin-left: 8px; }
+
+        /* MEMBERS 一排2个 */
+        .members-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .member-avatar { width: 140px; height: 140px; }
+        .member-name { font-size: 18px; }
+
+        /* 底部导航栏不换行 - 强制所有链接一行 */
+        .footer-nav-container {
+            flex-wrap: nowrap !important;
+            gap: 8px !important;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding: 0 10px;
+            justify-content: space-between;
+        }
+        .footer-nav-container::-webkit-scrollbar { display: none; }
+        .footer-nav a, .footer-nav-container a {
+            font-size: 10px !important;
+            white-space: nowrap !important;
+            letter-spacing: 0.5px !important;
+            padding: 5px 2px !important;
+            flex-shrink: 0;
+        }
+        /* 隐藏龙图在超小屏幕 */
+        @media (max-width: 380px) {
+            .footer-nav-container .nav-dragon { display: none; }
+        } .nav-links a { font-size: 12px; letter-spacing: 1px; } .nav-dragon { width: 30px; height: 30px; } .nav-dragon-left { margin-right: 15px; } .nav-dragon-right { margin-left: 15px; } .hero-logo-img { max-width: 400px; width: 90vw; } .hero { padding-bottom: 3vh; } .members-grid { grid-template-columns: 1fr; } .merch-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; } .tour-item { flex-direction: column; gap: 10px; text-align: center; padding: 6px 15px; } .tour-section { padding-top: 30px; } .section-title { font-size: 36px; letter-spacing: 8px; margin-bottom: 30px; } .album-cover { width: 260px; height: 260px; } .album-title { font-size: 28px; letter-spacing: 4px; } .music-section-inner, .video-section-inner { padding: 50px 20px; } .banner-btn { padding: 8px 25px; font-size: 14px; bottom: 30px; } .banner-btn-right { right: 20px; } .footer-main { padding: 30px 20px; } .subscribe-form { flex-direction: column; align-items: center; } .subscribe-input { width: 100%; max-width: 280px; } .footer-nav-container { flex-wrap: wrap; gap: 20px; } .social-grid { grid-template-columns: repeat(4, 40px); } }
         ::-webkit-scrollbar { width: 10px; }
         ::-webkit-scrollbar-track { background: var(--black); }
         ::-webkit-scrollbar-thumb { background: var(--logo-red); border-radius: 5px; box-shadow: 0 0 15px rgba(220, 38, 38, 0.6); }
@@ -486,7 +561,17 @@
         </div>
     </section>
 
-    <div class="silver-line"></div>
+    <!-- Video Banner 3 - 无分割线，与 MUSIC 融合 -->
+    <section class="banner-section video-banner-section" id="banner3">
+        <div class="banner reveal video-banner">
+            <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover;">
+                <source src="https://video.wixstatic.com/video/d502ca_c9a0037029ee4c2c9586d94dd655a1e4/1080p/mp4/file.mp4" type="video/mp4">
+            </video>
+            <div class="banner-dark-effect">
+                <div class="banner-cinematic"></div>
+            </div>
+        </div>
+    </section>
 
     <section class="music-video-section" id="music-video">
         <div class="music-section-inner" id="music">
@@ -522,9 +607,9 @@
 
     <div class="silver-line"></div>
 
-    <section class="banner-section" id="banner3">
+    <section class="banner-section" id="banner4">
         <div class="banner reveal">
-            <img src="./image/banner3.jpg" alt="Banner 3">
+            <img src="./image/banner3.jpg" alt="Banner 4">
             <div class="banner-dark-effect">
                 <div class="banner-cinematic"></div>
                 <div class="banner-grain"></div>
@@ -604,26 +689,26 @@
                     <a href="https://www.youtube.com/channel/UCv2-Y8NFUHXkf-2hDQUzLKw" target="_blank" class="social-icon" title="YouTube" data-editable>
                         <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
                     </a>
-                    <a href="https://www.instagram.com/thenoname/" target="_blank" class="social-icon" title="Instagram" data-editable>
+                    <a href="https://instagram.com/nonamepunks" target="_blank" class="social-icon" title="Instagram" data-editable>
                         <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
                     </a>
-                    <a href="https://www.facebook.com/thenoname/" target="_blank" class="social-icon" title="Facebook" data-editable>
+                    <a href="https://facebook.com/TheNonamePunk" target="_blank" class="social-icon" title="Facebook" data-editable>
                         <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
                     </a>
-                    <a href="https://twitter.com/thenoname/" target="_blank" class="social-icon" title="Twitter" data-editable>
+                    <a href="https://x.com/nonamepunks" target="_blank" class="social-icon" title="Twitter" data-editable>
                         <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
                     </a>
-                    <a href="https://open.spotify.com/artist/xxxx" target="_blank" class="social-icon" title="Spotify" data-editable>
+                    <a href="https://open.spotify.com/artist/1QjEg19ZiCoWuyUSFdbVhu" target="_blank" class="social-icon" title="Spotify" data-editable>
                         <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
                     </a>
-                    <a href="https://www.tiktok.com/@thenoname" target="_blank" class="social-icon" title="TikTok" data-editable>
+                    <a href="https://tiktok.com/nonamepunks" target="_blank" class="social-icon" title="TikTok" data-editable>
                         <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
                     </a>
-                    <a href="https://weibo.com/thenoname" target="_blank" class="social-icon" title="Weibo" data-editable>
+                    <a href="https://weibo.com/nonamepunks" target="_blank" class="social-icon" title="Weibo" data-editable>
                         <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M10.098 20.323c-3.977.391-7.414-1.406-7.672-4.02-.259-2.609 2.759-5.047 6.74-5.441 3.979-.394 7.413 1.404 7.671 4.018.259 2.6-2.759 5.049-6.739 5.443zM9.05 17.219c-.384.616-1.208.884-1.829.602-.612-.279-.793-.991-.406-1.593.379-.595 1.176-.861 1.793-.601.622.263.82.972.442 1.592zm1.27-1.627c-.141.237-.449.353-.689.253-.236-.09-.313-.361-.177-.586.138-.227.436-.346.672-.24.239.09.315.36.194.573zm.176-2.719c-1.893-.493-4.033.45-4.857 2.118-.836 1.704-.026 3.591 1.886 4.21 1.983.64 4.318-.341 5.132-2.179.8-1.793-.201-3.642-2.161-4.149zm7.563-1.224c-.346-.105-.579-.18-.405-.649.381-1.025.421-1.905.001-2.535-.788-1.181-2.924-1.109-5.382-.031 0 0-.768.334-.571-.271.381-1.217.324-2.229-.268-2.816-1.344-1.336-4.918.045-7.985 3.088C2.013 10.878.784 13.447.784 15.658c0 4.226 5.407 6.804 10.695 6.804 6.936 0 11.551-4.021 11.551-7.21 0-1.925-1.628-3.013-2.971-3.403zm.658-5.533c-.193-.229-.481-.314-.745-.229-.271.086-.453.314-.453.602 0 .229.086.457.314.643.229.186.516.271.744.186.271-.086.453-.314.453-.602.001-.229-.085-.457-.313-.6zm2.059-2.246c-.771-.915-1.936-1.258-2.978-.915-.229.072-.351.314-.279.543.072.229.314.351.543.279.629-.2 1.329.029 1.787.572.457.543.572 1.272.314 1.901-.086.229.029.486.258.572.229.086.486-.029.572-.258.4-1.001.229-2.188-.217-2.694z"/></svg>
                     </a>
-                    <a href="https://www.bilibili.com/thenoname" target="_blank" class="social-icon" title="Bilibili" data-editable>
-                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M17.813 4.653h.854c1.51.054 2.769.578 3.773 1.574 1.004.995 1.524 2.249 1.56 3.76v7.36c-.036 1.51-.556 2.769-1.56 3.773s-2.262 1.524-3.773 1.56H5.333c-1.51-.036-2.769-.556-3.773-1.56S.036 18.858 0 17.347v-7.36c.036-1.511.556-2.765 1.56-3.76 1.004-.996 2.262-1.52 3.773-1.574h.774l-1.174-1.12a1.234 1.234 0 0 1-.373-.906c0-.356.124-.658.373-.907l.027-.027c.267-.249.573-.373.92-.373.347 0 .653.124.92.373L9.653 4.44c.071.071.134.142.187.213h4.267a.836.836 0 0 1 .16-.213l2.853-2.747c.267-.249.573-.373.92-.373.347 0 .662.151.929.4.267.249.391.551.391.907 0 .355-.124.657-.373.906zM5.333 7.24c-.746.018-1.373.276-1.88.773-.506.498-.769 1.13-.786 1.894v7.52c.017.764.28 1.395.786 1.893.507.498 1.134.756 1.88.773h13.334c.746-.017 1.373-.275 1.88-.773.506-.498.769-1.129.786-1.893v-7.52c-.017-.765-.28-1.396-.786-1.894-.507-.497-1.134-.755-1.88-.773zM8 11.107c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c0-.373.129-.689.386-.947.258-.257.574-.386.947-.386zm8 0c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c.017-.391.15-.711.4-.96.249-.249.56-.373.933-.373z"/></svg>
+                    <a href="https://www.xiaohongshu.com/user/profile/64a1494b0000000010034ba7" target="_blank" class="social-icon" title="小红书" data-editable>
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm0-8h-2V7h2v2zm4 8h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
                     </a>
                 </div>
             </div>
@@ -647,13 +732,7 @@
         <div class="footer-bottom">
             <div class="footer-slogan">REAL PUNK ROCK NEVER DEAD</div>
             <div class="footer-copyright">
-                <p>© 2021~2026 The Noname無名 | Powered by <a href="#" data-editable>EmanonEnt.</a></p>
-                <p style="margin-top: 10px;">
-                    <a href="#" data-editable>Privacy Policy</a> | 
-                    <a href="#" data-editable>Cookie Policy</a> | 
-                    <a href="#" data-editable>Terms of Use</a> | 
-                    <a href="#" data-editable>Do Not Sell or Share My Personal Information</a>
-                </p>
+                <p>© 2026 Epitaph Records | <a href="#" data-editable>Privacy Policy</a> | <a href="#" data-editable>Cookie Policy</a> | <a href="#" data-editable>Terms of Use</a> | <a href="#" data-editable>Do Not Sell or Share My Personal Information</a></p>
             </div>
         </div>
     </footer>

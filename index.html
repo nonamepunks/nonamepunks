@@ -32,8 +32,49 @@
         .navbar.visible { top: 0; }
         .navbar::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, transparent, var(--logo-red), transparent); animation: lineScan 3s linear infinite; }
         .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: center; align-items: center; padding: 0 30px; position: relative; }
-        .nav-dragon { width: 40px; height: 40px; cursor: pointer; transition: all 0.2s; filter: grayscale(100%) brightness(0.8); object-fit: contain; }
+        .nav-dragon { width: 50px; height: 50px; cursor: pointer; transition: all 0.2s; filter: grayscale(100%) brightness(0.8); object-fit: contain; }
         .nav-dragon:hover { filter: grayscale(0%) brightness(1.2) drop-shadow(0 0 10px var(--logo-red)); transform: scale(1.1); }
+
+        /* 龙点击动画 */
+        .nav-dragon.animating {
+            position: fixed !important;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) scale(12) !important;
+            filter: grayscale(0%) brightness(2) drop-shadow(0 0 60px var(--logo-red)) drop-shadow(0 0 120px rgba(220, 38, 38, 0.8)) !important;
+            z-index: 99999 !important;
+            transition: all 0.3s ease-out;
+            margin: 0 !important;
+        }
+
+        .nav-dragon.animating::before {
+            content: '';
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 200vmax;
+            height: 200vmax;
+            background: radial-gradient(ellipse at center, 
+                rgba(220, 38, 38, 0.6) 0%, 
+                rgba(100, 100, 100, 0.3) 20%, 
+                rgba(0, 0, 0, 0.8) 50%, 
+                transparent 70%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            animation: dragonCloudExpand 1s ease-out forwards;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes dragonCloudExpand {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+        }
+
+        .nav-dragon.returning {
+            transition: all 0.5s ease-in;
+        }
         .nav-dragon-left { margin-right: 40px; }
         .nav-dragon-right { margin-left: 40px; }
         .nav-links { display: flex; gap: 50px; list-style: none; justify-content: center; }
@@ -392,7 +433,7 @@
             .nav-links { gap: 5px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding: 0 10px; justify-content: space-around; }
             .nav-links::-webkit-scrollbar { display: none; }
             .nav-links a { font-size: 12px; white-space: nowrap; padding: 8px 3px; letter-spacing: 1px; }
-            .nav-dragon { width: 25px; height: 25px; }
+            .nav-dragon { width: 35px; height: 35px; }
             .nav-dragon-left { margin-right: 8px; }
             .nav-dragon-right { margin-left: 8px; }
 
@@ -483,7 +524,7 @@
 
         @media (max-width: 380px) {
             .hero-logo-img { width: 55%; max-width: 200px; }
-            .footer-nav-container .nav-dragon { display: block; width: 20px; height: 20px; }
+            .footer-nav-container .nav-dragon { display: block; width: 30px; height: 30px; }
         }
 
         ::-webkit-scrollbar { width: 10px; }
@@ -909,6 +950,63 @@
             player.onclick = null;
             player.style.cursor = 'default';
         }
+
+        // 龙图案点击动画
+        document.querySelectorAll('.nav-dragon').forEach(dragon => {
+            dragon.addEventListener('click', function(e) {
+                // 如果正在动画中，不处理
+                if (this.classList.contains('animating')) return;
+
+                e.preventDefault();
+
+                const originalPosition = this.getBoundingClientRect();
+                const parent = this.parentElement;
+
+                // 创建占位符防止布局塌陷
+                const placeholder = document.createElement('span');
+                placeholder.style.width = originalPosition.width + 'px';
+                placeholder.style.height = originalPosition.height + 'px';
+                placeholder.style.display = 'inline-block';
+                placeholder.style.visibility = 'hidden';
+                parent.insertBefore(placeholder, this);
+
+                // 记录原始位置用于返回
+                this.dataset.originalTop = originalPosition.top + 'px';
+                this.dataset.originalLeft = originalPosition.left + 'px';
+
+                // 添加动画类 - 立即定位到屏幕中央
+                this.classList.add('animating');
+
+                // 延迟后开始返回
+                setTimeout(() => {
+                    this.classList.add('returning');
+                    this.classList.remove('animating');
+
+                    // 返回原位置
+                    this.style.position = 'fixed';
+                    this.style.top = this.dataset.originalTop;
+                    this.style.left = this.dataset.originalLeft;
+                    this.style.transform = 'translate(0, 0) scale(1)';
+                    this.style.filter = '';
+                    this.style.zIndex = '';
+
+                    setTimeout(() => {
+                        this.classList.remove('returning');
+                        this.style.position = '';
+                        this.style.top = '';
+                        this.style.left = '';
+                        this.style.transform = '';
+                        this.style.margin = '';
+                        placeholder.remove();
+                    }, 500);
+                }, 800);
+
+                // 同时执行返回顶部
+                setTimeout(() => {
+                    window.scrollTo({top: 0, behavior: 'smooth'});
+                }, 300);
+            });
+        });
     </script>
     <script type="text/javascript">
        (function(){

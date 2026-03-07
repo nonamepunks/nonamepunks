@@ -111,7 +111,6 @@
             }
         }
 
-
         .hero-vignette { 
             position: absolute; 
             top: 0; 
@@ -125,7 +124,7 @@
 
         /* ===== 其他区域样式 ===== */
         .banner-section { width: 100%; background: url('./image/blackbg.webp') repeat-y center top; background-size: 100% auto; position: relative; }
-        .video-banner { overflow: hidden; margin-bottom: 0; }
+        
         .video-banner video { display: block; }
         .video-banner-section { margin-bottom: 0; background: url('./image/blackbg.webp') repeat-y center top; background-size: 100% auto; }
         .music-video-section { margin-top: 0; padding-top: 0; }
@@ -225,7 +224,7 @@
         /* MERCH */
         .merch-section { padding: 100px 30px; background: url('./image/blackbg.webp') repeat-y center top; background-size: 100% auto; position: relative; }
         .merch-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; max-width: 1400px; margin: 0 auto 50px; }
-        .merch-item { position: relative; aspect-ratio: 1; background: #111; cursor: pointer; transition: all 0.3s; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        
         .merch-item:hover { transform: translateY(-10px); box-shadow: 0 20px 60px rgba(220, 38, 38, 0.3); }
         .merch-img-wrap { position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; padding: 20px; }
         .merch-img { max-width: 100%; max-height: 100%; object-fit: contain; transition: all 0.4s; }
@@ -388,17 +387,9 @@
                     width: 75%;
                     max-width: 340px;
                 }
-            /* 合并的样式 */
-            .hero-logo-img { width: 80%; max-width: 320px; }
+            
             .footer-nav-container .nav-dragon { display: block; width: 20px; height: 20px; }
-            /* 合并的样式 */
-            @keyframes dragonFlash {
-                0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
-                20% { transform: translate(-50%, -50%) scale(0.8); opacity: 1; }
-                50% { transform: translate(-50%, -50%) scale(0.9); opacity: 1; }
-                80% { transform: translate(-50%, -50%) scale(0.8); opacity: 1; }
-                100% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
-            }
+            
             .dragon-star-ring { width: 40vmin; height: 40vmin; }
         }
 
@@ -494,21 +485,10 @@
             .footer-nav-container { flex-wrap: nowrap; gap: 8px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 0 10px; justify-content: space-between; }
             .footer-nav a { font-size: 10px; white-space: nowrap; letter-spacing: 0.5px; padding: 5px 2px; flex-shrink: 0; }
             .footer-nav-container .nav-dragon { display: block; width: 35px; height: 35px; }
-        
-            /* 从第二个媒体查询合并 */
-            @keyframes dragonFlash {
-                0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
-                20% { transform: translate(-50%, -50%) scale(0.9); opacity: 1; }
-                50% { transform: translate(-50%, -50%) scale(1.0); opacity: 1; }
-                80% { transform: translate(-50%, -50%) scale(0.9); opacity: 1; }
-                100% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
-            }
+
             .dragon-star-ring { width: 45vmin; height: 45vmin; }
         }
 
-        
-
-    
         /* iOS 防止默认视频播放按钮 */
         .video-player {
             -webkit-user-select: none;
@@ -557,7 +537,6 @@
         }
 
         /* 移动端优化 - 缩小 scale 避免出屏 */
-        
 
         /* 竖屏模式特殊优化 */
         @media (max-width: 768px) and (orientation: portrait) {
@@ -571,8 +550,6 @@
         }
 
         /* 超小屏幕进一步优化 */
-        
-
 
 /* ===== MERCH 区域新样式 ===== */
 .merch-carousel-wrapper {
@@ -866,7 +843,6 @@
     }
 }
 
-
 /* 视频区域打字机效果 */
 .video-typewriter-container {
     position: absolute;
@@ -956,7 +932,6 @@
         line-height: 1.15;
     }
 }
-
 
 /* 视频区域优化 */
 .video-banner {
@@ -1056,129 +1031,6 @@
     pointer-events: auto;
 }
 
-.merch-popup-img {
-    position: absolute;
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    cursor: pointer;
-}
-
-.merch-popup-img.active {
-    opacity: 1;
-}
-
-.merch-popup-info {
-    margin-top: 30px;
-    text-align: center;
-    color: var(--white);
-}
-
-.merch-popup-name {
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-size: 28px;
-    letter-spacing: 3px;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-}
-
-.merch-popup-category {
-    font-family: 'Arial Black', Arial, sans-serif;
-    font-size: 16px;
-    color: var(--silver);
-    letter-spacing: 2px;
-    margin-bottom: 10px;
-}
-
-.merch-popup-price {
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-size: 24px;
-    color: var(--logo-red);
-    letter-spacing: 2px;
-}
-
-.merch-popup-nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 50px;
-    height: 50px;
-    background: rgba(220, 38, 38, 0.8);
-    border: 2px solid var(--logo-red);
-    color: var(--white);
-    font-size: 20px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s;
-    z-index: 10;
-}
-
-.merch-popup-nav:hover {
-    background: var(--logo-red);
-    box-shadow: 0 0 30px rgba(220, 38, 38, 0.8);
-}
-
-.merch-popup-prev { left: -70px; }
-.merch-popup-next { right: -70px; }
-
-.merch-popup-dots {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.merch-popup-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.merch-popup-dot.active {
-    background: var(--logo-red);
-    box-shadow: 0 0 10px var(--logo-red);
-}
-
-.merch-popup-close {
-    position: absolute;
-    top: -50px;
-    right: 0;
-    width: 40px;
-    height: 40px;
-    background: transparent;
-    border: 2px solid var(--logo-red);
-    color: var(--white);
-    font-size: 24px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s;
-}
-
-.merch-popup-close:hover {
-    background: var(--logo-red);
-    transform: rotate(90deg);
-}
-
-/* 单图时不显示导航 */
-.merch-popup-images.single-image .merch-popup-nav,
-.merch-popup-images.single-image .merch-popup-dots {
-    display: none;
-}
-
-/* 移动端适配 */
-@media (max-width: 768px) {
-    .merch-popup-images {
-        width: 85vw;
-        height: 50vh;
-    }
     .merch-popup-name {
         font-size: 20px;
     }
@@ -1189,7 +1041,6 @@
     }
     .merch-popup-prev { left: -50px; }
     .merch-popup-next { right: -50px; }
-}
 </style>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
@@ -1833,7 +1684,6 @@
         });
 </script>
 
-
 <!-- MERCH 轮播功能 -->
 <script>
 (function() {
@@ -2041,7 +1891,6 @@ document.addEventListener('keydown', function(e) {
     }
 });
 </script>
-
 
 <script>
 // MERCH 弹出大图功能
@@ -2292,9 +2141,6 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-
-
-
 </script>
 
 <!-- Banner 1 平滑滚动 -->
@@ -2312,7 +2158,6 @@ document.querySelectorAll('a[href="#merch"]').forEach(function(link) {
     });
 });
 </script>
-
 
 <!-- 视频区域打字机效果 -->
 <script>

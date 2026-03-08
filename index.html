@@ -22,7 +22,7 @@
         @keyframes logoFadeIn { 0% { opacity: 0; transform: scale(0.95); filter: blur(20px) brightness(2); } 50% { opacity: 0.5; filter: blur(10px) brightness(1.5); } 100% { opacity: 1; transform: scale(1); filter: blur(0) brightness(1); } }
         @keyframes logoGlow { 0%, 100% { filter: drop-shadow(0 0 30px rgba(220, 38, 38, 0.8)) drop-shadow(0 0 60px rgba(220, 38, 38, 0.5)) drop-shadow(0 0 90px rgba(220, 38, 38, 0.3)); } 50% { filter: drop-shadow(0 0 50px rgba(220, 38, 38, 1)) drop-shadow(0 0 100px rgba(220, 38, 38, 0.7)) drop-shadow(0 0 150px rgba(220, 38, 38, 0.4)); } }
         @keyframes flashShine { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
-        @keyframes lineScan { 0% { left: -100%; } 100% { left: 100%; } }
+         100% { left: 100%; } }
          10% { transform: translate(-5%, -5%); } 20% { transform: translate(-10%, 5%); } 30% { transform: translate(5%, -10%); } 40% { transform: translate(-5%, 15%); } 50% { transform: translate(-10%, 5%); } 60% { transform: translate(15%, 0); } 70% { transform: translate(0, 10%); } 80% { transform: translate(-15%, 0); } 90% { transform: translate(10%, 5%); } }
 
         .reveal { opacity: 0; }
@@ -33,7 +33,16 @@
         /* ===== 导航栏 ===== */
         .navbar { position: fixed; top: -100px; left: 0; width: 100%; background: rgba(0,0,0,0.95); border-bottom: 3px solid var(--logo-red); z-index: 1000; padding: 4px 0; transition: top 0.3s steps(3); }
         .navbar.visible { top: 0; }
-        .navbar::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, transparent, var(--logo-red), transparent); animation: lineScan 3s linear infinite; }
+        .navbar::after { 
+    content: ''; 
+    position: absolute; 
+    bottom: -3px; 
+    left: 0; 
+    width: 100%; 
+    height: 3px; 
+    background: linear-gradient(90deg, transparent, var(--deep-red), transparent);
+    box-shadow: 0 0 10px rgba(127, 29, 29, 0.3);  /* 静态暗红发光 */
+}
         .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: center; align-items: center; padding: 0 30px; position: relative; }
         .nav-dragon { width: 50px; height: 50px; cursor: pointer; transition: all 0.2s; filter: grayscale(100%) brightness(0.8); object-fit: contain; }
         .nav-dragon:hover { filter: grayscale(0%) brightness(1.2) drop-shadow(0 0 10px var(--logo-red)); transform: scale(1.1); }
@@ -427,8 +436,14 @@
         .tour-btn.limited { border-color: var(--logo-red); color: var(--logo-red); animation: pulse 1.5s infinite; box-shadow: 0 0 15px rgba(220, 38, 38, 0.3); }
         .tour-btn.limited:hover { color: var(--white); border-color: var(--logo-red); }
         .btn-music { padding: 18px 45px; font-size: 18px; }
-        .silver-line { height: 3px; background: var(--logo-red); position: relative; overflow: hidden; box-shadow: 0 0 20px rgba(220, 38, 38, 0.6); }
-        .silver-line::after { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, var(--white), transparent); animation: lineScan 2s linear infinite; }
+        .silver-line { 
+    height: 3px; 
+    background: var(--deep-red);  /* 暗红色 #7F1D1D */
+    position: relative; 
+    overflow: hidden; 
+    box-shadow: 0 0 15px rgba(127, 29, 29, 0.4);  /* 暗红发光，静态 */
+}
+        
 
         /* ===== 响应式布局 ===== */
 

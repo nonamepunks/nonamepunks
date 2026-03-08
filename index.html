@@ -574,13 +574,14 @@
         
 
 
-/* ===== MERCH 区域新样式 ===== */
+/* ===== MERCH 区域优化样式 ===== */
 .merch-carousel-wrapper {
     position: relative;
     width: 100vw;
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
     overflow: hidden;
+    contain: layout style; /* 优化渲染性能 */
 }
 
 .merch-carousel {
@@ -590,14 +591,16 @@
 
 .merch-track {
     display: flex;
-    transition: transform 0.5s ease;
+    transition: transform 0.3s ease;
+    will-change: transform; /* 仅保留必要的 */
+    backface-visibility: hidden; /* 防止闪烁 */
 }
 
 .merch-item { 
     position: relative; 
     background: rgba(0,0,0,0.6);
     cursor: pointer; 
-    transition: all 0.4s ease; 
+    transition: box-shadow 0.4s ease; 
     overflow: hidden; 
     flex-shrink: 0;
     border: 1px solid rgba(220, 38, 38, 0.1);
@@ -623,6 +626,7 @@
     max-height: 90%; 
     object-fit: contain; 
     transition: transform 0.4s ease, opacity 0.6s ease 1s;
+    /* 移除will-change，避免内存占用 */
 }
 
 .merch-img-hover { 
@@ -797,7 +801,7 @@
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 0;
-        transform: none;
+        transform: none !important; /* 移动端不需要transform */
         transition: none;
     }
     .merch-item {
@@ -865,130 +869,6 @@
         font-size: 13px;
     }
 }
-
-
-/* 视频区域打字机效果 */
-.video-typewriter-container {
-    position: absolute;
-    top: 62%;
-    left: 0;
-    right: 0;
-    width: 100%;
-    padding: 40px 30px 0;
-    z-index: 10;
-    text-align: center;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    overflow: hidden;
-}
-
-.video-typewriter-text {
-    font-family: 'Courier New', monospace;
-    font-size: clamp(10px, 1.4vw, 18px);
-    line-height: 1.5;
-    color: #fff;
-    text-shadow: 
-        0 0 8px rgba(220, 38, 38, 0.9),
-        0 0 16px rgba(220, 38, 38, 0.7),
-        0 0 24px rgba(220, 38, 38, 0.5),
-        2px 2px 4px rgba(0,0,0,1);
-    letter-spacing: 0.3px;
-    max-width: 100%;
-    padding: 0 10px;
-}
-
-.video-typewriter-text::after {
-    content: '|';
-    animation: cursorBlink 1s infinite;
-    color: var(--logo-red);
-    text-shadow: 0 0 10px var(--logo-red);
-}
-
-@keyframes cursorBlink {
-    0%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0; }
-}
-
-/* 移动端适配 */
-@media (max-width: 768px) {
-    .video-typewriter-container {
-        padding: 15px 12px 0;
-        top: 53.5%;
-        bottom: 1.5%;
-        height: auto;
-        min-height: 45%;
-    }
-    .video-typewriter-text {
-        font-size: clamp(5px, 1.4vw, 9px);
-        line-height: 1.22;
-        letter-spacing: 0;
-        padding: 0;
-        word-break: break-word;
-    }
-}
-
-@media (max-width: 480px) {
-    .video-typewriter-container {
-        padding: 12px 8px 0;
-        top: 51%;
-        bottom: 2%;
-        min-height: 47%;
-    }
-    .video-typewriter-text {
-        font-size: clamp(5px, 2vw, 8px);
-        line-height: 1.18;
-        letter-spacing: 0;
-        padding: 0;
-    }
-}
-
-/* 超小屏 */
-@media (max-width: 360px) {
-    .video-typewriter-container {
-        top: 49%;
-        padding: 10px 5px 0;
-        bottom: 1%;
-        min-height: 50%;
-    }
-    .video-typewriter-text {
-        font-size: clamp(4px, 2.2vw, 7px);
-        line-height: 1.15;
-    }
-}
-
-
-/* 视频区域优化 */
-.video-banner {
-    aspect-ratio: 1280 / 672;
-    background: #000;
-    position: relative;
-    overflow: hidden;
-}
-
-#bannerVideo {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    opacity: 0;
-    transition: opacity 0.5s;
-}
-
-.video-fallback {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('./image/banner3-fallback.webp') center/cover no-repeat, #000;
-    z-index: 0;
-}
-
 /* ===== MERCH 弹出大图样式 ===== */
 .merch-popup-overlay {
     position: fixed;
@@ -1213,6 +1093,29 @@
                 animation: none !important;
             }
         }
+
+    /* MERCH图片加载优化 */
+    .merch-img {
+        background: linear-gradient(90deg, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%);
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite;
+    }
+
+    .merch-img.loaded,
+    .merch-img[complete="true"] {
+        animation: none;
+        background: transparent;
+    }
+
+    @keyframes shimmer {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+    }
+
+    /* 确保图片容器有最小高度，避免布局偏移 */
+    .merch-img-wrap {
+        min-height: 150px;
+    }
 </style>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
@@ -1230,28 +1133,7 @@
     <link rel="dns-prefetch" href="https://www.youtube.com">
     <link rel="preconnect" href="https://img.youtube.com">
     <link rel="dns-prefetch" href="https://img.youtube.com">
-<!-- MERCH 延迟加载优化 -->
-<script>
-// 延迟初始化 merch 轮播，等页面主要内容加载完成
-if ('IntersectionObserver' in window) {
-    const merchObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // 当 merch 区域进入视口时再初始化
-                window.merchShouldInit = true;
-                merchObserver.disconnect();
-            }
-        });
-    }, { rootMargin: '100px' });
-
-    document.addEventListener('DOMContentLoaded', function() {
-        const merchSection = document.getElementById('merch');
-        if (merchSection) {
-            merchObserver.observe(merchSection);
-        }
-    });
-}
-</script>
+<!-- MERCH 预加载优化 -->
 </head>
 <body>
 
@@ -1492,8 +1374,8 @@ if ('IntersectionObserver' in window) {
                 <div class="merch-track">
 <div class="merch-item reveal dual-img" data-img1="./image/merchs/Anti-teeb1.png" data-img2="./image/merchs/Anti-teeb2.png" data-name="Anti-" data-category="Tee" data-price="$25.9" onclick="openMerchPopup(this)">
                         <div class="merch-img-wrap">
-                            <img loading="lazy" decoding="async" src="./image/merchs/Anti-teeb1.png" alt="Anti-" class="merch-img">
-                            <img loading="lazy" decoding="async" src="./image/merchs/Anti-teeb2.png" alt="Anti- Back" class="merch-img-hover">
+                            <img loading="lazy" decoding="async" src="./image/merchs/Anti-teeb1.png" alt="Anti-" class="merch-img" onerror="this.style.opacity='0.5'; this.parentElement.style.background='#222';">
+                            <img loading="lazy" decoding="async" src="./image/merchs/Anti-teeb2.png" alt="Anti- Back" class="merch-img-hover" onerror="this.style.display='none';">
                         </div>
                         <div class="merch-info">
                             <div class="merch-name">Anti-</div>
@@ -1503,7 +1385,7 @@ if ('IntersectionObserver' in window) {
                     </div>
 <div class="merch-item reveal" data-img1="./image/merchs/DevilSukll-teeb1.png" data-img2="" data-name="Devil Skull" data-category="Tee" data-price="$22.9" onclick="openMerchPopup(this)">
                         <div class="merch-img-wrap">
-                            <img loading="lazy" decoding="async" src="./image/merchs/DevilSukll-teeb1.png" alt="Devil Skull" class="merch-img">
+                            <img loading="lazy" decoding="async" src="./image/merchs/DevilSukll-teeb1.png" alt="Devil Skull" class="merch-img" onerror="this.style.opacity='0.5'; this.parentElement.style.background='#222';">
 
                         </div>
                         <div class="merch-info">
@@ -1514,8 +1396,8 @@ if ('IntersectionObserver' in window) {
                     </div>
 <div class="merch-item reveal dual-img" data-img1="./image/merchs/WNTT-tee1.png" data-img2="./image/merchs/WNTT-tee2.png" data-name="We Need The Truth" data-category="Tee" data-price="$25.9" onclick="openMerchPopup(this)">
                         <div class="merch-img-wrap">
-                            <img loading="lazy" decoding="async" src="./image/merchs/WNTT-tee1.png" alt="We Need The Truth" class="merch-img">
-                            <img loading="lazy" decoding="async" src="./image/merchs/WNTT-tee2.png" alt="We Need The Truth Back" class="merch-img-hover">
+                            <img loading="lazy" decoding="async" src="./image/merchs/WNTT-tee1.png" alt="We Need The Truth" class="merch-img" onerror="this.style.opacity='0.5'; this.parentElement.style.background='#222';">
+                            <img loading="lazy" decoding="async" src="./image/merchs/WNTT-tee2.png" alt="We Need The Truth Back" class="merch-img-hover" onerror="this.style.display='none';">
                         </div>
                         <div class="merch-info">
                             <div class="merch-name">We Need The Truth</div>
@@ -1525,7 +1407,7 @@ if ('IntersectionObserver' in window) {
                     </div>
 <div class="merch-item reveal" data-img1="./image/merchs/cdg-ls1.png" data-img2="" data-name="Coup De Grace" data-category="Sweatshirt" data-price="$35.9" onclick="openMerchPopup(this)">
                         <div class="merch-img-wrap">
-                            <img loading="lazy" decoding="async" src="./image/merchs/cdg-ls1.png" alt="Coup De Grace" class="merch-img">
+                            <img loading="lazy" decoding="async" src="./image/merchs/cdg-ls1.png" alt="Coup De Grace" class="merch-img" onerror="this.style.opacity='0.5'; this.parentElement.style.background='#222';">
 
                         </div>
                         <div class="merch-info">
@@ -1536,7 +1418,7 @@ if ('IntersectionObserver' in window) {
                     </div>
 <div class="merch-item reveal" data-img1="./image/merchs/Button1.png" data-img2="" data-name="CN Logo" data-category="Botton" data-price="$12.9" onclick="openMerchPopup(this)">
                         <div class="merch-img-wrap">
-                            <img loading="lazy" decoding="async" src="./image/merchs/Button1.png" alt="CN Logo" class="merch-img">
+                            <img loading="lazy" decoding="async" src="./image/merchs/Button1.png" alt="CN Logo" class="merch-img" onerror="this.style.opacity='0.5'; this.parentElement.style.background='#222';">
 
                         </div>
                         <div class="merch-info">
@@ -1547,8 +1429,8 @@ if ('IntersectionObserver' in window) {
                     </div>
 <div class="merch-item reveal dual-img" data-img1="./image/merchs/fb-h1a.png" data-img2="./image/merchs/fb-h1b.png" data-name="Fortress Besieged" data-category="Hoodies" data-price="$39.9" onclick="openMerchPopup(this)">
                         <div class="merch-img-wrap">
-                            <img loading="lazy" decoding="async" src="./image/merchs/fb-h1a.png" alt="Fortress Besieged" class="merch-img">
-                            <img loading="lazy" decoding="async" src="./image/merchs/fb-h1b.png" alt="Fortress Besieged Back" class="merch-img-hover">
+                            <img loading="lazy" decoding="async" src="./image/merchs/fb-h1a.png" alt="Fortress Besieged" class="merch-img" onerror="this.style.opacity='0.5'; this.parentElement.style.background='#222';">
+                            <img loading="lazy" decoding="async" src="./image/merchs/fb-h1b.png" alt="Fortress Besieged Back" class="merch-img-hover" onerror="this.style.display='none';">
                         </div>
                         <div class="merch-info">
                             <div class="merch-name">Fortress Besieged</div>
@@ -1558,7 +1440,7 @@ if ('IntersectionObserver' in window) {
                     </div>
 <div class="merch-item reveal" data-img1="./image/merchs/logo-cap1.png" data-img2="" data-name="Anti-" data-category="Cap" data-price="$12.9" onclick="openMerchPopup(this)">
                         <div class="merch-img-wrap">
-                            <img loading="lazy" decoding="async" src="./image/merchs/logo-cap1.png" alt="Anti-" class="merch-img">
+                            <img loading="lazy" decoding="async" src="./image/merchs/logo-cap1.png" alt="Anti-" class="merch-img" onerror="this.style.opacity='0.5'; this.parentElement.style.background='#222';">
 
                         </div>
                         <div class="merch-info">
@@ -1569,7 +1451,7 @@ if ('IntersectionObserver' in window) {
                     </div>
 <div class="merch-item reveal" data-img1="./image/merchs/fb-vinylb.png" data-img2="" data-name="Fortress Besieged" data-category="Vinyl" data-price="$29.9" onclick="openMerchPopup(this)">
                         <div class="merch-img-wrap">
-                            <img loading="lazy" decoding="async" src="./image/merchs/fb-vinylb.png" alt="Fortress Besieged" class="merch-img">
+                            <img loading="lazy" decoding="async" src="./image/merchs/fb-vinylb.png" alt="Fortress Besieged" class="merch-img" onerror="this.style.opacity='0.5'; this.parentElement.style.background='#222';">
 
                         </div>
                         <div class="merch-info">
@@ -1580,7 +1462,7 @@ if ('IntersectionObserver' in window) {
                     </div>
 <div class="merch-item reveal" data-img1="./image/merchs/Anarchy-tee.png" data-img2="" data-name="Anarchy" data-category="Tee" data-price="$22.9" onclick="openMerchPopup(this)">
                         <div class="merch-img-wrap">
-                            <img loading="lazy" decoding="async" src="./image/merchs/Anarchy-tee.png" alt="Anarchy" class="merch-img">
+                            <img loading="lazy" decoding="async" src="./image/merchs/Anarchy-tee.png" alt="Anarchy" class="merch-img" onerror="this.style.opacity='0.5'; this.parentElement.style.background='#222';">
                         </div>
                         <div class="merch-info">
                             <div class="merch-name">Anarchy</div>
@@ -1876,7 +1758,34 @@ if ('IntersectionObserver' in window) {
 </script>
 
 
-<!-- MERCH 轮播功能 -->
+<!-- MERCH 优化加载 -->
+<script>
+// 预加载关键图片函数
+function preloadMerchImages() {
+    const criticalImages = [
+        './image/merchs/Anti-teeb1.png',
+        './image/merchs/DevilSukll-teeb1.png',
+        './image/merchs/WNTT-tee1.png',
+        './image/merchs/cdg-ls1.png',
+        './image/merchs/Button1.png',
+        './image/merchs/fb-h1a.png'
+    ];
+
+    criticalImages.forEach(src => {
+        const img = new Image();
+        img.src = src;
+    });
+}
+
+// 页面加载完成后预加载
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', preloadMerchImages);
+} else {
+    preloadMerchImages();
+}
+</script>
+
+<!-- MERCH 轮播功能 - 优化版 -->
 <script>
 (function() {
     'use strict';
@@ -1884,6 +1793,7 @@ if ('IntersectionObserver' in window) {
     let merchCurrentIndex = 0;
     let merchTrack, merchItems, prevBtn, nextBtn;
     let isMobile = false;
+    let isInitialized = false;
 
     function initElements() {
         merchTrack = document.querySelector('.merch-track');
@@ -1898,10 +1808,10 @@ if ('IntersectionObserver' in window) {
         const isPortrait = window.innerHeight > window.innerWidth;
         isMobile = width <= 768;
 
-        if (width <= 480) return 2; // 超小屏2个
-        if (width <= 768) return 3; // 移动端3个
-        if (width >= 1025 && !isPortrait) return 6; // 桌面横屏6个
-        return 3; // 桌面竖屏3个
+        if (width <= 480) return 2;
+        if (width <= 768) return 3;
+        if (width >= 1025 && !isPortrait) return 6;
+        return 3;
     }
 
     window.updateMerchCarousel = function() {
@@ -1911,17 +1821,15 @@ if ('IntersectionObserver' in window) {
         const totalItems = merchItems.length;
         const maxIndex = Math.max(0, totalItems - itemsPerView);
 
-        // 限制索引
         merchCurrentIndex = Math.max(0, Math.min(merchCurrentIndex, maxIndex));
 
-        // 计算位移
-        const containerWidth = isMobile ? window.innerWidth : window.innerWidth;
+        // 使用translate3d启用硬件加速
+        const containerWidth = window.innerWidth;
         const itemWidth = containerWidth / itemsPerView;
         const offset = -merchCurrentIndex * itemWidth;
 
-        merchTrack.style.transform = 'translateX(' + offset + 'px)';
+        merchTrack.style.transform = 'translate3d(' + offset + 'px, 0, 0)';
 
-        // 更新导航按钮（仅桌面端）
         if (!isMobile && prevBtn && nextBtn) {
             if (totalItems > itemsPerView) {
                 prevBtn.classList.toggle('visible', merchCurrentIndex > 0);
@@ -1944,131 +1852,104 @@ if ('IntersectionObserver' in window) {
         window.updateMerchCarousel();
     };
 
-    function shuffleMerchItems() {
-        if (!merchTrack) return;
-        const items = Array.from(merchTrack.children);
-        // Fisher-Yates 洗牌算法
-        for (let i = items.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            merchTrack.appendChild(items[j]);
-        }
-    }
-
     function init() {
+        if (isInitialized) return;
+
         if (initElements()) {
-            shuffleMerchItems(); // 随机排序商品
-            // 使用 requestIdleCallback 或 setTimeout 延迟初始化，避免阻塞主线程
-            if ('requestIdleCallback' in window) {
-                requestIdleCallback(function() {
-                    window.updateMerchCarousel();
-                }, { timeout: 2000 });
-            } else {
-                setTimeout(function() {
-                    window.updateMerchCarousel();
-                }, 100);
-            }
+            isInitialized = true;
+            // 立即初始化，不延迟
+            window.updateMerchCarousel();
+
+            // 图片加载完成后重新计算布局
+            const images = merchTrack.querySelectorAll('img');
+            let loadedCount = 0;
+            const totalImages = images.length;
+
+            images.forEach(img => {
+                if (img.complete) {
+                    loadedCount++;
+                } else {
+                    img.addEventListener('load', function() {
+                        loadedCount++;
+                        if (loadedCount >= Math.min(totalImages, 3)) {
+                            window.updateMerchCarousel();
+                        }
+                    }, { once: true });
+
+                    img.addEventListener('error', function() {
+                        loadedCount++;
+                        console.warn('图片加载失败:', this.src);
+                    }, { once: true });
+                }
+            });
         }
     }
 
-    // 窗口大小改变
+    // 窗口大小改变防抖
     let resizeTimer;
     window.addEventListener('resize', function() {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(function() {
             merchCurrentIndex = 0;
             window.updateMerchCarousel();
-        }, 250);
+        }, 150);
     });
 
-    // 初始化
+    // 立即初始化（不移除延迟）
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
     } else {
         init();
     }
 
-    // 触摸滑动 - 所有设备都支持
+    // 触摸滑动优化
     let touchStartX = 0;
     let touchStartY = 0;
     let isDragging = false;
 
-    merchTrack.addEventListener('touchstart', function(e) {
-        touchStartX = e.changedTouches[0].screenX;
-        touchStartY = e.changedTouches[0].screenY;
-        isDragging = true;
-        merchTrack.style.transition = 'none';
-    }, {passive: true});
+    if (merchTrack) {
+        merchTrack.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
+            isDragging = true;
+            merchTrack.style.transition = 'none';
+        }, {passive: true});
 
-    merchTrack.addEventListener('touchmove', function(e) {
-        if (!isDragging) return;
+        merchTrack.addEventListener('touchmove', function(e) {
+            if (!isDragging) return;
 
-        const touchX = e.changedTouches[0].screenX;
-        const touchY = e.changedTouches[0].screenY;
-        const diffX = touchStartX - touchX;
-        const diffY = touchStartY - touchY;
+            const touchX = e.changedTouches[0].screenX;
+            const touchY = e.changedTouches[0].screenY;
+            const diffX = touchStartX - touchX;
+            const diffY = touchStartY - touchY;
 
-        // 主要是水平滑动时才阻止默认行为
-        if (Math.abs(diffX) > Math.abs(diffY)) {
-            e.preventDefault();
-        }
-    }, {passive: false});
-
-    merchTrack.addEventListener('touchend', function(e) {
-        if (!isDragging) return;
-        isDragging = false;
-
-        merchTrack.style.transition = 'transform 0.3s ease';
-
-        const touchEndX = e.changedTouches[0].screenX;
-        const touchEndY = e.changedTouches[0].screenY;
-        const diffX = touchStartX - touchEndX;
-        const diffY = touchStartY - touchEndY;
-
-        // 水平滑动超过50px触发切换
-        if (Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY)) {
-            if (diffX > 0) {
-                window.scrollMerch(1); // 左滑 - 下一个
-            } else {
-                window.scrollMerch(-1); // 右滑 - 上一个
+            if (Math.abs(diffX) > Math.abs(diffY)) {
+                e.preventDefault();
             }
-        } else {
-            // 回弹到当前位置
-            window.updateMerchCarousel();
-        }
-    }, {passive: true});
+        }, {passive: false});
 
-    // 鼠标拖拽（桌面端）
-    let mouseStartX = 0;
-    let isMouseDragging = false;
+        merchTrack.addEventListener('touchend', function(e) {
+            if (!isDragging) return;
+            isDragging = false;
 
-    merchTrack.addEventListener('mousedown', function(e) {
-        mouseStartX = e.clientX;
-        isMouseDragging = true;
-        merchTrack.style.transition = 'none';
-        merchTrack.style.cursor = 'grabbing';
-    });
+            merchTrack.style.transition = 'transform 0.3s ease';
 
-    document.addEventListener('mousemove', function(e) {
-        if (!isMouseDragging) return;
-        e.preventDefault();
-    });
+            const touchEndX = e.changedTouches[0].screenX;
+            const touchEndY = e.changedTouches[0].screenY;
+            const diffX = touchStartX - touchEndX;
+            const diffY = touchStartY - touchEndY;
 
-    document.addEventListener('mouseup', function(e) {
-        if (!isMouseDragging) return;
-        isMouseDragging = false;
-
-        merchTrack.style.transition = 'transform 0.3s ease';
-        merchTrack.style.cursor = 'grab';
-
-        const diff = mouseStartX - e.clientX;
-        if (Math.abs(diff) > 50) {
-            window.scrollMerch(diff > 0 ? 1 : -1);
-        } else {
-            window.updateMerchCarousel();
-        }
-    });
-
-    merchTrack.style.cursor = 'grab';
+            if (Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY)) {
+                if (diffX > 0) {
+                    window.scrollMerch(1);
+                } else {
+                    window.scrollMerch(-1);
+                }
+            } else {
+                window.updateMerchCarousel();
+            }
+        }, {passive: true});
+    }
 })();
 </script>
 
@@ -2092,6 +1973,7 @@ document.addEventListener('keydown', function(e) {
     }
 });
 </script>
+
 
 
 <script>

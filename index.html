@@ -1256,6 +1256,40 @@
     .merch-img-wrap {
         min-height: 150px;
     }
+
+/* Banner 3 到 Music 渐变过渡 */
+.banner3-gradient-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    background: linear-gradient(to bottom, 
+        transparent 0%, 
+        rgba(0,0,0,0.3) 30%,
+        rgba(0,0,0,0.7) 70%,
+        #000 100%
+    );
+    z-index: 10;
+    pointer-events: none;
+}
+
+/* Music 区域顶部微调 */
+.music-video-section {
+    position: relative;
+}
+
+.music-video-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background: linear-gradient(to bottom, #000 0%, transparent 100%);
+    z-index: 5;
+    pointer-events: none;
+}
 </style>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 

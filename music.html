@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>The Noname無名 - Music</title>
+    <link rel="icon" href="/nonamepunks/image/toplogo.png" type="image/png">
+    <link rel="shortcut icon" href="/nonamepunks/image/toplogo.png" type="image/png">
+    <link rel="apple-touch-icon" href="/nonamepunks/image/toplogo.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+        :root { --logo-red: #DC2626; --blood-red: #B91C1C; --deep-red: #7F1D1D; --black: #000000; --white: #FFFFFF; --silver: #C0C0C0; --dark-gray: #1a1a1a; }
+        body { background-color: #000; background-image: url('./image/blackbg.webp'); background-repeat: repeat-y; background-position: center top; background-size: 100% auto; color: var(--white); font-family: 'Arial Black', 'Helvetica Neue', Helvetica, Arial, sans-serif; overflow-x: hidden; cursor: crosshair; }
+
+        @keyframes hardGlitch { 0% { opacity: 0; transform: translateX(-10px); filter: hue-rotate(90deg); } 20% { opacity: 1; transform: translateX(5px); filter: hue-rotate(-90deg) drop-shadow(3px 0 var(--logo-red)); } 40% { transform: translateX(-3px); filter: hue-rotate(45deg) drop-shadow(-3px 0 var(--silver)); } 60% { transform: translateX(2px); filter: hue-rotate(0deg) drop-shadow(2px 0 var(--blood-red)); } 80% { transform: translateX(-1px); filter: drop-shadow(1px 0 var(--logo-red)); } 100% { opacity: 1; transform: translateX(0); filter: none; } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* 导航栏 - 与index完全一致 */
+        .navbar { position: fixed; top: -100px; left: 0; width: 100%; background: rgba(0,0,0,0.7); border-bottom: none; z-index: 1000; padding: 4px 0; transition: top 0.3s steps(3); }
+        .navbar.visible { top: 0; }
+        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: center; align-items: center; padding: 0 30px; position: relative; }
+
+        /* 骷髅图 - 放大到与导航栏高度一致 */
+        .nav-skull { width: 60px; height: 60px; cursor: pointer; transition: all 0.3s; filter: grayscale(100%) brightness(0.8); object-fit: contain; }
+        .nav-skull:hover { filter: grayscale(0%) brightness(1.2) drop-shadow(0 0 15px var(--logo-red)); transform: scale(1.1) rotate(5deg); }
+        .nav-skull-left { margin-right: 20px; }
+        .nav-skull-right { margin-left: 20px; }
+
+        .nav-dragon { width: 50px; height: 50px; cursor: pointer; transition: all 0.2s; filter: grayscale(100%) brightness(0.8); object-fit: contain; }
+        .nav-dragon:hover { filter: grayscale(0%) brightness(1.2) drop-shadow(0 0 10px var(--logo-red)); transform: scale(1.1); }
+        .nav-dragon-left { margin-right: 40px; }
+        .nav-dragon-right { margin-left: 40px; }
+
+        .nav-links { display: flex; gap: 50px; list-style: none; justify-content: center; }
+        .nav-links a { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; color: var(--white); text-decoration: none; font-size: 18px; letter-spacing: 4px; text-transform: uppercase; position: relative; transition: all 0.1s; padding: 10px 0; }
+        .nav-links a:hover { color: var(--logo-red); text-shadow: -1px -1px 0 rgba(0,0,0,0.8), 1px -1px 0 rgba(0,0,0,0.8), -1px 1px 0 rgba(0,0,0,0.8), 1px 1px 0 rgba(0,0,0,0.8), 0 0 10px var(--logo-red), 0 0 20px var(--logo-red); transform: skewX(-5deg); }
+
+        /* 龙点击特效 - 与index完全一致 */
+        .dragon-clone { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0); filter: grayscale(0%) brightness(3) drop-shadow(0 0 60px #DC2626) drop-shadow(0 0 120px rgba(220,38,38,0.9)); z-index: 99999; pointer-events: none; opacity: 0; background-repeat: no-repeat; background-position: center; will-change: transform, opacity; }
+        .dragon-clone.animate { animation: dragonFlash 1.2s ease-out forwards; }
+        @keyframes dragonFlash { 0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; } 20% { transform: translate(-50%, -50%) scale(1.0); opacity: 1; } 50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; } 80% { transform: translate(-50%, -50%) scale(1.0); opacity: 1; } 100% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; } }
+        .dragon-star-ring { position: fixed; top: 50%; left: 50%; width: 60vmin; height: 60vmin; background: rgba(220,38,38,0.9); clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); transform: translate(-50%, -50%) scale(0) rotate(0deg); z-index: 99998; animation: starExpand 1.2s ease-out forwards; will-change: transform, opacity; }
+        @keyframes starExpand { 0% { transform: translate(-50%, -50%) scale(0) rotate(0deg); opacity: 0; } 30% { opacity: 1; } 100% { transform: translate(-50%, -50%) scale(3) rotate(180deg); opacity: 0; } }
+
+        /* Banner3 视频区域 - 完全复制index */
+        .banner-section { width: 100%; background: url('./image/blackbg.webp') repeat-y center top; background-size: 100% auto; position: relative; }
+        .video-banner { overflow: hidden; margin-bottom: 0; }
+        .video-banner-section { margin-bottom: 0; background: url('./image/blackbg.webp') repeat-y center top; background-size: 100% auto; }
+        .banner { width: 100%; background: var(--dark-gray); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .banner img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+        .banner-dark-effect { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; opacity: 0.3; }
+        .banner-cinematic { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.6) 100%), linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, transparent 20%, transparent 80%, rgba(0,0,0,0.3) 100%), linear-gradient(to right, rgba(0,0,0,0.2) 0%, transparent 10%, transparent 90%, rgba(0,0,0,0.2) 100%); }
+        .banner3-gradient-overlay { position: absolute; bottom: 0; left: 0; width: 100%; height: 150px; background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.5) 70%, #000 100%); z-index: 5; pointer-events: none; }
+
+        /* 视频区域打字机效果 */
+        .video-typewriter-container { position: absolute; top: 62%; left: 0; right: 0; width: 100%; padding: 40px 60px 0; z-index: 10; text-align: center; display: flex; align-items: flex-start; justify-content: center; overflow: hidden; pointer-events: none; }
+        .video-typewriter-text { font-family: 'Courier New', monospace; font-size: clamp(11px, 1.2vw, 16px); line-height: 1.6; color: #fff; text-shadow: 0 0 8px rgba(220, 38, 38, 0.9), 0 0 16px rgba(220, 38, 38, 0.7), 0 0 24px rgba(220, 38, 38, 0.5), 2px 2px 4px rgba(0,0,0,1); letter-spacing: 0.5px; max-width: 900px; margin: 0 auto; text-align: center; white-space: pre-wrap; word-wrap: break-word; }
+        .video-typewriter-text::after { content: '|'; animation: cursorBlink 1s infinite; color: var(--logo-red); text-shadow: 0 0 10px var(--logo-red); }
+        @keyframes cursorBlink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
+
+        /* Music & Video 区域 */
+        .music-video-section { width: 100%; background: linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 15%, rgba(0,0,0,0.4) 85%, rgba(0,0,0,0.85) 100%), url('./image/musicbg.webp'), url('./image/blackbg.webp'); background-size: cover, cover, cover; background-position: center, center, center; background-repeat: no-repeat, no-repeat, no-repeat; position: relative; min-height: 100vh; }
+        .music-video-section::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 15%, rgba(0,0,0,0.4) 85%, rgba(0,0,0,0.85) 100%); z-index: 1; }
+        .music-video-section::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.15) 2px, rgba(0,0,0,0.15) 4px); pointer-events: none; z-index: 2; }
+        .music-video-section::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 80px; background: linear-gradient(to bottom, #000 0%, rgba(0,0,0,0.6) 60%, transparent 100%); z-index: 5; pointer-events: none; }
+        .music-section-inner { position: relative; z-index: 10; padding: 80px 40px 40px; }
+        .section-title { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-size: 48px; text-align: center; margin-bottom: 50px; letter-spacing: 12px; text-transform: uppercase; color: var(--logo-red); position: relative; text-shadow: -1px -1px 0 rgba(0,0,0,0.8), 1px -1px 0 rgba(0,0,0,0.8), -1px 1px 0 rgba(0,0,0,0.8), 1px 1px 0 rgba(0,0,0,0.8), 0 0 10px rgba(220, 38, 38, 0.9), 0 0 20px rgba(220, 38, 38, 0.6), 0 0 30px rgba(220, 38, 38, 0.3); z-index: 10; font-weight: 900; }
+        .music-content-new { width: 100%; max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.3fr 1fr; gap: 60px; align-items: center; }
+        .music-player-side { background: rgba(0,0,0,0.7); border: 2px solid rgba(255,255,255,0.2); padding: 20px; text-align: center; backdrop-filter: blur(10px); transition: all 0.3s; }
+        .music-player-side:hover { border-color: var(--logo-red); box-shadow: 0 0 30px rgba(220, 38, 38, 0.3); }
+        .music-player-title { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-size: 20px; letter-spacing: 3px; margin-bottom: 15px; color: var(--white); border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 10px; }
+        .music-player-embed { width: 100%; border: none; background: rgba(0,0,0,0.3); }
+        .music-center { text-align: center; padding: 20px; }
+        .album-cover-featured { width: 420px; height: 420px; background: var(--dark-gray); margin: 0 auto 30px; border: 3px solid var(--logo-red); box-shadow: 0 0 60px rgba(220, 38, 38, 0.6); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; transition: all 0.3s; }
+        .album-cover-featured:hover { transform: scale(1.02); box-shadow: 0 0 80px rgba(220, 38, 38, 0.8); }
+        .album-cover-featured img { width: 100%; height: 100%; object-fit: cover; }
+        .album-title-featured { font-family: 'Arial Black', 'Helvetica Neue', Arial, sans-serif; font-size: 42px; letter-spacing: 10px; word-spacing: 5px; margin-bottom: 15px; color: var(--white); text-shadow: -1px -1px 0 rgba(0,0,0,0.9), 1px -1px 0 rgba(0,0,0,0.9), -1px 1px 0 rgba(0,0,0,0.9), 1px 1px 0 rgba(0,0,0,0.9), 0 0 10px rgba(220, 38, 38, 0.7), 0 0 20px rgba(220, 38, 38, 0.4); text-transform: uppercase; font-weight: 900; }
+        .album-subtitle { font-family: 'Arial Black', Arial, sans-serif; font-size: 16px; color: var(--silver); letter-spacing: 3px; margin-bottom: 30px; }
+        .video-section-inner { position: relative; z-index: 10; padding: 80px 40px; border-top: 1px solid rgba(220, 38, 38, 0.3); }
+        .video-container { width: 100%; max-width: 1200px; margin: 0 auto; text-align: center; }
+        .video-player { width: 100%; aspect-ratio: 16 / 9; max-height: 600px; background: rgba(0,0,0,0.5); border: 3px solid var(--logo-red); display: flex; align-items: center; justify-content: center; margin-bottom: 30px; position: relative; cursor: pointer; box-shadow: 0 0 60px rgba(220, 38, 38, 0.4); transition: all 0.3s; overflow: hidden; }
+        .video-player:hover { box-shadow: 0 0 100px rgba(220, 38, 38, 0.6); border-color: var(--logo-red); }
+        .play-btn { width: 120px; height: 120px; border: 5px solid var(--logo-red); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s; box-shadow: 0 0 50px rgba(220, 38, 38, 0.7); background: rgba(0,0,0,0.6); position: relative; z-index: 100; }
+        .play-btn::after { content: '▶'; font-size: 50px; margin-left: 10px; color: var(--logo-red); }
+        .video-player:hover .play-btn { background: var(--logo-red); border-color: var(--logo-red); transform: scale(1.1); box-shadow: 0 0 80px var(--logo-red); }
+        .video-player:hover .play-btn::after { color: var(--white); }
+
+        /* 分隔线 - 与index一致 */
+        .silver-line { height: 1px; background: linear-gradient(to right, transparent 0%, var(--deep-red) 20%, var(--logo-red) 50%, var(--deep-red) 80%, transparent 100%); position: relative; overflow: hidden; box-shadow: 0 0 10px rgba(127, 29, 29, 0.3); opacity: 0.6; }
+
+        /* Discography */
+        .discography-section { width: 100%; background: url('./image/blackbg.webp') repeat-y center top; background-size: 100% auto; position: relative; padding: 80px 0; overflow: hidden; }
+        .discography-section::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 10%, transparent 90%, rgba(0,0,0,0.8) 100%); pointer-events: none; z-index: 1; }
+        .chinese-line { position: absolute; left: 50%; transform: translateX(-50%); width: 2px; height: 100%; background: linear-gradient(to bottom, transparent 0%, var(--deep-red) 5%, var(--logo-red) 50%, var(--deep-red) 95%, transparent 100%); z-index: 2; opacity: 0.6; }
+        .albums-container { max-width: 1200px; margin: 0 auto; position: relative; z-index: 10; padding: 0 40px; }
+        .album-item { display: flex; align-items: flex-start; margin-bottom: -100px; position: relative; opacity: 0; transform: translateY(50px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .album-item.active { opacity: 1; transform: translateY(0); }
+        .album-item:last-child { margin-bottom: 0; }
+        .album-item:nth-child(odd) { flex-direction: row; }
+        .album-item:nth-child(even) { flex-direction: row-reverse; }
+        .album-cover-wrapper { width: 45%; position: relative; z-index: 10; cursor: pointer; transition: all 0.4s; }
+        .album-cover { width: 100%; aspect-ratio: 1; background: var(--dark-gray); border: 3px solid rgba(220, 38, 38, 0.3); box-shadow: 0 10px 40px rgba(0,0,0,0.8); position: relative; overflow: hidden; transition: all 0.4s; }
+        .album-cover img { width: 100%; height: 100%; object-fit: cover; transition: all 0.4s; }
+        .album-cover-hover { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.4s; }
+        .album-cover-wrapper:hover .album-cover { border-color: var(--logo-red); box-shadow: 0 0 50px rgba(220, 38, 38, 0.6); transform: scale(1.02); }
+        /* hover切换由JS控制 */
+        /* hover切换由JS控制 */
+        .album-info { width: 55%; padding: 40px 50px; position: relative; z-index: 5; opacity: 0.4; transition: all 0.4s; transform: translateY(150px); }
+        .album-item:nth-child(odd) .album-info { padding-left: 80px; }
+        .album-item:nth-child(even) .album-info { padding-right: 80px; text-align: right; }
+        .album-item:hover .album-info { opacity: 1; }
+        .album-item.active-hovered .album-info { opacity: 1; }
+        .album-item.dimmed { opacity: 0.3; }
+        .album-title { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-size: 36px; font-style: italic; letter-spacing: 4px; color: var(--white); margin-bottom: 15px; text-shadow: -1px -1px 0 rgba(0,0,0,0.9), 1px -1px 0 rgba(0,0,0,0.9), -1px 1px 0 rgba(0,0,0,0.9), 1px 1px 0 rgba(0,0,0,0.9), 0 0 10px rgba(220, 38, 38, 0.5); transition: all 0.3s; }
+        .album-item:hover .album-title { color: var(--logo-red); text-shadow: -1px -1px 0 rgba(0,0,0,0.9), 1px -1px 0 rgba(0,0,0,0.9), -1px 1px 0 rgba(0,0,0,0.9), 1px 1px 0 rgba(0,0,0,0.9), 0 0 20px rgba(220, 38, 38, 0.8); }
+        .album-date { font-family: 'Arial Black', Arial, sans-serif; font-size: 14px; color: var(--silver); letter-spacing: 3px; margin-bottom: 30px; text-transform: uppercase; }
+        .album-links { display: flex; gap: 20px; flex-wrap: wrap; }
+        .album-item:nth-child(even) .album-links { justify-content: flex-end; }
+        .stream-btn { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; padding: 8px 20px; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; border: 2px solid var(--logo-red); background: rgba(0,0,0,0.6); color: var(--white); cursor: pointer; position: relative; overflow: hidden; transition: all 0.3s; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+        .stream-btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: var(--logo-red); transition: left 0.3s; z-index: -1; }
+        .stream-btn:hover::before { left: 0; }
+        .stream-btn:hover { color: var(--white); transform: skewX(-5deg); box-shadow: 0 0 30px rgba(220, 38, 38, 0.6); }
+        .stream-btn.disabled { border-color: #444; color: #666; cursor: not-allowed; opacity: 0.5; }
+        .stream-btn.disabled::before { display: none; }
+        .stream-btn.disabled:hover { transform: none; box-shadow: none; }
+        .album-connector { position: absolute; top: 50%; width: 60px; height: 1px; background: linear-gradient(to right, var(--deep-red), var(--logo-red), var(--deep-red)); z-index: 3; }
+        .album-item:nth-child(odd) .album-connector { left: 45%; transform: translateY(-50%); }
+        .album-item:nth-child(even) .album-connector { right: 45%; transform: translateY(-50%) scaleX(-1); }
+        .album-connector::after { content: ''; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 8px; height: 8px; background: var(--logo-red); border-radius: 50%; box-shadow: 0 0 10px var(--logo-red), 0 0 20px rgba(220, 38, 38, 0.5); }
+
+        /* Footer - 与index一致 */
+        .footer-section { width: 100%; background: url('./image/downbg.webp') repeat-y center top, url('./image/blackbg.webp') repeat-y center top; position: relative; padding: 60px 0 0 0; background-size: 100% auto, 100% auto; }
+        .footer-section::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1; }
+        .footer-main { position: relative; z-index: 10; max-width: 1400px; margin: 0 auto; padding: 40px; display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 40px; }
+        .footer-left { display: flex; flex-direction: column; gap: 15px; }
+        .footer-dropdown { border: 1px solid rgba(220, 38, 38, 0.3); background: rgba(0,0,0,0.5); }
+        .dropdown-header { padding: 12px 20px; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-size: 14px; letter-spacing: 3px; color: var(--white); cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: all 0.3s; text-transform: uppercase; }
+        .dropdown-header:hover { background: rgba(220, 38, 38, 0.2); color: var(--logo-red); }
+        .dropdown-header::after { content: '+'; font-size: 20px; transition: transform 0.3s; }
+        .footer-dropdown.active .dropdown-header::after { transform: rotate(45deg); }
+        .dropdown-content { max-height: 0; overflow: hidden; transition: max-height 0.3s; }
+        .footer-dropdown.active .dropdown-content { max-height: 300px; }
+        .dropdown-content a { display: block; padding: 10px 20px; font-family: 'Arial Black', Arial, sans-serif; font-size: 12px; color: var(--silver); text-decoration: none; letter-spacing: 1px; transition: all 0.2s; border-top: 1px solid rgba(220, 38, 38, 0.1); }
+        .dropdown-content a:hover { color: var(--logo-red); padding-left: 30px; background: rgba(220, 38, 38, 0.1); }
+        .footer-center { text-align: center; display: flex; flex-direction: column; justify-content: center; }
+        .subscribe-title { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-size: 32px; letter-spacing: 4px; color: var(--white); margin-bottom: 15px; text-transform: uppercase; }
+        .subscribe-subtitle { font-family: 'Arial Black', Arial, sans-serif; font-size: 12px; color: var(--silver); letter-spacing: 2px; margin-bottom: 30px; }
+        .subscribe-form { display: flex; gap: 10px; justify-content: center; margin-bottom: 20px; }
+        .subscribe-input { flex: 1; max-width: 300px; padding: 15px 20px; background: transparent; border: 2px solid var(--logo-red); color: var(--white); font-family: 'Arial Black', Arial, sans-serif; font-size: 14px; letter-spacing: 1px; outline: none; transition: all 0.3s; }
+        .subscribe-input::placeholder { color: rgba(255,255,255,0.5); }
+        .subscribe-input:focus { box-shadow: 0 0 20px rgba(220, 38, 38, 0.5); background: rgba(220, 38, 38, 0.1); }
+        .subscribe-btn { padding: 15px 30px; background: transparent; border: 2px solid var(--logo-red); color: var(--white); font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-size: 14px; letter-spacing: 3px; cursor: pointer; transition: all 0.3s; text-transform: uppercase; }
+        .subscribe-btn:hover { background: var(--logo-red); box-shadow: 0 0 30px rgba(220, 38, 38, 0.6); }
+        .privacy-text { font-family: Arial, sans-serif; font-size: 10px; color: rgba(255,255,255,0.4); line-height: 1.6; max-width: 400px; margin: 0 auto; }
+        .footer-right { display: flex; flex-direction: column; align-items: flex-end; justify-content: center; }
+        .footer-right-title { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-size: 14px; letter-spacing: 3px; color: var(--white); margin-bottom: 20px; text-transform: uppercase; }
+        .social-grid { display: grid; grid-template-columns: repeat(4, 45px); gap: 12px; }
+        .social-icon { width: 45px; height: 45px; border: 2px solid rgba(220, 38, 38, 0.5); display: flex; align-items: center; justify-content: center; color: var(--white); text-decoration: none; transition: all 0.3s; background: rgba(0,0,0,0.5); }
+        .social-icon svg { width: 20px; height: 20px; fill: currentColor; }
+        .social-icon:hover { background: var(--logo-red); border-color: var(--logo-red); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(220, 38, 38, 0.5); }
+        .footer-nav { position: relative; z-index: 10; border-top: 1px solid rgba(220, 38, 38, 0.3); border-bottom: 1px solid rgba(220, 38, 38, 0.3); padding: 20px 0; margin-top: 20px; }
+        .footer-nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: center; align-items: center; gap: 40px; padding: 0 40px; }
+        .footer-nav a { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; color: var(--white); text-decoration: none; font-size: 14px; letter-spacing: 3px; text-transform: uppercase; transition: all 0.2s; }
+        .footer-nav a:hover { color: var(--logo-red); text-shadow: -1px -1px 0 rgba(0,0,0,0.8), 1px -1px 0 rgba(0,0,0,0.8), -1px 1px 0 rgba(0,0,0,0.8), 1px 1px 0 rgba(0,0,0,0.8), 0 0 10px var(--logo-red); }
+        .footer-bottom { position: relative; z-index: 10; padding: 30px; text-align: center; background: rgba(0,0,0,0.9); }
+        .footer-slogan { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-size: 24px; letter-spacing: 8px; color: var(--logo-red); margin-bottom: 20px; text-transform: uppercase; text-shadow: -1px -1px 0 rgba(0,0,0,0.8), 1px -1px 0 rgba(0,0,0,0.8), -1px 1px 0 rgba(0,0,0,0.8), 1px 1px 0 rgba(0,0,0,0.8), 0 0 10px rgba(220, 38, 38, 0.8), 0 0 20px rgba(220, 38, 38, 0.4); font-weight: 700; }
+        .footer-copyright { font-family: 'Arial Black', Arial, sans-serif; font-size: 11px; color: var(--silver); letter-spacing: 2px; line-height: 2; }
+        .footer-copyright a { color: var(--white); text-decoration: none; transition: color 0.2s; }
+        .footer-copyright a:hover { color: var(--logo-red); }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .music-content-new { grid-template-columns: 1fr; gap: 40px; }
+            .music-player-side { max-width: 600px; margin: 0 auto; width: 100%; }
+            .album-cover-featured { width: 350px; height: 350px; }
+            .footer-main { grid-template-columns: 1fr; gap: 40px; }
+            .footer-right { align-items: center; }
+            .album-item { margin-bottom: 60px; }
+            .album-title { font-size: 28px; }
+            .music-player-embed { height: 537px !important; }
+        }
+        @media (max-width: 1024px) {
+            .nav-links { gap: 25px; }
+            .nav-links a { font-size: 14px; letter-spacing: 2px; }
+            .nav-skull { width: 50px; height: 50px; }
+            .nav-dragon { width: 40px; height: 40px; }
+            .album-cover-featured { width: 300px; height: 300px; }
+            .album-title-featured { font-size: 36px; letter-spacing: 6px; }
+            .album-item { margin-bottom: 40px; }
+            .album-title { font-size: 24px; }
+            .album-info { padding: 30px; }
+            .album-item:nth-child(odd) .album-info, .album-item:nth-child(even) .album-info { padding-left: 40px; padding-right: 40px; }
+            .video-typewriter-container { top: 55%; padding: 20px 40px 0; }
+            .video-typewriter-text { font-size: clamp(10px, 1.8vw, 14px); line-height: 1.3; }
+            .music-player-embed { height: 537px !important; }
+        }
+        @media (max-width: 768px) {
+            .nav-skull { width: 45px; height: 45px; }
+            .nav-skull-left { margin-right: 10px; }
+            .nav-skull-right { margin-left: 10px; }
+            .nav-dragon { width: 35px; height: 35px; }
+            .nav-dragon-left { margin-right: 15px; }
+            .nav-dragon-right { margin-left: 15px; }
+            .nav-links { gap: 8px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding: 0 5px; }
+            .nav-links a { font-size: 11px; white-space: nowrap; padding: 8px 2px; letter-spacing: 0.5px; }
+            .section-title { font-size: 32px; letter-spacing: 6px; }
+            .album-cover-featured { width: 260px; height: 260px; }
+            .album-title-featured { font-size: 24px; letter-spacing: 4px; }
+            .music-section-inner, .video-section-inner { padding: 40px 20px; }
+            .albums-container { padding: 0 20px; }
+            .album-item { flex-direction: column !important; margin-bottom: 40px; }
+            .album-cover-wrapper { width: 70%; margin: 0 auto; }
+            .album-info { width: 100%; padding: 30px 20px !important; text-align: center !important; opacity: 1; }
+            .album-title { font-size: 22px; }
+            .album-links { justify-content: center !important; }
+            .album-connector { display: none; }
+            .chinese-line { display: none; }
+            .play-btn { width: 60px; height: 60px; border-width: 3px; }
+            .play-btn::after { font-size: 24px; margin-left: 3px; }
+            .footer-nav-container { flex-wrap: nowrap; gap: 8px; overflow-x: auto; padding: 0 10px; }
+            .footer-nav a { font-size: 10px; white-space: nowrap; letter-spacing: 0.5px; }
+            .subscribe-form { flex-direction: column; align-items: center; }
+            .subscribe-input { width: 100%; max-width: 280px; }
+            .video-typewriter-container { top: 56%; left: 2%; right: 2%; width: 96%; padding: 10px 15px 0; }
+            .video-typewriter-text { font-size: clamp(9px, 2.8vw, 13px); line-height: 1.25; }
+            .music-player-embed { height: 537px !important; }
+        }
+        @media (max-width: 480px) {
+            .album-cover-wrapper { width: 85%; }
+            .album-title { font-size: 18px; letter-spacing: 2px; }
+            .stream-btn { padding: 6px 16px; font-size: 11px; }
+            .video-typewriter-text { font-size: clamp(8px, 3.2vw, 12px); }
+            .music-player-embed { height: 537px !important; }
+        }
+        @media (max-width: 360px) {
+            .video-typewriter-text { font-size: clamp(7px, 3.5vw, 11px); line-height: 1.2; }
+            .music-player-embed { height: 537px !important; }
+        }
+    
+        /* 电脑端竖屏：文字按钮下移100px */
+        @media (orientation: portrait) and (min-width: 768px) {
+            .album-info {
+                transform: translateY(100px) !important;
+            }
+        }
+
+        /* 平板横屏：文字按钮下移80px */
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .album-info {
+                transform: translateY(80px) !important;
+            }
+        }
+
+        /* 移动端：文字按钮下移60px */
+        @media (max-width: 768px) {
+            .album-info {
+                transform: translateY(60px) !important;
+            }
+        }
+
+        /* 小屏移动端：文字按钮下移40px */
+        @media (max-width: 480px) {
+            .album-info {
+                transform: translateY(40px) !important;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="./index.html"><img src="./image/skull26s.webp" alt="Logo" class="nav-skull nav-skull-left"></a>
+            <a href="#" onclick="scrollToTop(); return false;"><img src="./image/dragonL.png" alt="Dragon Left" class="nav-dragon nav-dragon-left" id="dragonLeft"></a>
+            <ul class="nav-links">
+                <li><a href="./index.html#tour">TOUR</a></li>
+                <li><a href="./music.html">MUSIC</a></li>
+                <li><a href="./index.html#video">VIDEO</a></li>
+                <li><a href="./index.html#merch">STORE</a></li>
+                <li><a href="./index.html#footer">Contact</a></li>
+                <li><a href="http://emanonent.wixstudio.com/livegigs/antiipa" target="_blank">ANTI-IPA</a></li>
+            </ul>
+            <a href="#" onclick="scrollToTop(); return false;"><img src="./image/dragonR.png" alt="Dragon Right" class="nav-dragon nav-dragon-right" id="dragonRight"></a>
+            <a href="./cn.html"><img src="./image/skull26g.webp" alt="Logo" class="nav-skull nav-skull-right"></a>
+        </div>
+    </nav>
+
+    <!-- Banner3 视频区域 - 完全复制index -->
+    <section class="banner-section video-banner-section" id="banner3">
+        <div class="banner reveal video-banner" style="position: relative; aspect-ratio: 1280/672; overflow: hidden; background: #000;">
+            <div class="video-static-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('./image/banner3-poster.jpg') center/cover no-repeat; z-index: 0;"></div>
+            <video id="bannerVideo" autoplay muted loop playsinline preload="metadata" poster="./image/banner3-poster.jpg" style="width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.5s;" onloadeddata="this.style.opacity=1" oncanplay="this.style.opacity=1">
+                <source src="https://video.wixstatic.com/video/d502ca_02f77ea8c1204a13ad02d6ebd762d136/720p/webm/file.webm" type="video/webm">
+                <source src="https://video.wixstatic.com/video/d502ca_cae18d24aaad4b468c7b2b2160253319/720p/mp4/file.mp4" type="video/mp4">
+            </video>
+            <div class="video-fallback" style="display: none;"></div>
+            <div class="banner-dark-effect">
+                <div class="banner-cinematic"></div>
+            </div>
+            <div class="video-typewriter-container">
+                <div class="video-typewriter-text" id="typewriterText"></div>
+            </div>
+        </div>
+        <div class="banner3-gradient-overlay"></div>
+    </section>
+
+    <!-- Music & Video 区域 -->
+    <section class="music-video-section" id="music-video">
+        <div class="music-section-inner" id="music">
+            <h2 class="section-title reveal">MUSIC</h2>
+            <div class="music-content-new">
+                <div class="music-player-side reveal">
+                    <h3 class="music-player-title">SPOTIFY</h3>
+                    <iframe class="music-player-embed" style="border-radius:12px; width: 350px; height: 655px;" src="https://open.spotify.com/embed/playlist/5vBfMyh7RoXQFLLsrK2Pqz?utm_source=generator&theme=0" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+                </div>
+                <div class="music-center reveal">
+                    <div class="album-cover-featured"><img src="./image/releases/undersymphonicsiege.webp" alt="Under Symphonic Siege Album Cover"></div>
+                    <h2 class="album-title-featured">Under Symphonic Siege</h2>
+                    <p class="album-subtitle">LATEST RELEASE</p>
+                </div>
+                <div class="music-player-side reveal">
+                    <h3 class="music-player-title">BANDCAMP</h3>
+                    <iframe class="music-player-embed" style="border: 0; width: 350px; height: 655px;" src="https://bandcamp.com/EmbeddedPlayer/album=1097170438/size=large/bgcol=333333/linkcol=e32c14/package=3697783973/transparent=true/" seamless><a href="https://nonamepunks.bandcamp.com/album/anti">ANTI- by The NONAME</a></iframe>
+                </div>
+            </div>
+        </div>
+        <div class="video-section-inner" id="video">
+            <h2 class="section-title reveal">VIDEO</h2>
+            <div class="video-container">
+                <div class="video-player reveal" id="videoPlayer" onclick="playVideo()">
+                    <img src="https://img.youtube.com/vi/CFZik0yVglc/maxresdefault.jpg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;" alt="Video Thumbnail">
+                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 1;"></div>
+                    <div class="play-btn" style="position: relative; z-index: 100;"></div>
+                </div>
+                <a href="https://www.youtube.com/channel/UCv2-Y8NFUHXkf-2hDQUzLKw" target="_blank" class="stream-btn">WATCH VIDEO</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="silver-line"></div>
+
+    <!-- Discography -->
+    <section class="discography-section" id="discography">
+        <h2 class="section-title reveal">DISCOGRAPHY</h2>
+        <div class="chinese-line"></div>
+        <div class="albums-container">
+
+            <div class="album-item reveal" data-index="0">
+                <div class="album-cover-wrapper">
+                    <div class="album-cover"><img src="./image/releases/undersymphonicsiege.webp" alt="Under Symphonic Siege"></div>
+                </div>
+                <div class="album-connector"></div>
+                <div class="album-info">
+                    <h3 class="album-title">Under Symphonic Siege</h3>
+                    <p class="album-date">Release Date: 2026.02.17</p>
+                    <div class="album-links"><a href="https://open.spotify.com/album/0F8d8XWxzm8HHxsHdmsbZH" target="_blank" class="stream-btn">Stream Now</a><a href="https://music.163.com/#/album?id=363459258" target="_blank" class="stream-btn">現在試聽</a></div>
+                </div>
+            </div>
+
+            <div class="album-item reveal" data-index="1">
+                <div class="album-cover-wrapper">
+                    <div class="album-cover"><img src="./image/releases/texuzhuangong.webp" alt="Exclusive Edition"></div>
+                </div>
+                <div class="album-connector"></div>
+                <div class="album-info">
+                    <h3 class="album-title">Exclusive Edition</h3>
+                    <p class="album-date">Release Date: 2025.01.29</p>
+                    <div class="album-links"><a href="https://open.spotify.com/album/7oqJpwixLuKd4BW92R6ISI" target="_blank" class="stream-btn">Stream Now</a><a href="https://music.163.com/#/album?id=260476392" target="_blank" class="stream-btn">現在試聽</a></div>
+                </div>
+            </div>
+
+            <div class="album-item reveal" data-index="2">
+                <div class="album-cover-wrapper">
+                    <div class="album-cover"><img src="./image/releases/fortressbesieged.webp" alt="Fortress Besieged 圍城"><img src="./image/releases/fortressbesiegedcd.webp" alt="Fortress Besieged 圍城 Alternate" class="album-cover-hover"></div>
+                </div>
+                <div class="album-connector"></div>
+                <div class="album-info">
+                    <h3 class="album-title">Fortress Besieged 圍城</h3>
+                    <p class="album-date">Release Date: 2025.01.18</p>
+                    <div class="album-links"><a href="https://open.spotify.com/album/0EKvswaKdzqlXYo8B5R428" target="_blank" class="stream-btn">Stream Now</a><a href="https://music.163.com/#/album?id=260008452" target="_blank" class="stream-btn">現在試聽</a></div>
+                </div>
+            </div>
+
+            <div class="album-item reveal" data-index="3">
+                <div class="album-cover-wrapper">
+                    <div class="album-cover"><img src="./image/releases/waitingforthatday.webp" alt="Waiting for That Day"></div>
+                </div>
+                <div class="album-connector"></div>
+                <div class="album-info">
+                    <h3 class="album-title">Waiting for That Day</h3>
+                    <p class="album-date">Release Date: 2024.09.06</p>
+                    <div class="album-links"><a href="https://open.spotify.com/album/2y3J4ZvDxNIjTk9rfko3AR" target="_blank" class="stream-btn">Stream Now</a><a href="https://music.163.com/#/album?id=246154825" target="_blank" class="stream-btn">現在試聽</a></div>
+                </div>
+            </div>
+
+            <div class="album-item reveal" data-index="4">
+                <div class="album-cover-wrapper">
+                    <div class="album-cover"><img src="./image/releases/anti-.webp" alt="ANTI-"></div>
+                </div>
+                <div class="album-connector"></div>
+                <div class="album-info">
+                    <h3 class="album-title">ANTI-</h3>
+                    <p class="album-date">Release Date: 2024.07.18</p>
+                    <div class="album-links"><a href="https://open.spotify.com/album/6pmG5eQHylQd5HWJAZKTOJ" target="_blank" class="stream-btn">Stream Now</a><a href="https://music.163.com/#/album?id=246764463" target="_blank" class="stream-btn">現在試聽</a></div>
+                </div>
+            </div>
+
+            <div class="album-item reveal" data-index="5">
+                <div class="album-cover-wrapper">
+                    <div class="album-cover"><img src="./image/releases/xiantoboston.webp" alt="Xi'an To Boston"></div>
+                </div>
+                <div class="album-connector"></div>
+                <div class="album-info">
+                    <h3 class="album-title">Xi'an To Boston</h3>
+                    <p class="album-date">Release Date: 2024.06.20</p>
+                    <div class="album-links"><a href="https://open.spotify.com/album/1tajRNdIbcVDGge2pxqp2G" target="_blank" class="stream-btn">Stream Now</a><a href="https://music.163.com/#/album?id=199250446" target="_blank" class="stream-btn">現在試聽</a></div>
+                </div>
+            </div>
+
+            <div class="album-item reveal" data-index="6">
+                <div class="album-cover-wrapper">
+                    <div class="album-cover"><img src="./image/releases/liveinzhuhai.webp" alt="Live In ZhuHai (Of Rising Up From The Ash Tour)"></div>
+                </div>
+                <div class="album-connector"></div>
+                <div class="album-info">
+                    <h3 class="album-title">Live In ZhuHai (Of Rising Up From The Ash Tour)</h3>
+                    <p class="album-date">Release Date: 2023.11.18</p>
+                    <div class="album-links"><a href="https://open.spotify.com/album/5IjQxnJDVrksDpd0g8q4Cz" target="_blank" class="stream-btn">Stream Now</a><a href="https://music.163.com/#/album?id=179020554" target="_blank" class="stream-btn">現在試聽</a></div>
+                </div>
+            </div>
+
+            <div class="album-item reveal" data-index="7">
+                <div class="album-cover-wrapper">
+                    <div class="album-cover"><img src="./image/releases/unplugged.webp" alt="Unplugged (In Shanghai)"></div>
+                </div>
+                <div class="album-connector"></div>
+                <div class="album-info">
+                    <h3 class="album-title">Unplugged (In Shanghai)</h3>
+                    <p class="album-date">Release Date: 2023.10.27</p>
+                    <div class="album-links"><span class="stream-btn disabled">Stream Now</span><span class="stream-btn disabled">現在試聽</span></div>
+                </div>
+            </div>
+
+            <div class="album-item reveal" data-index="8">
+                <div class="album-cover-wrapper">
+                    <div class="album-cover"><img src="./image/releases/liveattheschool.webp" alt="Live At The School"></div>
+                </div>
+                <div class="album-connector"></div>
+                <div class="album-info">
+                    <h3 class="album-title">Live At The School</h3>
+                    <p class="album-date">Release Date: 2023.09.09</p>
+                    <div class="album-links"><a href="https://open.spotify.com/album/3hjFwtewvfCx9MvvJtVTUQ" target="_blank" class="stream-btn">Stream Now</a><a href="https://music.163.com/#/album?id=173856098" target="_blank" class="stream-btn">現在試聽</a></div>
+                </div>
+            </div>
+
+            <div class="album-item reveal" data-index="9">
+                <div class="album-cover-wrapper">
+                    <div class="album-cover"><img src="./image/releases/bostontoxian.webp" alt="Boston to Xi'An"></div>
+                </div>
+                <div class="album-connector"></div>
+                <div class="album-info">
+                    <h3 class="album-title">Boston to Xi'An</h3>
+                    <p class="album-date">Release Date: 2023.11.23</p>
+                    <div class="album-links"><a href="https://open.spotify.com/album/3xZK4WP46ld6dbF0CXmGis" target="_blank" class="stream-btn">Stream Now</a><a href="https://music.163.com/#/album?id=133650682" target="_blank" class="stream-btn">現在試聽</a></div>
+                </div>
+            </div>
+
+            <div class="album-item reveal" data-index="10">
+                <div class="album-cover-wrapper">
+                    <div class="album-cover"><img src="./image/releases/nomorepunk.webp" alt="Alive (No More Punk In My Town)"></div>
+                </div>
+                <div class="album-connector"></div>
+                <div class="album-info">
+                    <h3 class="album-title">Alive (No More Punk In My Town)</h3>
+                    <p class="album-date">Release Date: 2022.07.23</p>
+                    <div class="album-links"><a href="https://open.spotify.com/album/3dbG9WDnK4Ml5L23I96XpU" target="_blank" class="stream-btn">Stream Now</a><a href="https://music.163.com/#/album?id=148298342" target="_blank" class="stream-btn">現在試聽</a></div>
+                </div>
+            </div>
+
+            <div class="album-item reveal" data-index="11">
+                <div class="album-cover-wrapper">
+                    <div class="album-cover"><img src="./image/releases/liveinxian.webp" alt="Live In Xi'An (At Nonamefest 20')"></div>
+                </div>
+                <div class="album-connector"></div>
+                <div class="album-info">
+                    <h3 class="album-title">Live In Xi'An (At Nonamefest 20')</h3>
+                    <p class="album-date">Release Date: 2021.10.18</p>
+                    <div class="album-links"><a href="https://open.spotify.com/album/7hR5wvBMkDwN6I7qDi5VWT" target="_blank" class="stream-btn">Stream Now</a><a href="https://music.163.com/#/album?id=132932950" target="_blank" class="stream-btn">現在試聽</a></div>
+                </div>
+            </div>
+
+            <div class="album-item reveal" data-index="12">
+                <div class="album-cover-wrapper">
+                    <div class="album-cover"><img src="./image/releases/noweed.webp" alt="No Weed"></div>
+                </div>
+                <div class="album-connector"></div>
+                <div class="album-info">
+                    <h3 class="album-title">No Weed</h3>
+                    <p class="album-date">Release Date: 2021.09.18</p>
+                    <div class="album-links"><span class="stream-btn disabled">Stream Now</span><a href="https://music.163.com/#/album?id=132347685" target="_blank" class="stream-btn">現在試聽</a></div>
+                </div>
+            </div>
+
+            <div class="album-item reveal" data-index="13">
+                <div class="album-cover-wrapper">
+                    <div class="album-cover"><img src="./image/releases/kidsunion.webp" alt="Kids Union (Special Version)"></div>
+                </div>
+                <div class="album-connector"></div>
+                <div class="album-info">
+                    <h3 class="album-title">Kids Union (Special Version)</h3>
+                    <p class="album-date">Release Date: 2021.08.15</p>
+                    <div class="album-links"><a href="https://open.spotify.com/album/0JzwFinZnKAl4HW6zMvQzN" target="_blank" class="stream-btn">Stream Now</a><a href="https://music.163.com/#/album?id=131407115" target="_blank" class="stream-btn">現在試聽</a></div>
+                </div>
+            </div>
+
+            <div class="album-item reveal" data-index="14">
+                <div class="album-cover-wrapper">
+                    <div class="album-cover"><img src="./image/releases/20thde.webp" alt="Best Of 2001-2021 (20th Anniversary)"><img src="./image/releases/20thus.webp" alt="Best Of 2001-2021 (20th Anniversary) Alternate" class="album-cover-hover"></div>
+                </div>
+                <div class="album-connector"></div>
+                <div class="album-info">
+                    <h3 class="album-title">Best Of 2001-2021 (20th Anniversary)</h3>
+                    <p class="album-date">Release Date: 2021.07.18</p>
+                    <div class="album-links"><a href="https://open.spotify.com/album/24uEBH6Dk6YBYlIuzkB5tr" target="_blank" class="stream-btn">Stream Now</a><a href="https://music.163.com/#/album?id=132359310" target="_blank" class="stream-btn">現在試聽</a></div>
+                </div>
+            </div>
+
+            <div class="album-item reveal" data-index="15">
+                <div class="album-cover-wrapper">
+                    <div class="album-cover"><img src="./image/releases/dragoncity.webp" alt="Dragon City (Music Film)"></div>
+                </div>
+                <div class="album-connector"></div>
+                <div class="album-info">
+                    <h3 class="album-title">Dragon City (Music Film)</h3>
+                    <p class="album-date">Release Date: 2012.10.18</p>
+                    <div class="album-links"><span class="stream-btn disabled">Stream Now</span><span class="stream-btn disabled">現在試聽</span></div>
+                </div>
+            </div>
+
+            <div class="album-item reveal" data-index="16">
+                <div class="album-cover-wrapper">
+                    <div class="album-cover"><img src="./image/releases/thatiswhatwebelieve.webp" alt="That Is What We Believe"></div>
+                </div>
+                <div class="album-connector"></div>
+                <div class="album-info">
+                    <h3 class="album-title">That Is What We Believe</h3>
+                    <p class="album-date">Release Date: 2011.01.18</p>
+                    <div class="album-links"><span class="stream-btn disabled">Stream Now</span><a href="https://music.163.com/#/album?id=36614" target="_blank" class="stream-btn">現在試聽</a></div>
+                </div>
+            </div>
+
+            <div class="album-item reveal" data-index="17">
+                <div class="album-cover-wrapper">
+                    <div class="album-cover"><img src="./image/releases/whowillsuevive.webp" alt="Who Will Suevive"></div>
+                </div>
+                <div class="album-connector"></div>
+                <div class="album-info">
+                    <h3 class="album-title">Who Will Suevive</h3>
+                    <p class="album-date">Release Date: 2009.07.18</p>
+                    <div class="album-links"><span class="stream-btn disabled">Stream Now</span><span class="stream-btn disabled">現在試聽</span></div>
+                </div>
+            </div>
+
+            <div class="album-item reveal" data-index="18">
+                <div class="album-cover-wrapper">
+                    <div class="album-cover"><img src="./image/releases/split.webp" alt="Split"></div>
+                </div>
+                <div class="album-connector"></div>
+                <div class="album-info">
+                    <h3 class="album-title">Split</h3>
+                    <p class="album-date">Release Date: 2009.01.01</p>
+                    <div class="album-links"><a href="https://open.spotify.com/album/3jnl2UAcfTlItI0sRr2gLa" target="_blank" class="stream-btn">Stream Now</a><a href="https://music.163.com/#/album?id=132358376" target="_blank" class="stream-btn">現在試聽</a></div>
+                </div>
+            </div>
+
+            <div class="album-item reveal" data-index="19">
+                <div class="album-cover-wrapper">
+                    <div class="album-cover"><img src="./image/releases/sickandtired.webp" alt="Sick and Tired"><img src="./image/releases/sickandtiredcn.webp" alt="Sick and Tired Alternate" class="album-cover-hover"></div>
+                </div>
+                <div class="album-connector"></div>
+                <div class="album-info">
+                    <h3 class="album-title">Sick and Tired</h3>
+                    <p class="album-date">Release Date: 2007.07.18</p>
+                    <div class="album-links"><a href="https://open.spotify.com/album/23MnnW9XnxxoX7mVgtoTeS" target="_blank" class="stream-btn">Stream Now</a><a href="https://music.163.com/#/album?id=36624" target="_blank" class="stream-btn">現在試聽</a></div>
+                </div>
+            </div>
+
+            <div class="album-item reveal" data-index="20">
+                <div class="album-cover-wrapper">
+                    <div class="album-cover"><img src="./image/releases/getfree.webp" alt="Get Free"></div>
+                </div>
+                <div class="album-connector"></div>
+                <div class="album-info">
+                    <h3 class="album-title">Get Free</h3>
+                    <p class="album-date">Release Date: 2006.01.01</p>
+                    <div class="album-links"><span class="stream-btn disabled">Stream Now</span><span class="stream-btn disabled">現在試聽</span></div>
+                </div>
+            </div>
+
+            <div class="album-item reveal" data-index="21">
+                <div class="album-cover-wrapper">
+                    <div class="album-cover"><img src="./image/releases/wedonotneedthatshit.webp" alt="We Don't Need That Shit!"></div>
+                </div>
+                <div class="album-connector"></div>
+                <div class="album-info">
+                    <h3 class="album-title">We Don't Need That Shit!</h3>
+                    <p class="album-date">Release Date: 2004.10.18</p>
+                    <div class="album-links"><span class="stream-btn disabled">Stream Now</span><a href="https://music.163.com/#/album?id=36618" target="_blank" class="stream-btn">現在試聽</a></div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <div class="silver-line"></div>
+
+    <!-- Footer -->
+    <footer class="footer-section" id="footer">
+        <div class="footer-main">
+            <div class="footer-left">
+                <div class="footer-dropdown" data-dropdown>
+                    <div class="dropdown-header" onclick="toggleDropdown(this)"><span>LABELS</span></div>
+                    <div class="dropdown-content">
+                        <a href="#">Kids-Union Records</a>
+                        <a href="#">Smith & Miller Records</a>
+                        <a href="#">Abbruch Records</a>
+                        <a href="#">PASIDARYK PATS records</a>
+                    </div>
+                </div>
+                <div class="footer-dropdown" data-dropdown>
+                    <div class="dropdown-header" onclick="toggleDropdown(this)"><span>XREBooking Group</span></div>
+                    <div class="dropdown-content">
+                        <a href="http://xrebooking.com" target="_blank">XRE Booking Group</a>
+                    </div>
+                </div>
+                <div class="footer-dropdown" data-dropdown>
+                    <div class="dropdown-header" onclick="toggleDropdown(this)"><span>STORE</span></div>
+                    <div class="dropdown-content">
+                        <a href="#">RAY.Y - CHINA</a>
+                        <a href="#">TBA</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-center">
+                <h3 class="subscribe-title">SUBSCRIBE</h3>
+                <p class="subscribe-subtitle">Sign up with your email address to receive news and updates.</p>
+                <form class="subscribe-form" id="subscribeForm">
+                    <input type="email" class="subscribe-input" placeholder="Email Address" required>
+                    <button type="submit" class="subscribe-btn">SIGN UP</button>
+                </form>
+                <p class="privacy-text">We respect your privacy. Your information will not be shared with third parties.</p>
+            </div>
+            <div class="footer-right">
+                <h4 class="footer-right-title">FOLLOW US</h4>
+                <div class="social-grid">
+                    <a href="https://www.youtube.com/channel/UCv2-Y8NFUHXkf-2hDQUzLKw" target="_blank" class="social-icon" title="YouTube">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    </a>
+                    <a href="https://instagram.com/nonamepunks" target="_blank" class="social-icon" title="Instagram">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+                    </a>
+                    <a href="https://facebook.com/TheNonamePunk" target="_blank" class="social-icon" title="Facebook">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    </a>
+                    <a href="https://x.com/nonamepunks" target="_blank" class="social-icon" title="Twitter">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+                    </a>
+                    <a href="https://open.spotify.com/artist/1QjEg19ZiCoWuyUSFdbVhu" target="_blank" class="social-icon" title="Spotify">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+                    </a>
+                    <a href="https://tiktok.com/nonamepunks" target="_blank" class="social-icon" title="TikTok">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+                    </a>
+                    <a href="https://weibo.com/nonamepunks" target="_blank" class="social-icon" title="Weibo">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M10.098 20.323c-3.977.391-7.414-1.406-7.672-4.02-.259-2.609 2.759-5.047 6.74-5.441 3.979-.394 7.413 1.404 7.671 4.018.259 2.6-2.759 5.049-6.739 5.443zM9.05 17.219c-.384.616-1.208.884-1.829.602-.612-.279-.793-.991-.406-1.593.379-.595 1.176-.861 1.793-.601.622.263.82.972.442 1.592zm1.27-1.627c-.141.237-.449.353-.689.253-.236-.09-.313-.361-.177-.586.138-.227.436-.346.672-.24.239.09.315.36.194.573zm.176-2.719c-1.893-.493-4.033.45-4.857 2.118-.836 1.704-.026 3.591 1.886 4.21 1.983.64 4.318-.341 5.132-2.179.8-1.793-.201-3.642-2.161-4.149zm7.563-1.224c-.346-.105-.579-.18-.405-.649.381-1.025.421-1.905.001-2.535-.788-1.181-2.924-1.109-5.382-.031 0 0-.768.334-.571-.271.381-1.217.324-2.229-.268-2.816-1.344-1.336-4.918.045-7.985 3.088C2.013 10.878.784 13.447.784 15.658c0 4.226 5.407 6.804 10.695 6.804 6.936 0 11.551-4.021 11.551-7.21 0-1.925-1.628-3.013-2.971-3.403zm.658-5.533c-.193-.229-.481-.314-.745-.229-.271.086-.453.314-.453.602 0 .229.086.457.314.643.229.186.516.271.744.186.271-.086.453-.314.453-.602.001-.229-.085-.457-.313-.6zm2.059-2.246c-.771-.915-1.936-1.258-2.978-.915-.229.072-.351.314-.279.543.072.229.314.351.543.279.629-.2 1.329.029 1.787.572.457.543.572 1.272.314 1.901-.086.229.029.486.258.572.229.086.486-.029.572-.258.4-1.001.229-2.188-.217-2.694z"/></svg>
+                    </a>
+                    <a href="https://www.xiaohongshu.com/user/profile/64a1494b0000000010034ba7" target="_blank" class="social-icon" title="小红书">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm0-8h-2V7h2v2zm4 8h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-nav">
+            <div class="footer-nav-container">
+                <a href="./index.html#hero"><img src="./image/dragonL.png" alt="Dragon Left" class="nav-dragon nav-dragon-left" style="width: 35px; height: 35px;"></a>
+                <a href="./index.html#tour">TOUR</a>
+                <a href="./music.html">MUSIC</a>
+                <a href="./index.html#video">VIDEO</a>
+                <a href="./index.html#merch">STORE</a>
+                <a href="./index.html#footer">CONTACT</a>
+                <a href="http://emanonent.wixstudio.com/livegigs/antiipa" target="_blank">ANTI-IPA</a>
+                <a href="./index.html#hero"><img src="./image/dragonR.png" alt="Dragon Right" class="nav-dragon nav-dragon-right" style="width: 35px; height: 35px;"></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-slogan">REAL PUNK ROCK NEVER DEAD</div>
+            <div class="footer-copyright">
+                <p>© 2021~2026 The Noname | <a href="https://www.privacy.epitaph.com/" target="_blank">Privacy Policy</a> | <a href="https://www.privacy.epitaph.com/cookiepolicy" target="_blank">Cookie Policy</a> | <a href="https://www.privacy.epitaph.com/terms" target="_blank">Terms of Use</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 滚动显示动画
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+        }, observerOptions);
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // 导航栏显示/隐藏 - 与index一致，滚动到banner3下方才显示
+        const navbar = document.getElementById('navbar');
+        const banner3 = document.getElementById('banner3');
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            const banner3Bottom = banner3 ? banner3.offsetTop + banner3.offsetHeight : 0;
+            if (currentScroll > banner3Bottom - 100) {
+                navbar.classList.add('visible');
+            } else {
+                navbar.classList.remove('visible');
+            }
+        });
+
+        // 回到顶部
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 龙点击特效 - 与index完全一致
+        document.querySelectorAll('.nav-dragon').forEach(dragon => {
+            dragon.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (document.querySelector('.dragon-clone.animate')) return;
+
+                const src = this.src;
+                const img = new Image();
+                img.src = src;
+
+                img.onload = () => {
+                    const naturalWidth = img.naturalWidth || 1191;
+                    const naturalHeight = img.naturalHeight || 496;
+                    const aspectRatio = naturalWidth / naturalHeight;
+                    const screenWidth = window.innerWidth;
+                    const screenHeight = window.innerHeight;
+                    const isMobile = screenWidth <= 768;
+                    const isPortrait = screenHeight > screenWidth;
+                    const maxWidth = screenWidth * 0.85;
+                    const maxHeight = screenHeight * 0.5;
+                    let displayWidth, displayHeight;
+
+                    if (isMobile) {
+                        if (isPortrait) {
+                            displayWidth = Math.min(screenWidth * 0.75, 320);
+                            displayHeight = displayWidth / aspectRatio;
+                        } else {
+                            displayHeight = Math.min(screenHeight * 0.4, 180);
+                            displayWidth = displayHeight * aspectRatio;
+                        }
+                    } else {
+                        displayHeight = Math.min(500, screenHeight * 0.6);
+                        displayWidth = displayHeight * aspectRatio;
+                    }
+
+                    if (displayWidth > maxWidth) {
+                        displayWidth = maxWidth;
+                        displayHeight = displayWidth / aspectRatio;
+                    }
+                    if (displayHeight > maxHeight) {
+                        displayHeight = maxHeight;
+                        displayWidth = displayHeight * aspectRatio;
+                    }
+
+                    const clone = document.createElement('div');
+                    clone.className = 'dragon-clone';
+                    clone.style.backgroundImage = 'url(' + src + ')';
+                    clone.style.width = displayWidth + 'px';
+                    clone.style.height = displayHeight + 'px';
+                    clone.style.backgroundSize = 'contain';
+                    document.body.appendChild(clone);
+
+                    const star = document.createElement('div');
+                    star.className = 'dragon-star-ring';
+                    document.body.appendChild(star);
+
+                    requestAnimationFrame(() => {
+                        clone.classList.add('animate');
+                    });
+
+                    setTimeout(() => {
+                        clone.remove();
+                        star.remove();
+                    }, 1200);
+
+                    setTimeout(() => {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }, 300);
+                };
+            });
+        });
+
+        // 专辑hover效果
+        const albumItems = document.querySelectorAll('.album-item');
+        albumItems.forEach(item => {
+            const cover = item.querySelector('.album-cover-wrapper');
+            const hoverImg = item.querySelector('.album-cover-hover');
+            const mainImg = item.querySelector('.album-cover img:first-child');
+
+            cover.addEventListener('mouseenter', () => {
+                albumItems.forEach(other => { if (other !== item) other.classList.add('dimmed'); });
+                item.classList.add('active-hovered');
+                // 只有存在hover图时才切换
+                if (hoverImg && mainImg) {
+                    hoverImg.style.opacity = '1';
+                    mainImg.style.opacity = '0';
+                }
+            });
+            cover.addEventListener('mouseleave', () => {
+                albumItems.forEach(other => other.classList.remove('dimmed'));
+                item.classList.remove('active-hovered');
+                // 恢复原始图
+                if (hoverImg && mainImg) {
+                    hoverImg.style.opacity = '0';
+                    mainImg.style.opacity = '1';
+                }
+            });
+        });
+
+        // Footer dropdown
+        function toggleDropdown(header) {
+            const dropdown = header.parentElement;
+            const isActive = dropdown.classList.contains('active');
+            document.querySelectorAll('.footer-dropdown').forEach(d => d.classList.remove('active'));
+            if (!isActive) dropdown.classList.add('active');
+        }
+
+        // 视频播放
+        function playVideo() {
+            var player = document.getElementById('videoPlayer');
+            player.innerHTML = '<iframe src="https://www.youtube.com/embed/CFZik0yVglc?autoplay=1" allowfullscreen frameborder="0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>';
+            player.onclick = null;
+            player.style.cursor = 'default';
+        }
+
+        // 订阅表单
+        document.getElementById('subscribeForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thanks for subscribing!');
+            this.reset();
+        });
+
+        // 视频打字机效果
+        (function() {
+            const text = `The NONAME is a Chinese punk rock institution with nearly 30 years of history. Here comes a blast of the hottest punk rock import from the Far East—straight from Xi'an, China! Masterminded by vocalist and band head honcho Ray, who is sick and tired of the ruling order, he finds his kind of freedom in music by starting his own revolution against all false hope in the world. Furthermore, these maniacs show their tough attitude straight to people's faces and fight against all limits. Their music can be described as a mix between pure 1980s punk rock and straight hardcore, with heavy guitars, groovy bass lines, and powerful vocals. THE NONAME creates a wall of sound to scream along with; this music is the kind of revolution Ray wanted and hoped would never stop inspiring.`;
+            const element = document.getElementById('typewriterText');
+            let index = 0;
+            let lastTime = 0;
+            const isMobile = window.innerWidth <= 768;
+
+            if (isMobile) {
+                if (element) element.textContent = text;
+                return;
+            }
+
+            function typeWriter(currentTime) {
+                if (!element) return;
+                const deltaTime = currentTime - lastTime;
+                let speed = 30;
+                if (index > 0) {
+                    const char = text.charAt(index - 1);
+                    if (char === '.' || char === '!' || char === '?') speed = 400;
+                    else if (char === ',' || char === ';') speed = 200;
+                    else if (char === ' ') speed = 50;
+                }
+                if (deltaTime >= speed) {
+                    if (index < text.length) {
+                        element.textContent += text.charAt(index);
+                        index++;
+                        lastTime = currentTime;
+                    } else {
+                        return;
+                    }
+                }
+                requestAnimationFrame(typeWriter);
+            }
+
+            function init() {
+                if (element) {
+                    element.textContent = '';
+                    index = 0;
+                    lastTime = performance.now();
+                    requestAnimationFrame(typeWriter);
+                }
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', init);
+            } else {
+                init();
+            }
+        })();
+
+        // 延迟加载视频
+        setTimeout(function() {
+            var video = document.getElementById('bannerVideo');
+            if (video && video.load) {
+                video.load();
+            }
+        }, 2000);
+    </script>
+</body>
+</html>

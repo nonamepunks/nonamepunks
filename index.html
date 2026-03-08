@@ -33,16 +33,7 @@
         /* ===== 导航栏 ===== */
         .navbar { position: fixed; top: -100px; left: 0; width: 100%; background: rgba(0,0,0,0.95); border-bottom: 3px solid var(--logo-red); z-index: 1000; padding: 4px 0; transition: top 0.3s steps(3); }
         .navbar.visible { top: 0; }
-        .navbar::after { 
-    content: ''; 
-    position: absolute; 
-    bottom: -3px; 
-    left: 0; 
-    width: 100%; 
-    height: 3px; 
-    background: linear-gradient(90deg, transparent, var(--deep-red), transparent);
-    box-shadow: 0 0 10px rgba(127, 29, 29, 0.3);  /* 静态暗红发光 */
-}
+        
         .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: center; align-items: center; padding: 0 30px; position: relative; }
         .nav-dragon { width: 50px; height: 50px; cursor: pointer; transition: all 0.2s; filter: grayscale(100%) brightness(0.8); object-fit: contain; }
         .nav-dragon:hover { filter: grayscale(0%) brightness(1.2) drop-shadow(0 0 10px var(--logo-red)); transform: scale(1.1); }
@@ -1657,7 +1648,7 @@
         </div>
         <button class="merch-nav-btn merch-next-btn" onclick="scrollMerch(1)">&#10095;</button>
         </div>
-        <div class="merch-btn-container reveal"><a href="./store.html" class="btn">VIEW ALL MERCH</a></div>
+        <div class="merch-btn-container reveal"><a href="https://nonamepunks.bandcamp.com/" target="_blank" class="btn">VIEW ALL MERCH</a></div>
     </section>
 
     <div class="silver-line"></div>
@@ -1675,9 +1666,9 @@
                     </div>
                 </div>
                 <div class="footer-dropdown" data-dropdown>
-                    <div class="dropdown-header" onclick="toggleDropdown(this)"><span>BOOKING</span></div>
+                    <div class="dropdown-header" onclick="toggleDropdown(this)"><span>XREBooking Group</span></div>
                     <div class="dropdown-content">
-                        <a href="mailto:booking@xrebooking.com" data-editable>XRE Booking Group</a>
+                        <a href="http://xrebooking.com" target="_blank" data-editable>XRE Booking Group</a>
                     </div>
                 </div>
                 <div class="footer-dropdown" data-dropdown>

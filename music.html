@@ -55,7 +55,7 @@
         .banner3-gradient-overlay { position: absolute; bottom: 0; left: 0; width: 100%; height: 150px; background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.5) 70%, #000 100%); z-index: 5; pointer-events: none; }
 
         /* 视频区域打字机效果 */
-        .video-typewriter-container { position: absolute; top: 62%; left: 0; right: 0; width: 100%; padding: 40px 60px 0; z-index: 10; text-align: center; display: flex; align-items: flex-start; justify-content: center; overflow: hidden; pointer-events: none; }
+        .video-typewriter-container { position: absolute; top: 62%; left: 0; right: 0; width: 100%; padding: 40px 60px 0; z-index: 10; text-align: center; display: flex; align-items: flex-start; justify-content: center; overflow: hidden; pointer-events: none; ; max-height: 35%; overflow: hidden;}
         .video-typewriter-text { font-family: 'Courier New', monospace; font-size: clamp(11px, 1.2vw, 16px); line-height: 1.6; color: #fff; text-shadow: 0 0 8px rgba(220, 38, 38, 0.9), 0 0 16px rgba(220, 38, 38, 0.7), 0 0 24px rgba(220, 38, 38, 0.5), 2px 2px 4px rgba(0,0,0,1); letter-spacing: 0.5px; max-width: 900px; margin: 0 auto; text-align: center; white-space: pre-wrap; word-wrap: break-word; }
         .video-typewriter-text::after { content: '|'; animation: cursorBlink 1s infinite; color: var(--logo-red); text-shadow: 0 0 10px var(--logo-red); }
         @keyframes cursorBlink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
@@ -74,7 +74,7 @@
         .music-player-embed { width: 100%; border: none; background: rgba(0,0,0,0.3); }
         .music-center { text-align: center; padding: 20px; }
         .album-cover-featured { width: 420px; height: 420px; background: var(--dark-gray); margin: 0 auto 30px; border: 3px solid var(--logo-red); box-shadow: 0 0 60px rgba(220, 38, 38, 0.6); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; transition: all 0.3s; }
-        .album-cover-featured:hover { transform: scale(1.02); box-shadow: 0 0 80px rgba(220, 38, 38, 0.8); }
+        .album-cover-featured:hover { box-shadow: 0 0 80px rgba(220, 38, 38, 0.8); }
         .album-cover-featured img { width: 100%; height: 100%; object-fit: cover; }
         .album-title-featured { font-family: 'Arial Black', 'Helvetica Neue', Arial, sans-serif; font-size: 42px; letter-spacing: 10px; word-spacing: 5px; margin-bottom: 15px; color: var(--white); text-shadow: -1px -1px 0 rgba(0,0,0,0.9), 1px -1px 0 rgba(0,0,0,0.9), -1px 1px 0 rgba(0,0,0,0.9), 1px 1px 0 rgba(0,0,0,0.9), 0 0 10px rgba(220, 38, 38, 0.7), 0 0 20px rgba(220, 38, 38, 0.4); text-transform: uppercase; font-weight: 900; }
         .album-subtitle { font-family: 'Arial Black', Arial, sans-serif; font-size: 16px; color: var(--silver); letter-spacing: 3px; margin-bottom: 30px; }
@@ -104,7 +104,7 @@
         .album-cover { width: 100%; aspect-ratio: 1; background: var(--dark-gray); border: 3px solid rgba(220, 38, 38, 0.3); box-shadow: 0 10px 40px rgba(0,0,0,0.8); position: relative; overflow: hidden; transition: all 0.4s; }
         .album-cover img { width: 100%; height: 100%; object-fit: cover; transition: all 0.4s; }
         .album-cover-hover { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.4s; }
-        .album-cover-wrapper:hover .album-cover { border-color: var(--logo-red); box-shadow: 0 0 50px rgba(220, 38, 38, 0.6); transform: scale(1.02); }
+        .album-cover-wrapper:hover .album-cover { border-color: var(--logo-red); box-shadow: 0 0 50px rgba(220, 38, 38, 0.6); }
         /* hover切换由JS控制 */
         /* hover切换由JS控制 */
         .album-info { width: 55%; padding: 40px 50px; position: relative; z-index: 5; opacity: 0.4; transition: all 0.4s; transform: translateY(150px); }
@@ -235,7 +235,8 @@
             .music-player-embed { height: 537px !important; }
         }
         @media (max-width: 360px) {
-            .video-typewriter-text { font-size: clamp(7px, 3.5vw, 11px); line-height: 1.2; }
+            .video-typewriter-container { top: 46%; padding: 5px 8px 0; }
+            .video-typewriter-text { font-size: clamp(6px, 3vw, 10px); line-height: 1.0; letter-spacing: 0; }
             .music-player-embed { height: 537px !important; }
         }
     
@@ -264,6 +265,65 @@
         @media (max-width: 480px) {
             .album-info {
                 transform: translateY(40px) !important;
+            }
+        }
+
+    
+        
+
+    
+        /* WATCH VIDEO 按钮放大样式 - 与index一致 */
+        .watch-video-btn {
+            padding: 15px 50px !important;
+            font-size: 18px !important;
+            letter-spacing: 4px !important;
+        }
+
+    
+        /* 专辑项整体hover效果 - 按钮hover时图案也发光 */
+        .album-item {
+            transition: all 0.4s;
+        }
+
+        .album-item:hover .album-cover {
+            border-color: var(--logo-red);
+            box-shadow: 0 0 50px rgba(220, 38, 38, 0.6);
+        }
+
+        .album-item:hover .album-cover img {
+            filter: brightness(1.1);
+        }
+
+        .album-item:hover .album-title {
+            color: var(--logo-red);
+            text-shadow: -1px -1px 0 rgba(0,0,0,0.9), 1px -1px 0 rgba(0,0,0,0.9), -1px 1px 0 rgba(0,0,0,0.9), 1px 1px 0 rgba(0,0,0,0.9), 0 0 20px rgba(220, 38, 38, 0.8);
+        }
+
+    
+        /* 电脑端竖屏和平板竖屏优化 */
+        @media (orientation: portrait) and (min-width: 768px) {
+            .video-typewriter-container {
+                top: 54%;
+                padding: 20px 40px 0;
+                max-height: 40%;
+            }
+            .video-typewriter-text {
+                font-size: clamp(9px, 1.4vw, 13px);
+                line-height: 1.2;
+                letter-spacing: 0.3px;
+            }
+        }
+
+        @media (orientation: portrait) and (max-width: 767px) {
+            .video-typewriter-container {
+                top: 50%;
+                padding: 10px 15px 0;
+                max-height: 48%;
+            }
+            .video-typewriter-text {
+                font-size: clamp(8px, 2.5vw, 12px);
+                line-height: 1.1;
+                letter-spacing: 0.2px;
             }
         }
 
@@ -335,7 +395,7 @@
                     <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 1;"></div>
                     <div class="play-btn" style="position: relative; z-index: 100;"></div>
                 </div>
-                <a href="https://www.youtube.com/channel/UCv2-Y8NFUHXkf-2hDQUzLKw" target="_blank" class="stream-btn">WATCH VIDEO</a>
+                <a href="https://www.youtube.com/channel/UCv2-Y8NFUHXkf-2hDQUzLKw" target="_blank" class="stream-btn watch-video-btn">WATCH VIDEO</a>
             </div>
         </div>
     </section>
@@ -910,5 +970,61 @@
             }
         }, 2000);
     </script>
+</body>
+</html>
+            function init() {
+                if (element) {
+                    element.textContent = '';
+                    index = 0;
+                    lastTime = performance.now();
+                    requestAnimationFrame(typeWriter);
+                }
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', init);
+            } else {
+                init();
+            }
+        })();
+
+        // 延迟加载视频
+        setTimeout(function() {
+            var video = document.getElementById('bannerVideo');
+            if (video && video.load) {
+                video.load();
+            }
+        }, 2000);
+    
+        // 按钮hover时专辑封面发光效果
+        document.querySelectorAll('.album-item').forEach(item => {
+            const buttons = item.querySelectorAll('.stream-btn');
+            const cover = item.querySelector('.album-cover');
+            const coverImg = item.querySelector('.album-cover img:first-child');
+
+            buttons.forEach(btn => {
+                btn.addEventListener('mouseenter', () => {
+                    if (cover) {
+                        cover.style.borderColor = 'var(--logo-red)';
+                        cover.style.boxShadow = '0 0 50px rgba(220, 38, 38, 0.6)';
+                    }
+                    if (coverImg) {
+                        coverImg.style.filter = 'brightness(1.1)';
+                    }
+                });
+
+                btn.addEventListener('mouseleave', () => {
+                    if (cover) {
+                        cover.style.borderColor = 'rgba(220, 38, 38, 0.3)';
+                        cover.style.boxShadow = '0 10px 40px rgba(0,0,0,0.8)';
+                    }
+                    if (coverImg) {
+                        coverImg.style.filter = 'brightness(1)';
+                    }
+                });
+            });
+        });
+
+</script>
 </body>
 </html>

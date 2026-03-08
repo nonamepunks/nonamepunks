@@ -106,7 +106,7 @@
     right: 0;
     width: 100%;
     padding: 40px 60px 0;
-    z-index: 20;
+    z-index: 10;
     text-align: center;
     display: flex;
     align-items: flex-start;
@@ -270,7 +270,7 @@
         .members-section::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.7) 100%), radial-gradient(ellipse at center, rgba(220,38,38,0.1) 0%, transparent 70%); z-index: 1; }
         .members-section::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(220, 38, 38, 0.03) 2px, rgba(220, 38, 38, 0.03) 4px); pointer-events: none; z-index: 2; }
         .section-title { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-size: 48px; text-align: center; margin-bottom: 40px; margin-top: 0; letter-spacing: 12px; text-transform: uppercase; color: var(--logo-red); position: relative; text-shadow: 0 0 20px rgba(220, 38, 38, 0.8), 0 0 40px rgba(220, 38, 38, 0.4); z-index: 10; }
-        .members-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 20; align-items: start; }
+        .members-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 10; align-items: start; }
         .member-card { text-align: center; cursor: pointer; position: relative; transition: transform 0.2s; }
         .member-card:hover { transform: scale(1.05); }
         .member-avatar { width: 200px; height: 200px; border-radius: 50%; background: var(--deep-red); margin: 0 auto 20px; border: 4px solid var(--logo-red); position: relative; overflow: hidden; box-shadow: 0 0 30px rgba(220, 38, 38, 0.4); transition: all 0.3s; }
@@ -286,7 +286,7 @@
     text-shadow: 0 0 15px rgba(220, 38, 38, 0.5), 0 2px 4px rgba(0,0,0,0.8); 
     transition: all 0.2s; 
     position: relative;
-    z-index: 20;
+    z-index: 100 !important;
 }
         .member-card:hover .member-name { color: var(--logo-red); text-shadow: 0 0 30px var(--logo-red); }
         .member-role { 
@@ -295,7 +295,7 @@
     color: var(--silver); 
     letter-spacing: 2px; 
     position: relative;
-    z-index: 20;
+    z-index: 100 !important;
     text-shadow: 0 1px 3px rgba(0,0,0,0.8);
 }
 
@@ -434,7 +434,7 @@
         .btn::before, .banner-btn::before, .tour-btn::before, .btn-music::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: var(--logo-red); transition: left 0.2s steps(5); z-index: -1; }
         .btn:hover::before, .banner-btn:hover::before, .tour-btn:hover::before, .btn-music:hover::before { left: 0; }
         .btn:hover, .banner-btn:hover, .tour-btn:hover, .btn-music:hover { color: var(--white); transform: skewX(-5deg); box-shadow: 0 0 50px var(--logo-red), 0 0 80px rgba(220, 38, 38, 0.6); text-shadow: 0 0 15px var(--white); border-color: var(--logo-red); }
-        .banner-btn { position: absolute; bottom: 50px; z-index: 20; }
+        .banner-btn { position: absolute; bottom: 50px; z-index: 10; }
         .banner-btn-center { left: 50%; transform: translateX(-50%); }
         .banner-btn-center:hover { transform: translateX(-50%) skewX(-5deg); }
         .banner-btn-right { right: 50px; }

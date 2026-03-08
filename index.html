@@ -267,19 +267,37 @@
         .banner:hover .banner-border-glow { opacity: 1; box-shadow: inset 0 0 50px rgba(255,255,255,0.15), 0 0 40px rgba(255,255,255,0.2); }
 
         .members-section { padding: 100px 30px; background: url('./image/Mbg.webp') center/cover no-repeat; position: relative; }
-        .members-section::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.1) 70%, transparent 100%), radial-gradient(ellipse at center, rgba(220,38,38,0.1) 0%, transparent 70%); z-index: 1; }
+        .members-section::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.7) 100%), radial-gradient(ellipse at center, rgba(220,38,38,0.1) 0%, transparent 70%); z-index: 1; }
         .members-section::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(220, 38, 38, 0.03) 2px, rgba(220, 38, 38, 0.03) 4px); pointer-events: none; z-index: 2; }
         .section-title { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-size: 48px; text-align: center; margin-bottom: 40px; margin-top: 0; letter-spacing: 12px; text-transform: uppercase; color: var(--logo-red); position: relative; text-shadow: 0 0 20px rgba(220, 38, 38, 0.8), 0 0 40px rgba(220, 38, 38, 0.4); z-index: 10; }
-        .members-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 10; }
+        .members-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 20; align-items: start; }
         .member-card { text-align: center; cursor: pointer; position: relative; transition: transform 0.2s; }
         .member-card:hover { transform: scale(1.05); }
         .member-avatar { width: 200px; height: 200px; border-radius: 50%; background: var(--deep-red); margin: 0 auto 20px; border: 4px solid var(--logo-red); position: relative; overflow: hidden; box-shadow: 0 0 30px rgba(220, 38, 38, 0.4); transition: all 0.3s; }
         .member-card:hover .member-avatar { box-shadow: 0 0 50px var(--logo-red), 0 0 80px rgba(220, 38, 38, 0.6); }
         .member-avatar::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent 30%, rgba(220, 38, 38, 0.4) 50%, transparent 70%); animation: flashShine 3s infinite; }
         .member-avatar img { width: 100%; height: 100%; object-fit: cover; }
-        .member-name { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-size: 24px; letter-spacing: 3px; margin-bottom: 5px; color: var(--white); text-shadow: 0 0 15px rgba(220, 38, 38, 0.5); transition: all 0.2s; }
+        .member-name { 
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; 
+    font-size: 24px; 
+    letter-spacing: 3px; 
+    margin-bottom: 5px; 
+    color: var(--white); 
+    text-shadow: 0 0 15px rgba(220, 38, 38, 0.5), 0 2px 4px rgba(0,0,0,0.8); 
+    transition: all 0.2s; 
+    position: relative;
+    z-index: 20;
+}
         .member-card:hover .member-name { color: var(--logo-red); text-shadow: 0 0 30px var(--logo-red); }
-        .member-role { font-family: 'Arial Black', Arial, sans-serif; font-size: 14px; color: var(--silver); letter-spacing: 2px; }
+        .member-role { 
+    font-family: 'Arial Black', Arial, sans-serif; 
+    font-size: 14px; 
+    color: var(--silver); 
+    letter-spacing: 2px; 
+    position: relative;
+    z-index: 20;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+}
 
         /* TOUR DATES */
         .tour-section { width: 100%; background: url('./image/dragonbg.webp'); background-position: center top; background-repeat: repeat-y; background-size: 100% auto; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; padding: 40px 0; min-height: 100vh; }

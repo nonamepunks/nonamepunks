@@ -23,7 +23,7 @@
         .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: center; align-items: center; padding: 0 30px; position: relative; }
 
         /* 骷髅图 - 放大到与导航栏高度一致 */
-        .nav-skull { width: 60px; height: 60px; cursor: pointer; transition: all 0.3s; filter: grayscale(100%) brightness(0.8); object-fit: contain; }
+        .nav-skull { width: 68px; height: 68px; cursor: pointer; transition: all 0.3s; filter: grayscale(100%) brightness(0.8); object-fit: contain; }
         .nav-skull:hover { filter: grayscale(0%) brightness(1.2) drop-shadow(0 0 15px var(--logo-red)); transform: scale(1.1) rotate(5deg); }
         .nav-skull-left { margin-right: 20px; }
         .nav-skull-right { margin-left: 20px; }
@@ -745,20 +745,20 @@
         </div>
         <div class="footer-nav">
             <div class="footer-nav-container">
-                <a href="./index.html#hero"><img src="./image/dragonL.png" alt="Dragon Left" class="nav-dragon nav-dragon-left" style="width: 35px; height: 35px;"></a>
+                <a href="./index.html#hero"><img src="./image/dragonL.png" alt="Dragon Left" class="nav-dragon nav-dragon-left" style="width: 50px; height: 50px;"></a>
                 <a href="./index.html#tour">TOUR</a>
                 <a href="./music.html">MUSIC</a>
                 <a href="./index.html#video">VIDEO</a>
                 <a href="./index.html#merch">STORE</a>
                 <a href="./index.html#footer">CONTACT</a>
                 <a href="http://emanonent.wixstudio.com/livegigs/antiipa" target="_blank">ANTI-IPA</a>
-                <a href="./index.html#hero"><img src="./image/dragonR.png" alt="Dragon Right" class="nav-dragon nav-dragon-right" style="width: 35px; height: 35px;"></a>
+                <a href="./index.html#hero"><img src="./image/dragonR.png" alt="Dragon Right" class="nav-dragon nav-dragon-right" style="width: 50px; height: 50px;"></a>
             </div>
         </div>
         <div class="footer-bottom">
             <div class="footer-slogan">REAL PUNK ROCK NEVER DEAD</div>
             <div class="footer-copyright">
-                <p>© 2021~2026 The Noname | <a href="https://www.privacy.epitaph.com/" target="_blank">Privacy Policy</a> | <a href="https://www.privacy.epitaph.com/cookiepolicy" target="_blank">Cookie Policy</a> | <a href="https://www.privacy.epitaph.com/terms" target="_blank">Terms of Use</a></p>
+                <p>© 2021~2026 The Noname | <a href="https://www.privacy.epitaph.com/" target="_blank">Privacy Policy</a> | <a href="https://www.privacy.epitaph.com/cookiepolicy" target="_blank">Cookie Policy</a> | <a href="https://www.privacy.epitaph.com/terms" target="_blank">Terms of Use</a> | <span onclick="scrollToTop(); return false;" style="cursor: pointer; color: var(--white);" onmouseover="this.style.color='var(--logo-red)'" onmouseout="this.style.color='var(--white)'">Do Not Sell or Share My Personal Information</span></p>
             </div>
         </div>
     </footer>
@@ -970,61 +970,5 @@
             }
         }, 2000);
     </script>
-</body>
-</html>
-            function init() {
-                if (element) {
-                    element.textContent = '';
-                    index = 0;
-                    lastTime = performance.now();
-                    requestAnimationFrame(typeWriter);
-                }
-            }
-
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', init);
-            } else {
-                init();
-            }
-        })();
-
-        // 延迟加载视频
-        setTimeout(function() {
-            var video = document.getElementById('bannerVideo');
-            if (video && video.load) {
-                video.load();
-            }
-        }, 2000);
-    
-        // 按钮hover时专辑封面发光效果
-        document.querySelectorAll('.album-item').forEach(item => {
-            const buttons = item.querySelectorAll('.stream-btn');
-            const cover = item.querySelector('.album-cover');
-            const coverImg = item.querySelector('.album-cover img:first-child');
-
-            buttons.forEach(btn => {
-                btn.addEventListener('mouseenter', () => {
-                    if (cover) {
-                        cover.style.borderColor = 'var(--logo-red)';
-                        cover.style.boxShadow = '0 0 50px rgba(220, 38, 38, 0.6)';
-                    }
-                    if (coverImg) {
-                        coverImg.style.filter = 'brightness(1.1)';
-                    }
-                });
-
-                btn.addEventListener('mouseleave', () => {
-                    if (cover) {
-                        cover.style.borderColor = 'rgba(220, 38, 38, 0.3)';
-                        cover.style.boxShadow = '0 10px 40px rgba(0,0,0,0.8)';
-                    }
-                    if (coverImg) {
-                        coverImg.style.filter = 'brightness(1)';
-                    }
-                });
-            });
-        });
-
-</script>
 </body>
 </html>

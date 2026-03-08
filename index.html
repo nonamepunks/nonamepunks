@@ -1910,7 +1910,7 @@ if (document.readyState === 'loading') {
 }
 </script>
 
-<!-- MERCH 轮播功能 - 优化版 -->
+<!-- MERCH 轮播功能 - 优化版（含自动滚屏） -->
 <script>
 (function() {
     'use strict';
@@ -1919,6 +1919,8 @@ if (document.readyState === 'loading') {
     let merchTrack, merchItems, prevBtn, nextBtn;
     let isMobile = false;
     let isInitialized = false;
+    let autoScrollInterval = null;
+    let isPaused = false;
 
     function initElements() {
         merchTrack = document.querySelector('.merch-track');
@@ -1948,7 +1950,6 @@ if (document.readyState === 'loading') {
 
         merchCurrentIndex = Math.max(0, Math.min(merchCurrentIndex, maxIndex));
 
-        // 使用translate3d启用硬件加速
         const containerWidth = window.innerWidth;
         const itemWidth = containerWidth / itemsPerView;
         const offset = -merchCurrentIndex * itemWidth;
@@ -1972,20 +1973,60 @@ if (document.readyState === 'loading') {
         const maxIndex = Math.max(0, totalItems - itemsPerView);
 
         merchCurrentIndex += direction;
-        merchCurrentIndex = Math.max(0, Math.min(merchCurrentIndex, maxIndex));
+
+        // 循环滚动
+        if (merchCurrentIndex > maxIndex) {
+            merchCurrentIndex = 0;
+        } else if (merchCurrentIndex < 0) {
+            merchCurrentIndex = maxIndex;
+        }
 
         window.updateMerchCarousel();
     };
+
+    // 自动滚屏功能（仅电脑端）
+    function startAutoScroll() {
+        if (isMobile) return; // 移动端不自动滚动
+        if (autoScrollInterval) clearInterval(autoScrollInterval);
+
+        autoScrollInterval = setInterval(function() {
+            if (!isPaused) {
+                window.scrollMerch(1);
+            }
+        }, 3000); // 每3秒滚动一次
+    }
+
+    function stopAutoScroll() {
+        if (autoScrollInterval) {
+            clearInterval(autoScrollInterval);
+            autoScrollInterval = null;
+        }
+    }
 
     function init() {
         if (isInitialized) return;
 
         if (initElements()) {
             isInitialized = true;
-            // 立即初始化，不延迟
             window.updateMerchCarousel();
 
-            // 图片加载完成后重新计算布局
+            // 电脑端启动自动滚动
+            if (!isMobile) {
+                startAutoScroll();
+
+                // 鼠标悬停时暂停
+                const merchWrapper = document.querySelector('.merch-carousel-wrapper');
+                if (merchWrapper) {
+                    merchWrapper.addEventListener('mouseenter', function() {
+                        isPaused = true;
+                    });
+                    merchWrapper.addEventListener('mouseleave', function() {
+                        isPaused = false;
+                    });
+                }
+            }
+
+            // 图片加载完成后重新计算
             const images = merchTrack.querySelectorAll('img');
             let loadedCount = 0;
             const totalImages = images.length;
@@ -2003,31 +2044,41 @@ if (document.readyState === 'loading') {
 
                     img.addEventListener('error', function() {
                         loadedCount++;
-                        console.warn('图片加载失败:', this.src);
                     }, { once: true });
                 }
             });
         }
     }
 
-    // 窗口大小改变防抖
+    // 窗口大小改变
     let resizeTimer;
     window.addEventListener('resize', function() {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(function() {
+            const wasMobile = isMobile;
             merchCurrentIndex = 0;
             window.updateMerchCarousel();
+
+            // 切换设备类型时处理自动滚动
+            const newIsMobile = window.innerWidth <= 768;
+            if (wasMobile !== newIsMobile) {
+                if (newIsMobile) {
+                    stopAutoScroll();
+                } else {
+                    startAutoScroll();
+                }
+            }
         }, 150);
     });
 
-    // 立即初始化（不移除延迟）
+    // 立即初始化
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
     } else {
         init();
     }
 
-    // 触摸滑动优化
+    // 触摸滑动
     let touchStartX = 0;
     let touchStartY = 0;
     let isDragging = false;
@@ -2038,6 +2089,7 @@ if (document.readyState === 'loading') {
             touchStartY = e.changedTouches[0].screenY;
             isDragging = true;
             merchTrack.style.transition = 'none';
+            isPaused = true; // 触摸时暂停自动滚动
         }, {passive: true});
 
         merchTrack.addEventListener('touchmove', function(e) {
@@ -2073,11 +2125,36 @@ if (document.readyState === 'loading') {
             } else {
                 window.updateMerchCarousel();
             }
+
+            // 恢复自动滚动（如果是电脑端）
+            setTimeout(function() {
+                isPaused = false;
+            }, 1000);
         }, {passive: true});
     }
 })();
 </script>
 
+<!-- 键盘导航 -->
+<script>
+document.addEventListener('keydown', function(e) {
+    const merchSection = document.getElementById('merch');
+    if (!merchSection) return;
+
+    const rect = merchSection.getBoundingClientRect();
+    const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+
+    if (isVisible && window.innerWidth > 768) {
+        if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            if (window.scrollMerch) window.scrollMerch(-1);
+        } else if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            if (window.scrollMerch) window.scrollMerch(1);
+        }
+    }
+});
+</script>
 <!-- 键盘导航 -->
 <script>
 document.addEventListener('keydown', function(e) {

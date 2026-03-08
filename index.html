@@ -98,21 +98,141 @@
             .music-player-embed { height: 470px !important; }
         }
 
-        /* 桌面端竖屏 - 视频文字上移并增加显示行数 */
-        @media (min-width: 769px) and (orientation: portrait) {
-            .video-typewriter-container {
-                top: 49.5% !important;
-                padding: 30px 40px 0 !important;
-                min-height: 49% !important;
-            }
-            .video-typewriter-text {
-                font-size: clamp(10px, 1.4vw, 18px) !important;
-                line-height: 1.5 !important;
-            }
-        }
+        /* 视频区域打字机效果 */
+.video-typewriter-container {
+    position: absolute;
+    top: 62%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    padding: 40px 60px 0;
+    z-index: 10;
+    text-align: center;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    overflow: hidden;
+    pointer-events: none; /* 避免干扰视频点击 */
+}
+
+.video-typewriter-text {
+    font-family: 'Courier New', monospace;
+    font-size: clamp(11px, 1.2vw, 16px);
+    line-height: 1.6;
+    color: #fff;
+    text-shadow: 
+        0 0 8px rgba(220, 38, 38, 0.9),
+        0 0 16px rgba(220, 38, 38, 0.7),
+        0 0 24px rgba(220, 38, 38, 0.5),
+        2px 2px 4px rgba(0,0,0,1);
+    letter-spacing: 0.5px;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.video-typewriter-text::after {
+    content: '|';
+    animation: cursorBlink 1s infinite;
+    color: var(--logo-red);
+    text-shadow: 0 0 10px var(--logo-red);
+}
+
+@keyframes cursorBlink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* 桌面端竖屏 - 视频文字调整 */
+/* 桌面端竖屏 - 视频文字调整 */
+@media (min-width: 769px) and (orientation: portrait) {
+    .video-typewriter-container {
+        top: 52% !important;
+        left: 5% !important;
+        right: 5% !important;
+        width: 90% !important;
+        padding: 20px 0 0 !important;
+        min-height: 48% !important;
+    }
+    .video-typewriter-text {
+        font-size: clamp(11px, 1.6vw, 15px) !important;
+        line-height: 1.6 !important;
+        max-width: 100% !important;
+        padding: 0 10px !important;
+    }
+}
+
+/* 平板端 */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .video-typewriter-container {
+        top: 55%;
+        left: 5%;
+        right: 5%;
+        width: 90%;
+        padding: 20px 0 0;
+    }
+    .video-typewriter-text {
+        font-size: clamp(10px, 1.8vw, 14px);
+        line-height: 1.5;
+        max-width: 100%;
+    }
+}
+
+/* 移动端 */
+@media (max-width: 768px) {
+    .video-typewriter-container {
+        padding: 10px 15px 0;
+        top: 56%;
+        left: 2%;
+        right: 2%;
+        width: 96%;
+        bottom: 1%;
+        height: auto;
+        min-height: 44%;
+    }
+    .video-typewriter-text {
+        font-size: clamp(9px, 2.8vw, 13px);
+        line-height: 1.5;
+        letter-spacing: 0.2px;
+        padding: 0;
+        word-break: break-word;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .video-typewriter-container {
+        padding: 8px 10px 0;
+        top: 54%;
+        left: 1%;
+        right: 1%;
+        width: 98%;
+        bottom: 1%;
+        min-height: 46%;
+    }
+    .video-typewriter-text {
+        font-size: clamp(8px, 3.2vw, 12px);
+        line-height: 1.45;
+        letter-spacing: 0.1px;
+    }
+}
+
+@media (max-width: 360px) {
+    .video-typewriter-container {
+        top: 52%;
+        padding: 6px 8px 0;
+        min-height: 48%;
+    }
+    .video-typewriter-text {
+        font-size: clamp(7px, 3.5vw, 11px);
+        line-height: 1.4;
+    }
+}
 
 
-        .hero-vignette { 
+.hero-vignette { 
             position: absolute; 
             top: 0; 
             left: 0; 

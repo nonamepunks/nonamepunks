@@ -87,7 +87,7 @@
         .album-subtitle { font-family: 'Arial Black', Arial, sans-serif; font-size: 16px; color: var(--silver); letter-spacing: 3px; margin-bottom: 30px; }
         .video-section-inner { position: relative; z-index: 10; padding: 80px 40px; border-top: 1px solid rgba(220, 38, 38, 0.3); }
         .video-container { width: 100%; max-width: 1200px; margin: 0 auto; text-align: center; }
-        .video-player { width: 100%; aspect-ratio: 40 / 21; max-height: 600px; background: rgba(0,0,0,0.5); border: 3px solid var(--logo-red); display: flex; align-items: center; justify-content: center; margin-bottom: 30px; position: relative; cursor: pointer; box-shadow: 0 0 60px rgba(220, 38, 38, 0.4); transition: all 0.3s; overflow: hidden; }
+        .video-player { width: 100%; aspect-ratio: 1280 / 672; max-height: 600px; background: rgba(0,0,0,0.5); border: 3px solid var(--logo-red); display: flex; align-items: center; justify-content: center; margin-bottom: 30px; position: relative; cursor: pointer; box-shadow: 0 0 60px rgba(220, 38, 38, 0.4); transition: all 0.3s; overflow: hidden; }
         .video-player:hover { box-shadow: 0 0 100px rgba(220, 38, 38, 0.6); border-color: var(--logo-red); }
         .play-btn { width: 120px; height: 120px; border: 5px solid var(--logo-red); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s; box-shadow: 0 0 50px rgba(220, 38, 38, 0.7); background: rgba(0,0,0,0.6); position: relative; z-index: 100; }
         .play-btn::after { content: '▶'; font-size: 50px; margin-left: 10px; color: var(--logo-red); }
@@ -408,8 +408,12 @@
                 preload="metadata" poster="./image/banner3-poster.jpg" 
                 style="width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.5s;" 
                 onloadeddata="this.style.opacity=1" oncanplay="this.style.opacity=1">
+                <!-- WebM 格式优先（体积更小，加载更快） -->
                 <source src="https://video.wixstatic.com/video/d502ca_02f77ea8c1204a13ad02d6ebd762d136/720p/webm/file.webm" type="video/webm">
+                <!-- MP4 后备格式 -->
                 <source src="https://video.wixstatic.com/video/d502ca_cae18d24aaad4b468c7b2b2160253319/720p/mp4/file.mp4" type="video/mp4">
+                <!-- 备用图片（视频无法播放时显示） -->
+                <img src="./image/banner3fallback.webp" alt="Banner" style="width: 100%; height: 100%; object-fit: cover;">
             </video>
             <div class="video-fallback" style="display: none;"></div>
             <div class="banner-dark-effect">

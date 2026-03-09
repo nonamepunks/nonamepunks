@@ -440,7 +440,7 @@
         .album-subtitle { font-family: 'Arial Black', Arial, sans-serif; font-size: 16px; color: var(--silver); letter-spacing: 3px; margin-bottom: 30px; }
         .video-section-inner { position: relative; z-index: 10; padding: 80px 40px; border-top: 1px solid rgba(220, 38, 38, 0.3); }
         .video-container { width: 100%; max-width: 1200px; margin: 0 auto; text-align: center; }
-        .video-player { width: 100%; aspect-ratio: 16 / 9; max-height: 600px; background: rgba(0,0,0,0.5); border: 3px solid var(--logo-red); display: flex; align-items: center; justify-content: center; margin-bottom: 30px; position: relative; cursor: pointer; box-shadow: 0 0 60px rgba(220, 38, 38, 0.4); transition: all 0.3s; overflow: hidden; touch-action: manipulation; -webkit-tap-highlight-color: rgba(220, 38, 38, 0.3); }
+        .video-player { width: 100%; aspect-ratio: 1280 / 672; max-height: 600px; background: rgba(0,0,0,0.5); border: 3px solid var(--logo-red); display: flex; align-items: center; justify-content: center; margin-bottom: 30px; position: relative; cursor: pointer; box-shadow: 0 0 60px rgba(220, 38, 38, 0.4); transition: all 0.3s; overflow: hidden; touch-action: manipulation; -webkit-tap-highlight-color: rgba(220, 38, 38, 0.3); }
         .video-player:hover { box-shadow: 0 0 100px rgba(220, 38, 38, 0.6); border-color: var(--logo-red); }
         .video-player iframe { width: 100%; height: 100%; border: none; }
         .play-btn { 
@@ -1613,7 +1613,7 @@
 
     <div class="silver-line"></div>
     <section class="banner-section video-banner-section" id="banner3">
-        <div class="banner reveal video-banner" style="position: relative; aspect-ratio: 1280/672; overflow: hidden; background: #000;">
+        <div class="banner reveal video-banner" style="position: relative; aspect-ratio: 40/21; overflow: hidden; background: #000;">
             <!-- 静态背景图优先显示，视频后台加载 -->
             <div class="video-static-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('./image/banner3-poster.jpg') center/cover no-repeat; z-index: 0;"></div>
             <!-- 视频背景 -->
@@ -1636,6 +1636,8 @@
                 <source src="https://video.wixstatic.com/video/d502ca_02f77ea8c1204a13ad02d6ebd762d136/720p/webm/file.webm" type="video/webm">
                 <!-- MP4 后备格式 -->
                 <source src="https://video.wixstatic.com/video/d502ca_cae18d24aaad4b468c7b2b2160253319/720p/mp4/file.mp4" type="video/mp4">
+                <!-- 备用图片（视频无法播放时显示） -->
+                <img src="./image/banner3fallback.webp" alt="Banner" style="width: 100%; height: 100%; object-fit: cover;">
             </video>
             <script>
                 function handleVideoError(video) {

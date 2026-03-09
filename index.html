@@ -16,7 +16,14 @@
             -moz-osx-font-smoothing: grayscale;
             text-rendering: optimizeLegibility;
         }
-        :root { --logo-red: #DC2626; --blood-red: #B91C1C; --deep-red: #7F1D1D; --black: #000000; --white: #FFFFFF; --silver: #C0C0C0; --dark-gray: #1a1a1a; }
+        html {
+    width: 100%;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+:root { --logo-red: #DC2626; --blood-red: #B91C1C; --deep-red: #7F1D1D; --black: #000000; --white: #FFFFFF; --silver: #C0C0C0; --dark-gray: #1a1a1a; }
         body { 
             background-color: #000;
             background-image: url('./image/blackbg.webp');
@@ -202,20 +209,20 @@
 /* 移动端 - 修复：完整显示所有文字 */
 @media (max-width: 768px) {
     .video-typewriter-container {
-        padding: 6px 10px 0;
-        top: 52%;
-        left: 1.5%;
-        right: 1.5%;
-        width: 97%;
+        padding: 4px 8px 0;
+        top: 50%;
+        left: 1%;
+        right: 1%;
+        width: 98%;
         bottom: 0;
-        min-height: 48%;
-        max-height: 48%;
+        min-height: 50%;
+        max-height: 50%;
         overflow: hidden;
     }
     .video-typewriter-text {
-        font-size: clamp(8px, 2.5vw, 11px);
-        line-height: 1.08;
-        letter-spacing: -0.25px;
+        font-size: clamp(7.5px, 2.4vw, 10px);
+        line-height: 1.02;
+        letter-spacing: -0.3px;
         padding: 0;
         word-break: break-word;
         max-width: 100%;
@@ -225,32 +232,32 @@
 
 @media (max-width: 480px) {
     .video-typewriter-container {
-        padding: 4px 8px 0;
-        top: 50%;
-        left: 1%;
-        right: 1%;
-        width: 98%;
-        min-height: 50%;
-        max-height: 50%;
+        padding: 3px 6px 0;
+        top: 48%;
+        left: 0.5%;
+        right: 0.5%;
+        width: 99%;
+        min-height: 52%;
+        max-height: 52%;
     }
     .video-typewriter-text {
-        font-size: clamp(7px, 2.8vw, 10px);
-        line-height: 1.05;
-        letter-spacing: -0.2px;
+        font-size: clamp(6.5px, 2.6vw, 9px);
+        line-height: 1.0;
+        letter-spacing: -0.15px;
     }
 }
 
 @media (max-width: 360px) {
     .video-typewriter-container {
-        top: 48%;
-        padding: 3px 6px 0;
-        min-height: 52%;
-        max-height: 52%;
+        top: 46%;
+        padding: 2px 4px 0;
+        min-height: 54%;
+        max-height: 54%;
     }
     .video-typewriter-text {
-        font-size: clamp(6.5px, 3vw, 9px);
-        line-height: 1.02;
-        letter-spacing: -0.15px;
+        font-size: clamp(6px, 2.8vw, 8px);
+        line-height: 0.98;
+        letter-spacing: -0.1px;
     }
 }
 
@@ -849,7 +856,7 @@
 /* ===== MERCH 区域优化样式 ===== */
 .merch-carousel-wrapper {
     position: relative;
-    width: 100vw;
+    width: 100%;
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
     overflow: hidden;
@@ -857,7 +864,7 @@
 }
 
 .merch-carousel {
-    width: 100vw;
+    width: 100%;
     overflow: hidden;
 }
 
@@ -1075,14 +1082,14 @@
         padding: 60px 0;
     }
     .merch-carousel-wrapper {
-        width: 100vw;
+        width: 100%;
         margin-left: calc(-50vw + 50%);
         margin-right: calc(-50vw + 50%);
         overflow: visible;
         touch-action: auto;
     }
     .merch-carousel {
-        width: 100vw;
+        width: 100%;
         overflow: visible;
     }
     .merch-track {
@@ -1615,6 +1622,10 @@
                 muted 
                 loop 
                 playsinline 
+                webkit-playsinline="true"
+                x5-playsinline="true"
+                x5-video-player-type="h5-page"
+                x5-video-player-fullscreen="false"
                 preload="metadata" 
                 poster="./image/banner3-poster.jpg"
                 style="width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.5s;"
@@ -1638,6 +1649,46 @@
                         video.load();
                     }
                 }, 2000);
+
+                // 微信浏览器视频自动播放兼容处理
+                function initWechatVideo() {
+                    var video = document.getElementById('bannerVideo');
+                    if (!video) return;
+
+                    // 微信JS-SDK就绪后播放（iOS有效）
+                    if (window.WeixinJSBridge) {
+                        WeixinJSBridge.invoke('getNetworkType', {}, function(e) {
+                            video.play().catch(function(){});
+                        });
+                    } else {
+                        document.addEventListener('WeixinJSBridgeReady', function() {
+                            WeixinJSBridge.invoke('getNetworkType', {}, function(e) {
+                                video.play().catch(function(){});
+                            });
+                        }, false);
+                    }
+
+                    // 安卓微信：首次点击页面任意位置触发播放
+                    var isAndroid = /android/i.test(navigator.userAgent);
+                    var isWechat = /MicroMessenger/i.test(navigator.userAgent);
+
+                    if (isAndroid && isWechat) {
+                        var playOnFirstTouch = function() {
+                            video.play().catch(function(){});
+                            document.removeEventListener('touchstart', playOnFirstTouch);
+                            document.removeEventListener('click', playOnFirstTouch);
+                        };
+                        document.addEventListener('touchstart', playOnFirstTouch, {once: true});
+                        document.addEventListener('click', playOnFirstTouch, {once: true});
+                    }
+                }
+
+                // 页面加载完成后初始化
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', initWechatVideo);
+                } else {
+                    initWechatVideo();
+                }
             </script>
             <div class="video-fallback" style="display: none;"></div>
             <div class="banner-dark-effect">

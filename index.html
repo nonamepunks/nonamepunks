@@ -115,7 +115,7 @@
             .music-player-embed { height: 470px !important; }
         }
 
-        /* 视频区域打字机效果 */
+        /* ===== 视频区域打字机效果 - 修复移动端显示 ===== */
 .video-typewriter-container {
     position: absolute;
     top: 62%;
@@ -129,7 +129,7 @@
     align-items: flex-start;
     justify-content: center;
     overflow: hidden;
-    pointer-events: none; /* 避免干扰视频点击 */
+    pointer-events: none;
 }
 
 .video-typewriter-text {
@@ -162,110 +162,100 @@
     51%, 100% { opacity: 0; }
 }
 
-/* 桌面端竖屏 - 视频文字调整 */
-/* 桌面端竖屏 - 视频文字调整 */
-/* 桌面端竖屏 - 视频文字调整 */
+/* 桌面端竖屏 - 修复 (下移避开背景文字) */
 @media (min-width: 769px) and (orientation: portrait) {
     .video-typewriter-container {
-        top: 52% !important;
-        left: 5% !important;
-        right: 5% !important;
-        width: 90% !important;
-        padding: 20px 0 0 !important;
-        min-height: 48% !important;
+        top: 56% !important;          /* 从50%改为56%，下移两行 */
+        left: 3% !important;
+        right: 3% !important;
+        width: 94% !important;
+        padding: 15px 0 0 !important;
+        min-height: 44% !important;   /* 相应减小高度 */
     }
     .video-typewriter-text {
-        font-size: clamp(11px, 1.6vw, 15px) !important;
-        line-height: 1.3 !important;           /* 原1.6，减小行间距 */
-        letter-spacing: -0.3px !important;     /* 添加负字间距 */
+        font-size: clamp(10px, 1.5vw, 14px) !important;
+        line-height: 1.15 !important;
+        letter-spacing: -0.2px !important;
         max-width: 100% !important;
-        padding: 0 10px !important;
+        padding: 0 5px !important;
     }
 }
 
 /* 平板端 */
 @media (max-width: 1024px) and (min-width: 769px) {
     .video-typewriter-container {
-        top: 55%;
-        left: 5%;
-        right: 5%;
-        width: 90%;
-        padding: 20px 0 0;
+        top: 54%;
+        left: 4%;
+        right: 4%;
+        width: 92%;
+        padding: 12px 0 0;
+        min-height: 46%;
     }
     .video-typewriter-text {
-        font-size: clamp(10px, 1.8vw, 14px);
-        line-height: 1.3;                      /* 原1.5，减小 */
-        letter-spacing: -0.2px;                /* 负字间距 */
+        font-size: clamp(9px, 1.6vw, 13px);
+        line-height: 1.12;
+        letter-spacing: -0.25px;
         max-width: 100%;
     }
 }
 
-/* 移动端 */
+/* 移动端 - 修复：完整显示所有文字 */
 @media (max-width: 768px) {
     .video-typewriter-container {
-        padding: 10px 15px 0;
-        top: 56%;
-        left: 2%;
-        right: 2%;
-        width: 96%;
-        bottom: 1%;
-        height: auto;
-        min-height: 44%;
+        padding: 6px 10px 0;
+        top: 52%;
+        left: 1.5%;
+        right: 1.5%;
+        width: 97%;
+        bottom: 0;
+        min-height: 48%;
+        max-height: 48%;
+        overflow: hidden;
     }
     .video-typewriter-text {
-        font-size: clamp(9px, 2.8vw, 13px);
-        line-height: 1.25;                     /* 原1.5，大幅减小 */
-        letter-spacing: -0.3px;                /* 负字间距 */
+        font-size: clamp(8px, 2.5vw, 11px);
+        line-height: 1.08;
+        letter-spacing: -0.25px;
         padding: 0;
         word-break: break-word;
         max-width: 100%;
+        margin: 0;
     }
 }
 
 @media (max-width: 480px) {
     .video-typewriter-container {
-        padding: 8px 10px 0;
-        top: 54%;
+        padding: 4px 8px 0;
+        top: 50%;
         left: 1%;
         right: 1%;
         width: 98%;
-        bottom: 1%;
-        min-height: 46%;
+        min-height: 50%;
+        max-height: 50%;
     }
     .video-typewriter-text {
-        font-size: clamp(8px, 3.2vw, 12px);
-        line-height: 1.2;                      /* 原1.45，减小 */
-        letter-spacing: -0.2px;                /* 负字间距 */
+        font-size: clamp(7px, 2.8vw, 10px);
+        line-height: 1.05;
+        letter-spacing: -0.2px;
     }
 }
 
 @media (max-width: 360px) {
     .video-typewriter-container {
-        top: 52%;
-        padding: 6px 8px 0;
-        min-height: 48%;
+        top: 48%;
+        padding: 3px 6px 0;
+        min-height: 52%;
+        max-height: 52%;
     }
     .video-typewriter-text {
-        font-size: clamp(7px, 3.5vw, 11px);
-        line-height: 1.15;                     /* 原1.4，大幅减小 */
-        letter-spacing: -0.1px;                /* 微负字间距 */
+        font-size: clamp(6.5px, 3vw, 9px);
+        line-height: 1.02;
+        letter-spacing: -0.15px;
     }
 }
 
+/* ===== 其他区域样式 ===== */
 
-
-.hero-vignette { 
-            position: absolute; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            background: radial-gradient(ellipse at center, transparent 0%, transparent 50%, rgba(0,0,0,0.7) 100%); 
-            z-index: 4; 
-            pointer-events: none; 
-        }
-
-        /* ===== 其他区域样式 ===== */
         .banner-section { width: 100%; background: url('./image/blackbg.webp') repeat-y center top; background-size: 100% auto; position: relative; }
         .video-banner { overflow: hidden; margin-bottom: 0; }
         .video-banner video { display: block; }

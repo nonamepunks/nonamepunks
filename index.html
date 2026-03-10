@@ -53,6 +53,11 @@
         .nav-dragon:hover { filter: grayscale(0%) brightness(1.2) drop-shadow(0 0 10px var(--logo-red)); transform: scale(1.1); }
         .nav-dragon-left { margin-right: 40px; }
         .nav-dragon-right { margin-left: 40px; }
+        .nav-skull { width: 68px; height: 68px; cursor: pointer; transition: all 0.3s; filter: grayscale(100%) brightness(0.8); object-fit: contain; }
+        .nav-skull:hover { filter: grayscale(0%) brightness(1.2) drop-shadow(0 0 15px var(--logo-red)); transform: scale(1.1) rotate(5deg); }
+        .nav-skull-left { margin-right: 20px; }
+        .nav-skull-right { margin-left: 20px; }
+
         .nav-links { display: flex; gap: 50px; list-style: none; justify-content: center; }
         .nav-links a { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; color: var(--white); text-decoration: none; font-size: 18px; letter-spacing: 4px; text-transform: uppercase; position: relative; transition: all 0.1s; padding: 10px 0; }
         .nav-links a:hover { 
@@ -228,6 +233,9 @@
         max-width: 100%;
         margin: 0;
     }
+            .nav-skull { width: 45px; height: 45px; }
+            .nav-skull-left { margin-right: 10px; }
+            .nav-skull-right { margin-left: 10px; }
 }
 
 @media (max-width: 480px) {
@@ -604,7 +612,8 @@
             .album-cover { width: 300px; height: 300px; } 
             .album-title { font-size: 36px; letter-spacing: 6px; }
             .music-player-embed { height: 470px !important; }
-        }
+                    .nav-skull { width: 50px; height: 50px; }
+}
 
         /* 768px以下 - 移动端 */
         @media (max-width: 768px) {
@@ -1480,6 +1489,7 @@
 
     <nav class="navbar" id="navbar">
         <div class="nav-container">
+            <a href="./index.html"><img src="./image/skull26s.webp" alt="Logo" class="nav-skull nav-skull-left"></a>
             <a href="#hero" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">
                 <img src="./image/dragonL.png" alt="Dragon Left" class="nav-dragon nav-dragon-left">
             </a>
@@ -1494,6 +1504,7 @@
             <a href="#hero" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">
                 <img src="./image/dragonR.png" alt="Dragon Right" class="nav-dragon nav-dragon-right">
             </a>
+            <a href="./cn.html"><img src="./image/skull26g.webp" alt="Logo" class="nav-skull nav-skull-right"></a>
         </div>
     </nav>
 
@@ -1938,6 +1949,9 @@
         <div class="footer-nav">
             <div class="footer-nav-container">
                 <a href="#hero" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">
+                    <img src="./image/skull26s.webp" alt="Logo" class="nav-skull nav-skull-left" style="width: 50px; height: 50px;">
+                </a>
+                <a href="#hero" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">
                     <img src="./image/dragonL.png" alt="Dragon Left" class="nav-dragon nav-dragon-left">
                 </a>
                 <a href="#tour" data-editable>TOUR</a>
@@ -1949,7 +1963,10 @@
                 <a href="#hero" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">
                     <img src="./image/dragonR.png" alt="Dragon Right" class="nav-dragon nav-dragon-right">
                 </a>
-            </div>
+                <a href="#hero" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">
+                    <img src="./image/skull26g.webp" alt="Logo" class="nav-skull nav-skull-right" style="width: 50px; height: 50px;">
+                </a>
+</div>
         </div>
         <div class="footer-bottom">
             <div class="footer-slogan">REAL PUNK ROCK NEVER DEAD</div>

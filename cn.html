@@ -14,7 +14,6 @@
         body { background-color: #000; background-image: url('./image/blackbg.webp'); background-repeat: repeat-y; background-position: center top; background-size: 100% auto; color: var(--white); font-family: 'Arial Black', 'Helvetica Neue', Helvetica, Arial, 'Microsoft YaHei', 'SimHei', sans-serif; overflow-x: hidden; cursor: crosshair; }
 
         /* 刀光划痕动画 */
-        
         @keyframes hardGlitch { 0% { opacity: 0; transform: translateX(-10px); filter: hue-rotate(90deg); } 20% { opacity: 1; transform: translateX(5px); filter: hue-rotate(-90deg) drop-shadow(3px 0 var(--logo-red)); } 40% { transform: translateX(-3px); filter: hue-rotate(45deg) drop-shadow(-3px 0 var(--silver)); } 60% { transform: translateX(2px); filter: hue-rotate(0deg) drop-shadow(2px 0 var(--blood-red)); } 80% { transform: translateX(-1px); filter: drop-shadow(1px 0 var(--logo-red)); } 100% { opacity: 1; transform: translateX(0); filter: none; } }
         @keyframes logoFadeIn { 0% { opacity: 0; transform: scale(0.95); filter: blur(20px) brightness(2); } 50% { opacity: 0.5; filter: blur(10px) brightness(1.5); } 100% { opacity: 1; transform: scale(1); filter: blur(0) brightness(1); } }
         @keyframes logoGlow { 0%, 100% { filter: drop-shadow(0 0 30px rgba(220, 38, 38, 0.8)) drop-shadow(0 0 60px rgba(220, 38, 38, 0.5)) drop-shadow(0 0 90px rgba(220, 38, 38, 0.3)); } 50% { filter: drop-shadow(0 0 50px rgba(220, 38, 38, 1)) drop-shadow(0 0 100px rgba(220, 38, 38, 0.7)) drop-shadow(0 0 150px rgba(220, 38, 38, 0.4)); } }
@@ -43,10 +42,10 @@
         .nav-links a { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', 'Microsoft YaHei', sans-serif; color: var(--white); text-decoration: none; font-size: 18px; letter-spacing: 6px; text-transform: uppercase; position: relative; transition: all 0.1s; padding: 10px 0; }
         .nav-links a:hover { color: var(--logo-red); text-shadow: -1px -1px 0 rgba(0,0,0,0.8), 1px -1px 0 rgba(0,0,0,0.8), -1px 1px 0 rgba(0,0,0,0.8), 1px 1px 0 rgba(0,0,0,0.8), 0 0 10px var(--logo-red), 0 0 20px var(--logo-red); transform: skewX(-5deg); }
 
-        /* HERO 区域 - 刀光劈裂效果（更快版本） */
-        .hero { width: 100%; background: #000; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; position: relative; overflow: hidden; line-height: 0; }
-        .hero-bg { position: relative; width: 100%; line-height: 0; z-index: 1; }
-        .hero-bg img, .hero-bg-base { width: 100%; height: auto; display: block; }
+        /* HERO 区域 - 刀光划痕效果 */
+        .hero { width: 100%; background: #000; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; position: relative; overflow: hidden; line-height: 0; min-height: 100vh; }
+        .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; line-height: 0; z-index: 1; }
+        .hero-bg-base { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
         .hero-members-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; z-index: 2; }
         .hero-member { 
     flex: 1; 
@@ -98,55 +97,19 @@
         }
         .hero-content { position: absolute; bottom: 5%; left: 0; right: 0; z-index: 20; text-align: center; width: 100%; line-height: normal; }
         .hero-logo-img { max-width: 1000px; width: 90%; height: auto; opacity: 0; }
-        .hero-logo-img.active { animation: logoFadeIn 1.2s ease-out forwards, logoGlow 3s ease-in-out infinite 1.2s; }
-
-        
+        .hero-logo-img.active { animation: logoFadeIn 1.5s ease-out forwards, logoGlow 3s ease-in-out infinite 1.5s; }
 
         @media (min-width: 769px) and (orientation: portrait) {
-            /* 桌面端竖屏 - hero图片完整显示 */
-            .hero {
-                width: 100%;
-                position: relative;
-                overflow: hidden;
-            }
-            .hero-bg {
-                position: relative;
-                width: 100%;
-                line-height: 0;
-            }
-            .hero-bg img, .hero-bg-base {
-                width: 100%;
-                height: auto;
-                display: block;
-            }
-            .hero-members-container {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                display: flex;
-            }
-            .hero-member {
-                flex: 1;
-                height: 100%;
-            }
-            .hero-member img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-            .hero-content {
-                position: absolute;
-                bottom: 5%;
-                left: 0;
-                right: 0;
-                z-index: 10;
-                text-align: center;
-                width: 100%;
-            }
             .hero-logo-img { max-width: 660px; width: 60%; }
-            .music-player-embed { height: 470px !important; }
+            .music-player-embed { height: 655px !important; }
+        }
+
+        /* 电脑端竖屏/移动端音乐iframe高度调整 */
+        @media (max-width: 1024px) and (min-width: 769px) and (orientation: portrait),
+               (max-width: 768px) {
+            .music-player-embed {
+                height: 537px !important;
+            }
         }
 
         /* 视频打字机效果 */
@@ -163,81 +126,19 @@
             .video-typewriter-text { font-size: clamp(9px, 1.6vw, 13px); line-height: 1.12; letter-spacing: 0.5px; max-width: 100%; }
         }
         @media (max-width: 768px) {
-            /* HERO - 移动端/竖屏：图片完整显示，无黑边 */
-            .hero {
-                width: 100%;
-                position: relative;
-                overflow: hidden;
-            }
-            .hero-bg {
-                position: relative;
-                width: 100%;
-                line-height: 0;
-            }
-            .hero-bg img, .hero-bg-base {
-                width: 100%;
-                height: auto;
-                display: block;
-            }
-            .hero-members-container {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                display: flex;
-            }
-            .hero-member {
-                flex: 1;
-                height: 100%;
-                opacity: 1;
-            }
-            .hero-member img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                object-position: center;
-            }
-            .hero-content {
-                position: absolute;
-                bottom: 8%;
-                left: 0;
-                right: 0;
-                z-index: 10;
-                text-align: center;
-                width: 100%;
-                padding: 0 15px;
-            }
-            .hero-logo-img {
-                width: 80%;
-                max-width: 360px;
-                height: auto;
-                filter: drop-shadow(0 0 15px rgba(220, 38, 38, 0.6)) drop-shadow(0 0 30px rgba(220, 38, 38, 0.4));
-            }
-
             .video-typewriter-container { padding: 4px 8px 0; top: 50%; left: 1%; right: 1%; width: 98%; bottom: 0; min-height: 50%; max-height: 50%; overflow: hidden; }
             .video-typewriter-text { font-size: clamp(7.5px, 2.4vw, 10px); line-height: 1.02; letter-spacing: 0.5px; padding: 0; word-break: break-word; max-width: 100%; margin: 0; }
             .nav-skull { width: 45px; height: 45px; }
             .nav-skull-left { margin-right: 10px; }
             .nav-skull-right { margin-left: 10px; }
         }
-
-        /* 电脑竖屏 - logo缩小 */
-        @media (max-width: 768px) and (orientation: portrait) and (min-aspect-ratio: 1/2) {
-            .hero-logo-img {
-                width: 53%;
-                max-width: 240px;
-            }
-        }
         @media (max-width: 480px) {
             .video-typewriter-container { padding: 3px 6px 0; top: 48%; left: 0.5%; right: 0.5%; width: 99%; min-height: 52%; max-height: 52%; }
             .video-typewriter-text { font-size: clamp(6.5px, 2.6vw, 9px); line-height: 1.0; letter-spacing: 0.5px; }
-            .hero-logo-img { width: 75%; max-width: 340px; }
         }
         @media (max-width: 360px) {
             .video-typewriter-container { top: 46%; padding: 2px 4px 0; min-height: 54%; max-height: 54%; }
             .video-typewriter-text { font-size: clamp(6px, 2.8vw, 8px); line-height: 0.98; letter-spacing: 0.5px; }
-            .hero-logo-img { width: 80%; max-width: 320px; }
         }
 
         /* Banner区域 */
@@ -292,14 +193,6 @@
         .music-player-side:hover { border-color: var(--logo-red); box-shadow: 0 0 30px rgba(220, 38, 38, 0.3); }
         .music-player-title { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', 'Microsoft YaHei', sans-serif; font-size: 20px; letter-spacing: 4px; margin-bottom: 15px; color: var(--white); border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 10px; }
         .music-player-embed { width: 100%; border: none; background: rgba(0,0,0,0.3); }
-
-        /* 电脑端竖屏/移动端音乐iframe高度调整 */
-        @media (max-width: 1024px) and (min-width: 769px) and (orientation: portrait),
-               (max-width: 768px) {
-            .music-player-embed {
-                height: 537px !important;
-            }
-        }
         .music-center { text-align: center; padding: 20px; }
         .album-cover { width: 420px; height: 420px; background: var(--dark-gray); margin: 0 auto 30px; border: 3px solid var(--logo-red); box-shadow: 0 0 60px rgba(220, 38, 38, 0.6); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; transition: all 0.3s; cursor: pointer; touch-action: manipulation; }
         .album-cover:hover { transform: scale(1.02); box-shadow: 0 0 80px rgba(220, 38, 38, 0.8); }
@@ -318,10 +211,10 @@
         .video-player:hover .play-btn::after { color: var(--white); }
 
         /* MERCH */
-        .merch-section { padding: 100px 0; background: url('./image/blackbg.webp') repeat-y center top; background-size: 100% auto; position: relative; overflow: hidden; }
-        .merch-carousel-wrapper { position: relative; width: 100vw; margin-left: calc(-50vw + 50%); overflow: visible; contain: layout style; }
-        .merch-carousel { width: 100%; overflow: hidden; position: relative; }
-        .merch-track { display: flex; transition: transform 0.3s ease; will-change: transform; backface-visibility: hidden; width: max-content; }
+        .merch-section { padding: 100px 30px; background: url('./image/blackbg.webp') repeat-y center top; background-size: 100% auto; position: relative; }
+        .merch-carousel-wrapper { position: relative; width: 100%; margin-left: calc(-50vw + 50%); margin-right: calc(-50vw + 50%); overflow: hidden; contain: layout style; }
+        .merch-carousel { width: 100%; overflow: hidden; }
+        .merch-track { display: flex; transition: transform 0.3s ease; will-change: transform; backface-visibility: hidden; }
         .merch-item { position: relative; background: rgba(0,0,0,0.6); cursor: pointer; transition: box-shadow 0.4s ease; overflow: hidden; flex-shrink: 0; border: 1px solid rgba(220, 38, 38, 0.1); }
         .merch-item:hover { box-shadow: inset 0 0 30px rgba(220, 38, 38, 0.2); }
         .merch-img-wrap { position: relative; width: 100%; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; overflow: hidden; background: rgba(0,0,0,0.4); }
@@ -335,36 +228,37 @@
         .merch-name { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', 'Microsoft YaHei', sans-serif; font-size: 16px; letter-spacing: 2px; color: var(--white); margin-bottom: 5px; text-transform: uppercase; text-shadow: -1px -1px 0 rgba(0,0,0,0.9), 1px -1px 0 rgba(0,0,0,0.9), -1px 1px 0 rgba(0,0,0,0.9), 1px 1px 0 rgba(0,0,0,0.9), 0 2px 4px rgba(0,0,0,0.9); font-weight: 700; }
         .merch-category { font-family: 'Arial Black', 'Microsoft YaHei', Arial, sans-serif; font-size: 12px; color: var(--silver); letter-spacing: 1px; margin-bottom: 8px; text-transform: uppercase; text-shadow: -1px -1px 0 rgba(0,0,0,0.9), 1px -1px 0 rgba(0,0,0,0.9), -1px 1px 0 rgba(0,0,0,0.9), 1px 1px 0 rgba(0,0,0,0.9); font-weight: 600; }
         .merch-price { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', 'Microsoft YaHei', sans-serif; font-size: 20px; color: var(--logo-red); letter-spacing: 2px; text-shadow: -1px -1px 0 rgba(0,0,0,0.9), 1px -1px 0 rgba(0,0,0,0.9), -1px 1px 0 rgba(0,0,0,0.9), 1px 1px 0 rgba(0,0,0,0.9); font-weight: 700; }
-        .merch-btn-container { text-align: center; margin-top: 50px; padding: 0 20px; }
-        .merch-nav-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 50px; height: 50px; background: rgba(220, 38, 38, 0.9); border: 2px solid var(--logo-red); color: var(--white); font-size: 20px; cursor: pointer; z-index: 1000; transition: all 0.3s; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; }
+        .merch-btn-container { text-align: center; margin-top: 50px; }
+        .merch-nav-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 50px; height: 50px; background: rgba(220, 38, 38, 0.9); border: 2px solid var(--logo-red); color: var(--white); font-size: 20px; cursor: pointer; z-index: 100; transition: all 0.3s; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; }
+        .merch-prev-btn { left: 20px; }
+        .merch-next-btn { right: 20px; }
         .merch-nav-btn.visible { opacity: 1; pointer-events: auto; }
         .merch-nav-btn:hover { background: var(--logo-red); box-shadow: 0 0 30px rgba(220, 38, 38, 0.8); }
-        .merch-prev-btn { left: 30px; }
-        .merch-next-btn { right: 30px; }
+        .merch-prev-btn { left: 20px; }
+        .merch-next-btn { right: 20px; }
 
         @media (min-width: 1025px) and (orientation: landscape) {
-            .merch-item { width: calc(100vw / 6); min-width: calc(100vw / 6); }
-            .merch-carousel-wrapper { touch-action: pan-y; overflow: hidden; }
+            .merch-item { width: calc(100vw / 6); }
+            .merch-carousel-wrapper { touch-action: pan-y; }
             .merch-carousel-wrapper:hover .merch-nav-btn.visible { opacity: 1; }
         }
         @media (min-width: 769px) and (orientation: portrait) {
-            .merch-item { width: calc(100vw / 3); min-width: calc(100vw / 3); }
+            .merch-item { width: calc(100vw / 3); }
             .merch-nav-btn { width: 45px; height: 45px; font-size: 18px; }
-            .merch-prev-btn { left: 20px; }
-            .merch-next-btn { right: 20px; }
-            .merch-carousel-wrapper { touch-action: pan-y; overflow: hidden; }
+            .merch-prev-btn { left: 15px; }
+            .merch-next-btn { right: 15px; }
+            .merch-carousel-wrapper { touch-action: pan-y; }
             .merch-carousel-wrapper:hover .merch-nav-btn.visible { opacity: 1; }
         }
         @media (max-width: 1024px) and (min-width: 769px) {
-            .merch-item { width: calc(100vw / 3); min-width: calc(100vw / 3); }
+            .merch-item { width: calc(100vw / 3); }
             .merch-nav-btn.visible { opacity: 1; pointer-events: auto; }
-            .merch-carousel-wrapper { overflow: hidden; }
         }
         @media (max-width: 768px) {
-            .merch-section { padding: 60px 0; width: 100vw; overflow: hidden; }
-            .merch-carousel-wrapper { width: 100vw; margin-left: calc(-50vw + 50%); overflow: hidden; touch-action: auto; }
-            .merch-carousel { width: 100%; overflow: hidden; }
-            .merch-track { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; transform: none !important; transition: none; width: 100%; }
+            .merch-section { padding: 60px 0; }
+            .merch-carousel-wrapper { width: 100%; margin-left: calc(-50vw + 50%); margin-right: calc(-50vw + 50%); overflow: visible; touch-action: auto; }
+            .merch-carousel { width: 100%; overflow: visible; }
+            .merch-track { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; transform: none !important; transition: none; }
             .merch-item { width: 100%; min-width: auto; border: none; aspect-ratio: 1; }
             .merch-nav-btn { display: none !important; }
             .merch-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 15px 10px; background: transparent; transform: translateY(100%); transition: transform 0.3s ease; }
@@ -380,7 +274,6 @@
             .merch-name { font-size: 11px; }
             .merch-category { font-size: 9px; }
             .merch-price { font-size: 13px; }
-            .merch-section { padding: 40px 0; }
         }
 
         /* MERCH 弹出大图 */
@@ -472,7 +365,60 @@
         .silver-line { height: 3px; background: var(--deep-red); position: relative; overflow: hidden; box-shadow: 0 0 15px rgba(127, 29, 29, 0.4); }
 
         /* 响应式 */
-        @media (max-width: 1200px) { 
+        /* QQ音乐播放器样式 */
+        .qq-music-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            height: 655px;
+            overflow: hidden;
+        }
+        .qq-music-player {
+            width: 100%;
+            height: 60px;
+            border: none;
+            flex-shrink: 0;
+        }
+
+        /* 桌面端 (1025px+) */
+        @media (min-width: 1025px) {
+            .qq-music-list {
+                height: 655px;
+            }
+        }
+
+        /* 桌面端竖屏/平板 (768px-1024px) */
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .qq-music-list {
+                height: 537px;
+            }
+            .qq-music-player.qq-music-hide-mobile {
+                display: none;
+            }
+        }
+
+        /* 平板/手机 (≤768px) */
+        @media (max-width: 768px) {
+            .qq-music-list {
+                height: 537px;
+            }
+            .qq-music-player.qq-music-hide-mobile {
+                display: none;
+            }
+        }
+
+        /* 小屏手机 (≤480px) */
+        @media (max-width: 480px) {
+            .qq-music-list {
+                height: 537px;
+            }
+            .qq-music-player.qq-music-hide-mobile,
+            .qq-music-player.qq-music-hide-tablet {
+                display: none;
+            }
+        }
+
+@media (max-width: 1200px) { 
             .music-content-new { grid-template-columns: 1fr; gap: 40px; } 
             .music-player-side { max-width: 600px; margin: 0 auto; width: 100%; } 
             .album-cover { width: 350px; height: 350px; } 
@@ -494,9 +440,6 @@
             .hero { width: 100%; position: relative; overflow: hidden; }
             .hero-bg { position: relative; width: 100%; line-height: 0; }
             .hero-bg img { width: 100%; height: auto; display: block; }
-            .hero-members-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; z-index: 2; }
-            .hero-member { flex: 1; height: 100%; position: relative; overflow: hidden; opacity: 1; }
-            .hero-member img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
             .hero-content { position: absolute; bottom: 8%; left: 0; right: 0; z-index: 10; text-align: center; width: 100%; padding: 0 15px; }
             .hero-logo-img { width: 80%; max-width: 360px; height: auto; filter: drop-shadow(0 0 15px rgba(220, 38, 38, 0.6)) drop-shadow(0 0 30px rgba(220, 38, 38, 0.4)); }
             @media (max-width: 768px) and (orientation: portrait) and (min-aspect-ratio: 1/2) {
@@ -541,7 +484,6 @@
         @media (max-width: 480px) {
             .video-typewriter-container { padding: 3px 6px 0; top: 48%; left: 0.5%; right: 0.5%; width: 99%; min-height: 52%; max-height: 52%; }
             .video-typewriter-text { font-size: clamp(6.5px, 2.6vw, 9px); line-height: 1.0; letter-spacing: 0.5px; }
-            .hero-logo-img { width: 75%; max-width: 340px; }
         }
 
         /* 其他样式 */
@@ -570,84 +512,6 @@
         .music-video-section { position: relative; }
         .music-video-section::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 80px; background: linear-gradient(to bottom, #000 0%, rgba(0,0,0,0.6) 60%, transparent 100%); z-index: 5; pointer-events: none; }
     
-        /* QQ音乐播放器样式 */
-        .qq-music-list {
-            display: flex;
-            flex-direction: column;
-            gap: 0;
-            height: 655px;
-            overflow: hidden;
-        }
-        .qq-music-player {
-            width: 100%;
-            height: 60px;
-            border: none;
-            flex-shrink: 0;
-        }
-
-        /* 桌面端 (1025px+) - 显示9首，540px，但容器655px，显示前10首其实没问题 */
-        @media (min-width: 1025px) {
-            .qq-music-list {
-                height: 655px;
-            }
-        }
-
-        /* 桌面端竖屏 (1024px以下) - 显示6首 (360px) */
-        @media (max-width: 1024px) and (min-width: 769px) {
-            .qq-music-list {
-                height: 470px;
-            }
-            .qq-music-player.qq-music-hide-mobile {
-                display: none;
-            }
-        }
-
-        /* 平板 (768px以下) - 显示5首 (300px) */
-        @media (max-width: 768px) and (min-width: 481px) {
-            .qq-music-list {
-                height: 400px;
-            }
-            .qq-music-player.qq-music-hide-mobile,
-            .qq-music-player:nth-child(7) {
-                display: none;
-            }
-        }
-
-        /* 手机 (480px以下) - 显示4首 (240px) */
-        @media (max-width: 480px) and (min-width: 361px) {
-            .qq-music-list {
-                height: 350px;
-            }
-            .qq-music-player.qq-music-hide-mobile,
-            .qq-music-player.qq-music-hide-tablet,
-            .qq-music-player:nth-child(6) {
-                display: none;
-            }
-        }
-
-        /* 小屏手机 (360px以下) - 显示3首 (180px) */
-        @media (max-width: 360px) {
-            .qq-music-list {
-                height: 300px;
-            }
-            .qq-music-player.qq-music-hide-mobile,
-            .qq-music-player.qq-music-hide-tablet,
-            .qq-music-player:nth-child(5),
-            .qq-music-player:nth-child(6) {
-                display: none;
-            }
-        }
-        @media (max-width: 360px) {
-            .qq-music-list {
-                height: 300px;
-            }
-            .qq-music-player.qq-music-hide-mobile,
-            .qq-music-player.qq-music-hide-tablet,
-            .qq-music-player:nth-child(5),
-            .qq-music-player:nth-child(4) {
-                display: none;
-            }
-        }
 </style>
 </head>
 <body>
@@ -688,8 +552,7 @@
                 <div class="hero-member" id="member4">
                     <img src="./image/cnherom4.webp" alt="Member 4">
                 </div>
-                <!-- 刀光线条 -->
-                </div>
+            </div>
         </div>
         <div class="hero-content">
             <img src="./image/logocn.png" alt="NONAME LOGO" class="hero-logo-img reveal-logo">
@@ -828,7 +691,7 @@
             <div class="music-content-new">
                 <div class="music-player-side reveal">
                     <h3 class="music-player-title">網易雲音樂</h3>
-                    <iframe class="music-player-embed" style="border-radius:12px; width: 350px; height: 655px;" src="//music.163.com/outchain/player?type=0&id=6844513901&auto=0&height=430" frameBorder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+                    <iframe class="music-player-embed" style="border-radius:12px; width: 350px; height: 655px;" src="//music.163.com/outchain/player?type=0&id=6844513901&auto=1&height=430" frameBorder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
                 </div>
                 <div class="music-center reveal">
                     <div class="album-cover"><img src="./image/releases/undersymphonicsiege.webp" alt="Under Symphonic Siege Album Cover"></div>
@@ -852,6 +715,66 @@
                         <iframe class="qq-music-player qq-music-hide-tablet" src="https://i.y.qq.com/n2/m/outchain/player/index.html?songid=315056402&songtype=0" frameborder="0" allowfullscreen></iframe>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="video-section-inner" id="video">
+            <h2 class="section-title reveal">視頻</h2>
+            <div class="video-container">
+                <div class="video-player reveal" id="videoPlayer" onclick="playVideo()" style="cursor: pointer; position: relative; overflow: hidden;">
+                    <img src="https://img.youtube.com/vi/CFZik0yVglc/maxresdefault.jpg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;" alt="Video Thumbnail">
+                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 1;"></div>
+                    <div class="play-btn" style="position: relative; z-index: 100; pointer-events: none;"></div>
+                </div>
+                <a href="https://www.bilibili.com" target="_blank" class="btn">觀看視頻</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="silver-line"></div>
+
+    <section class="banner-section" id="banner4">
+        <div class="banner reveal">
+            <img loading="lazy" src="./image/banner3.jpg" alt="Banner 4">
+            <div class="banner-dark-effect">
+                <div class="banner-cinematic"></div>
+                <div class="banner-grain"></div>
+                <div class="banner-scanlines-dark"></div>
+                <div class="banner-glow"></div>
+                <div class="banner-border-glow"></div>
+            </div>
+            <a href="http://emanonent.wixstudio.com/livegigs/antiipa" target="_blank" class="banner-btn banner-btn-center">乾杯</a>
+        </div>
+    </section>
+
+    <div class="silver-line"></div>
+
+    <section class="merch-section" id="merch">
+        <h2 class="section-title reveal">周邊產品</h2>
+        <div class="merch-carousel-wrapper">
+            <button class="merch-nav-btn merch-prev-btn" onclick="scrollMerch(-1)">&#10094;</button>
+            <div class="merch-carousel">
+                <div class="merch-track">
+                    <div class="merch-item reveal dual-img" data-img1="./image/merchs/Anti-teeb1.png" data-img2="./image/merchs/Anti-teeb2.png" data-name="Anti-" data-category="T恤" data-price="¥180" onclick="openMerchPopup(this)">
+                        <div class="merch-img-wrap">
+                            <img loading="lazy" decoding="async" src="./image/merchs/Anti-teeb1.png" alt="Anti-" class="merch-img" onerror="this.style.opacity='0.5'; this.parentElement.style.background='#222';">
+                            <img loading="lazy" decoding="async" src="./image/merchs/Anti-teeb2.png" alt="Anti- Back" class="merch-img-hover" onerror="this.style.display='none';">
+                        </div>
+                        <div class="merch-info">
+                            <div class="merch-name">Anti-</div>
+                            <div class="merch-category">T恤</div>
+                            <div class="merch-price">¥180</div>
+                        </div>
+                    </div>
+                    <div class="merch-item reveal" data-img1="./image/merchs/DevilSukll-teeb1.png" data-img2="" data-name="Devil Skull" data-category="T恤" data-price="¥160" onclick="openMerchPopup(this)">
+                        <div class="merch-img-wrap">
+                            <img loading="lazy" decoding="async" src="./image/merchs/DevilSukll-teeb1.png" alt="Devil Skull" class="merch-img" onerror="this.style.opacity='0.5'; this.parentElement.style.background='#222';">
+                        </div>
+                        <div class="merch-info">
+                            <div class="merch-name">Devil Skull</div>
+                            <div class="merch-category">T恤</div>
+                            <div class="merch-price">¥160</div>
+                        </div>
+                    </div>
                     <div class="merch-item reveal dual-img" data-img1="./image/merchs/WNTT-tee1.png" data-img2="./image/merchs/WNTT-tee2.png" data-name="We Need The Truth" data-category="T恤" data-price="¥180" onclick="openMerchPopup(this)">
                         <div class="merch-img-wrap">
                             <img loading="lazy" decoding="async" src="./image/merchs/WNTT-tee1.png" alt="We Need The Truth" class="merch-img" onerror="this.style.opacity='0.5'; this.parentElement.style.background='#222';">
@@ -1148,9 +1071,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // 视频播放（已改为直接嵌入Bilibili）
+        // 视频播放
         function playVideo() {
-            // Bilibili视频已直接嵌入，无需额外操作
+            var player = document.getElementById('videoPlayer');
+            player.innerHTML = '<iframe src="https://player.bilibili.com/player.html?bvid=BV1bvMHz7EVJ&page=1&autoplay=1" allowfullscreen frameborder="0" scrolling="no" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>';
+            player.onclick = null;
+            player.style.cursor = 'default';
         }
 
         // 视频错误处理
@@ -1391,26 +1317,6 @@ document.addEventListener('DOMContentLoaded', () => {
                             });
                         }
                     }
-
-                    // 图片加载完成后重新计算
-                    const images = merchTrack.querySelectorAll('img');
-                    let loadedCount = 0;
-                    const totalImages = images.length;
-                    images.forEach(img => {
-                        if (img.complete) {
-                            loadedCount++;
-                        } else {
-                            img.addEventListener('load', function() {
-                                loadedCount++;
-                                if (loadedCount >= Math.min(totalImages, 3)) {
-                                    window.updateMerchCarousel();
-                                }
-                            }, { once: true });
-                            img.addEventListener('error', function() {
-                                loadedCount++;
-                            }, { once: true });
-                        }
-                    });
                 }
             }
 

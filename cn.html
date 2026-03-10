@@ -569,7 +569,86 @@
         .banner3-gradient-overlay { position: absolute; bottom: 0; left: 0; width: 100%; height: 150px; background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.5) 70%, #000 100%); z-index: 5; pointer-events: none; }
         .music-video-section { position: relative; }
         .music-video-section::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 80px; background: linear-gradient(to bottom, #000 0%, rgba(0,0,0,0.6) 60%, transparent 100%); z-index: 5; pointer-events: none; }
-    </style>
+    
+        /* QQ音乐播放器样式 */
+        .qq-music-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            height: 655px;
+            overflow: hidden;
+        }
+        .qq-music-player {
+            width: 100%;
+            height: 60px;
+            border: none;
+            flex-shrink: 0;
+        }
+
+        /* 桌面端 (1025px+) - 显示9首，540px，但容器655px，显示前10首其实没问题 */
+        @media (min-width: 1025px) {
+            .qq-music-list {
+                height: 655px;
+            }
+        }
+
+        /* 桌面端竖屏 (1024px以下) - 显示6首 (360px) */
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .qq-music-list {
+                height: 470px;
+            }
+            .qq-music-player.qq-music-hide-mobile {
+                display: none;
+            }
+        }
+
+        /* 平板 (768px以下) - 显示5首 (300px) */
+        @media (max-width: 768px) and (min-width: 481px) {
+            .qq-music-list {
+                height: 400px;
+            }
+            .qq-music-player.qq-music-hide-mobile,
+            .qq-music-player:nth-child(7) {
+                display: none;
+            }
+        }
+
+        /* 手机 (480px以下) - 显示4首 (240px) */
+        @media (max-width: 480px) and (min-width: 361px) {
+            .qq-music-list {
+                height: 350px;
+            }
+            .qq-music-player.qq-music-hide-mobile,
+            .qq-music-player.qq-music-hide-tablet,
+            .qq-music-player:nth-child(6) {
+                display: none;
+            }
+        }
+
+        /* 小屏手机 (360px以下) - 显示3首 (180px) */
+        @media (max-width: 360px) {
+            .qq-music-list {
+                height: 300px;
+            }
+            .qq-music-player.qq-music-hide-mobile,
+            .qq-music-player.qq-music-hide-tablet,
+            .qq-music-player:nth-child(5),
+            .qq-music-player:nth-child(6) {
+                display: none;
+            }
+        }
+        @media (max-width: 360px) {
+            .qq-music-list {
+                height: 300px;
+            }
+            .qq-music-player.qq-music-hide-mobile,
+            .qq-music-player.qq-music-hide-tablet,
+            .qq-music-player:nth-child(5),
+            .qq-music-player:nth-child(4) {
+                display: none;
+            }
+        }
+</style>
 </head>
 <body>
     <nav class="navbar" id="navbar">
@@ -757,61 +836,21 @@
                     <p class="album-subtitle">最新發行</p>
                     <a href="./music.html" class="btn-music">查看所有發行</a>
                 </div>
-                <div class="music-player-side reveal">
+                <div class="music-player-side reveal qq-music-side">
                     <h3 class="music-player-title">QQ音樂</h3>
-                    <iframe class="music-player-embed" style="border-radius:12px; width: 350px; height: 655px;" src="https://i.y.qq.com/n2/m/outchain/player/index.html?songid=512660748&songtype=0" frameBorder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-                </div>
-            </div>
-        </div>
-        <div class="video-section-inner" id="video">
-            <h2 class="section-title reveal">視頻</h2>
-            <div class="video-container">
-                <div class="video-player reveal" id="videoPlayer" style="cursor: pointer; position: relative; overflow: hidden; aspect-ratio: 16/9; background: #000;">
-                    <iframe src="//player.bilibili.com/player.html?bvid=BV1XGFNzSEh1&page=1&high_quality=1&danmaku=0&as_wide=1" 
-                        scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" 
-                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-                    </iframe>
-                </div>
-                <a href="https://space.bilibili.com/504652594" target="_blank" class="btn">查看所有視頻</a>
-            </div>
-        </div>
-    </section>
-
-    <div class="silver-line"></div>
-
-    <section class="banner-section" id="banner4">
-        <div class="banner reveal">
-            <img loading="lazy" src="./image/banner3.jpg" alt="Banner 4">
-            <div class="banner-dark-effect">
-                <div class="banner-cinematic"></div>
-                <div class="banner-grain"></div>
-                <div class="banner-scanlines-dark"></div>
-                <div class="banner-glow"></div>
-                <div class="banner-border-glow"></div>
-            </div>
-            <a href="http://emanonent.wixstudio.com/livegigs/antiipa" target="_blank" class="banner-btn banner-btn-center">乾杯</a>
-        </div>
-    </section>
-
-    <div class="silver-line"></div>
-
-    <section class="merch-section" id="merch">
-        <h2 class="section-title reveal">周邊產品</h2>
-        <div class="merch-carousel-wrapper">
-            <button class="merch-nav-btn merch-prev-btn" onclick="scrollMerch(-1)">&#10094;</button>
-            <div class="merch-carousel">
-                <div class="merch-track">
-                    <div class="merch-item reveal dual-img" data-img1="./image/merchs/Anti-teeb1.png" data-img2="./image/merchs/Anti-teeb2.png" data-name="Anti-" data-category="T恤" data-price="¥180" onclick="openMerchPopup(this)">
-                        <div class="merch-img-wrap">
-                            <img loading="lazy" decoding="async" src="./image/merchs/Anti-teeb1.png" alt="Anti-" class="merch-img" onerror="this.style.opacity='0.5'; this.parentElement.style.background='#222';">
-                            <img loading="lazy" decoding="async" src="./image/merchs/Anti-teeb2.png" alt="Anti- Back" class="merch-img-hover" onerror="this.style.display='none';">
-                        </div>
-                        <div class="merch-info">
-                            <div class="merch-name">Anti-</div>
-                            <div class="merch-category">T恤</div>
-                            <div class="merch-price">¥180</div>
-                        </div>
+                    <div class="qq-music-list">
+                        <iframe class="qq-music-player" src="https://i.y.qq.com/n2/m/outchain/player/index.html?songid=512660748&songtype=0" frameborder="0" allowfullscreen></iframe>
+                        <iframe class="qq-music-player" src="https://i.y.qq.com/n2/m/outchain/player/index.html?songid=558099144&songtype=0" frameborder="0" allowfullscreen></iframe>
+                        <iframe class="qq-music-player" src="https://i.y.qq.com/n2/m/outchain/player/index.html?songid=558099122&songtype=0" frameborder="0" allowfullscreen></iframe>
+                        <iframe class="qq-music-player" src="https://i.y.qq.com/n2/m/outchain/player/index.html?songid=558099135&songtype=0" frameborder="0" allowfullscreen></iframe>
+                        <iframe class="qq-music-player" src="https://i.y.qq.com/n2/m/outchain/player/index.html?songid=558099046&songtype=0" frameborder="0" allowfullscreen></iframe>
+                        <iframe class="qq-music-player" src="https://i.y.qq.com/n2/m/outchain/player/index.html?songid=313205414&songtype=0" frameborder="0" allowfullscreen></iframe>
+                        <iframe class="qq-music-player qq-music-hide-mobile" src="https://i.y.qq.com/n2/m/outchain/player/index.html?songid=313205489&songtype=0" frameborder="0" allowfullscreen></iframe>
+                        <iframe class="qq-music-player qq-music-hide-mobile" src="https://i.y.qq.com/n2/m/outchain/player/index.html?songid=313205434&songtype=0" frameborder="0" allowfullscreen></iframe>
+                        <iframe class="qq-music-player qq-music-hide-tablet" src="https://i.y.qq.com/n2/m/outchain/player/index.html?songid=313205438&songtype=0" frameborder="0" allowfullscreen></iframe>
+                        <iframe class="qq-music-player qq-music-hide-tablet" src="https://i.y.qq.com/n2/m/outchain/player/index.html?songid=556761743&songtype=0" frameborder="0" allowfullscreen></iframe>
                     </div>
+                </div>
                     <div class="merch-item reveal" data-img1="./image/merchs/DevilSukll-teeb1.png" data-img2="" data-name="Devil Skull" data-category="T恤" data-price="¥160" onclick="openMerchPopup(this)">
                         <div class="merch-img-wrap">
                             <img loading="lazy" decoding="async" src="./image/merchs/DevilSukll-teeb1.png" alt="Devil Skull" class="merch-img" onerror="this.style.opacity='0.5'; this.parentElement.style.background='#222';">

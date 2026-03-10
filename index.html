@@ -866,10 +866,8 @@
 .merch-carousel-wrapper {
     position: relative;
     width: 100%;
-    margin-left: calc(-50vw + 50%);
-    margin-right: calc(-50vw + 50%);
     overflow: hidden;
-    contain: layout style; /* 优化渲染性能 */
+    contain: layout style;
 }
 
 .merch-carousel {
@@ -1024,13 +1022,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-}
-
-.merch-nav-btn.visible {
     opacity: 1;
     pointer-events: auto;
+}
+
+.merch-nav-btn:hover {
+    background: var(--logo-red);
+    box-shadow: 0 0 30px rgba(220, 38, 38, 0.8);
+}
+
+.merch-nav-btn.hidden {
+    opacity: 0;
+    pointer-events: none;
 }
 
 .merch-nav-btn:hover {
@@ -1044,20 +1047,17 @@
 /* 桌面端横屏 - 6个产品 */
 @media (min-width: 1025px) and (orientation: landscape) {
     .merch-item {
-        width: calc(100vw / 6);
+        width: calc(100% / 6);
     }
     .merch-carousel-wrapper {
         touch-action: pan-y;
-    }
-    .merch-carousel-wrapper:hover .merch-nav-btn.visible {
-        opacity: 1;
     }
 }
 
 /* 桌面端竖屏 - 3个产品 */
 @media (min-width: 769px) and (orientation: portrait) {
     .merch-item {
-        width: calc(100vw / 3);
+        width: calc(100% / 3);
     }
     .merch-nav-btn {
         width: 45px;
@@ -1069,19 +1069,12 @@
     .merch-carousel-wrapper {
         touch-action: pan-y;
     }
-    .merch-carousel-wrapper:hover .merch-nav-btn.visible {
-        opacity: 1;
-    }
 }
 
 /* 平板端 */
 @media (max-width: 1024px) and (min-width: 769px) {
     .merch-item {
-        width: calc(100vw / 3);
-    }
-    .merch-nav-btn.visible {
-        opacity: 1;
-        pointer-events: auto;
+        width: calc(100% / 3);
     }
 }
 
@@ -1092,8 +1085,6 @@
     }
     .merch-carousel-wrapper {
         width: 100%;
-        margin-left: calc(-50vw + 50%);
-        margin-right: calc(-50vw + 50%);
         overflow: visible;
         touch-action: auto;
     }

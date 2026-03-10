@@ -14,28 +14,7 @@
         body { background-color: #000; background-image: url('./image/blackbg.webp'); background-repeat: repeat-y; background-position: center top; background-size: 100% auto; color: var(--white); font-family: 'Arial Black', 'Helvetica Neue', Helvetica, Arial, 'Microsoft YaHei', 'SimHei', sans-serif; overflow-x: hidden; cursor: crosshair; }
 
         /* 刀光划痕动画 */
-        @keyframes slashRevealTop {
-            0% { clip-path: polygon(0 0, 0 0, 0 0, 0 0); filter: brightness(3) contrast(2); transform: translateY(-50px); opacity: 0; }
-            30% { clip-path: polygon(0 0, 100% 0, 100% 30%, 0 30%); filter: brightness(4) contrast(3); }
-            60% { clip-path: polygon(0 0, 100% 0, 100% 70%, 0 70%); filter: brightness(2) contrast(1.5); }
-            100% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); filter: brightness(1) contrast(1); transform: translateY(0); opacity: 1; }
-        }
-        @keyframes slashRevealBottom {
-            0% { clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%); filter: brightness(3) contrast(2); transform: translateY(50px); opacity: 0; }
-            30% { clip-path: polygon(0 70%, 100% 70%, 100% 100%, 0 100%); filter: brightness(4) contrast(3); }
-            60% { clip-path: polygon(0 30%, 100% 30%, 100% 100%, 0 100%); filter: brightness(2) contrast(1.5); }
-            100% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); filter: brightness(1) contrast(1); transform: translateY(0); opacity: 1; }
-        }
-        @keyframes slashSwipe {
-            0% { left: -5%; opacity: 1; transform: skewX(-20deg) scaleY(1.2); }
-            50% { opacity: 1; }
-            100% { left: 105%; opacity: 0; transform: skewX(-20deg) scaleY(1.2); }
-        }
-        @keyframes slashSwipe {
-            0% { left: -5%; opacity: 1; transform: skewX(-20deg) scaleY(1.2); }
-            50% { opacity: 1; }
-            100% { left: 105%; opacity: 0; transform: skewX(-20deg) scaleY(1.2); }
-        }
+        
         @keyframes hardGlitch { 0% { opacity: 0; transform: translateX(-10px); filter: hue-rotate(90deg); } 20% { opacity: 1; transform: translateX(5px); filter: hue-rotate(-90deg) drop-shadow(3px 0 var(--logo-red)); } 40% { transform: translateX(-3px); filter: hue-rotate(45deg) drop-shadow(-3px 0 var(--silver)); } 60% { transform: translateX(2px); filter: hue-rotate(0deg) drop-shadow(2px 0 var(--blood-red)); } 80% { transform: translateX(-1px); filter: drop-shadow(1px 0 var(--logo-red)); } 100% { opacity: 1; transform: translateX(0); filter: none; } }
         @keyframes logoFadeIn { 0% { opacity: 0; transform: scale(0.95); filter: blur(20px) brightness(2); } 50% { opacity: 0.5; filter: blur(10px) brightness(1.5); } 100% { opacity: 1; transform: scale(1); filter: blur(0) brightness(1); } }
         @keyframes logoGlow { 0%, 100% { filter: drop-shadow(0 0 30px rgba(220, 38, 38, 0.8)) drop-shadow(0 0 60px rgba(220, 38, 38, 0.5)) drop-shadow(0 0 90px rgba(220, 38, 38, 0.3)); } 50% { filter: drop-shadow(0 0 50px rgba(220, 38, 38, 1)) drop-shadow(0 0 100px rgba(220, 38, 38, 0.7)) drop-shadow(0 0 150px rgba(220, 38, 38, 0.4)); } }
@@ -65,50 +44,107 @@
         .nav-links a:hover { color: var(--logo-red); text-shadow: -1px -1px 0 rgba(0,0,0,0.8), 1px -1px 0 rgba(0,0,0,0.8), -1px 1px 0 rgba(0,0,0,0.8), 1px 1px 0 rgba(0,0,0,0.8), 0 0 10px var(--logo-red), 0 0 20px var(--logo-red); transform: skewX(-5deg); }
 
         /* HERO 区域 - 刀光劈裂效果（更快版本） */
-        .hero { width: 100%; background: #000; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; position: relative; overflow: hidden; line-height: 0; min-height: 100vh; }
-        .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; line-height: 0; z-index: 1; }
-        .hero-bg-base { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+        .hero { width: 100%; background: #000; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; position: relative; overflow: hidden; line-height: 0; }
+        .hero-bg { position: relative; width: 100%; line-height: 0; z-index: 1; }
+        .hero-bg img, .hero-bg-base { width: 100%; height: auto; display: block; }
         .hero-members-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; z-index: 2; }
-        .hero-member { flex: 1; height: 100%; position: relative; overflow: hidden; opacity: 0; }
+        .hero-member { 
+    flex: 1; 
+    height: 100%; 
+    position: relative; 
+    overflow: hidden; 
+    opacity: 1;
+}
+.hero-member {
+    position: relative;
+    overflow: hidden;
+}
+.hero-member::before,
+.hero-member::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: rgba(220,38,38,0.8);
+    box-shadow: 
+        0 0 30px rgba(220,38,38,1),
+        0 0 60px rgba(220,38,38,0.8),
+        0 0 90px rgba(220,38,38,0.6),
+        0 0 120px rgba(255,255,255,0.4);
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+.hero-member::before {
+    top: 0;
+}
+.hero-member::after {
+    bottom: 0;
+}
+.hero-member.slash-reveal::before,
+.hero-member.slash-reveal::after {
+    opacity: 1;
+}
         .hero-member img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
-        .hero-member:nth-child(1).slash-reveal { animation: slashRevealTop 0.6s cubic-bezier(0.77, 0, 0.175, 1) forwards; animation-delay: 0.1s; }
-        .hero-member:nth-child(2).slash-reveal { animation: slashRevealBottom 0.6s cubic-bezier(0.77, 0, 0.175, 1) forwards; animation-delay: 0.25s; }
-        .hero-member:nth-child(3).slash-reveal { animation: slashRevealTop 0.6s cubic-bezier(0.77, 0, 0.175, 1) forwards; animation-delay: 0.4s; }
-        .hero-member:nth-child(4).slash-reveal { animation: slashRevealBottom 0.6s cubic-bezier(0.77, 0, 0.175, 1) forwards; animation-delay: 0.55s; }
-        .slash-line { position: absolute; top: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,1) 15%, rgba(220,38,38,1) 50%, rgba(255,255,255,1) 85%, transparent 100%); box-shadow: 0 0 30px rgba(220,38,38,1), 0 0 60px rgba(220,38,38,0.9), 0 0 90px rgba(255,255,255,0.8); z-index: 10; opacity: 0; }
-        .slash-line.animate { animation: slashSwipe 0.4s ease-out forwards; }
-        .slash-line:nth-child(1) { left: 25%; }
-        .slash-line:nth-child(2) { left: 50%; }
-        .slash-line:nth-child(3) { left: 75%; }
-        .slash-line:nth-child(4) { left: 100%; }
+        .hero-member:nth-child(1).slash-reveal { animation: fadeInMember 0.8s ease-out forwards; animation-delay: 0.1s; }
+        .hero-member:nth-child(2).slash-reveal { animation: fadeInMember 0.8s ease-out forwards; animation-delay: 0.25s; }
+        .hero-member:nth-child(3).slash-reveal { animation: fadeInMember 0.8s ease-out forwards; animation-delay: 0.4s; }
+        .hero-member:nth-child(4).slash-reveal { animation: fadeInMember 0.8s ease-out forwards; animation-delay: 0.55s; }
+
+        @keyframes fadeInMember {
+            0% { opacity: 0; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1); }
+        }
         .hero-content { position: absolute; bottom: 5%; left: 0; right: 0; z-index: 20; text-align: center; width: 100%; line-height: normal; }
         .hero-logo-img { max-width: 1000px; width: 90%; height: auto; opacity: 0; }
         .hero-logo-img.active { animation: logoFadeIn 1.2s ease-out forwards, logoGlow 3s ease-in-out infinite 1.2s; }
 
-        @keyframes slashRevealTop {
-            0% { clip-path: polygon(0 0, 0 0, 0 0, 0 0); filter: brightness(3) contrast(2); transform: translateY(-50px); opacity: 0; }
-            30% { clip-path: polygon(0 0, 100% 0, 100% 30%, 0 30%); filter: brightness(4) contrast(3); }
-            60% { clip-path: polygon(0 0, 100% 0, 100% 70%, 0 70%); filter: brightness(2) contrast(1.5); }
-            100% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); filter: brightness(1) contrast(1); transform: translateY(0); opacity: 1; }
-        }
-        @keyframes slashRevealBottom {
-            0% { clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%); filter: brightness(3) contrast(2); transform: translateY(50px); opacity: 0; }
-            30% { clip-path: polygon(0 70%, 100% 70%, 100% 100%, 0 100%); filter: brightness(4) contrast(3); }
-            60% { clip-path: polygon(0 30%, 100% 30%, 100% 100%, 0 100%); filter: brightness(2) contrast(1.5); }
-            100% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); filter: brightness(1) contrast(1); transform: translateY(0); opacity: 1; }
-        }
-        @keyframes slashSwipe {
-            0% { left: -5%; opacity: 1; transform: skewX(-20deg) scaleY(1.2); }
-            50% { opacity: 1; }
-            100% { left: 105%; opacity: 0; transform: skewX(-20deg) scaleY(1.2); }
-        }
-        @keyframes slashSwipe {
-            0% { left: -5%; opacity: 1; transform: skewX(-20deg) scaleY(1.2); }
-            50% { opacity: 1; }
-            100% { left: 105%; opacity: 0; transform: skewX(-20deg) scaleY(1.2); }
-        }
+        
 
         @media (min-width: 769px) and (orientation: portrait) {
+            /* 桌面端竖屏 - hero图片完整显示 */
+            .hero {
+                width: 100%;
+                position: relative;
+                overflow: hidden;
+            }
+            .hero-bg {
+                position: relative;
+                width: 100%;
+                line-height: 0;
+            }
+            .hero-bg img, .hero-bg-base {
+                width: 100%;
+                height: auto;
+                display: block;
+            }
+            .hero-members-container {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                display: flex;
+            }
+            .hero-member {
+                flex: 1;
+                height: 100%;
+            }
+            .hero-member img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            .hero-content {
+                position: absolute;
+                bottom: 5%;
+                left: 0;
+                right: 0;
+                z-index: 10;
+                text-align: center;
+                width: 100%;
+            }
             .hero-logo-img { max-width: 660px; width: 60%; }
             .music-player-embed { height: 470px !important; }
         }
@@ -127,19 +163,81 @@
             .video-typewriter-text { font-size: clamp(9px, 1.6vw, 13px); line-height: 1.12; letter-spacing: 0.5px; max-width: 100%; }
         }
         @media (max-width: 768px) {
+            /* HERO - 移动端/竖屏：图片完整显示，无黑边 */
+            .hero {
+                width: 100%;
+                position: relative;
+                overflow: hidden;
+            }
+            .hero-bg {
+                position: relative;
+                width: 100%;
+                line-height: 0;
+            }
+            .hero-bg img, .hero-bg-base {
+                width: 100%;
+                height: auto;
+                display: block;
+            }
+            .hero-members-container {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                display: flex;
+            }
+            .hero-member {
+                flex: 1;
+                height: 100%;
+                opacity: 1;
+            }
+            .hero-member img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+            }
+            .hero-content {
+                position: absolute;
+                bottom: 8%;
+                left: 0;
+                right: 0;
+                z-index: 10;
+                text-align: center;
+                width: 100%;
+                padding: 0 15px;
+            }
+            .hero-logo-img {
+                width: 80%;
+                max-width: 360px;
+                height: auto;
+                filter: drop-shadow(0 0 15px rgba(220, 38, 38, 0.6)) drop-shadow(0 0 30px rgba(220, 38, 38, 0.4));
+            }
+
             .video-typewriter-container { padding: 4px 8px 0; top: 50%; left: 1%; right: 1%; width: 98%; bottom: 0; min-height: 50%; max-height: 50%; overflow: hidden; }
             .video-typewriter-text { font-size: clamp(7.5px, 2.4vw, 10px); line-height: 1.02; letter-spacing: 0.5px; padding: 0; word-break: break-word; max-width: 100%; margin: 0; }
             .nav-skull { width: 45px; height: 45px; }
             .nav-skull-left { margin-right: 10px; }
             .nav-skull-right { margin-left: 10px; }
         }
+
+        /* 电脑竖屏 - logo缩小 */
+        @media (max-width: 768px) and (orientation: portrait) and (min-aspect-ratio: 1/2) {
+            .hero-logo-img {
+                width: 53%;
+                max-width: 240px;
+            }
+        }
         @media (max-width: 480px) {
             .video-typewriter-container { padding: 3px 6px 0; top: 48%; left: 0.5%; right: 0.5%; width: 99%; min-height: 52%; max-height: 52%; }
             .video-typewriter-text { font-size: clamp(6.5px, 2.6vw, 9px); line-height: 1.0; letter-spacing: 0.5px; }
+            .hero-logo-img { width: 75%; max-width: 340px; }
         }
         @media (max-width: 360px) {
             .video-typewriter-container { top: 46%; padding: 2px 4px 0; min-height: 54%; max-height: 54%; }
             .video-typewriter-text { font-size: clamp(6px, 2.8vw, 8px); line-height: 0.98; letter-spacing: 0.5px; }
+            .hero-logo-img { width: 80%; max-width: 320px; }
         }
 
         /* Banner区域 */
@@ -399,7 +497,6 @@
             .hero-members-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; z-index: 2; }
             .hero-member { flex: 1; height: 100%; position: relative; overflow: hidden; opacity: 1; }
             .hero-member img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
-            .slash-line { display: none; }
             .hero-content { position: absolute; bottom: 8%; left: 0; right: 0; z-index: 10; text-align: center; width: 100%; padding: 0 15px; }
             .hero-logo-img { width: 80%; max-width: 360px; height: auto; filter: drop-shadow(0 0 15px rgba(220, 38, 38, 0.6)) drop-shadow(0 0 30px rgba(220, 38, 38, 0.4)); }
             @media (max-width: 768px) and (orientation: portrait) and (min-aspect-ratio: 1/2) {
@@ -444,6 +541,7 @@
         @media (max-width: 480px) {
             .video-typewriter-container { padding: 3px 6px 0; top: 48%; left: 0.5%; right: 0.5%; width: 99%; min-height: 52%; max-height: 52%; }
             .video-typewriter-text { font-size: clamp(6.5px, 2.6vw, 9px); line-height: 1.0; letter-spacing: 0.5px; }
+            .hero-logo-img { width: 75%; max-width: 340px; }
         }
 
         /* 其他样式 */
@@ -512,11 +610,7 @@
                     <img src="./image/cnherom4.webp" alt="Member 4">
                 </div>
                 <!-- 刀光线条 -->
-                <div class="slash-line" id="slash1" style="left: 25%;"></div>
-                <div class="slash-line" id="slash2" style="left: 50%;"></div>
-                <div class="slash-line" id="slash3" style="left: 75%;"></div>
-                <div class="slash-line" id="slash4" style="left: 100%;"></div>
-            </div>
+                </div>
         </div>
         <div class="hero-content">
             <img src="./image/logocn.png" alt="NONAME LOGO" class="hero-logo-img reveal-logo">
@@ -665,13 +759,7 @@
                 </div>
                 <div class="music-player-side reveal">
                     <h3 class="music-player-title">QQ音樂</h3>
-                    <div style="width: 350px; height: 655px; background: rgba(0,0,0,0.8); display: flex; flex-direction: column; align-items: center; justify-content: center; border: 2px solid rgba(220, 38, 38, 0.5);">
-                        <svg viewBox="0 0 24 24" width="80" height="80" fill="#DC2626" style="margin-bottom: 20px;">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
-                        </svg>
-                        <p style="color: #fff; font-size: 16px; margin-bottom: 20px; text-align: center; padding: 0 20px;">QQ音樂歌單</p>
-                        <a href="https://y.qq.com/n3/other/pages/details/playlist.html?id=9678338418" target="_blank" class="btn" style="padding: 12px 30px; font-size: 14px;">打開QQ音樂</a>
-                    </div>
+                    <iframe class="music-player-embed" style="border-radius:12px; width: 350px; height: 655px;" src="https://i.y.qq.com/n2/m/outchain/player/index.html?songid=512660748&songtype=0" frameBorder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
                 </div>
             </div>
         </div>
@@ -942,27 +1030,21 @@
         // 页面加载完成后执行
         // 使用 DOMContentLoaded 更快启动动画
 document.addEventListener('DOMContentLoaded', () => {
-            // 立即启动刀光劈裂动画（无需等待图片加载）
+            // 成员照片依次显示，带刀光边框效果
             setTimeout(() => {
-                // 上下上下交替进入效果
                 const members = document.querySelectorAll('.hero-member');
-                const slashes = document.querySelectorAll('.slash-line');
 
-                // 成员1（从上到下）
+                // 成员1显示
                 members[0].classList.add('slash-reveal');
-                setTimeout(() => slashes[0].classList.add('animate'), 200);
 
-                // 成员2（从下到上）
+                // 成员2显示
                 setTimeout(() => members[1].classList.add('slash-reveal'), 150);
-                setTimeout(() => slashes[1].classList.add('animate'), 350);
 
-                // 成员3（从上到下）
+                // 成员3显示
                 setTimeout(() => members[2].classList.add('slash-reveal'), 300);
-                setTimeout(() => slashes[2].classList.add('animate'), 500);
 
-                // 成员4（从下到上）
+                // 成员4显示
                 setTimeout(() => members[3].classList.add('slash-reveal'), 450);
-                setTimeout(() => slashes[3].classList.add('animate'), 650);
             }, 50);
 
             // LOGO渐显（提前显示）

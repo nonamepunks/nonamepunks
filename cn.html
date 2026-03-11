@@ -42,50 +42,83 @@
         .nav-links a { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', 'Microsoft YaHei', sans-serif; color: var(--white); text-decoration: none; font-size: 18px; letter-spacing: 6px; text-transform: uppercase; position: relative; transition: all 0.1s; padding: 10px 0; }
         .nav-links a:hover { color: var(--logo-red); text-shadow: -1px -1px 0 rgba(0,0,0,0.8), 1px -1px 0 rgba(0,0,0,0.8), -1px 1px 0 rgba(0,0,0,0.8), 1px 1px 0 rgba(0,0,0,0.8), 0 0 10px var(--logo-red), 0 0 20px var(--logo-red); transform: skewX(-5deg); }
 
-        /* HERO 区域 - 刀光划痕效果 */
-        .hero { width: 100%; background: #000; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; position: relative; overflow: hidden; line-height: 0; min-height: 100vh; }
-        .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; line-height: 0; z-index: 1; }
-        .hero-bg-base { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
-        .hero-members-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; z-index: 2; }
+        /* ===== HERO 区域 - 4成员刀光特效 ===== */
+        .hero { 
+            width: 100%;
+            background: #000; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: flex-end; 
+            align-items: center; 
+            position: relative; 
+            overflow: hidden;
+            line-height: 0;
+        }
+
+        .hero-bg { 
+            position: relative;
+            width: 100%;
+            line-height: 0;
+        }
+
+        .hero-bg-base { 
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .hero-members-container { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            display: flex; 
+            z-index: 2; 
+        }
+
         .hero-member { 
-    flex: 1; 
-    height: 100%; 
-    position: relative; 
-    overflow: hidden; 
-    opacity: 1;
-}
-.hero-member {
-    position: relative;
-    overflow: hidden;
-}
-.hero-member::before,
-.hero-member::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: rgba(220,38,38,0.8);
-    box-shadow: 
-        0 0 30px rgba(220,38,38,1),
-        0 0 60px rgba(220,38,38,0.8),
-        0 0 90px rgba(220,38,38,0.6),
-        0 0 120px rgba(255,255,255,0.4);
-    z-index: 10;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-}
-.hero-member::before {
-    top: 0;
-}
-.hero-member::after {
-    bottom: 0;
-}
-.hero-member.slash-reveal::before,
-.hero-member.slash-reveal::after {
-    opacity: 1;
-}
-        .hero-member img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+            flex: 1; 
+            height: 100%; 
+            position: relative; 
+            overflow: hidden; 
+            opacity: 0;
+        }
+
+        .hero-member img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            object-position: center; 
+        }
+
+        /* 刀光边框效果 */
+        .hero-member::before,
+        .hero-member::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: rgba(220,38,38,0.8);
+            box-shadow: 
+                0 0 30px rgba(220,38,38,1),
+                0 0 60px rgba(220,38,38,0.8),
+                0 0 90px rgba(220,38,38,0.6),
+                0 0 120px rgba(255,255,255,0.4);
+            z-index: 10;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .hero-member::before { top: 0; }
+        .hero-member::after { bottom: 0; }
+
+        .hero-member.slash-reveal::before,
+        .hero-member.slash-reveal::after {
+            opacity: 1;
+        }
+
         .hero-member:nth-child(1).slash-reveal { animation: fadeInMember 0.8s ease-out forwards; animation-delay: 0.1s; }
         .hero-member:nth-child(2).slash-reveal { animation: fadeInMember 0.8s ease-out forwards; animation-delay: 0.25s; }
         .hero-member:nth-child(3).slash-reveal { animation: fadeInMember 0.8s ease-out forwards; animation-delay: 0.4s; }
@@ -95,9 +128,51 @@
             0% { opacity: 0; transform: scale(0.95); }
             100% { opacity: 1; transform: scale(1); }
         }
-        .hero-content { position: absolute; bottom: 5%; left: 0; right: 0; z-index: 20; text-align: center; width: 100%; line-height: normal; }
-        .hero-logo-img { max-width: 1000px; width: 90%; height: auto; opacity: 0; }
-        .hero-logo-img.active { animation: logoFadeIn 1.5s ease-out forwards, logoGlow 3s ease-in-out infinite 1.5s; }
+
+        .hero-content { 
+            position: absolute; 
+            bottom: 5%; 
+            left: 0; 
+            right: 0; 
+            z-index: 20; 
+            text-align: center; 
+            width: 100%; 
+            line-height: normal; 
+        }
+
+        .hero-logo-img { 
+            max-width: 1000px; 
+            width: 90%; 
+            height: auto; 
+            opacity: 0; 
+        }
+
+        .hero-logo-img.active { 
+            animation: logoFadeIn 1.5s ease-out forwards, logoGlow 3s ease-in-out infinite 1.5s; 
+        }
+
+        /* 桌面端竖屏 - LOGO缩小到2/3 */
+        @media (min-width: 769px) and (orientation: portrait) {
+            .hero-logo-img {
+                max-width: 660px;
+                width: 60%;
+            }
+        }
+
+        /* 移动端 Hero 适配 */
+        @media (max-width: 768px) {
+            .hero-logo-img {
+                width: 80%;
+                max-width: 360px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .hero-logo-img {
+                width: 75%;
+                max-width: 320px;
+            }
+        }
 
         @media (min-width: 769px) and (orientation: portrait) {
             .hero-logo-img { max-width: 660px; width: 60%; }
@@ -438,62 +513,10 @@
         @media (max-width: 768px) {
             .play-btn { width: 60px; height: 60px; border-width: 3px; background: rgba(0,0,0,0.7); }
             .play-btn::after { font-size: 24px; margin-left: 3px; }
-            /* HERO - 移动端/竖屏：4成员竖条整体显示 */
-            .hero { 
-                width: 100%; 
-                position: relative; 
-                overflow: hidden;
-                min-height: auto;
-            }
-            .hero-bg { 
-                position: relative; 
-                width: 100%; 
-                line-height: 0; 
-            }
-            .hero-bg img { 
-                width: 100%; 
-                height: auto; 
-                display: block; 
-            }
-            /* 4成员竖条容器：绝对定位，高度跟随背景图 */
-            .hero-members-container {
-                position: absolute !important;
-                top: 0 !important;
-                left: 0 !important;
-                width: 100% !important;
-                height: auto !important;
-                bottom: 0 !important;
-                display: flex !important;
-                z-index: 2 !important;
-            }
-            /* 每个成员竖条 */
-            .hero-member {
-                flex: 1 !important;
-                height: auto !important;
-                position: relative !important;
-                overflow: hidden !important;
-            }
-            .hero-member img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                object-position: center;
-            }
-            /* 隐藏刀光边框效果 */
-            .hero-member::before,
-            .hero-member::after {
-                display: none;
-            }
-            .hero-content { 
-                position: absolute; 
-                bottom: 5%; 
-                left: 0; 
-                right: 0; 
-                z-index: 20; 
-                text-align: center; 
-                width: 100%; 
-                padding: 0 15px; 
-            }
+            .hero { width: 100%; position: relative; overflow: hidden; }
+            .hero-bg { position: relative; width: 100%; line-height: 0; }
+            .hero-bg img { width: 100%; height: auto; display: block; }
+            .hero-content { position: absolute; bottom: 8%; left: 0; right: 0; z-index: 10; text-align: center; width: 100%; padding: 0 15px; }
             .hero-logo-img { width: 80%; max-width: 360px; height: auto; filter: drop-shadow(0 0 15px rgba(220, 38, 38, 0.6)) drop-shadow(0 0 30px rgba(220, 38, 38, 0.4)); }
             @media (max-width: 768px) and (orientation: portrait) and (min-aspect-ratio: 1/2) {
                 .hero-logo-img { width: 53%; max-width: 240px; }
@@ -565,7 +588,15 @@
         .music-video-section { position: relative; }
         .music-video-section::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 80px; background: linear-gradient(to bottom, #000 0%, rgba(0,0,0,0.6) 60%, transparent 100%); z-index: 5; pointer-events: none; }
     
-</style>
+        /* 网易云播放器高度调整 */
+        @media (min-width: 769px) and (orientation: portrait) {
+            .netease-player { height: 655px !important; }
+        }
+        @media (max-width: 1024px) and (min-width: 769px) and (orientation: portrait),
+               (max-width: 768px) {
+            .netease-player { height: 537px !important; }
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar" id="navbar">
@@ -744,7 +775,7 @@
             <div class="music-content-new">
                 <div class="music-player-side reveal">
                     <h3 class="music-player-title">網易雲音樂</h3>
-                    <iframe class="music-player-embed" style="border-radius:12px; width: 350px; height: 655px;" src="//music.163.com/outchain/player?type=0&id=6844513901&auto=1&height=430" frameBorder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+                    <iframe class="music-player-embed netease-player" style="border-radius:12px; width: 350px; height: 655px;" src="https://music.163.com/outchain/player?type=0&id=6844513901&auto=1&height=430" frameBorder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" scrolling="no"></iframe>
                 </div>
                 <div class="music-center reveal">
                     <div class="album-cover"><img src="./image/releases/undersymphonicsiege.webp" alt="Under Symphonic Siege Album Cover"></div>

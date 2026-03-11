@@ -104,7 +104,13 @@
             .music-player-embed { height: 655px !important; }
         }
 
-        
+        /* 电脑端竖屏/移动端音乐iframe高度调整 */
+        @media (max-width: 1024px) and (min-width: 769px) and (orientation: portrait),
+               (max-width: 768px) {
+            .music-player-embed {
+                height: 537px !important;
+            }
+        }
 
         /* 视频打字机效果 */
         .video-typewriter-container { position: absolute; top: 62%; left: 0; right: 0; width: 100%; padding: 40px 60px 0; z-index: 10; text-align: center; display: flex; align-items: flex-start; justify-content: center; overflow: hidden; pointer-events: none; }
@@ -413,18 +419,6 @@
             }
         }
 
-        /* 网易云音乐播放器高度控制 */
-        .netease-player {
-            height: 655px !important;
-        }
-
-        /* 桌面端竖屏/平板/移动端 */
-        @media (max-width: 1024px) {
-            .netease-player {
-                height: 537px !important;
-            }
-        }
-
 @media (max-width: 1200px) { 
             .music-content-new { grid-template-columns: 1fr; gap: 40px; } 
             .music-player-side { max-width: 600px; margin: 0 auto; width: 100%; } 
@@ -461,22 +455,23 @@
                 height: auto; 
                 display: block; 
             }
-            /* 4成员竖条容器：绝对定位覆盖在背景图上 */
+            /* 4成员竖条容器：绝对定位，高度跟随背景图 */
             .hero-members-container {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                display: flex;
-                z-index: 2;
+                position: absolute !important;
+                top: 0 !important;
+                left: 0 !important;
+                width: 100% !important;
+                height: auto !important;
+                bottom: 0 !important;
+                display: flex !important;
+                z-index: 2 !important;
             }
             /* 每个成员竖条 */
             .hero-member {
-                flex: 1;
-                height: 100%;
-                position: relative;
-                overflow: hidden;
+                flex: 1 !important;
+                height: auto !important;
+                position: relative !important;
+                overflow: hidden !important;
             }
             .hero-member img {
                 width: 100%;
@@ -484,7 +479,7 @@
                 object-fit: cover;
                 object-position: center;
             }
-            /* 刀光边框效果在移动端简化 */
+            /* 隐藏刀光边框效果 */
             .hero-member::before,
             .hero-member::after {
                 display: none;
@@ -499,21 +494,12 @@
                 width: 100%; 
                 padding: 0 15px; 
             }
-            .hero-logo-img { 
-                width: 80%; 
-                max-width: 360px; 
-                height: auto; 
-                filter: drop-shadow(0 0 15px rgba(220, 38, 38, 0.6)) drop-shadow(0 0 30px rgba(220, 38, 38, 0.4)); 
-            }
-            /* 电脑竖屏 - logo小到2/3 */
+            .hero-logo-img { width: 80%; max-width: 360px; height: auto; filter: drop-shadow(0 0 15px rgba(220, 38, 38, 0.6)) drop-shadow(0 0 30px rgba(220, 38, 38, 0.4)); }
             @media (max-width: 768px) and (orientation: portrait) and (min-aspect-ratio: 1/2) {
                 .hero-logo-img { width: 53%; max-width: 240px; }
             }
-            /* 超小屏幕 */
             @media (max-width: 380px) {
                 .hero-logo-img { width: 75%; max-width: 340px; }
-            }
-            @media (max-width: 360px) {
                 .hero-logo-img { width: 80%; max-width: 320px; }
                 .footer-nav-container .nav-dragon { display: block; width: 20px; height: 20px; }
             }
@@ -758,7 +744,7 @@
             <div class="music-content-new">
                 <div class="music-player-side reveal">
                     <h3 class="music-player-title">網易雲音樂</h3>
-                    <iframe class="music-player-embed netease-player" src="//music.163.com/outchain/player?type=0&id=6844513901&auto=1&height=430" frameBorder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" style="border-radius:12px; width: 350px;"></iframe>
+                    <iframe class="music-player-embed" style="border-radius:12px; width: 350px; height: 655px;" src="//music.163.com/outchain/player?type=0&id=6844513901&auto=1&height=430" frameBorder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
                 </div>
                 <div class="music-center reveal">
                     <div class="album-cover"><img src="./image/releases/undersymphonicsiege.webp" alt="Under Symphonic Siege Album Cover"></div>

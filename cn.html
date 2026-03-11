@@ -45,7 +45,33 @@
         /* HERO 区域 - 刀光划痕效果 */
         .hero { width: 100%; background: #000; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; position: relative; overflow: hidden; line-height: 0; min-height: 100vh; }
         .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; line-height: 0; z-index: 1; }
-        .hero-bg-base { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+        .hero-bg-base { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-fit: cover; z-index: 1; }
+
+        /* 移动端 Hero 优化 */
+        @media (max-width: 768px) {
+            .hero {
+                min-height: auto;
+                display: block;
+            }
+            .hero-bg {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+            .hero-bg-base {
+                position: relative;
+                width: 100%;
+                height: auto;
+                object-fit: contain;
+            }
+            .hero-members-container {
+                display: none;
+            }
+            .hero-content {
+                position: absolute;
+                bottom: 5%;
+            }
+        }
         .hero-members-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; z-index: 2; }
         .hero-member { 
     flex: 1; 
@@ -258,8 +284,8 @@
         @media (max-width: 768px) {
             .merch-section { padding: 60px 0; width: 100vw; overflow: hidden; }
             .merch-carousel-wrapper { width: 100vw; margin-left: calc(-50vw + 50%); overflow: hidden; touch-action: auto; }
-            .merch-carousel { width: 100%; overflow: visible; }
-            .merch-track { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; transform: none !important; transition: none; }
+            .merch-carousel { width: 100%; overflow: hidden; }
+            .merch-track { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; transform: none !important; transition: none; width: 100%; }
             .merch-item { width: 100%; min-width: auto; border: none; aspect-ratio: 1; }
             .merch-nav-btn { display: none !important; }
             .merch-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 15px 10px; background: transparent; transform: translateY(100%); transition: transform 0.3s ease; }
@@ -436,20 +462,61 @@
             .nav-skull { width: 50px; height: 50px; }
         }
         @media (max-width: 768px) {
+            /* 移动端播放按钮优化 */
             .play-btn { width: 60px; height: 60px; border-width: 3px; background: rgba(0,0,0,0.7); }
             .play-btn::after { font-size: 24px; margin-left: 3px; }
-            .hero { width: 100%; position: relative; overflow: hidden; }
-            .hero-bg { position: relative; width: 100%; line-height: 0; }
-            .hero-bg img { width: 100%; height: auto; display: block; }
-            .hero-content { position: absolute; bottom: 8%; left: 0; right: 0; z-index: 10; text-align: center; width: 100%; padding: 0 15px; }
-            .hero-logo-img { width: 80%; max-width: 360px; height: auto; filter: drop-shadow(0 0 15px rgba(220, 38, 38, 0.6)) drop-shadow(0 0 30px rgba(220, 38, 38, 0.4)); }
+
+            /* HERO - 移动端：图片完整显示，无黑边 */
+            .hero { 
+                width: 100%; 
+                position: relative; 
+                overflow: hidden;
+                min-height: auto;
+                display: block;
+            }
+            .hero-bg { 
+                position: relative; 
+                width: 100%; 
+                line-height: 0;
+                height: auto;
+            }
+            .hero-bg-base {
+                position: relative;
+                width: 100%;
+                height: auto;
+                object-fit: contain;
+                display: block;
+            }
+            /* 移动端隐藏成员图片容器，只显示背景图 */
+            .hero-members-container { 
+                display: none; 
+            }
+            .hero-content { 
+                position: absolute; 
+                bottom: 8%; 
+                left: 0; 
+                right: 0; 
+                z-index: 10; 
+                text-align: center; 
+                width: 100%; 
+                padding: 0 15px; 
+            }
+            .hero-logo-img { 
+                width: 80%; 
+                max-width: 360px; 
+                height: auto; 
+                filter: drop-shadow(0 0 15px rgba(220, 38, 38, 0.6)) drop-shadow(0 0 30px rgba(220, 38, 38, 0.4)); 
+            }
+            /* 电脑竖屏 - logo小到2/3 (相对于移动端) */
             @media (max-width: 768px) and (orientation: portrait) and (min-aspect-ratio: 1/2) {
                 .hero-logo-img { width: 53%; max-width: 240px; }
             }
+            /* 超小屏幕 */
             @media (max-width: 380px) {
                 .hero-logo-img { width: 75%; max-width: 340px; }
+            }
+            @media (max-width: 360px) {
                 .hero-logo-img { width: 80%; max-width: 320px; }
-                .footer-nav-container .nav-dragon { display: block; width: 20px; height: 20px; }
             }
             .reveal, .reveal.active, .reveal-logo, .reveal-logo.active { opacity: 1; animation: none; transform: none; filter: none; }
             .nav-links { gap: 5px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding: 0 10px; justify-content: space-around; }

@@ -211,10 +211,10 @@
         .video-player:hover .play-btn::after { color: var(--white); }
 
         /* MERCH */
-        .merch-section { padding: 100px 30px; background: url('./image/blackbg.webp') repeat-y center top; background-size: 100% auto; position: relative; }
-        .merch-carousel-wrapper { position: relative; width: 100%; margin-left: calc(-50vw + 50%); margin-right: calc(-50vw + 50%); overflow: hidden; contain: layout style; }
-        .merch-carousel { width: 100%; overflow: hidden; }
-        .merch-track { display: flex; transition: transform 0.3s ease; will-change: transform; backface-visibility: hidden; }
+        .merch-section { padding: 100px 0; background: url('./image/blackbg.webp') repeat-y center top; background-size: 100% auto; position: relative; overflow: hidden; }
+        .merch-carousel-wrapper { position: relative; width: 100vw; margin-left: calc(-50vw + 50%); overflow: visible; contain: layout style; }
+        .merch-carousel { width: 100%; overflow: hidden; position: relative; }
+        .merch-track { display: flex; transition: transform 0.3s ease; will-change: transform; backface-visibility: hidden; width: max-content; }
         .merch-item { position: relative; background: rgba(0,0,0,0.6); cursor: pointer; transition: box-shadow 0.4s ease; overflow: hidden; flex-shrink: 0; border: 1px solid rgba(220, 38, 38, 0.1); }
         .merch-item:hover { box-shadow: inset 0 0 30px rgba(220, 38, 38, 0.2); }
         .merch-img-wrap { position: relative; width: 100%; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; overflow: hidden; background: rgba(0,0,0,0.4); }
@@ -228,35 +228,36 @@
         .merch-name { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', 'Microsoft YaHei', sans-serif; font-size: 16px; letter-spacing: 2px; color: var(--white); margin-bottom: 5px; text-transform: uppercase; text-shadow: -1px -1px 0 rgba(0,0,0,0.9), 1px -1px 0 rgba(0,0,0,0.9), -1px 1px 0 rgba(0,0,0,0.9), 1px 1px 0 rgba(0,0,0,0.9), 0 2px 4px rgba(0,0,0,0.9); font-weight: 700; }
         .merch-category { font-family: 'Arial Black', 'Microsoft YaHei', Arial, sans-serif; font-size: 12px; color: var(--silver); letter-spacing: 1px; margin-bottom: 8px; text-transform: uppercase; text-shadow: -1px -1px 0 rgba(0,0,0,0.9), 1px -1px 0 rgba(0,0,0,0.9), -1px 1px 0 rgba(0,0,0,0.9), 1px 1px 0 rgba(0,0,0,0.9); font-weight: 600; }
         .merch-price { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', 'Microsoft YaHei', sans-serif; font-size: 20px; color: var(--logo-red); letter-spacing: 2px; text-shadow: -1px -1px 0 rgba(0,0,0,0.9), 1px -1px 0 rgba(0,0,0,0.9), -1px 1px 0 rgba(0,0,0,0.9), 1px 1px 0 rgba(0,0,0,0.9); font-weight: 700; }
-        .merch-btn-container { text-align: center; margin-top: 50px; }
-        .merch-nav-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 50px; height: 50px; background: rgba(220, 38, 38, 0.9); border: 2px solid var(--logo-red); color: var(--white); font-size: 20px; cursor: pointer; z-index: 100; transition: all 0.3s; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; }
-        .merch-prev-btn { left: 20px; }
-        .merch-next-btn { right: 20px; }
+        .merch-btn-container { text-align: center; margin-top: 50px; padding: 0 20px; }
+        .merch-nav-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 50px; height: 50px; background: rgba(220, 38, 38, 0.9); border: 2px solid var(--logo-red); color: var(--white); font-size: 20px; cursor: pointer; z-index: 1000; transition: all 0.3s; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; }
+        .merch-prev-btn { left: 30px; }
+        .merch-next-btn { right: 30px; }
         .merch-nav-btn.visible { opacity: 1; pointer-events: auto; }
         .merch-nav-btn:hover { background: var(--logo-red); box-shadow: 0 0 30px rgba(220, 38, 38, 0.8); }
-        .merch-prev-btn { left: 20px; }
-        .merch-next-btn { right: 20px; }
+        .merch-prev-btn { left: 30px; }
+        .merch-next-btn { right: 30px; }
 
         @media (min-width: 1025px) and (orientation: landscape) {
-            .merch-item { width: calc(100vw / 6); }
-            .merch-carousel-wrapper { touch-action: pan-y; }
+            .merch-item { width: calc(100vw / 6); min-width: calc(100vw / 6); }
+            .merch-carousel-wrapper { touch-action: pan-y; overflow: hidden; }
             .merch-carousel-wrapper:hover .merch-nav-btn.visible { opacity: 1; }
         }
         @media (min-width: 769px) and (orientation: portrait) {
-            .merch-item { width: calc(100vw / 3); }
+            .merch-item { width: calc(100vw / 3); min-width: calc(100vw / 3); }
             .merch-nav-btn { width: 45px; height: 45px; font-size: 18px; }
-            .merch-prev-btn { left: 15px; }
-            .merch-next-btn { right: 15px; }
-            .merch-carousel-wrapper { touch-action: pan-y; }
+            .merch-prev-btn { left: 20px; }
+            .merch-next-btn { right: 20px; }
+            .merch-carousel-wrapper { touch-action: pan-y; overflow: hidden; }
             .merch-carousel-wrapper:hover .merch-nav-btn.visible { opacity: 1; }
         }
         @media (max-width: 1024px) and (min-width: 769px) {
-            .merch-item { width: calc(100vw / 3); }
+            .merch-item { width: calc(100vw / 3); min-width: calc(100vw / 3); }
             .merch-nav-btn.visible { opacity: 1; pointer-events: auto; }
+            .merch-carousel-wrapper { overflow: hidden; }
         }
         @media (max-width: 768px) {
-            .merch-section { padding: 60px 0; }
-            .merch-carousel-wrapper { width: 100%; margin-left: calc(-50vw + 50%); margin-right: calc(-50vw + 50%); overflow: visible; touch-action: auto; }
+            .merch-section { padding: 60px 0; width: 100vw; overflow: hidden; }
+            .merch-carousel-wrapper { width: 100vw; margin-left: calc(-50vw + 50%); overflow: hidden; touch-action: auto; }
             .merch-carousel { width: 100%; overflow: visible; }
             .merch-track { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; transform: none !important; transition: none; }
             .merch-item { width: 100%; min-width: auto; border: none; aspect-ratio: 1; }
@@ -496,7 +497,7 @@
         .dragon-star-ring { position: fixed; top: 50%; left: 50%; width: 60vmin; height: 60vmin; background: rgba(220,38,38,0.9); clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); transform: translate(-50%, -50%) scale(0) rotate(0deg); z-index: 99998; animation: starExpand 1.2s ease-out forwards; will-change: transform, opacity; }
         @keyframes starExpand { 0% { transform: translate(-50%, -50%) scale(0) rotate(0deg); opacity: 0; } 30% { opacity: 1; } 100% { transform: translate(-50%, -50%) scale(3) rotate(180deg); opacity: 0; } }
         @media (max-width: 768px) and (orientation: portrait) {
-            @keyframes dragonFlash { 0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; } 20% { transform: translate(-50%, -50%) scale(0.85); opacity: 1; } 50% { transform: translate(-50%, -50%) scale(0.95); opacity: 1; } 80% { transform: translate(-50%, -50%) scale(0.85); opacity: 1; } 100% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; } }
+            
         }
         .merch-item, .merch-img, .merch-img-hover { will-change: transform; contain: layout style paint; }
         .banner img, .hero-bg img { will-change: transform; content-visibility: auto; }
@@ -725,7 +726,7 @@
                     <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 1;"></div>
                     <div class="play-btn" style="position: relative; z-index: 100; pointer-events: none;"></div>
                 </div>
-                <a href="https://www.bilibili.com" target="_blank" class="btn">觀看視頻</a>
+                <a href="https://space.bilibili.com/504652594" target="_blank" class="btn">查看所有視頻</a>
             </div>
         </div>
     </section>
@@ -980,44 +981,6 @@
             });
         });
 
-        // 页面加载完成后执行
-        // 使用 DOMContentLoaded 更快启动动画
-document.addEventListener('DOMContentLoaded', () => {
-            // 成员照片依次显示，带刀光边框效果
-            setTimeout(() => {
-                const members = document.querySelectorAll('.hero-member');
-
-                // 成员1显示
-                members[0].classList.add('slash-reveal');
-
-                // 成员2显示
-                setTimeout(() => members[1].classList.add('slash-reveal'), 150);
-
-                // 成员3显示
-                setTimeout(() => members[2].classList.add('slash-reveal'), 300);
-
-                // 成员4显示
-                setTimeout(() => members[3].classList.add('slash-reveal'), 450);
-            }, 50);
-
-            // LOGO渐显（提前显示）
-            setTimeout(() => {
-                document.querySelector('.hero-logo-img').classList.add('active');
-            }, 600);
-
-            hideExpiredTours();
-        });
-
-        // 备用：window.load 确保所有资源加载完成后的处理
-        window.addEventListener('load', () => {
-            // 确保动画已启动（如果DOMContentLoaded missed）
-            document.querySelectorAll('.hero-member').forEach(member => {
-                if (!member.classList.contains('slash-reveal')) {
-                    member.classList.add('slash-reveal');
-                }
-            });
-        });
-
         // 隐藏过期巡演
         function hideExpiredTours() {
             const today = new Date();
@@ -1040,6 +1003,32 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.footer-dropdown').forEach(d => d.classList.remove('active'));
             if (!isActive) dropdown.classList.add('active');
         }
+
+        // 点击外部关闭下拉菜单
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.footer-dropdown')) {
+                document.querySelectorAll('.footer-dropdown').forEach(d => d.classList.remove('active'));
+            }
+        });
+
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', () => {
+            // 成员照片依次显示，带刀光边框效果
+            setTimeout(() => {
+                const members = document.querySelectorAll('.hero-member');
+                members[0].classList.add('slash-reveal');
+                setTimeout(() => members[1].classList.add('slash-reveal'), 150);
+                setTimeout(() => members[2].classList.add('slash-reveal'), 300);
+                setTimeout(() => members[3].classList.add('slash-reveal'), 450);
+            }, 50);
+
+            // LOGO渐显
+            setTimeout(() => {
+                document.querySelector('.hero-logo-img').classList.add('active');
+            }, 600);
+
+            hideExpiredTours();
+        });
 
         // 订阅表单处理
         function handleSubscribe(e) {
@@ -1064,17 +1053,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // 点击外部关闭下拉菜单
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.footer-dropdown')) {
-                document.querySelectorAll('.footer-dropdown').forEach(d => d.classList.remove('active'));
-            }
-        });
-
         // 视频播放
         function playVideo() {
             var player = document.getElementById('videoPlayer');
-            player.innerHTML = '<iframe src="https://player.bilibili.com/player.html?bvid=BV1bvMHz7EVJ&page=1&autoplay=1" allowfullscreen frameborder="0" scrolling="no" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>';
+            player.innerHTML = '<iframe src="https://player.bilibili.com/player.html?bvid=BV1XGFNzSEh1&page=1&autoplay=1" allowfullscreen frameborder="0" scrolling="no" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>';
             player.onclick = null;
             player.style.cursor = 'default';
         }
@@ -1132,6 +1114,11 @@ document.addEventListener('DOMContentLoaded', () => {
         (function(){
             emailjs.init({ publicKey: "FQAG2S-gm0UgmyD4A" });
         })();
+    </script>
+
+    <script type="text/javascript">
+        
+        
 
         // 龙点击动画
         document.querySelectorAll('.nav-dragon').forEach(dragon => {
@@ -1195,9 +1182,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 };
             });
         });
+    
     </script>
 
-    <!-- MERCH 功能脚本 -->
     <script>
         // 预加载关键图片
         function preloadMerchImages() {
@@ -1222,175 +1209,229 @@ document.addEventListener('DOMContentLoaded', () => {
     </script>
 
     <script>
-        (function() {
-            'use strict';
-            let merchCurrentIndex = 0;
-            let merchTrack, merchItems, prevBtn, nextBtn;
-            let isMobile = false;
-            let isInitialized = false;
-            let autoScrollInterval = null;
-            let isPaused = false;
+        
+(function() {
+    'use strict';
 
-            function initElements() {
-                merchTrack = document.querySelector('.merch-track');
-                merchItems = document.querySelectorAll('.merch-item');
-                prevBtn = document.querySelector('.merch-prev-btn');
-                nextBtn = document.querySelector('.merch-next-btn');
-                return merchTrack && merchItems.length > 0;
-            }
+    let merchCurrentIndex = 0;
+    let merchTrack, merchItems, prevBtn, nextBtn;
+    let isMobile = false;
+    let isInitialized = false;
+    let autoScrollInterval = null;
+    let isPaused = false;
 
-            function getItemsPerView() {
-                const width = window.innerWidth;
-                const isPortrait = window.innerHeight > window.innerWidth;
-                isMobile = width <= 768;
-                if (width <= 480) return 2;
-                if (width <= 768) return 3;
-                if (width >= 1025 && !isPortrait) return 6;
-                return 3;
-            }
+    function initElements() {
+        merchTrack = document.querySelector('.merch-track');
+        merchItems = document.querySelectorAll('.merch-item');
+        prevBtn = document.querySelector('.merch-prev-btn');
+        nextBtn = document.querySelector('.merch-next-btn');
+        return merchTrack && merchItems.length > 0;
+    }
 
-            window.updateMerchCarousel = function() {
-                if (!merchTrack || !merchItems.length) return;
-                const itemsPerView = getItemsPerView();
-                const totalItems = merchItems.length;
-                const maxIndex = Math.max(0, totalItems - itemsPerView);
-                merchCurrentIndex = Math.max(0, Math.min(merchCurrentIndex, maxIndex));
-                const containerWidth = window.innerWidth;
-                const itemWidth = containerWidth / itemsPerView;
-                const offset = -merchCurrentIndex * itemWidth;
-                merchTrack.style.transform = 'translate3d(' + offset + 'px, 0, 0)';
-                if (!isMobile && prevBtn && nextBtn) {
-                    if (totalItems > itemsPerView) {
-                        prevBtn.classList.toggle('visible', merchCurrentIndex > 0);
-                        nextBtn.classList.toggle('visible', merchCurrentIndex < maxIndex);
-                    } else {
-                        prevBtn.classList.remove('visible');
-                        nextBtn.classList.remove('visible');
-                    }
-                }
-            };
+    function getItemsPerView() {
+        const width = window.innerWidth;
+        const isPortrait = window.innerHeight > window.innerWidth;
+        isMobile = width <= 768;
 
-            window.scrollMerch = function(direction) {
-                const itemsPerView = getItemsPerView();
-                const totalItems = merchItems.length;
-                const maxIndex = Math.max(0, totalItems - itemsPerView);
-                merchCurrentIndex += direction;
-                if (merchCurrentIndex > maxIndex) {
-                    merchCurrentIndex = 0;
-                } else if (merchCurrentIndex < 0) {
-                    merchCurrentIndex = maxIndex;
-                }
-                window.updateMerchCarousel();
-            };
+        if (width <= 480) return 2;
+        if (width <= 768) return 3;
+        if (width >= 1025 && !isPortrait) return 6;
+        return 3;
+    }
 
-            function startAutoScroll() {
-                if (isMobile) return;
-                if (autoScrollInterval) clearInterval(autoScrollInterval);
-                autoScrollInterval = setInterval(function() {
-                    if (!isPaused) {
-                        window.scrollMerch(1);
-                    }
-                }, 3000);
-            }
+    window.updateMerchCarousel = function() {
+        if (!merchTrack || !merchItems.length) return;
 
-            function stopAutoScroll() {
-                if (autoScrollInterval) {
-                    clearInterval(autoScrollInterval);
-                    autoScrollInterval = null;
-                }
-            }
+        const itemsPerView = getItemsPerView();
+        const totalItems = merchItems.length;
+        const maxIndex = Math.max(0, totalItems - itemsPerView);
 
-            function init() {
-                if (isInitialized) return;
-                if (initElements()) {
-                    isInitialized = true;
-                    window.updateMerchCarousel();
-                    if (!isMobile) {
-                        startAutoScroll();
-                        const merchWrapper = document.querySelector('.merch-carousel-wrapper');
-                        if (merchWrapper) {
-                            merchWrapper.addEventListener('mouseenter', function() {
-                                isPaused = true;
-                            });
-                            merchWrapper.addEventListener('mouseleave', function() {
-                                isPaused = false;
-                            });
-                        }
-                    }
-                }
-            }
+        merchCurrentIndex = Math.max(0, Math.min(merchCurrentIndex, maxIndex));
 
-            let resizeTimer;
-            window.addEventListener('resize', function() {
-                clearTimeout(resizeTimer);
-                resizeTimer = setTimeout(function() {
-                    const wasMobile = isMobile;
-                    merchCurrentIndex = 0;
-                    window.updateMerchCarousel();
-                    const newIsMobile = window.innerWidth <= 768;
-                    if (wasMobile !== newIsMobile) {
-                        if (newIsMobile) {
-                            stopAutoScroll();
-                        } else {
-                            startAutoScroll();
-                        }
-                    }
-                }, 150);
-            });
+        const containerWidth = window.innerWidth;
+        const itemWidth = containerWidth / itemsPerView;
+        const offset = -merchCurrentIndex * itemWidth;
 
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', init);
+        merchTrack.style.transform = 'translate3d(' + offset + 'px, 0, 0)';
+
+        if (!isMobile && prevBtn && nextBtn) {
+            if (totalItems > itemsPerView) {
+                prevBtn.classList.toggle('visible', merchCurrentIndex > 0);
+                nextBtn.classList.toggle('visible', merchCurrentIndex < maxIndex);
             } else {
-                init();
+                prevBtn.classList.remove('visible');
+                nextBtn.classList.remove('visible');
             }
+        }
+    };
 
-            let touchStartX = 0;
-            let touchStartY = 0;
-            let isDragging = false;
+    window.scrollMerch = function(direction) {
+        const itemsPerView = getItemsPerView();
+        const totalItems = merchItems.length;
+        const maxIndex = Math.max(0, totalItems - itemsPerView);
 
-            if (merchTrack) {
-                merchTrack.addEventListener('touchstart', function(e) {
-                    touchStartX = e.changedTouches[0].screenX;
-                    touchStartY = e.changedTouches[0].screenY;
-                    isDragging = true;
-                    merchTrack.style.transition = 'none';
-                    isPaused = true;
-                }, {passive: true});
+        merchCurrentIndex += direction;
 
-                merchTrack.addEventListener('touchmove', function(e) {
-                    if (!isDragging) return;
-                    const touchX = e.changedTouches[0].screenX;
-                    const touchY = e.changedTouches[0].screenY;
-                    const diffX = touchStartX - touchX;
-                    const diffY = touchStartY - touchY;
-                    if (Math.abs(diffX) > Math.abs(diffY)) {
-                        e.preventDefault();
-                    }
-                }, {passive: false});
+        // 循环滚动
+        if (merchCurrentIndex > maxIndex) {
+            merchCurrentIndex = 0;
+        } else if (merchCurrentIndex < 0) {
+            merchCurrentIndex = maxIndex;
+        }
 
-                merchTrack.addEventListener('touchend', function(e) {
-                    if (!isDragging) return;
-                    isDragging = false;
-                    merchTrack.style.transition = 'transform 0.3s ease';
-                    const touchEndX = e.changedTouches[0].screenX;
-                    const touchEndY = e.changedTouches[0].screenY;
-                    const diffX = touchStartX - touchEndX;
-                    const diffY = touchStartY - touchEndY;
-                    if (Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY)) {
-                        if (diffX > 0) {
-                            window.scrollMerch(1);
-                        } else {
-                            window.scrollMerch(-1);
-                        }
-                    } else {
-                        window.updateMerchCarousel();
-                    }
-                    setTimeout(function() {
+        window.updateMerchCarousel();
+    };
+
+    // 自动滚屏功能（仅电脑端）
+    function startAutoScroll() {
+        if (isMobile) return; // 移动端不自动滚动
+        if (autoScrollInterval) clearInterval(autoScrollInterval);
+
+        autoScrollInterval = setInterval(function() {
+            if (!isPaused) {
+                window.scrollMerch(1);
+            }
+        }, 3000); // 每3秒滚动一次
+    }
+
+    function stopAutoScroll() {
+        if (autoScrollInterval) {
+            clearInterval(autoScrollInterval);
+            autoScrollInterval = null;
+        }
+    }
+
+    function init() {
+        if (isInitialized) return;
+
+        if (initElements()) {
+            isInitialized = true;
+            window.updateMerchCarousel();
+
+            // 电脑端启动自动滚动
+            if (!isMobile) {
+                startAutoScroll();
+
+                // 鼠标悬停时暂停
+                const merchWrapper = document.querySelector('.merch-carousel-wrapper');
+                if (merchWrapper) {
+                    merchWrapper.addEventListener('mouseenter', function() {
+                        isPaused = true;
+                    });
+                    merchWrapper.addEventListener('mouseleave', function() {
                         isPaused = false;
-                    }, 1000);
-                }, {passive: true});
+                    });
+                }
             }
-        })();
+
+            // 图片加载完成后重新计算
+            const images = merchTrack.querySelectorAll('img');
+            let loadedCount = 0;
+            const totalImages = images.length;
+
+            images.forEach(img => {
+                if (img.complete) {
+                    loadedCount++;
+                } else {
+                    img.addEventListener('load', function() {
+                        loadedCount++;
+                        if (loadedCount >= Math.min(totalImages, 3)) {
+                            window.updateMerchCarousel();
+                        }
+                    }, { once: true });
+
+                    img.addEventListener('error', function() {
+                        loadedCount++;
+                    }, { once: true });
+                }
+            });
+        }
+    }
+
+    // 窗口大小改变
+    let resizeTimer;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function() {
+            const wasMobile = isMobile;
+            merchCurrentIndex = 0;
+            window.updateMerchCarousel();
+
+            // 切换设备类型时处理自动滚动
+            const newIsMobile = window.innerWidth <= 768;
+            if (wasMobile !== newIsMobile) {
+                if (newIsMobile) {
+                    stopAutoScroll();
+                } else {
+                    startAutoScroll();
+                }
+            }
+        }, 150);
+    });
+
+    // 立即初始化
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+
+    // 触摸滑动
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let isDragging = false;
+
+    if (merchTrack) {
+        merchTrack.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
+            isDragging = true;
+            merchTrack.style.transition = 'none';
+            isPaused = true; // 触摸时暂停自动滚动
+        }, {passive: true});
+
+        merchTrack.addEventListener('touchmove', function(e) {
+            if (!isDragging) return;
+
+            const touchX = e.changedTouches[0].screenX;
+            const touchY = e.changedTouches[0].screenY;
+            const diffX = touchStartX - touchX;
+            const diffY = touchStartY - touchY;
+
+            if (Math.abs(diffX) > Math.abs(diffY)) {
+                e.preventDefault();
+            }
+        }, {passive: false});
+
+        merchTrack.addEventListener('touchend', function(e) {
+            if (!isDragging) return;
+            isDragging = false;
+
+            merchTrack.style.transition = 'transform 0.3s ease';
+
+            const touchEndX = e.changedTouches[0].screenX;
+            const touchEndY = e.changedTouches[0].screenY;
+            const diffX = touchStartX - touchEndX;
+            const diffY = touchStartY - touchEndY;
+
+            if (Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY)) {
+                if (diffX > 0) {
+                    window.scrollMerch(1);
+                } else {
+                    window.scrollMerch(-1);
+                }
+            } else {
+                window.updateMerchCarousel();
+            }
+
+            // 恢复自动滚动（如果是电脑端）
+            setTimeout(function() {
+                isPaused = false;
+            }, 1000);
+        }, {passive: true});
+    }
+})();
+
     </script>
 
     <script>
@@ -1426,7 +1467,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     </script>
 
-    <!-- 视频区域打字机效果 -->
     <script>
         (function() {
             const text = `中國不僅有電影功夫，還有最火爆的龐克搖滾風暴——這就是來自中國西安的THE NONAME無名。由主唱雷領軍的樂團致力於為這個時代帶來全新的聲音。他們從不斷創新的龐克搖滾樂中找到了真正的藝術自由，為打破一切禁錮而不斷探索。他們的音樂可以認為是混合了80年代正宗朋克搖滾樂並擁有重吉他音效、很酷的貝司的硬核搖滾，並以此為高度性唱腔的音樂。自2001年成立至今近三十年的龐克搖滾生涯，始終與國際唱片公司和世界各地知名樂團保持緊密聯繫。不僅在亞洲持續進行巡演，同時發行了多張專輯、EP和單曲，與無數優秀的搖滾歌手及樂團展開深度合作。迄今為止，樂團依然站在國際音樂舞台上，代表著中國龐克搖滾的聲音，受到世界各地粉絲的追捧。`;
@@ -1486,239 +1526,257 @@ document.addEventListener('DOMContentLoaded', () => {
         })();
     </script>
 
-    <!-- MERCH 弹出大图 -->
-    <div class="merch-popup-overlay" id="merchPopup" onclick="closeMerchPopup(event)">
-        <div class="merch-popup-content" onclick="event.stopPropagation()">
-            <button class="merch-popup-close" onclick="closeMerchPopup()">&times;</button>
-            <div class="merch-popup-images" id="merchPopupImages">
-                <img src="" alt="" class="merch-popup-img" id="merchPopupImg1">
-                <img src="" alt="" class="merch-popup-img" id="merchPopupImg2">
-                <button class="merch-popup-nav merch-popup-prev" onclick="switchMerchImage(-1)">&#10094;</button>
-                <button class="merch-popup-nav merch-popup-next" onclick="switchMerchImage(1)">&#10095;</button>
-            </div>
-            <div class="merch-popup-dots" id="merchPopupDots"></div>
-            <div class="merch-popup-info">
-                <div class="merch-popup-name" id="merchPopupName"></div>
-                <div class="merch-popup-category" id="merchPopupCategory"></div>
-                <div class="merch-popup-price" id="merchPopupPrice"></div>
-            </div>
-        </div>
-    </div>
-
     <script>
-        let merchPopupInterval = null;
-        let merchCurrentImage = 0;
-        let merchTotalImages = 1;
+        
+let merchPopupInterval = null;
+let merchCurrentImage = 0;
+let merchTotalImages = 1;
 
-        function openMerchPopup(element) {
-            const img1 = element.getAttribute('data-img1');
-            const img2 = element.getAttribute('data-img2');
-            const name = element.getAttribute('data-name');
-            const category = element.getAttribute('data-category');
-            const price = element.getAttribute('data-price');
+function openMerchPopup(element) {
+    const img1 = element.getAttribute('data-img1');
+    const img2 = element.getAttribute('data-img2');
+    const name = element.getAttribute('data-name');
+    const category = element.getAttribute('data-category');
+    const price = element.getAttribute('data-price');
 
-            const popup = document.getElementById('merchPopup');
-            const img1El = document.getElementById('merchPopupImg1');
-            const img2El = document.getElementById('merchPopupImg2');
-            const imagesContainer = document.getElementById('merchPopupImages');
-            const dotsContainer = document.getElementById('merchPopupDots');
+    const popup = document.getElementById('merchPopup');
+    const img1El = document.getElementById('merchPopupImg1');
+    const img2El = document.getElementById('merchPopupImg2');
+    const imagesContainer = document.getElementById('merchPopupImages');
+    const dotsContainer = document.getElementById('merchPopupDots');
 
-            img1El.src = img1;
-            img1El.classList.add('active');
+    // 设置图片
+    img1El.src = img1;
+    img1El.classList.add('active');
 
-            if (img2) {
-                img2El.src = img2;
-                img2El.classList.remove('active');
-                imagesContainer.classList.remove('single-image');
-                merchTotalImages = 2;
-                dotsContainer.innerHTML = '<div class="merch-popup-dot active" onclick="goToMerchImage(0)"></div><div class="merch-popup-dot" onclick="goToMerchImage(1)"></div>';
-                startMerchAutoSlide();
-            } else {
-                img2El.src = '';
-                imagesContainer.classList.add('single-image');
-                merchTotalImages = 1;
-                dotsContainer.innerHTML = '';
-            }
+    if (img2) {
+        img2El.src = img2;
+        img2El.classList.remove('active');
+        imagesContainer.classList.remove('single-image');
+        merchTotalImages = 2;
 
-            document.getElementById('merchPopupName').textContent = name;
-            document.getElementById('merchPopupCategory').textContent = category;
-            document.getElementById('merchPopupPrice').textContent = price;
+        // 创建指示点
+        dotsContainer.innerHTML = '<div class="merch-popup-dot active" onclick="goToMerchImage(0)"></div><div class="merch-popup-dot" onclick="goToMerchImage(1)"></div>';
 
-            merchCurrentImage = 0;
-            popup.classList.add('active');
-            document.body.style.overflow = 'hidden';
+        // 启动自动轮播
+        startMerchAutoSlide();
+    } else {
+        img2El.src = '';
+        imagesContainer.classList.add('single-image');
+        merchTotalImages = 1;
+        dotsContainer.innerHTML = '';
+    }
+
+    // 设置信息
+    document.getElementById('merchPopupName').textContent = name;
+    document.getElementById('merchPopupCategory').textContent = category;
+    document.getElementById('merchPopupPrice').textContent = price;
+
+    merchCurrentImage = 0;
+
+    // 显示弹出框
+    popup.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeMerchPopup(event) {
+    // 如果提供了 event，检查点击的是否是内容区域
+    if (event) {
+        const target = event.target;
+        const isContent = target.closest('.merch-popup-content') || 
+                         target.classList.contains('merch-popup-nav') ||
+                         target.classList.contains('merch-popup-dot') ||
+                         target.classList.contains('merch-popup-img');
+        if (isContent) {
+            return;
         }
+    }
 
-        function closeMerchPopup(event) {
-            if (event) {
-                const target = event.target;
-                const isContent = target.closest('.merch-popup-content') || 
-                                 target.classList.contains('merch-popup-nav') ||
-                                 target.classList.contains('merch-popup-dot') ||
-                                 target.classList.contains('merch-popup-img');
-                if (isContent) {
-                    return;
-                }
-            }
+    const popup = document.getElementById('merchPopup');
+    popup.classList.remove('active');
+    document.body.style.overflow = '';
 
-            const popup = document.getElementById('merchPopup');
-            popup.classList.remove('active');
-            document.body.style.overflow = '';
-            stopMerchAutoSlide();
-        }
+    // 停止自动轮播
+    stopMerchAutoSlide();
+}
 
-        function switchMerchImage(direction) {
-            if (merchTotalImages <= 1) return;
-            merchCurrentImage = (merchCurrentImage + direction + merchTotalImages) % merchTotalImages;
-            updateMerchImageDisplay();
-            stopMerchAutoSlide();
-            startMerchAutoSlide();
-        }
+function switchMerchImage(direction) {
+    if (merchTotalImages <= 1) return;
 
-        function goToMerchImage(index) {
-            if (merchTotalImages <= 1) return;
-            merchCurrentImage = index;
-            updateMerchImageDisplay();
-            stopMerchAutoSlide();
-            startMerchAutoSlide();
-        }
+    merchCurrentImage = (merchCurrentImage + direction + merchTotalImages) % merchTotalImages;
+    updateMerchImageDisplay();
 
-        function updateMerchImageDisplay() {
-            const img1El = document.getElementById('merchPopupImg1');
-            const img2El = document.getElementById('merchPopupImg2');
-            const dots = document.querySelectorAll('.merch-popup-dot');
+    // 重置自动轮播计时器
+    stopMerchAutoSlide();
+    startMerchAutoSlide();
+}
 
-            if (merchCurrentImage === 0) {
-                img1El.classList.add('active');
-                img2El.classList.remove('active');
-            } else {
-                img1El.classList.remove('active');
-                img2El.classList.add('active');
-            }
+function goToMerchImage(index) {
+    if (merchTotalImages <= 1) return;
 
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === merchCurrentImage);
-            });
-        }
+    merchCurrentImage = index;
+    updateMerchImageDisplay();
 
-        function startMerchAutoSlide() {
-            if (merchTotalImages <= 1) return;
-            stopMerchAutoSlide();
-            merchPopupInterval = setInterval(() => {
-                merchCurrentImage = (merchCurrentImage + 1) % merchTotalImages;
-                updateMerchImageDisplay();
-            }, 3000);
-        }
+    // 重置自动轮播计时器
+    stopMerchAutoSlide();
+    startMerchAutoSlide();
+}
 
-        function stopMerchAutoSlide() {
-            if (merchPopupInterval) {
-                clearInterval(merchPopupInterval);
-                merchPopupInterval = null;
-            }
-        }
+function updateMerchImageDisplay() {
+    const img1El = document.getElementById('merchPopupImg1');
+    const img2El = document.getElementById('merchPopupImg2');
+    const dots = document.querySelectorAll('.merch-popup-dot');
 
-        function initMerchImageClick() {
-            const img1El = document.getElementById('merchPopupImg1');
-            const img2El = document.getElementById('merchPopupImg2');
-            const imagesContainer = document.getElementById('merchPopupImages');
+    if (merchCurrentImage === 0) {
+        img1El.classList.add('active');
+        img2El.classList.remove('active');
+    } else {
+        img1El.classList.remove('active');
+        img2El.classList.add('active');
+    }
 
-            if (img1El) {
-                img1El.addEventListener('click', () => {
-                    if (merchTotalImages > 1) {
-                        switchMerchImage(1);
-                    }
-                });
-            }
+    // 更新指示点
+    dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === merchCurrentImage);
+    });
+}
 
-            if (img2El) {
-                img2El.addEventListener('click', () => {
-                    if (merchTotalImages > 1) {
-                        switchMerchImage(1);
-                    }
-                });
-            }
+function startMerchAutoSlide() {
+    if (merchTotalImages <= 1) return;
 
-            if (imagesContainer) {
-                let startX = 0;
-                let startY = 0;
-                let isDragging = false;
-                let isTouch = false;
+    stopMerchAutoSlide();
+    merchPopupInterval = setInterval(() => {
+        merchCurrentImage = (merchCurrentImage + 1) % merchTotalImages;
+        updateMerchImageDisplay();
+    }, 3000);
+}
 
-                const processSwipe = (diffX, diffY) => {
-                    if (Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY)) {
-                        if (diffX > 0) {
-                            switchMerchImage(1);
-                        } else {
-                            switchMerchImage(-1);
-                        }
-                    }
-                };
+function stopMerchAutoSlide() {
+    if (merchPopupInterval) {
+        clearInterval(merchPopupInterval);
+        merchPopupInterval = null;
+    }
+}
 
-                imagesContainer.addEventListener('touchstart', (e) => {
-                    isTouch = true;
-                    startX = e.changedTouches[0].screenX;
-                    startY = e.changedTouches[0].screenY;
-                    isDragging = true;
-                }, { passive: true });
+// 点击大图切换、触摸滑动和鼠标拖拽
+function initMerchImageClick() {
+    const img1El = document.getElementById('merchPopupImg1');
+    const img2El = document.getElementById('merchPopupImg2');
+    const imagesContainer = document.getElementById('merchPopupImages');
 
-                imagesContainer.addEventListener('touchmove', (e) => {
-                    if (!isDragging || !isTouch) return;
-                    const touchX = e.changedTouches[0].screenX;
-                    const touchY = e.changedTouches[0].screenY;
-                    const diffX = startX - touchX;
-                    const diffY = startY - touchY;
-                    if (Math.abs(diffX) > Math.abs(diffY)) {
-                        e.preventDefault();
-                    }
-                }, { passive: false });
-
-                imagesContainer.addEventListener('touchend', (e) => {
-                    if (!isDragging || !isTouch) return;
-                    isDragging = false;
-                    isTouch = false;
-                    const endX = e.changedTouches[0].screenX;
-                    const endY = e.changedTouches[0].screenY;
-                    processSwipe(startX - endX, startY - endY);
-                }, { passive: true });
-
-                imagesContainer.addEventListener('mousedown', (e) => {
-                    if (e.button !== 0) return;
-                    isTouch = false;
-                    startX = e.clientX;
-                    startY = e.clientY;
-                    isDragging = true;
-                    e.preventDefault();
-                    imagesContainer.style.cursor = 'grabbing';
-                });
-
-                document.addEventListener('mouseup', (e) => {
-                    if (!isDragging || isTouch) return;
-                    isDragging = false;
-                    imagesContainer.style.cursor = 'pointer';
-                    processSwipe(startX - e.clientX, startY - e.clientY);
-                });
-
-                document.addEventListener('mouseleave', () => {
-                    if (isDragging && !isTouch) {
-                        isDragging = false;
-                        imagesContainer.style.cursor = 'pointer';
-                    }
-                });
-
-                imagesContainer.style.cursor = 'pointer';
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', initMerchImageClick);
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                closeMerchPopup();
+    // 点击图片切换
+    if (img1El) {
+        img1El.addEventListener('click', () => {
+            if (merchTotalImages > 1) {
+                switchMerchImage(1);
             }
         });
+    }
+
+    if (img2El) {
+        img2El.addEventListener('click', () => {
+            if (merchTotalImages > 1) {
+                switchMerchImage(1);
+            }
+        });
+    }
+
+    // 触摸滑动和鼠标拖拽支持
+    if (imagesContainer) {
+        let startX = 0;
+        let startY = 0;
+        let isDragging = false;
+        let isTouch = false;
+
+        // 处理滑动逻辑（内联，避免闭包问题）
+        const processSwipe = (diffX, diffY) => {
+            // 水平滑动超过 50px 且水平距离大于垂直距离才触发
+            if (Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY)) {
+                if (diffX > 0) {
+                    switchMerchImage(1); // 左滑 - 下一张
+                } else {
+                    switchMerchImage(-1); // 右滑 - 上一张
+                }
+            }
+        };
+
+        // 触摸事件
+        imagesContainer.addEventListener('touchstart', (e) => {
+            isTouch = true;
+            startX = e.changedTouches[0].screenX;
+            startY = e.changedTouches[0].screenY;
+            isDragging = true;
+        }, { passive: true });
+
+        imagesContainer.addEventListener('touchmove', (e) => {
+            if (!isDragging || !isTouch) return;
+
+            const touchX = e.changedTouches[0].screenX;
+            const touchY = e.changedTouches[0].screenY;
+            const diffX = startX - touchX;
+            const diffY = startY - touchY;
+
+            if (Math.abs(diffX) > Math.abs(diffY)) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        imagesContainer.addEventListener('touchend', (e) => {
+            if (!isDragging || !isTouch) return;
+            isDragging = false;
+            isTouch = false;
+
+            const endX = e.changedTouches[0].screenX;
+            const endY = e.changedTouches[0].screenY;
+            processSwipe(startX - endX, startY - endY);
+        }, { passive: true });
+
+        // 鼠标拖拽事件（桌面端支持）
+        imagesContainer.addEventListener('mousedown', (e) => {
+            if (e.button !== 0) return; // 左键才触发
+
+            isTouch = false;
+            startX = e.clientX;
+            startY = e.clientY;
+            isDragging = true;
+
+            e.preventDefault();
+            imagesContainer.style.cursor = 'grabbing';
+        });
+
+        document.addEventListener('mouseup', (e) => {
+            if (!isDragging || isTouch) return;
+
+            isDragging = false;
+            imagesContainer.style.cursor = 'pointer';
+
+            processSwipe(startX - e.clientX, startY - e.clientY);
+        });
+
+        // 鼠标离开窗口时取消拖拽
+        document.addEventListener('mouseleave', () => {
+            if (isDragging && !isTouch) {
+                isDragging = false;
+                imagesContainer.style.cursor = 'pointer';
+            }
+        });
+
+        imagesContainer.style.cursor = 'pointer';
+    }
+}
+
+// 初始化
+document.addEventListener('DOMContentLoaded', initMerchImageClick);
+
+// ESC 键关闭
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeMerchPopup();
+    }
+});
+
     </script>
 
-    <!-- 图片懒加载优化 -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const lazyImages = document.querySelectorAll('img[loading="lazy"]');
@@ -1739,5 +1797,24 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     </script>
+
+
+<div class="merch-popup-overlay" id="merchPopup" onclick="closeMerchPopup(event)">
+    <div class="merch-popup-content" onclick="event.stopPropagation()">
+        <button class="merch-popup-close" onclick="closeMerchPopup()">&times;</button>
+        <div class="merch-popup-images" id="merchPopupImages">
+            <img src="" alt="" class="merch-popup-img" id="merchPopupImg1">
+            <img src="" alt="" class="merch-popup-img" id="merchPopupImg2">
+            <button class="merch-popup-nav merch-popup-prev" onclick="switchMerchImage(-1)">&#10094;</button>
+            <button class="merch-popup-nav merch-popup-next" onclick="switchMerchImage(1)">&#10095;</button>
+        </div>
+        <div class="merch-popup-dots" id="merchPopupDots"></div>
+        <div class="merch-popup-info">
+            <div class="merch-popup-name" id="merchPopupName"></div>
+            <div class="merch-popup-category" id="merchPopupCategory"></div>
+            <div class="merch-popup-price" id="merchPopupPrice"></div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

@@ -139,54 +139,6 @@
         }
 
         /* 移动端 Hero 适配 */
-        @media (max-width: 768px) {
-            .nav-container {
-                padding: 0 10px;
-            }
-            .nav-links {
-                gap: 8px;
-                flex-wrap: nowrap;
-                overflow-x: auto;
-                scrollbar-width: none;
-                -ms-overflow-style: none;
-                padding: 0 5px;
-                justify-content: flex-start;
-                width: 100%;
-                -webkit-overflow-scrolling: touch;
-            }
-            .nav-links::-webkit-scrollbar { display: none; }
-            .nav-links li { flex-shrink: 0; }
-            .nav-links a {
-                font-size: clamp(10px, 3vw, 14px);
-                white-space: nowrap;
-                padding: 8px 3px;
-                letter-spacing: 0.3px;
-                display: block;
-            }
-            .nav-links a[href*="antiipa"] { letter-spacing: 0; font-size: clamp(9px, 2.8vw, 12px); }
-            .nav-dragon { width: 32px; height: 32px; }
-            .nav-dragon-left { margin-right: 6px; }
-            .nav-dragon-right { margin-left: 6px; }
-            .nav-skull { width: 40px; height: 40px; }
-            .nav-skull-left { margin-right: 8px; }
-            .nav-skull-right { margin-left: 8px; }
-
-            .hero-logo-img {
-                width: 80%;
-                max-width: 360px;
-            }
-        }
-
-        @media (max-width: 380px) {
-            .hero-logo-img {
-                width: 75%;
-                max-width: 320px;
-                }
-            }
-
-        @media (min-width: 769px) and (orientation: portrait) {
-            .hero-logo-img { max-width: 660px; width: 60%; }
-            }
 
         /* 电脑端竖屏/移动端音乐iframe高度调整 */
         @media (max-width: 1024px) and (min-width: 769px) and (orientation: portrait),
@@ -207,17 +159,7 @@
             .video-typewriter-container { top: 54%; left: 4%; right: 4%; width: 92%; padding: 12px 0 0; min-height: 46%; }
             .video-typewriter-text { font-size: clamp(9px, 1.6vw, 13px); line-height: 1.12; letter-spacing: 0.5px; max-width: 100%; }
         }
-        @media (max-width: 768px) {
-            .video-typewriter-container { padding: 4px 8px 0; top: 50%; left: 1%; right: 1%; width: 98%; bottom: 0; min-height: 50%; max-height: 50%; overflow: hidden; }
-            .video-typewriter-text { font-size: clamp(7.5px, 2.4vw, 10px); line-height: 1.02; letter-spacing: 0.5px; padding: 0; word-break: break-word; max-width: 100%; margin: 0; }
-            .nav-skull { width: 45px; height: 45px; }
-            .nav-skull-left { margin-right: 10px; }
-            .nav-skull-right { margin-left: 10px; }
-        }
-        @media (max-width: 480px) {
-            .video-typewriter-container { padding: 3px 6px 0; top: 48%; left: 0.5%; right: 0.5%; width: 99%; min-height: 52%; max-height: 52%; }
-            .video-typewriter-text { font-size: clamp(6.5px, 2.6vw, 9px); line-height: 1.0; letter-spacing: 0.5px; }
-            }
+
         @media (max-width: 360px) {
             .video-typewriter-container { top: 46%; padding: 2px 4px 0; min-height: 54%; max-height: 54%; }
             .video-typewriter-text { font-size: clamp(6px, 2.8vw, 8px); line-height: 0.98; letter-spacing: 0.5px; }
@@ -337,27 +279,6 @@
             .merch-nav-btn.visible { opacity: 1; pointer-events: auto; }
             .merch-carousel-wrapper { overflow: hidden; }
         }
-        @media (max-width: 768px) {
-            .merch-section { padding: 60px 0; width: 100vw; overflow: hidden; }
-            .merch-carousel-wrapper { width: 100vw; margin-left: calc(-50vw + 50%); overflow: hidden; touch-action: auto; }
-            .merch-carousel { width: 100%; overflow: hidden; }
-            .merch-track { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; transform: none !important; transition: none; width: 100%; }
-            .merch-item { width: 100%; min-width: auto; border: none; aspect-ratio: 1; }
-            .merch-nav-btn { display: none !important; }
-            .merch-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 15px 10px; background: transparent; transform: translateY(100%); transition: transform 0.3s ease; }
-            .merch-item:hover .merch-info, .merch-item:active .merch-info { transform: translateY(0); }
-            .merch-name { font-size: 12px; letter-spacing: 1px; margin-bottom: 3px; text-shadow: 0 2px 4px rgba(0,0,0,0.9), 0 0 15px rgba(0,0,0,0.9); }
-            .merch-category { font-size: 10px; margin-bottom: 5px; text-shadow: -1px -1px 0 rgba(0,0,0,0.9), 1px -1px 0 rgba(0,0,0,0.9), -1px 1px 0 rgba(0,0,0,0.9), 1px 1px 0 rgba(0,0,0,0.9); }
-            .merch-price { font-size: 14px; letter-spacing: 1px; text-shadow: -1px -1px 0 rgba(0,0,0,0.9), 1px -1px 0 rgba(0,0,0,0.9), -1px 1px 0 rgba(0,0,0,0.9), 1px 1px 0 rgba(0,0,0,0.9); }
-            .merch-btn-container { margin-top: 30px; }
-            }
-        @media (max-width: 480px) {
-            .merch-item { width: 100%; min-width: auto; }
-            .merch-info { padding: 12px 8px; }
-            .merch-name { font-size: 11px; }
-            .merch-category { font-size: 9px; }
-            .merch-price { font-size: 13px; }
-        }
 
         /* MERCH 弹出大图 */
         .merch-popup-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); z-index: 10000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all 0.3s ease; cursor: pointer; }
@@ -381,13 +302,6 @@
         .merch-popup-close { position: absolute; top: -50px; right: 0; width: 40px; height: 40px; background: transparent; border: 2px solid var(--logo-red); color: var(--white); font-size: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
         .merch-popup-close:hover { background: var(--logo-red); transform: rotate(90deg); }
         .merch-popup-images.single-image .merch-popup-nav, .merch-popup-images.single-image .merch-popup-dots { display: none; }
-        @media (max-width: 768px) {
-            .merch-popup-images { width: 85vw; height: 50vh; }
-            .merch-popup-name { font-size: 20px; }
-            .merch-popup-nav { width: 40px; height: 40px; font-size: 16px; }
-            .merch-popup-prev { left: -50px; }
-            .merch-popup-next { right: -50px; }
-        }
 
         /* FOOTER */
         .footer-section { width: 100%; background: url('./image/downbg.webp') repeat-y center top, url('./image/blackbg.webp') repeat-y center top; position: relative; padding: 60px 0 0 0; background-size: 100% auto, 100% auto; }
@@ -481,27 +395,10 @@
         }
 
         /* 平板/手机 (≤768px) */
-        @media (max-width: 768px) {
-            .qq-music-list {
-                height: 537px;
-            }
-            .qq-music-player.qq-music-hide-mobile {
-                display: none;
-            }
-        }
 
         /* 小屏手机 (≤480px) */
-        @media (max-width: 480px) {
-            .qq-music-list {
-                height: 537px;
-            }
-            .qq-music-player.qq-music-hide-mobile,
-            .qq-music-player.qq-music-hide-tablet {
-                display: none;
-            }
-        }
 
-@media (max-width: 1200px) { 
+        @media (max-width: 1200px) { 
             .music-content-new { grid-template-columns: 1fr; gap: 40px; } 
             .music-player-side { max-width: 600px; margin: 0 auto; width: 100%; } 
             .album-cover { width: 350px; height: 350px; } 
@@ -510,94 +407,19 @@
         }
         @media (max-width: 1024px) { 
             .members-grid { grid-template-columns: 1fr 1fr; }
-            .nav-links { gap: 25px; } 
-            .nav-links a { font-size: 14px; letter-spacing: 3px; } 
+
             .album-cover { width: 300px; height: 300px; } 
             .album-title { font-size: 36px; letter-spacing: 8px; }
-            .nav-skull { width: 50px; height: 50px; }
+            
         }
-        @media (max-width: 768px) {
-            .play-btn { width: 60px; height: 60px; border-width: 3px; background: rgba(0,0,0,0.7); }
-            .play-btn::after { font-size: 24px; margin-left: 3px; }
-            .hero { width: 100%; position: relative; overflow: hidden; }
-            .hero-bg { position: relative; width: 100%; line-height: 0; }
-            .hero-bg img { width: 100%; height: auto; display: block; }
-            .hero-content { position: absolute; bottom: 8%; left: 0; right: 0; z-index: 10; text-align: center; width: 100%; padding: 0 15px; }
-            .hero-logo-img { width: 80%; max-width: 360px; height: auto; filter: drop-shadow(0 0 15px rgba(220, 38, 38, 0.6)) drop-shadow(0 0 30px rgba(220, 38, 38, 0.4)); }
-            @media (max-width: 768px) and (orientation: portrait) and (min-aspect-ratio: 1/2) {
-                .hero-logo-img { width: 53%; max-width: 240px; }
-            }
-            @media (max-width: 380px) {
-                .hero-logo-img { width: 75%; max-width: 340px; }
-                .hero-logo-img { width: 80%; max-width: 320px; }
-                .footer-nav-container .nav-dragon { display: block; width: 20px; height: 20px; }
-            }
-            .reveal, .reveal.active, .reveal-logo, .reveal-logo.active { opacity: 1; animation: none; transform: none; filter: none; }
-            .nav-links { 
-                gap: 8px; 
-                flex-wrap: nowrap; 
-                overflow-x: auto; 
-                scrollbar-width: none; 
-                -ms-overflow-style: none;
-                padding: 0 5px; 
-                justify-content: flex-start;
-                width: 100%;
-                -webkit-overflow-scrolling: touch;
-            }
-            .nav-links::-webkit-scrollbar { display: none; }
-            .nav-links li { flex-shrink: 0; }
-            .nav-links a { 
-                font-size: 13px; 
-                white-space: nowrap; 
-                padding: 8px 4px; 
-                letter-spacing: 0.5px;
-                display: block;
-            }
-            .nav-links a[href*="antiipa"] { letter-spacing: 0; font-size: 12px; }
-            .nav-dragon { width: 35px; height: 35px; }
-            .nav-dragon-left { margin-right: 8px; }
-            .nav-dragon-right { margin-left: 8px; }
-            .members-grid { grid-template-columns: 1fr 1fr; gap: 15px; max-width: 100%; }
-            .member-avatar { width: 120px; height: 120px; margin: 0 auto 15px; }
-            .member-name { font-size: 16px; }
-            .member-role { font-size: 12px; }
-            .tour-item { display: flex; flex-direction: row; flex-wrap: wrap; gap: 0; row-gap: 12px; text-align: center; padding: 12px 15px; justify-content: center; align-items: center; }
-            .tour-date-col { order: 1; width: 100%; text-align: center; color: var(--logo-red); font-weight: bold; font-size: 16px; }
-            .tour-city-col { order: 2; width: auto; text-align: center; flex: 0 0 auto; white-space: nowrap; }
-            .tour-venue-col { order: 3; width: auto; max-width: 120px; text-align: center; flex: 0 1 auto; margin: 0 20px; color: var(--silver); white-space: normal; word-break: break-word; }
-            .tour-country-col { order: 4; width: auto; text-align: center; flex: 0 0 auto; white-space: nowrap; }
-            .tour-btn-col { order: 5; width: 100%; text-align: center; margin-top: 0; }
-            .tour-section { padding-top: 30px; } 
-            .section-title { font-size: 36px; letter-spacing: 8px; margin-bottom: 30px; }
-            .album-cover { width: 260px; height: 260px; } 
-            .album-title { font-size: 28px; letter-spacing: 6px; } 
-            .music-section-inner, .video-section-inner { padding: 50px 20px; } 
-            .banner-btn { padding: 8px 25px; font-size: 14px; bottom: 30px; } 
-            .banner-btn-right { right: 20px; } 
-            .footer-main { padding: 30px 20px; } 
-            .subscribe-form { flex-direction: column; align-items: center; } 
-            .subscribe-input { width: 100%; max-width: 280px; } 
-            .footer-nav-container { flex-wrap: nowrap; gap: 8px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 0 10px; justify-content: space-between; }
-            .footer-nav a { font-size: 10px; white-space: nowrap; letter-spacing: 1px; padding: 5px 2px; flex-shrink: 0; }
-            .footer-nav-container .nav-dragon { display: block; width: 35px; height: 35px; }
-        }
-        @media (max-width: 480px) {
-            .video-typewriter-container { padding: 3px 6px 0; top: 48%; left: 0.5%; right: 0.5%; width: 99%; min-height: 52%; max-height: 52%; }
-            .video-typewriter-text { font-size: clamp(6.5px, 2.6vw, 9px); line-height: 1.0; letter-spacing: 0.5px; }
-            }
 
-        /* 其他样式 */
-        .video-player { -webkit-user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; }
-        .video-player img { -webkit-user-drag: none; }
-        .nav-dragon { image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges; }
+        risp-edges; }
         .dragon-clone { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0); filter: grayscale(0%) brightness(3) drop-shadow(0 0 60px #DC2626) drop-shadow(0 0 120px rgba(220,38,38,0.9)); z-index: 99999; pointer-events: none; opacity: 0; background-repeat: no-repeat; background-position: center; will-change: transform, opacity; }
         .dragon-clone.animate { animation: dragonFlash 1.2s ease-out forwards; }
         @keyframes dragonFlash { 0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; } 20% { transform: translate(-50%, -50%) scale(1.0); opacity: 1; } 50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; } 80% { transform: translate(-50%, -50%) scale(1.0); opacity: 1; } 100% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; } }
         .dragon-star-ring { position: fixed; top: 50%; left: 50%; width: 60vmin; height: 60vmin; background: rgba(220,38,38,0.9); clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); transform: translate(-50%, -50%) scale(0) rotate(0deg); z-index: 99998; animation: starExpand 1.2s ease-out forwards; will-change: transform, opacity; }
         @keyframes starExpand { 0% { transform: translate(-50%, -50%) scale(0) rotate(0deg); opacity: 0; } 30% { opacity: 1; } 100% { transform: translate(-50%, -50%) scale(3) rotate(180deg); opacity: 0; } }
-        @media (max-width: 768px) and (orientation: portrait) {
-            
-        }
+        
         .merch-item, .merch-img, .merch-img-hover { will-change: transform; contain: layout style paint; }
         .banner img, .hero-bg img { will-change: transform; content-visibility: auto; }
         #bannerVideo { will-change: opacity; }
@@ -613,13 +435,10 @@
         .music-video-section::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 80px; background: linear-gradient(to bottom, #000 0%, rgba(0,0,0,0.6) 60%, transparent 100%); z-index: 5; pointer-events: none; }
     
         /* 网易云播放器高度调整 */
-        @media (min-width: 769px) and (orientation: portrait) {
-            }
+        
         @media (max-width: 1024px) and (min-width: 769px) and (orientation: portrait),
                (max-width: 768px) {
             }
-    
-        
 
         /* ===== 音乐播放器统一样式 ===== */
         .netease-player {
@@ -628,30 +447,6 @@
 
         @media (max-width: 1024px) and (min-width: 769px) {
             .netease-player { height: 537px !important; }
-        }
-
-        @media (max-width: 768px) {
-            .music-player-side {
-                max-width: 100%;
-                width: 100%;
-            }
-            .music-player-embed {
-                width: 100% !important;
-                max-width: 100% !important;
-            }
-            .netease-player { 
-                width: 100% !important;
-                max-width: 100% !important;
-                height: 537px !important;
-            }
-            .music-content-new {
-                grid-template-columns: 1fr !important;
-                gap: 30px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .netease-player { height: 480px !important; }
         }
 
         /* 桌面端龙动画 - 横屏和竖屏都适用 */
@@ -680,13 +475,149 @@
         }
 
         /* 移动端龙动画 */
+
+        /* ===== 移动端导航栏统一设置 (max-width: 768px) ===== */
         @media (max-width: 768px) {
-            .dragon-clone.animate {
-                animation: dragonFlash 1.2s ease-out forwards;
+            .nav-container {
+                padding: 0 5px;
             }
+            .nav-links {
+                gap: 6px;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+                padding: 0 5px;
+                justify-content: flex-start;
+                width: 100%;
+                -webkit-overflow-scrolling: touch;
+            }
+            .nav-links::-webkit-scrollbar { display: none; }
+            .nav-links li { flex-shrink: 0; }
+            .nav-links a {
+                font-size: clamp(9px, 2.5vw, 12px);
+                white-space: nowrap;
+                padding: 8px 3px;
+                letter-spacing: 0.3px;
+                display: block;
+            }
+            .nav-links a[href*="antiipa"] { 
+                letter-spacing: 0; 
+                font-size: clamp(9px, 2.3vw, 11px); 
+            }
+            .nav-dragon { 
+                width: 32px; 
+                height: 32px; 
+            }
+            .nav-dragon-left { margin-right: 15px; }
+            .nav-dragon-right { margin-left: 15px; }
+            .nav-skull { 
+                width: 40px; 
+                height: 40px; 
+            }
+            .nav-skull-left { margin-right: 5px; }
+            .nav-skull-right { margin-left: 5px; }
+
+            /* Hero区域 */
+            .hero { width: 100%; position: relative; overflow: hidden; }
+            .hero-bg { position: relative; width: 100%; line-height: 0; }
+            .hero-bg img { width: 100%; height: auto; display: block; }
+            .hero-content { position: absolute; bottom: 8%; left: 0; right: 0; z-index: 10; text-align: center; width: 100%; padding: 0 15px; }
+            .hero-logo-img { width: 80%; max-width: 360px; height: auto; filter: drop-shadow(0 0 15px rgba(220, 38, 38, 0.6)) drop-shadow(0 0 30px rgba(220, 38, 38, 0.4)); }
+
+            /* 视频区域 */
+            .play-btn { width: 60px; height: 60px; border-width: 3px; background: rgba(0,0,0,0.7); }
+            .play-btn::after { font-size: 24px; margin-left: 3px; }
+            .video-typewriter-container { padding: 4px 8px 0; top: 50%; left: 1%; right: 1%; width: 98%; bottom: 0; min-height: 50%; max-height: 50%; overflow: hidden; }
+            .video-typewriter-text { font-size: clamp(7.5px, 2.4vw, 10px); line-height: 1.02; letter-spacing: 0.5px; padding: 0; word-break: break-word; max-width: 100%; margin: 0; }
+
+            /* 成员区域 */
+            .members-grid { grid-template-columns: 1fr 1fr; gap: 15px; max-width: 100%; }
+            .member-avatar { width: 120px; height: 120px; margin: 0 auto 15px; }
+            .member-name { font-size: 16px; }
+            .member-role { font-size: 12px; }
+
+            /* 巡演区域 */
+            .tour-item { display: flex; flex-direction: row; flex-wrap: wrap; gap: 0; row-gap: 12px; text-align: center; padding: 12px 15px; justify-content: center; align-items: center; }
+            .tour-date-col { order: 1; width: 100%; text-align: center; color: var(--logo-red); font-weight: bold; font-size: 16px; }
+            .tour-city-col { order: 2; width: auto; text-align: center; flex: 0 0 auto; white-space: nowrap; }
+            .tour-venue-col { order: 3; width: auto; max-width: 120px; text-align: center; flex: 0 1 auto; margin: 0 20px; color: var(--silver); white-space: normal; word-break: break-word; }
+            .tour-country-col { order: 4; width: auto; text-align: center; flex: 0 0 auto; white-space: nowrap; }
+            .tour-btn-col { order: 5; width: 100%; text-align: center; margin-top: 0; }
+            .tour-section { padding-top: 30px; } 
+            .section-title { font-size: 36px; letter-spacing: 8px; margin-bottom: 30px; }
+
+            /* 音乐区域 */
+            .album-cover { width: 260px; height: 260px; } 
+            .album-title { font-size: 28px; letter-spacing: 6px; } 
+            .music-section-inner, .video-section-inner { padding: 50px 20px; } 
+
+            /* Banner按钮 */
+            .banner-btn { padding: 8px 25px; font-size: 14px; bottom: 30px; } 
+            .banner-btn-right { right: 20px; }
+
+            /* 周边区域 */
+            .merch-section { padding: 60px 0; width: 100vw; overflow: hidden; }
+            .merch-carousel-wrapper { width: 100vw; margin-left: calc(-50vw + 50%); overflow: hidden; touch-action: auto; }
+            .merch-carousel { width: 100%; overflow: hidden; }
+            .merch-track { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; transform: none !important; transition: none; width: 100%; }
+            .merch-item { width: 100%; min-width: auto; border: none; aspect-ratio: 1; }
+            .merch-nav-btn { display: none !important; }
+            .merch-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 15px 10px; background: transparent; transform: translateY(100%); transition: transform 0.3s ease; }
+            .merch-item:hover .merch-info, .merch-item:active .merch-info { transform: translateY(0); }
+            .merch-name { font-size: 12px; letter-spacing: 1px; margin-bottom: 3px; text-shadow: 0 2px 4px rgba(0,0,0,0.9), 0 0 15px rgba(0,0,0,0.9); }
+            .merch-category { font-size: 10px; margin-bottom: 5px; text-shadow: -1px -1px 0 rgba(0,0,0,0.9), 1px -1px 0 rgba(0,0,0,0.9), -1px 1px 0 rgba(0,0,0,0.9), 1px 1px 0 rgba(0,0,0,0.9); }
+            .merch-price { font-size: 14px; letter-spacing: 1px; text-shadow: -1px -1px 0 rgba(0,0,0,0.9), 1px -1px 0 rgba(0,0,0,0.9), -1px 1px 0 rgba(0,0,0,0.9), 1px 1px 0 rgba(0,0,0,0.9); }
+            .merch-btn-container { margin-top: 30px; }
+
+            /* Footer */
+            .footer-main { padding: 30px 20px; } 
+            .subscribe-form { flex-direction: column; align-items: center; } 
+            .subscribe-input { width: 100%; max-width: 280px; } 
+            .footer-nav-container { flex-wrap: nowrap; gap: 8px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 0 10px; justify-content: space-between; }
+            .footer-nav-container::-webkit-scrollbar { display: none; }
+            .footer-nav a { font-size: 10px; white-space: nowrap; letter-spacing: 1px; padding: 5px 2px; flex-shrink: 0; }
+            .footer-nav-container 
+
+            /* 动画禁用 */
+            .reveal, .reveal.active, .reveal-logo, .reveal-logo.active { opacity: 1; animation: none; transform: none; filter: none; }
+
+            /* 音乐播放器 */
+            .music-player-side { max-width: 100%; width: 100%; }
+            .music-player-embed { width: 100% !important; max-width: 100% !important; }
+            .netease-player { width: 100% !important; max-width: 100% !important; height: 537px !important; }
+            .music-content-new { grid-template-columns: 1fr !important; gap: 30px; }
+            .qq-music-list { height: 537px; }
+            .qq-music-player.qq-music-hide-mobile { display: none; }
+
+            /* 周边弹出层 */
+            .merch-popup-images { width: 85vw; height: 50vh; }
+            .merch-popup-name { font-size: 20px; }
+            .merch-popup-nav { width: 40px; height: 40px; font-size: 16px; }
+            .merch-popup-prev { left: -50px; }
+            .merch-popup-next { right: -50px; }
+
+            /* 龙动画 */
+            .dragon-clone.animate { animation: dragonFlash 1.2s ease-out forwards; }
         }
 
-        </style>
+        /* 小屏手机 (max-width: 480px) */
+        @media (max-width: 480px) {
+            .video-typewriter-container { padding: 3px 6px 0; top: 48%; left: 0.5%; right: 0.5%; width: 99%; min-height: 52%; max-height: 52%; }
+            .video-typewriter-text { font-size: clamp(6.5px, 2.6vw, 9px); line-height: 1.0; letter-spacing: 0.5px; }
+            .netease-player { height: 480px !important; }
+            
+            .merch-info { padding: 12px 8px; }
+            .merch-name { font-size: 11px; }
+            .merch-category { font-size: 9px; }
+            .merch-price { font-size: 13px; }
+        }
+
+        /* 超小屏手机 (max-width: 380px) */
+        @media (max-width: 380px) {
+            .hero-logo-img { width: 75%; max-width: 340px; }
+        }
+</style>
 </head>
 <body>
     <nav class="navbar" id="navbar">
@@ -1290,8 +1221,6 @@
     </script>
 
     <script type="text/javascript">
-        
-        
 
         // 龙点击动画
         document.querySelectorAll('.nav-dragon').forEach(dragon => {
@@ -1970,7 +1899,6 @@ document.addEventListener('keydown', (e) => {
             }
         });
     </script>
-
 
 <div class="merch-popup-overlay" id="merchPopup" onclick="closeMerchPopup(event)">
     <div class="merch-popup-content" onclick="event.stopPropagation()">

@@ -204,14 +204,41 @@
             .music-player-embed { height: 537px !important; }
         }
         @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 5px;
+                justify-content: space-between;
+            }
+            .nav-dragon-left { margin-right: 5px; }
+            .nav-dragon-right { margin-left: 5px; }
+            .nav-skull-left { margin-right: 5px; }
+            .nav-skull-right { margin-left: 5px; }
             .nav-skull { width: 45px; height: 45px; }
             .nav-skull-left { margin-right: 10px; }
             .nav-skull-right { margin-left: 10px; }
             .nav-dragon { width: 35px; height: 35px; }
             .nav-dragon-left { margin-right: 15px; }
             .nav-dragon-right { margin-left: 15px; }
-            .nav-links { gap: 8px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding: 0 5px; }
-            .nav-links a { font-size: 11px; white-space: nowrap; padding: 8px 2px; letter-spacing: 0.5px; }
+            .nav-links { 
+                gap: 10px; 
+                flex-wrap: nowrap; 
+                overflow-x: auto; 
+                scrollbar-width: none; 
+                -ms-overflow-style: none;
+                padding: 0 5px; 
+                justify-content: flex-start;
+                width: 100%;
+                -webkit-overflow-scrolling: touch;
+            }
+            .nav-links::-webkit-scrollbar { display: none; }
+            .nav-links li { flex-shrink: 0; }
+            .nav-links a { 
+                font-size: 12px; 
+                white-space: nowrap; 
+                padding: 8px 4px; 
+                letter-spacing: 0.5px;
+                display: block;
+            }
+            .nav-links a[href*="antiipa"] { letter-spacing: 0; font-size: 11px; }
             .section-title { font-size: 32px; letter-spacing: 6px; }
             .album-cover-featured { width: 260px; height: 260px; }
             .album-title-featured { font-size: 24px; letter-spacing: 4px; }

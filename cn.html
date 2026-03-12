@@ -169,6 +169,35 @@
         .banner-section { width: 100%; background: url('./image/blackbg.webp') repeat-y center top; background-size: 100% auto; position: relative; }
         .banner { width: 100%; background: var(--dark-gray); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
         .banner img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+
+        /* nonamefestbanner响应式样式 */
+        #banner-nonamefest .banner {
+            width: 100%;
+            overflow: hidden;
+        }
+        #banner-nonamefest .banner img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            object-position: center;
+        }
+
+        /* 竖屏/移动端适配 */
+        @media (max-width: 1024px) and (orientation: portrait),
+               (max-width: 768px) {
+            #banner-nonamefest .banner img {
+                width: 100%;
+                height: auto;
+                max-height: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #banner-nonamefest .banner img {
+                width: 100%;
+                height: auto;
+            }
+        }
         .banner-dark-effect { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; opacity: 0.3; }
         .banner-cinematic { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.6) 100%), linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, transparent 20%, transparent 80%, rgba(0,0,0,0.3) 100%), linear-gradient(to right, rgba(0,0,0,0.2) 0%, transparent 10%, transparent 90%, rgba(0,0,0,0.2) 100%); }
         .banner-grain { position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); opacity: 0.08; mix-blend-mode: overlay; }
@@ -413,12 +442,21 @@
             
         }
 
-        risp-edges; }
         .dragon-clone { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0); filter: grayscale(0%) brightness(3) drop-shadow(0 0 60px #DC2626) drop-shadow(0 0 120px rgba(220,38,38,0.9)); z-index: 99999; pointer-events: none; opacity: 0; background-repeat: no-repeat; background-position: center; will-change: transform, opacity; }
+
+        .dragon-clone.animate { animation: dragonFlash 1.2s ease-out forwards; }
         
-        @keyframes dragonFlash { 0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; } 20% { transform: translate(-50%, -50%) scale(1.0); opacity: 1; } 50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; } 80% { transform: translate(-50%, -50%) scale(1.0); opacity: 1; } 100% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; } }
+        @keyframes dragonFlash { 0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
+            20% { transform: translate(-50%, -50%) scale(1.0); opacity: 1; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+            80% { transform: translate(-50%, -50%) scale(1.0); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
+        }
         .dragon-star-ring { position: fixed; top: 50%; left: 50%; width: 60vmin; height: 60vmin; background: rgba(220,38,38,0.9); clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); transform: translate(-50%, -50%) scale(0) rotate(0deg); z-index: 99998; animation: starExpand 1.2s ease-out forwards; will-change: transform, opacity; }
-        @keyframes starExpand { 0% { transform: translate(-50%, -50%) scale(0) rotate(0deg); opacity: 0; } 30% { opacity: 1; } 100% { transform: translate(-50%, -50%) scale(3) rotate(180deg); opacity: 0; } }
+        @keyframes starExpand { 0% { transform: translate(-50%, -50%) scale(0) rotate(0deg); opacity: 0; }
+            30% { opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(3) rotate(180deg); opacity: 0; }
+        }
         
         .merch-item, .merch-img, .merch-img-hover { will-change: transform; contain: layout style paint; }
         .banner img, .hero-bg img { will-change: transform; content-visibility: auto; }
@@ -449,6 +487,10 @@
             .netease-player { height: 537px !important; }
         }
 
+        @media (max-width: 768px) {
+            .netease-player { height: 480px !important; }
+        }
+
         /* 桌面端龙动画 - 横屏和竖屏都适用 */
         @media (min-width: 769px) {
             @keyframes dragonFlashDesktop {
@@ -475,6 +517,15 @@
         }
 
         /* 移动端龙动画 */
+        @media (max-width: 768px) {
+            .dragon-clone.animate {
+                animation: dragonFlash 1.2s ease-out forwards;
+            }
+            .dragon-star-ring {
+                width: 45vmin;
+                height: 45vmin;
+            }
+        }
 
         /* ===== 移动端导航栏统一设置 (max-width: 768px) ===== */
         @media (max-width: 768px) {
@@ -577,7 +628,6 @@
             .footer-nav-container { flex-wrap: nowrap; gap: 8px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 0 10px; justify-content: space-between; }
             .footer-nav-container::-webkit-scrollbar { display: none; }
             .footer-nav a { font-size: 10px; white-space: nowrap; letter-spacing: 1px; padding: 5px 2px; flex-shrink: 0; }
-            .footer-nav-container 
 
             /* 动画禁用 */
             .reveal, .reveal.active, .reveal-logo, .reveal-logo.active { opacity: 1; animation: none; transform: none; filter: none; }
@@ -601,9 +651,8 @@
             
         
 
-            /* 龙动画 */
-            .dragon-clone.animate { animation: dragonFlash 1.2s ease-out forwards; }
-            .dragon-star-ring { animation: starExpand 1.2s ease-out forwards; }}
+            
+        }
 
         /* 小屏手机 (max-width: 480px) */
         @media (max-width: 480px) {
@@ -621,14 +670,17 @@
         @media (max-width: 380px) {
             .hero-logo-img { width: 75%; max-width: 340px; }
         }
+
+
+
 </style>
 </head>
 <body>
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="./index.html"><img src="./image/skull26s.webp" alt="Logo" class="nav-skull nav-skull-left"></a>
-            <a href="#hero" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">
-                <img src="./image/dragonL.png" alt="Dragon Left" class="nav-dragon nav-dragon-left">
+            <a href="#hero" class="nav-dragon-link">
+                <img src="./image/dragonL.png" alt="Dragon Left" class="nav-dragon nav-dragon-left" id="dragonLeft">
             </a>
             <ul class="nav-links">
                 <li><a href="#tour">巡演</a></li>
@@ -638,8 +690,8 @@
                 <li><a href="#footer">聯係</a></li>
                 <li><a href="http://emanonent.wixstudio.com/livegigs/antiipa" target="_blank">ANTI-IPA</a></li>
             </ul>
-            <a href="#hero" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">
-                <img src="./image/dragonR.png" alt="Dragon Right" class="nav-dragon nav-dragon-right">
+            <a href="#hero" class="nav-dragon-link">
+                <img src="./image/dragonR.png" alt="Dragon Right" class="nav-dragon nav-dragon-right" id="dragonRight">
             </a>
             <a href="./cn.html"><img src="./image/skull26g.webp" alt="Logo" class="nav-skull nav-skull-right"></a>
         </div>
@@ -681,6 +733,21 @@
                 <div class="banner-border-glow"></div>
             </div>
             <a href="#merch" class="banner-btn banner-btn-center">立即購買</a>
+        </div>
+    </section>
+
+    <div class="silver-line"></div>
+
+    <section class="banner-section" id="banner-nonamefest">
+        <div class="banner reveal">
+            <img loading="lazy" src="./image/nonamefestbanner.webp" alt="NONAMEFEST Banner" style="width: 100%; height: auto; display: block;">
+            <div class="banner-dark-effect">
+                <div class="banner-cinematic"></div>
+                <div class="banner-grain"></div>
+                <div class="banner-scanlines-dark"></div>
+                <div class="banner-glow"></div>
+                <div class="banner-border-glow"></div>
+            </div>
         </div>
     </section>
 
@@ -1032,8 +1099,8 @@
         </div>
         <div class="footer-nav">
             <div class="footer-nav-container">
-                <a href="#hero" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">
-                    <img src="./image/dragonL.png" alt="Dragon Left" class="nav-dragon nav-dragon-left">
+                <a href="#hero" class="nav-dragon-link">
+                    <img src="./image/dragonL.png" alt="Dragon Left" class="nav-dragon nav-dragon-left" id="dragonLeftFooter">
                 </a>
                 <a href="#tour" data-editable>巡演</a>
                 <a href="#music" data-editable>音樂</a>
@@ -1041,8 +1108,8 @@
                 <a href="#merch" data-editable>周邊</a>
                 <a href="#footer" data-editable>聯係</a>
                 <a href="http://emanonent.wixstudio.com/livegigs/antiipa" target="_blank" data-editable>ANTI-IPA</a>
-                <a href="#hero" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">
-                    <img src="./image/dragonR.png" alt="Dragon Right" class="nav-dragon nav-dragon-right">
+                <a href="#hero" class="nav-dragon-link">
+                    <img src="./image/dragonR.png" alt="Dragon Right" class="nav-dragon nav-dragon-right" id="dragonRightFooter">
                 </a>
             </div>
         </div>
@@ -1225,15 +1292,17 @@
     </script>
 
     <script type="text/javascript">
-
-        // 龙点击动画
+        // 龙点击动画 - 与index.html保持一致
         document.querySelectorAll('.nav-dragon').forEach(dragon => {
             dragon.addEventListener('click', function(e) {
                 e.preventDefault();
+                e.stopPropagation();
                 if (document.querySelector('.dragon-clone.animate')) return;
+
                 const src = this.src;
                 const img = new Image();
                 img.src = src;
+
                 img.onload = () => {
                     const naturalWidth = img.naturalWidth || 1191;
                     const naturalHeight = img.naturalHeight || 496;
@@ -1245,6 +1314,7 @@
                     const maxWidth = screenWidth * 0.85;
                     const maxHeight = screenHeight * 0.5;
                     let displayWidth, displayHeight;
+
                     if (isMobile) {
                         if (isPortrait) {
                             displayWidth = Math.min(screenWidth * 0.75, 320);
@@ -1257,6 +1327,7 @@
                         displayHeight = Math.min(500, screenHeight * 0.6);
                         displayWidth = displayHeight * aspectRatio;
                     }
+
                     if (displayWidth > maxWidth) {
                         displayWidth = maxWidth;
                         displayHeight = displayWidth / aspectRatio;
@@ -1265,6 +1336,7 @@
                         displayHeight = maxHeight;
                         displayWidth = displayHeight * aspectRatio;
                     }
+
                     const clone = document.createElement('div');
                     clone.className = 'dragon-clone';
                     clone.style.backgroundImage = 'url(' + src + ')';
@@ -1272,23 +1344,26 @@
                     clone.style.height = displayHeight + 'px';
                     clone.style.backgroundSize = 'contain';
                     document.body.appendChild(clone);
+
                     const star = document.createElement('div');
                     star.className = 'dragon-star-ring';
                     document.body.appendChild(star);
+
                     requestAnimationFrame(() => {
                         clone.classList.add('animate');
                     });
+
                     setTimeout(() => {
                         clone.remove();
                         star.remove();
                     }, 1200);
+
                     setTimeout(() => {
-                        window.scrollTo({top: 0, behavior: 'smooth'});
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
                     }, 300);
                 };
             });
         });
-    
     </script>
 
     <script>

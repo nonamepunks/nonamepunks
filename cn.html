@@ -487,13 +487,25 @@
         /* ===== 音乐播放器统一样式 ===== */
         .netease-player {
             height: 655px !important;
+            min-height: 430px;
+            min-width: 300px;
+            width: 100%;
+            max-width: 100%;
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
         }
 
         @media (max-width: 1024px) and (min-width: 769px) {
             .netease-player { 
                 height: 537px !important; 
+                min-height: 537px;
+                min-width: 300px !important;
                 display: block !important;
                 visibility: visible !important;
+                opacity: 1 !important;
+                width: 100% !important;
+                max-width: 100% !important;
             }
         }
 
@@ -501,9 +513,12 @@
             .netease-player { 
                 height: 520px !important; 
                 min-height: 520px;
+                min-width: 300px !important;
                 display: block !important;
                 visibility: visible !important;
                 opacity: 1 !important;
+                width: 100% !important;
+                max-width: 100% !important;
             }
 
             .music-player-side {
@@ -1958,7 +1973,7 @@
             <div class="music-content-new">
                 <div class="music-player-side reveal">
                     <h3 class="music-player-title">網易雲音樂</h3>
-                    <iframe class="music-player-embed netease-player" style="border-radius:12px;" src="https://music.163.com/outchain/player?type=0&id=6844513901&auto=0&height=430" frameBorder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" scrolling="no"></iframe>
+                    <iframe class="music-player-embed netease-player" style="border-radius:12px; min-width:300px; min-height:430px;" src="https://music.163.com/outchain/player?type=0&id=6844513901&auto=0&height=430" frameborder="no" border="0" marginwidth="0" marginheight="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" scrolling="no"></iframe>
                 </div>
                 <div class="music-center reveal">
                     <div class="album-cover"><img src="./image/releases/undersymphonicsiege.webp" alt="Under Symphonic Siege Album Cover"></div>

@@ -8,14 +8,17 @@
     <link rel="shortcut icon" href="./image/toplogo.png" type="image/png">
     <link rel="apple-touch-icon" href="./image/toplogo.png">
     <style>
-        /* ===== 导航栏 - 移动端修复版 ===== */
+        /* ===== 导航栏 - 完全统一版 ===== */
         .navbar { position: fixed; top: -100px; left: 0; width: 100%; background: rgba(0,0,0,0.7); border-bottom: none; z-index: 1000; padding: 4px 0; transition: top 0.3s steps(3); }
         .navbar.visible { top: 0; }
+
         .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: center; align-items: center; padding: 0 30px; position: relative; }
+
         .nav-skull { width: 68px; height: 68px; cursor: pointer; transition: all 0.3s; filter: grayscale(100%) brightness(0.8); object-fit: contain; }
         .nav-skull:hover { filter: grayscale(0%) brightness(1.2) drop-shadow(0 0 15px var(--logo-red)); transform: scale(1.1) rotate(5deg); }
         .nav-skull-left { margin-right: 20px; }
         .nav-skull-right { margin-left: 20px; }
+
         .nav-dragon { width: 50px; height: 50px; cursor: pointer; transition: all 0.2s; filter: grayscale(100%) brightness(0.8); object-fit: contain; }
         .nav-dragon:hover { filter: grayscale(0%) brightness(1.2) drop-shadow(0 0 10px var(--logo-red)); transform: scale(1.1); }
         .nav-dragon-left { margin-right: 40px; }
@@ -41,33 +44,38 @@
 
         /* 768px以下 - 移动端 */
         @media (max-width: 768px) {
-            .nav-container { padding: 0 10px; justify-content: space-between; }
-            .nav-links { gap: 6px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; padding: 0 8px; justify-content: flex-start; width: 100%; -webkit-overflow-scrolling: touch; scroll-snap-type: x mandatory; }
+            .nav-container { padding: 0 5px; justify-content: space-between; }
+
+            .nav-links { gap: 6px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; padding: 0 5px; justify-content: flex-start; width: 100%; -webkit-overflow-scrolling: touch; scroll-snap-type: x mandatory; }
             .nav-links::-webkit-scrollbar { display: none; }
             .nav-links li { flex-shrink: 0; scroll-snap-align: start; }
-            .nav-links a { font-size: clamp(9px, 2.5vw, 12px); white-space: nowrap; padding: 8px 4px; letter-spacing: 0.5px; display: block; }
+            .nav-links a { font-size: clamp(9px, 2.5vw, 12px); white-space: nowrap; padding: 8px 3px; letter-spacing: 0.5px; display: block; }
             .nav-links a[href*="antiipa"] { letter-spacing: 0.3px; font-size: clamp(9px, 2.3vw, 11px); }
+
             .nav-dragon { width: 32px; height: 32px; }
-            .nav-dragon-left { margin-right: 6px; }
-            .nav-dragon-right { margin-left: 6px; }
+            .nav-dragon-left { margin-right: 15px; }
+            .nav-dragon-right { margin-left: 15px; }
+
             .nav-skull { width: 40px; height: 40px; }
-            .nav-skull-left { margin-right: 8px; }
-            .nav-skull-right { margin-left: 8px; }
+            .nav-skull-left { margin-right: 5px; }
+            .nav-skull-right { margin-left: 5px; }
         }
 
         /* 480px以下 - 小屏手机 */
         @media (max-width: 480px) {
-            .nav-links { gap: 4px; padding: 0 5px; }
-            .nav-links a { font-size: 10px; padding: 6px 3px; letter-spacing: 0.3px; }
+            .nav-links { gap: 4px; padding: 0 3px; }
+            .nav-links a { font-size: 10px; padding: 6px 2px; letter-spacing: 0.3px; }
             .nav-links a[href*="antiipa"] { font-size: 9px; letter-spacing: 0.2px; }
+
             .nav-dragon { width: 28px; height: 28px; }
             .nav-skull { width: 36px; height: 36px; }
         }
 
         /* 360px以下 - 超小屏 */
         @media (max-width: 360px) {
-            .nav-links { gap: 3px; padding: 0 3px; }
+            .nav-links { gap: 3px; padding: 0 2px; }
             .nav-links a { font-size: 9px; padding: 5px 2px; letter-spacing: 0.2px; }
+
             .nav-dragon { width: 24px; height: 24px; }
             .nav-skull { width: 32px; height: 32px; }
         }
@@ -107,15 +115,6 @@
         .reveal.active { animation: hardGlitch 0.3s steps(5) forwards; }
         .reveal-logo { opacity: 0; }
         .reveal-logo.active { animation: logoFadeIn 1.5s ease-out forwards; }
-
-        .navbar.visible { top: 0; }
-        
-        .nav-dragon:hover { filter: grayscale(0%) brightness(1.2) drop-shadow(0 0 10px var(--logo-red)); transform: scale(1.1); }
-        .nav-dragon-left { margin-right: 40px; }
-        .nav-dragon-right { margin-left: 40px; }
-        .nav-skull:hover { filter: grayscale(0%) brightness(1.2) drop-shadow(0 0 15px var(--logo-red)); transform: scale(1.1) rotate(5deg); }
-        .nav-skull-left { margin-right: 20px; }
-        .nav-skull-right { margin-left: 20px; }
 
         /* ===== HERO 区域 - 桌面端 ===== */
         .hero { 
@@ -218,9 +217,7 @@
 
 /* 移动端 - 修复：完整显示所有文字 */
 
-/* ===== 其他区域样式 ===== */
-
-        .banner-section { width: 100%; background: url('./image/blackbg.webp') repeat-y center top; background-size: 100% auto; position: relative; }
+.banner-section { width: 100%; background: url('./image/blackbg.webp') repeat-y center top; background-size: 100% auto; position: relative; }
         .video-banner { overflow: hidden; margin-bottom: 0; }
         .video-banner video { display: block; }
         .video-banner-section { margin-bottom: 0; background: url('./image/blackbg.webp') repeat-y center top; background-size: 100% auto; }
@@ -540,8 +537,6 @@
     box-shadow: 0 0 15px rgba(127, 29, 29, 0.4);  /* 暗红发光，静态 */
 }
         
-
-        /* ===== 响应式布局 ===== */
 
         /* 1200px以下 */
         
@@ -940,12 +935,7 @@
         
 }
 @media (max-width: 768px) {
-            .nav-dragon-left { margin-right: 6px; }
-            .nav-dragon-right { margin-left: 6px; }
-            .nav-skull-left { margin-right: 8px; }
-            .nav-skull-right { margin-left: 8px; }
-
-    .video-typewriter-container {
+            .video-typewriter-container {
         padding: 4px 8px 0;
         top: 50%;
         left: 1%;
@@ -965,10 +955,6 @@
         max-width: 100%;
         margin: 0;
     }
-            .nav-skull-left { margin-right: 10px; }
-            .nav-skull-right { margin-left: 10px; }
-
-
             /* 移动端播放按钮优化 */
             .play-btn {
                 width: 60px;
@@ -1042,9 +1028,6 @@
                 transform: none;
                 filter: none;
             }
-
-            .nav-dragon-left { margin-right: 8px; }
-            .nav-dragon-right { margin-left: 8px; }
 
             /* MEMBERS */
             .members-grid { grid-template-columns: 1fr 1fr; gap: 15px; max-width: 100%; }

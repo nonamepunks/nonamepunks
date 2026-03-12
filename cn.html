@@ -140,8 +140,37 @@
 
         /* 移动端 Hero 适配 */
         @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 10px;
+            }
+            .nav-links {
+                gap: 8px;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+                padding: 0 5px;
+                justify-content: flex-start;
+                width: 100%;
+                -webkit-overflow-scrolling: touch;
+            }
+            .nav-links::-webkit-scrollbar { display: none; }
+            .nav-links li { flex-shrink: 0; }
+            .nav-links a {
+                font-size: clamp(10px, 3vw, 14px);
+                white-space: nowrap;
+                padding: 8px 3px;
+                letter-spacing: 0.3px;
+                display: block;
+            }
+            .nav-links a[href*="antiipa"] { letter-spacing: 0; font-size: clamp(9px, 2.8vw, 12px); }
+            .nav-dragon { width: 32px; height: 32px; }
+            .nav-dragon-left { margin-right: 6px; }
+            .nav-dragon-right { margin-left: 6px; }
+            .nav-skull { width: 40px; height: 40px; }
+            .nav-skull-left { margin-right: 8px; }
+            .nav-skull-right { margin-left: 8px; }
 
-                .nav-container 
             .hero-logo-img {
                 width: 80%;
                 max-width: 360px;
@@ -624,7 +653,33 @@
         @media (max-width: 480px) {
             .netease-player { height: 480px !important; }
         }
-</style>
+
+        /* 桌面端龙动画优化 - 更大更明显 */
+        @media (min-width: 769px) {
+            @keyframes dragonFlashDesktop {
+                0% { transform: translate(-50%, -50%) scale(0.2); opacity: 0; }
+                20% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+                50% { transform: translate(-50%, -50%) scale(1.3); opacity: 1; }
+                80% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+                100% { transform: translate(-50%, -50%) scale(0.2); opacity: 0; }
+            }
+
+            .dragon-clone.animate {
+                animation: dragonFlashDesktop 1.2s ease-out forwards;
+            }
+
+            @keyframes starExpandDesktop {
+                0% { transform: translate(-50%, -50%) scale(0) rotate(0deg); opacity: 0; }
+                30% { opacity: 1; }
+                100% { transform: translate(-50%, -50%) scale(4) rotate(180deg); opacity: 0; }
+            }
+
+            .dragon-star-ring {
+                animation: starExpandDesktop 1.2s ease-out forwards;
+            }
+        }
+        
+        </style>
 </head>
 <body>
     <nav class="navbar" id="navbar">

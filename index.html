@@ -1157,16 +1157,7 @@
     .merch-img {
         background: linear-gradient(90deg, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%);
         background-size: 200% 100%;
-        animation: shimmer 1.5s ease-in-out 3;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }
-
-    .merch-img.loaded,
-    .merch-img[complete="true"] {
-        animation: none;
-        background: transparent;
-        opacity: 1;
+        animation: shimmer 1.5s infinite;
     }
 
     .merch-img.loaded,
@@ -1529,7 +1520,7 @@
                 <div class="merch-track">
 <div class="merch-item reveal dual-img" data-img1="./image/merchs/Anti-teeb1.png" data-img2="./image/merchs/Anti-teeb2.png" data-name="Anti-" data-category="Tee" data-price="$25.9" onclick="openMerchPopup(this)">
                         <div class="merch-img-wrap">
-                            <img loading="eager" decoding="async" src="./image/merchs/Anti-teeb1.png" alt="Anti-" class="merch-img" onerror="this.style.opacity='0.5'; this.parentElement.style.background='#222';">
+                            <img loading="lazy" decoding="async" src="./image/merchs/Anti-teeb1.png" alt="Anti-" class="merch-img" onerror="this.style.opacity='0.5'; this.parentElement.style.background='#222';">
                             <img loading="lazy" decoding="async" src="./image/merchs/Anti-teeb2.png" alt="Anti- Back" class="merch-img-hover" onerror="this.style.display='none';">
                         </div>
                         <div class="merch-info">
@@ -1540,7 +1531,7 @@
                     </div>
 <div class="merch-item reveal" data-img1="./image/merchs/DevilSukll-teeb1.png" data-img2="" data-name="Devil Skull" data-category="Tee" data-price="$22.9" onclick="openMerchPopup(this)">
                         <div class="merch-img-wrap">
-                            <img loading="eager" decoding="async" src="./image/merchs/DevilSukll-teeb1.png" alt="Devil Skull" class="merch-img" onerror="this.style.opacity='0.5'; this.parentElement.style.background='#222';">
+                            <img loading="lazy" decoding="async" src="./image/merchs/DevilSukll-teeb1.png" alt="Devil Skull" class="merch-img" onerror="this.style.opacity='0.5'; this.parentElement.style.background='#222';">
 
                         </div>
                         <div class="merch-info">
@@ -1551,7 +1542,7 @@
                     </div>
 <div class="merch-item reveal dual-img" data-img1="./image/merchs/WNTT-tee1.png" data-img2="./image/merchs/WNTT-tee2.png" data-name="We Need The Truth" data-category="Tee" data-price="$25.9" onclick="openMerchPopup(this)">
                         <div class="merch-img-wrap">
-                            <img loading="eager" decoding="async" src="./image/merchs/WNTT-tee1.png" alt="We Need The Truth" class="merch-img" onerror="this.style.opacity='0.5'; this.parentElement.style.background='#222';">
+                            <img loading="lazy" decoding="async" src="./image/merchs/WNTT-tee1.png" alt="We Need The Truth" class="merch-img" onerror="this.style.opacity='0.5'; this.parentElement.style.background='#222';">
                             <img loading="lazy" decoding="async" src="./image/merchs/WNTT-tee2.png" alt="We Need The Truth Back" class="merch-img-hover" onerror="this.style.display='none';">
                         </div>
                         <div class="merch-info">

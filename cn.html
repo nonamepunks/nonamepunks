@@ -415,7 +415,7 @@
 
         risp-edges; }
         .dragon-clone { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0); filter: grayscale(0%) brightness(3) drop-shadow(0 0 60px #DC2626) drop-shadow(0 0 120px rgba(220,38,38,0.9)); z-index: 99999; pointer-events: none; opacity: 0; background-repeat: no-repeat; background-position: center; will-change: transform, opacity; }
-        .dragon-clone.animate { animation: dragonFlash 1.2s ease-out forwards; }
+        
         @keyframes dragonFlash { 0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; } 20% { transform: translate(-50%, -50%) scale(1.0); opacity: 1; } 50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; } 80% { transform: translate(-50%, -50%) scale(1.0); opacity: 1; } 100% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; } }
         .dragon-star-ring { position: fixed; top: 50%; left: 50%; width: 60vmin; height: 60vmin; background: rgba(220,38,38,0.9); clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); transform: translate(-50%, -50%) scale(0) rotate(0deg); z-index: 99998; animation: starExpand 1.2s ease-out forwards; will-change: transform, opacity; }
         @keyframes starExpand { 0% { transform: translate(-50%, -50%) scale(0) rotate(0deg); opacity: 0; } 30% { opacity: 1; } 100% { transform: translate(-50%, -50%) scale(3) rotate(180deg); opacity: 0; } }
@@ -598,8 +598,12 @@
             .merch-popup-next { right: -50px; }
 
             /* 龙动画 */
+            
+        
+
+            /* 龙动画 */
             .dragon-clone.animate { animation: dragonFlash 1.2s ease-out forwards; }
-        }
+            .dragon-star-ring { animation: starExpand 1.2s ease-out forwards; }}
 
         /* 小屏手机 (max-width: 480px) */
         @media (max-width: 480px) {

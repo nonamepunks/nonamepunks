@@ -673,6 +673,608 @@
 
 
 
+
+        /* ===== NONAMEFEST BANNER 样式 ===== */
+        .nonamefest-banner-wrapper {
+            width: 100%;
+            background: url('./image/blackbg.webp') center/cover no-repeat;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nonamefest-banner {
+            width: 100%;
+            max-width: 1280px;
+            height: 672px;
+            margin: 0 auto;
+            background: url('./image/blackbg.webp') center/cover no-repeat;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 年份切换 - 顶部书签层叠 */
+        .year-tabs {
+            position: absolute;
+            top: 20px;
+            left: 40px;
+            right: 40px;
+            height: 50px;
+            display: flex;
+            align-items: flex-end;
+            z-index: 100;
+        }
+
+        .year-tab {
+            position: relative;
+            padding: 12px 24px;
+            margin-right: -15px;
+            background: #1a1a1a;
+            border: 2px solid #333;
+            color: #666;
+            font-size: 14px;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            transform: skewX(-10deg);
+            box-shadow: -5px 5px 15px rgba(0,0,0,0.5);
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', 'Microsoft YaHei', sans-serif;
+        }
+
+        .year-tab span {
+            display: block;
+            transform: skewX(10deg);
+        }
+
+        .year-tab .year-num {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .year-tab .year-city {
+            font-size: 11px;
+            opacity: 0.7;
+        }
+
+        /* 层叠效果 */
+        .year-tab:nth-child(1) { z-index: 5; }
+        .year-tab:nth-child(2) { z-index: 4; }
+        .year-tab:nth-child(3) { z-index: 3; }
+        .year-tab:nth-child(4) { z-index: 2; }
+        .year-tab:nth-child(5) { z-index: 1; }
+
+        /* 选中状态 - CN风格红色 */
+        .year-tab.active {
+            background: var(--logo-red);
+            border-color: var(--logo-red);
+            color: #fff;
+            z-index: 10 !important;
+            transform: skewX(-10deg) translateY(-5px);
+            box-shadow: 0 10px 30px rgba(220, 38, 38, 0.4);
+        }
+
+        .year-tab:hover:not(.active) {
+            background: #2a2a2a;
+            color: #999;
+        }
+
+        /* 内容区域 */
+        .fest-content {
+            position: absolute;
+            top: 90px;
+            left: 40px;
+            right: 40px;
+            bottom: 40px;
+            display: flex;
+            gap: 20px;
+        }
+
+        /* 左侧艺人区域 */
+        .artists-section {
+            width: 400px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* 艺人网格 - 2列3排 */
+        .artists-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 150px);
+            grid-template-rows: repeat(3, 150px);
+            gap: 20px;
+        }
+
+        /* 艺人卡片 */
+        .artist-card {
+            width: 150px;
+            height: 150px;
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            border: 2px solid #333;
+            transition: all 0.3s ease;
+            background: #111;
+        }
+
+        .artist-card:hover {
+            border-color: var(--logo-red);
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(220, 38, 38, 0.3);
+        }
+
+        .artist-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* 双图轮播 */
+        .artist-card.dual-img .img-a,
+        .artist-card.dual-img .img-b {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transition: opacity 0.5s ease;
+        }
+
+        .artist-card.dual-img .img-b {
+            opacity: 0;
+        }
+
+        .artist-card.dual-img:hover .img-a {
+            opacity: 0;
+        }
+
+        .artist-card.dual-img:hover .img-b {
+            opacity: 1;
+        }
+
+        /* 右箭头按钮 */
+        .next-column-btn {
+            width: 50px;
+            height: 150px;
+            background: rgba(26, 26, 26, 0.8);
+            border: 2px dashed #444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .next-column-btn:hover {
+            border-color: var(--logo-red);
+            color: var(--logo-red);
+            background: rgba(42, 42, 42, 0.9);
+        }
+
+        .next-column-btn.hidden {
+            display: none;
+        }
+
+        /* 右侧主海报 */
+        .poster-section {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .poster-container {
+            width: 560px;
+            height: 560px;
+            position: relative;
+            border: 3px solid #333;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+        }
+
+        .poster-container.portrait {
+            background: url('./image/nonamefest/2020bg.webp') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .poster-container.portrait .main-poster {
+            width: 400px;
+            height: 560px;
+            object-fit: cover;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .poster-container.square .main-poster {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 第二海报 */
+        .second-poster {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            cursor: pointer;
+            z-index: 50;
+        }
+
+        .second-poster.show {
+            opacity: 1;
+        }
+
+        .second-poster img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .close-second {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 35px;
+            height: 35px;
+            background: var(--logo-red);
+            color: #fff;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .second-poster.show .close-second {
+            opacity: 1;
+        }
+
+        /* 票务层 */
+        .ticket-layer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 60%, transparent 100%);
+            padding: 30px 25px 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            z-index: 100;
+            pointer-events: none;
+        }
+
+        .ticket-layer .ticket-btn {
+            pointer-events: auto;
+        }
+
+        /* CN风格按钮 */
+        .ticket-btn {
+            padding: 15px 35px;
+            font-size: 16px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            border: 3px solid var(--logo-red);
+            background: rgba(0,0,0,0.5);
+            color: var(--white);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 0 30px rgba(220, 38, 38, 0.4);
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', 'Microsoft YaHei', sans-serif;
+        }
+
+        .ticket-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--logo-red);
+            transition: left 0.2s steps(5);
+            z-index: -1;
+        }
+
+        .ticket-btn:hover::before {
+            left: 0;
+        }
+
+        .ticket-btn:hover {
+            color: var(--white);
+            transform: skewX(-5deg);
+            box-shadow: 0 0 50px var(--logo-red), 0 0 80px rgba(220, 38, 38, 0.6);
+            text-shadow: -1px -1px 0 rgba(0,0,0,0.5), 1px -1px 0 rgba(0,0,0,0.5), -1px 1px 0 rgba(0,0,0,0.5), 1px 1px 0 rgba(0,0,0,0.5), 0 0 15px var(--white);
+            border-color: var(--logo-red);
+        }
+
+        .ticket-btn.disabled {
+            border-color: #555;
+            color: #666;
+            cursor: not-allowed;
+            pointer-events: none;
+            box-shadow: none;
+        }
+
+        .ticket-btn.disabled::before {
+            display: none;
+        }
+
+        /* ===== 响应式适配 - 保持左右布局 ===== */
+        /* 平板端 (768px - 1200px) - 保持左右布局，调整尺寸 */
+        @media (max-width: 1200px) {
+            .nonamefest-banner {
+                height: auto;
+                min-height: 600px;
+            }
+
+            .year-tabs {
+                padding: 15px 20px 0;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .year-tab {
+                padding: 10px 18px;
+                margin-right: -10px;
+            }
+
+            .year-tab .year-num {
+                font-size: 16px;
+            }
+
+            .fest-content {
+                top: 80px;
+                left: 20px;
+                right: 20px;
+                bottom: 20px;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .artists-section {
+                width: auto;
+                flex: 0 0 auto;
+            }
+
+            .artists-grid {
+                grid-template-columns: repeat(2, 120px);
+                grid-template-rows: repeat(3, 120px);
+                gap: 10px;
+            }
+
+            .artist-card {
+                width: 120px;
+                height: 120px;
+            }
+
+            .next-column-btn {
+                width: 35px;
+                height: 120px;
+                font-size: 24px;
+            }
+
+            .poster-container {
+                width: 400px;
+                height: 400px;
+            }
+
+            .poster-container.portrait .main-poster {
+                width: 280px;
+                height: 400px;
+            }
+        }
+
+        /* 手机端 (480px - 767px) - 保持左右布局 */
+        @media (max-width: 767px) {
+            .nonamefest-banner {
+                height: auto;
+                min-height: 500px;
+            }
+
+            .year-tabs {
+                padding: 10px 10px 0;
+                height: auto;
+                gap: 3px;
+            }
+
+            .year-tab {
+                padding: 6px 10px;
+                margin-right: -5px;
+                font-size: 11px;
+            }
+
+            .year-tab .year-num {
+                font-size: 13px;
+            }
+
+            .year-tab .year-city {
+                font-size: 8px;
+            }
+
+            .fest-content {
+                top: 60px;
+                left: 10px;
+                right: 10px;
+                bottom: 15px;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .artists-section {
+                width: auto;
+                flex: 0 0 auto;
+                flex-direction: row;
+                gap: 8px;
+            }
+
+            .artists-grid {
+                grid-template-columns: repeat(2, 90px);
+                grid-template-rows: repeat(3, 90px);
+                gap: 6px;
+            }
+
+            .artist-card {
+                width: 90px;
+                height: 90px;
+            }
+
+            .next-column-btn {
+                width: 30px;
+                height: 90px;
+                font-size: 18px;
+            }
+
+            .poster-section {
+                flex: 0 0 auto;
+            }
+
+            .poster-container {
+                width: 280px;
+                height: 280px;
+            }
+
+            .poster-container.portrait .main-poster {
+                width: 200px;
+                height: 280px;
+            }
+
+            .ticket-layer {
+                padding: 15px 10px 10px;
+            }
+
+            .ticket-btn {
+                padding: 10px 20px;
+                font-size: 12px;
+                letter-spacing: 2px;
+            }
+        }
+
+        /* 小屏手机 (320px - 479px) - 保持左右布局 */
+        @media (max-width: 479px) {
+            .nonamefest-banner {
+                min-height: 420px;
+            }
+
+            .year-tabs {
+                padding: 8px 5px 0;
+            }
+
+            .year-tab {
+                padding: 5px 8px;
+                margin-right: -3px;
+                font-size: 10px;
+            }
+
+            .year-tab .year-num {
+                font-size: 11px;
+            }
+
+            .fest-content {
+                top: 50px;
+                left: 5px;
+                right: 5px;
+                bottom: 10px;
+                flex-direction: row;
+                gap: 8px;
+            }
+
+            .artists-grid {
+                grid-template-columns: repeat(2, 75px);
+                grid-template-rows: repeat(3, 75px);
+                gap: 5px;
+            }
+
+            .artist-card {
+                width: 75px;
+                height: 75px;
+            }
+
+            .next-column-btn {
+                width: 25px;
+                height: 75px;
+                font-size: 14px;
+            }
+
+            .poster-container {
+                width: 220px;
+                height: 220px;
+            }
+
+            .poster-container.portrait .main-poster {
+                width: 160px;
+                height: 220px;
+            }
+
+            .ticket-btn {
+                padding: 8px 15px;
+                font-size: 11px;
+            }
+        }
+
+        /* 超小屏手机 (< 320px) - 保持左右布局 */
+        @media (max-width: 319px) {
+            .nonamefest-banner {
+                min-height: 380px;
+            }
+
+            .fest-content {
+                flex-direction: row;
+                gap: 5px;
+            }
+
+            .artists-grid {
+                grid-template-columns: repeat(2, 65px);
+                grid-template-rows: repeat(3, 65px);
+                gap: 4px;
+            }
+
+            .artist-card {
+                width: 65px;
+                height: 65px;
+            }
+
+            .next-column-btn {
+                width: 20px;
+                height: 65px;
+                font-size: 12px;
+            }
+
+            .poster-container {
+                width: 180px;
+                height: 180px;
+            }
+
+            .poster-container.portrait .main-poster {
+                width: 130px;
+                height: 180px;
+            }
+        }
+
 </style>
 </head>
 <body>
@@ -737,7 +1339,6 @@
     </section>
 
     <div class="silver-line"></div>
-
     <section class="banner-section" id="banner-nonamefest">
         <div class="banner reveal">
             <img loading="lazy" src="./image/nonamefestbanner.webp" alt="NONAMEFEST Banner" style="width: 100%; height: auto; display: block;">
@@ -751,19 +1352,57 @@
         </div>
     </section>
 
-    <div class="silver-line"></div>
-
     <section class="banner-section" id="banner2">
-        <div class="banner reveal">
-            <img loading="lazy" src="./image/banner2.webp" alt="NONAMEFEST">
-            <div class="banner-dark-effect">
-                <div class="banner-cinematic"></div>
-                <div class="banner-grain"></div>
-                <div class="banner-scanlines-dark"></div>
-                <div class="banner-glow"></div>
-                <div class="banner-border-glow"></div>
+        <div class="banner reveal nonamefest-banner-wrapper">
+            <div class="nonamefest-banner" id="nonamefestBanner">
+                <!-- 年份切换 -->
+                <div class="year-tabs">
+                    <div class="year-tab" data-year="2020">
+                        <span class="year-num">2020</span>
+                        <span class="year-city">XI'AN</span>
+                    </div>
+                    <div class="year-tab" data-year="2023">
+                        <span class="year-num">2023</span>
+                        <span class="year-city">XI'AN</span>
+                    </div>
+                    <div class="year-tab" data-year="2024">
+                        <span class="year-num">2024</span>
+                        <span class="year-city">XI'AN & HK</span>
+                    </div>
+                    <div class="year-tab" data-year="2025">
+                        <span class="year-num">2025</span>
+                        <span class="year-city">HK</span>
+                    </div>
+                    <div class="year-tab active" data-year="2026">
+                        <span class="year-num">2026</span>
+                        <span class="year-city">TBA</span>
+                    </div>
+                </div>
+
+                <!-- 内容区域 -->
+                <div class="fest-content">
+                    <!-- 左侧艺人网格 -->
+                    <div class="artists-section">
+                        <div class="artists-grid" id="artistsGrid"></div>
+                        <!-- 右箭头 - 用于滚动下一组 -->
+                        <div class="next-column-btn hidden" id="nextColumnBtn" onclick="nextColumn()">&#10095;</div>
+                    </div>
+
+                    <!-- 右侧主海报 -->
+                    <div class="poster-section">
+                        <div class="poster-container square" id="posterContainer">
+                            <img src="./image/nonamefest/2026p.webp" class="main-poster" id="mainPoster" alt="Main Poster">
+                            <div class="second-poster" id="secondPoster">
+                                <img src="" alt="Second Poster">
+                                <button class="close-second" onclick="closeSecondPoster()">&#215;</button>
+                            </div>
+                            <div class="ticket-layer" id="ticketLayer" style="display: none;">
+                                <button class="ticket-btn disabled" id="ticketBtn">立即購票 TICKETS</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <a href="#" class="banner-btn banner-btn-right">即將開啟</a>
         </div>
     </section>
 
@@ -1996,5 +2635,359 @@ document.addEventListener('keydown', (e) => {
         </div>
     </div>
 </div>
+
+    <script>
+        // ===== NONAMEFEST BANNER 功能 =====
+        const festData = {
+            2020: {
+                city: "XI'AN",
+                mainPoster: './image/nonamefest/2020p.webp',
+                secondPoster: './image/nonamefest/2020p2.webp',
+                bgPoster: './image/nonamefest/2020bg.webp',
+                portrait: false,
+                isLatest: false,
+                currentColumn: 0,
+                artists: [
+                    { nameEn: 'BONELESS', nameCn: '', name: 'BONELESS', img: './image/nonamefest/2020-BONELESS.webp' },
+                    { nameEn: 'DJ FEI', nameCn: '', name: 'DJ FEI', img: './image/nonamefest/2020-DJ-FEI.webp' },
+                    { nameEn: 'DJ SHENYUE', nameCn: '', name: 'DJ SHENYUE', img: './image/nonamefest/2020-DJ-SHENYUE.webp' },
+                    { nameEn: 'DUZI & MOENY', nameCn: '', name: 'DUZI & MOENY', img: './image/nonamefest/2020-DUZI&MOENY.webp' },
+                    { nameEn: 'GUMBLEED', nameCn: '', name: 'GUMBLEED', img: './image/nonamefest/2020-GUMBLEED.webp' },
+                    { nameEn: 'HU NING', nameCn: '胡寧', name: 'HU NING胡寧', img: './image/nonamefest/2020-HUNING.webp' },
+                    { nameEn: 'JOYOLD', nameCn: '', name: 'JOYOLD', img: './image/nonamefest/2020-JOYOLD.webp' },
+                    { nameEn: "LARRY'S PIZZA", nameCn: '', name: "LARRY'S PIZZA", img: './image/nonamefest/2020-LARRYSPizza.webp' },
+                    { nameEn: 'LI CHENGLONG', nameCn: '李程龍', name: 'LI CHENGLONG李程龍', img: './image/nonamefest/2020-LICHENGLONG.webp' },
+                    { nameEn: 'LITHIUM', nameCn: '鋰', name: 'LITHIUM鋰', img: './image/nonamefest/2020-lithium.webp' },
+                    { nameEn: 'MONKEY LEGION', nameCn: '猴子軍團', name: 'MONKEY LEGION猴子軍團', img: './image/nonamefest/2020-MONKEY.webp' },
+                    { nameEn: 'P-TWON', nameCn: '皮痛', name: 'P-TWON皮痛', img: './image/nonamefest/2020-P-TOWN.webp' },
+                    { nameEn: 'SUBS', nameCn: '殺不死', name: 'SUBS殺不死', img: './image/nonamefest/2020-SUBS.webp' },
+                    { nameEn: 'THE NONAME', nameCn: '無名', name: 'THE NONAME無名', img: './image/nonamefest/2020-THENONAME.webp' }
+                ]
+            },
+            2023: {
+                city: "XI'AN",
+                mainPoster: './image/nonamefest/2023p.webp',
+                secondPoster: null,
+                portrait: false,
+                isLatest: false,
+                currentColumn: 0,
+                artists: [
+                    { nameEn: 'ALEX', nameCn: '', name: 'ALEX', img: './image/nonamefest/2023-ALEX.webp' },
+                    { nameEn: 'BIANTUI', nameCn: '鞭腿', name: 'BIANTUI鞭腿', img: './image/nonamefest/2023-BIANTUI.webp' },
+                    { nameEn: 'SHXXT ME', nameCn: '', name: 'SHXXT ME', img: './image/nonamefest/2023-SHXXTME.webp' },
+                    { nameEn: 'SMELTER', nameCn: '土法煉鋼', name: 'SMELTER土法煉鋼', img: './image/nonamefest/2023-SMELTER.webp' },
+                    { nameEn: 'SUCKER', nameCn: '', name: 'SUCKER', img: './image/nonamefest/2023-SUCKER.webp' },
+                    { nameEn: 'THE PERFECT HOLIDAY', nameCn: '完美假日', name: 'THE PERFECT HOLIDAY完美假日', img: './image/nonamefest/2023-WMJR.webp' },
+                    { nameEn: 'THE NONAME', nameCn: '無名', name: 'THE NONAME無名', img: './image/nonamefest/2023-THENONAME.webp' }
+                ]
+            },
+            2024: {
+                city: "XI'AN & HK",
+                mainPoster: './image/nonamefest/2024p.webp',
+                secondPoster: null,
+                portrait: false,
+                isLatest: false,
+                currentColumn: 0,
+                artists: [
+                    { nameEn: 'ACIDEZ', nameCn: '', suffix: '(MX)', name: 'ACIDEZ (MX)', img: ['./image/nonamefest/2024-ACIDEZ.webp', './image/nonamefest/2024-ACIDEZ1.webp'], dual: true },
+                    { nameEn: 'ALEX', nameCn: '', name: 'ALEX', img: './image/nonamefest/2024-ALEX.webp' },
+                    { nameEn: 'CATSCARE', nameCn: '', suffix: '(HK)', name: 'CATSCARE (HK)', img: './image/nonamefest/2024-CATSCARE.webp' },
+                    { nameEn: 'SHXXT ME', nameCn: '', name: 'SHXXT ME', img: './image/nonamefest/2024-SHXXTME.webp' },
+                    { nameEn: 'SPEED BALL', nameCn: '', suffix: '(AU)', name: 'SPEED BALL (AU)', img: ['./image/nonamefest/2024-SPEEDBALL.webp', './image/nonamefest/2024-SPEEDBALL1.webp'], dual: true },
+                    { nameEn: 'THE BROKEN FLOWERS', nameCn: '碎紙花', suffix: '(TW)', name: 'THE BROKEN FLOWERS碎紙花 (TW)', img: './image/nonamefest/2024-TBFTW.webp' },
+                    { nameEn: 'THE NONAME', nameCn: '無名', name: 'THE NONAME無名', img: ['./image/nonamefest/2024-THENONAME.webp', './image/nonamefest/2024-THENONAME1.webp'], dual: true }
+                ]
+            },
+            2025: {
+                city: 'HK',
+                mainPoster: './image/nonamefest/2025p.webp',
+                secondPoster: null,
+                portrait: false,
+                isLatest: false,
+                currentColumn: 0,
+                artists: [
+                    { nameEn: 'FIST BUMP', nameCn: '', suffix: '(HK)', name: 'FIST BUMP (HK)', img: './image/nonamefest/2025-FISTBUMP.webp' },
+                    { nameEn: 'HOUSEPLANTS', nameCn: '', suffix: '(HK)', name: 'HOUSEPLANTS (HK)', img: './image/nonamefest/2025-HOUSEPLANTS.webp' },
+                    { nameEn: 'NON SERVIUM', nameCn: '', suffix: '(ES)', name: 'NON SERVIUM (ES)', img: './image/nonamefest/2025-nonservium.webp' },
+                    { nameEn: 'THE MONGOCOLS', nameCn: '', suffix: '(HK)', name: 'THE MONGOCOLS (HK)', img: './image/nonamefest/2025-THEMONGCOCKS.webp' },
+                    { nameEn: 'WORK TYLER & THE PEASANTS REVOLT', nameCn: '', suffix: '(HK)', name: 'WORK TYLER & THE PEASANTS REVOLT (HK)', img: './image/nonamefest/2025-WORKTYLER.webp' },
+                    { nameEn: 'THE NONAME', nameCn: '無名', name: 'THE NONAME無名', img: './image/nonamefest/2025-THENONAME.webp' }
+                ]
+            },
+            2026: {
+                city: 'TBA',
+                mainPoster: './image/nonamefest/2026p.webp',
+                secondPoster: null,
+                portrait: false,
+                isLatest: true,
+                currentColumn: 0,
+                artists: [
+                    { nameEn: 'TBA', nameCn: '', name: 'TBA', img: './image/nonamefest/zhanwei.webp' },
+                    { nameEn: 'TBA', nameCn: '', name: 'TBA', img: './image/nonamefest/zhanwei.webp' },
+                    { nameEn: 'TBA', nameCn: '', name: 'TBA', img: './image/nonamefest/zhanwei.webp' },
+                    { nameEn: 'TBA', nameCn: '', name: 'TBA', img: './image/nonamefest/zhanwei.webp' },
+                    { nameEn: 'TBA', nameCn: '', name: 'TBA', img: './image/nonamefest/zhanwei.webp' },
+                    { nameEn: 'TBA', nameCn: '', name: 'TBA', img: './image/nonamefest/zhanwei.webp' }
+                ]
+            }
+        };
+
+        const zhanweiImg = './image/nonamefest/zhanwei.webp';
+        let currentYear = '2026';
+        let currentArtistImages = [];
+        let currentArtistImageIndex = 0;
+        let isShowingArtist = false;
+        let posterTimeout = null;
+        let currentArtistsList = [];
+
+        function initNonamefest() {
+            initTabs();
+            loadYear('2026');
+        }
+
+        function initTabs() {
+            document.querySelectorAll('#banner2 .year-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    switchYear(tab.dataset.year);
+                });
+            });
+        }
+
+        function switchYear(year) {
+            currentYear = year;
+            document.querySelectorAll('#banner2 .year-tab').forEach(tab => {
+                tab.classList.toggle('active', tab.dataset.year === year);
+            });
+            loadYear(year);
+        }
+
+        function loadYear(year) {
+            const data = festData[year];
+            if (!data) return;
+            data.currentColumn = 0;
+            resetToMainPoster();
+            loadPoster(data);
+            loadArtists(data);
+            loadTicket(data);
+        }
+
+        function loadPoster(data) {
+            const container = document.getElementById('posterContainer');
+            const mainPoster = document.getElementById('mainPoster');
+            const secondPoster = document.getElementById('secondPoster');
+
+            container.className = 'poster-container ' + (data.portrait ? 'portrait' : 'square');
+            mainPoster.src = data.mainPoster;
+            mainPoster.onerror = () => { mainPoster.src = zhanweiImg; };
+
+            if (data.portrait) {
+                mainPoster.style.width = '400px';
+                mainPoster.style.height = '560px';
+                mainPoster.style.objectFit = 'cover';
+            } else {
+                mainPoster.style.width = '100%';
+                mainPoster.style.height = '100%';
+            }
+
+            if (data.secondPoster) {
+                secondPoster.querySelector('img').src = data.secondPoster;
+                mainPoster.style.cursor = 'pointer';
+                mainPoster.onclick = () => showSecondPoster();
+            } else {
+                secondPoster.querySelector('img').src = '';
+                mainPoster.style.cursor = 'default';
+                mainPoster.onclick = () => {
+                    if (isShowingArtist && currentArtistImages.length > 1) {
+                        switchArtistImageOnPoster();
+                    }
+                };
+            }
+            closeSecondPoster();
+        }
+
+        function showSecondPoster() {
+            document.getElementById('secondPoster').classList.add('show');
+        }
+
+        function closeSecondPoster() {
+            document.getElementById('secondPoster').classList.remove('show');
+        }
+
+        function loadArtists(data) {
+            const grid = document.getElementById('artistsGrid');
+            const nextBtn = document.getElementById('nextColumnBtn');
+            grid.innerHTML = '';
+
+            const artists = data.artists;
+            const itemsPerColumn = 6;
+            const column = data.currentColumn || 0;
+            const startIndex = column * itemsPerColumn;
+            const displayArtists = artists.slice(startIndex, startIndex + itemsPerColumn);
+
+            currentArtistsList = displayArtists;
+
+            displayArtists.forEach((artist, index) => {
+                const card = createArtistCard(artist, index);
+                grid.appendChild(card);
+            });
+
+            if (displayArtists.length < itemsPerColumn) {
+                for (let i = displayArtists.length; i < itemsPerColumn; i++) {
+                    const empty = document.createElement('div');
+                    empty.style.visibility = 'hidden';
+                    grid.appendChild(empty);
+                }
+            }
+
+            const totalColumns = Math.ceil(artists.length / itemsPerColumn);
+            const hasMultipleColumns = totalColumns > 1;
+            nextBtn.classList.toggle('hidden', !hasMultipleColumns);
+        }
+
+        function createArtistCard(artist, index) {
+            const card = document.createElement('div');
+            card.className = 'artist-card' + (artist.dual ? ' dual-img' : '');
+
+            let imgHtml = '';
+            if (artist.dual && Array.isArray(artist.img)) {
+                imgHtml = `
+                    <img src="${artist.img[0]}" class="img-a" onerror="this.onerror=null; this.src='./image/nonamefest/zhanwei.webp'">
+                    <img src="${artist.img[1]}" class="img-b" onerror="this.onerror=null; this.src='./image/nonamefest/zhanwei.webp'">
+                `;
+            } else {
+                const imgSrc = typeof artist.img === 'string' ? artist.img : artist.img[0];
+                imgHtml = `<img src="${imgSrc}" onerror="this.onerror=null; this.src='./image/nonamefest/zhanwei.webp'">`;
+            }
+
+            card.innerHTML = imgHtml;
+            card.onclick = () => {
+                showArtistOnPoster(artist, true);
+            };
+
+            return card;
+        }
+
+        function showArtistOnPoster(artist, fixed) {
+            const mainPoster = document.getElementById('mainPoster');
+            const ticketLayer = document.getElementById('ticketLayer');
+            const data = festData[currentYear];
+
+            if (posterTimeout) {
+                clearTimeout(posterTimeout);
+                posterTimeout = null;
+            }
+
+            if (artist.dual && Array.isArray(artist.img)) {
+                currentArtistImages = artist.img;
+            } else {
+                const imgSrc = typeof artist.img === 'string' ? artist.img : artist.img[0];
+                currentArtistImages = [imgSrc];
+            }
+
+            currentArtistImageIndex = 0;
+            isShowingArtist = fixed;
+
+            if (ticketLayer && data.isLatest) {
+                ticketLayer.style.display = 'none';
+            }
+
+            mainPoster.src = currentArtistImages[0];
+            mainPoster.style.opacity = '1';
+
+            if (fixed) {
+                if (currentArtistImages.length > 1) {
+                    posterTimeout = setTimeout(() => {
+                        currentArtistImageIndex = 1;
+                        mainPoster.src = currentArtistImages[1];
+                        posterTimeout = setTimeout(() => {
+                            resetToMainPoster();
+                        }, 2500);
+                    }, 2500);
+                } else {
+                    posterTimeout = setTimeout(() => {
+                        resetToMainPoster();
+                    }, 5000);
+                }
+            }
+        }
+
+        function switchArtistImageOnPoster() {
+            if (!isShowingArtist || currentArtistImages.length <= 1) return;
+            if (posterTimeout) {
+                clearTimeout(posterTimeout);
+            }
+            const mainPoster = document.getElementById('mainPoster');
+            currentArtistImageIndex = (currentArtistImageIndex + 1) % currentArtistImages.length;
+            mainPoster.src = currentArtistImages[currentArtistImageIndex];
+            posterTimeout = setTimeout(() => {
+                resetToMainPoster();
+            }, 5000);
+        }
+
+        function resetToMainPoster() {
+            const data = festData[currentYear];
+            const mainPoster = document.getElementById('mainPoster');
+            const container = document.getElementById('posterContainer');
+            const ticketLayer = document.getElementById('ticketLayer');
+
+            isShowingArtist = false;
+            currentArtistImages = [];
+            currentArtistImageIndex = 0;
+
+            if (posterTimeout) {
+                clearTimeout(posterTimeout);
+                posterTimeout = null;
+            }
+
+            mainPoster.style.opacity = '0';
+            setTimeout(() => {
+                mainPoster.src = data.mainPoster;
+                if (container.classList.contains('portrait')) {
+                    mainPoster.style.width = '400px';
+                    mainPoster.style.height = '560px';
+                    mainPoster.style.objectFit = 'cover';
+                } else {
+                    mainPoster.style.width = '100%';
+                    mainPoster.style.height = '100%';
+                }
+                mainPoster.style.opacity = '1';
+                if (data.isLatest && ticketLayer) {
+                    ticketLayer.style.display = 'flex';
+                }
+            }, 250);
+        }
+
+        function nextColumn() {
+            const data = festData[currentYear];
+            const itemsPerColumn = 6;
+            const maxColumn = Math.ceil(data.artists.length / itemsPerColumn) - 1;
+
+            data.currentColumn = (data.currentColumn || 0) + 1;
+            if (data.currentColumn > maxColumn) {
+                data.currentColumn = 0;
+            }
+            loadArtists(data);
+        }
+
+        function loadTicket(data) {
+            const ticketLayer = document.getElementById('ticketLayer');
+            const ticketBtn = document.getElementById('ticketBtn');
+
+            if (data.isLatest) {
+                ticketLayer.style.display = 'flex';
+                ticketBtn.className = 'ticket-btn disabled';
+                ticketBtn.innerHTML = '立即購票 TICKETS';
+                ticketBtn.onclick = null;
+            } else {
+                ticketLayer.style.display = 'none';
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initNonamefest);
+        } else {
+            initNonamefest();
+        }
+</script>
 </body>
 </html>

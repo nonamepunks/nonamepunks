@@ -1245,7 +1245,44 @@
             }
         }
 
-        </style>
+        
+/* ===== NONAMEFEST BANNER 移动端适配 ===== */
+#banner-nonamefest .banner {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+#banner-nonamefest .banner img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    #banner-nonamefest .banner img {
+        object-fit: contain;
+        object-position: center top;
+    }
+}
+
+@media (orientation: portrait) and (max-width: 768px) {
+    #banner-nonamefest .banner img {
+        object-fit: cover;
+        object-position: center top;
+    }
+}
+/* 横屏移动端适配 */
+@media (orientation: landscape) and (max-width: 896px) {
+    #banner-nonamefest .banner {
+        aspect-ratio: 21/9;
+    }
+    #banner-nonamefest .banner img {
+        object-fit: cover;
+        object-position: center;
+    }
+}
+</style>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
     <!-- 预加载关键资源 -->
@@ -1313,6 +1350,25 @@
     </section>
 
     <div class="silver-line"></div>
+
+    <section class="banner-section" id="banner-nonamefest">
+        <a href="./cn.html#banner-nonamefest" class="banner reveal" style="display: block; cursor: pointer; position: relative; overflow: hidden;">
+            <img loading="lazy" 
+                 src="./image/nonamefestbanner.webp" 
+                 alt="NONAMEFEST" 
+                 style="width: 100%; height: auto; display: block; object-fit: cover; object-position: center;">
+            <div class="banner-dark-effect">
+                <div class="banner-cinematic"></div>
+                <div class="banner-grain"></div>
+                <div class="banner-scanlines-dark"></div>
+                <div class="banner-glow"></div>
+                <div class="banner-border-glow"></div>
+            </div>
+        </a>
+    </section>
+
+    <div class="silver-line"></div>
+
 
     <section class="banner-section" id="banner2">
         <div class="banner reveal">

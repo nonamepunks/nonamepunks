@@ -85,6 +85,15 @@
             opacity: 0;
         }
 
+        .hero-member.slash-reveal {
+            animation: fadeInMember 0.8s ease-out forwards;
+        }
+
+        .hero-member:nth-child(1).slash-reveal { animation-delay: 0.1s; }
+        .hero-member:nth-child(2).slash-reveal { animation-delay: 0.25s; }
+        .hero-member:nth-child(3).slash-reveal { animation-delay: 0.4s; }
+        .hero-member:nth-child(4).slash-reveal { animation-delay: 0.55s; }
+
         .hero-member img { 
             width: 100%; 
             height: 100%; 
@@ -92,37 +101,7 @@
             object-position: center; 
         }
 
-        /* 刀光边框效果 */
-        .hero-member::before,
-        .hero-member::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: rgba(220,38,38,0.8);
-            box-shadow: 
-                0 0 30px rgba(220,38,38,1),
-                0 0 60px rgba(220,38,38,0.8),
-                0 0 90px rgba(220,38,38,0.6),
-                0 0 120px rgba(255,255,255,0.4);
-            z-index: 10;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        .hero-member::before { top: 0; }
-        .hero-member::after { bottom: 0; }
-
-        .hero-member.slash-reveal::before,
-        .hero-member.slash-reveal::after {
-            opacity: 1;
-        }
-
-        .hero-member:nth-child(1).slash-reveal { animation: fadeInMember 0.8s ease-out forwards; animation-delay: 0.1s; }
-        .hero-member:nth-child(2).slash-reveal { animation: fadeInMember 0.8s ease-out forwards; animation-delay: 0.25s; }
-        .hero-member:nth-child(3).slash-reveal { animation: fadeInMember 0.8s ease-out forwards; animation-delay: 0.4s; }
-        .hero-member:nth-child(4).slash-reveal { animation: fadeInMember 0.8s ease-out forwards; animation-delay: 0.55s; }
+        /* 刀光边框效果 - 已移除 */
 
         @keyframes fadeInMember {
             0% { opacity: 0; transform: scale(0.95); }
@@ -187,13 +166,6 @@
             .music-player-embed,
             .netease-player {
                 height: 537px !important;
-                width: 100% !important;
-                max-width: 100% !important;
-            }
-            .music-player-side {
-                width: 100% !important;
-                max-width: 100% !important;
-                padding: 15px !important;
             }
         }
 
@@ -220,8 +192,7 @@
         @media (max-width: 480px) {
             .video-typewriter-container { padding: 3px 6px 0; top: 48%; left: 0.5%; right: 0.5%; width: 99%; min-height: 52%; max-height: 52%; }
             .video-typewriter-text { font-size: clamp(6.5px, 2.6vw, 9px); line-height: 1.0; letter-spacing: 0.5px; }
-            .netease-player { height: 537px !important; width: 100% !important; max-width: 100% !important; }
-            .music-player-side { width: 100% !important; max-width: 100% !important; padding: 10px !important; }
+            .netease-player { height: 537px !important; }
         }
         @media (max-width: 360px) {
             .video-typewriter-container { top: 46%; padding: 2px 4px 0; min-height: 54%; max-height: 54%; }
@@ -573,8 +544,7 @@
         @media (max-width: 480px) {
             .video-typewriter-container { padding: 3px 6px 0; top: 48%; left: 0.5%; right: 0.5%; width: 99%; min-height: 52%; max-height: 52%; }
             .video-typewriter-text { font-size: clamp(6.5px, 2.6vw, 9px); line-height: 1.0; letter-spacing: 0.5px; }
-            .netease-player { height: 537px !important; width: 100% !important; max-width: 100% !important; }
-            .music-player-side { width: 100% !important; max-width: 100% !important; padding: 10px !important; }
+            .netease-player { height: 537px !important; }
         }
 
         /* 其他样式 */

@@ -1247,7 +1247,7 @@
                 transition: none !important;
                 animation: none !important;
             
-        /* 桌面端龙动画优化 - 更大更明显 */
+        /* 桌面端龙动画 - 横屏和竖屏都适用 */
         @media (min-width: 769px) {
             @keyframes dragonFlashDesktop {
                 0% { transform: translate(-50%, -50%) scale(0.2); opacity: 0; }
@@ -1257,22 +1257,28 @@
                 100% { transform: translate(-50%, -50%) scale(0.2); opacity: 0; }
             }
 
-            .dragon-clone.animate {
-                animation: dragonFlashDesktop 1.2s ease-out forwards;
-            }
-
-            /* 桌面端五角星也更大 */
             @keyframes starExpandDesktop {
                 0% { transform: translate(-50%, -50%) scale(0) rotate(0deg); opacity: 0; }
                 30% { opacity: 1; }
                 100% { transform: translate(-50%, -50%) scale(4) rotate(180deg); opacity: 0; }
             }
 
+            .dragon-clone.animate {
+                animation: dragonFlashDesktop 1.2s ease-out forwards !important;
+            }
+
             .dragon-star-ring {
-                animation: starExpandDesktop 1.2s ease-out forwards;
+                animation: starExpandDesktop 1.2s ease-out forwards !important;
             }
         }
-        
+
+        /* 移动端龙动画 */
+        @media (max-width: 768px) {
+            .dragon-clone.animate {
+                animation: dragonFlash 1.2s ease-out forwards;
+            }
+        }
+
         </style>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 

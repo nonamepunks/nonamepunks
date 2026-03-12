@@ -490,11 +490,27 @@
         }
 
         @media (max-width: 1024px) and (min-width: 769px) {
-            .netease-player { height: 537px !important; }
+            .netease-player { 
+                height: 537px !important; 
+                display: block !important;
+                visibility: visible !important;
+            }
         }
 
         @media (max-width: 768px) {
-            .netease-player { height: 480px !important; }
+            .netease-player { 
+                height: 520px !important; 
+                min-height: 520px;
+                display: block !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+            }
+
+            .music-player-side {
+                display: block !important;
+                visibility: visible !important;
+                min-height: 520px;
+            }
         }
 
         /* 桌面端龙动画 - 横屏和竖屏都适用 */
@@ -664,7 +680,19 @@
         @media (max-width: 480px) {
             .video-typewriter-container { padding: 3px 6px 0; top: 48%; left: 0.5%; right: 0.5%; width: 99%; min-height: 52%; max-height: 52%; }
             .video-typewriter-text { font-size: clamp(6.5px, 2.6vw, 9px); line-height: 1.0; letter-spacing: 0.5px; }
-            .netease-player { height: 480px !important; }
+            .netease-player { 
+                height: 520px !important; 
+                min-height: 520px;
+                display: block !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+            }
+
+            .music-player-side {
+                display: block !important;
+                visibility: visible !important;
+                min-height: 520px;
+            }
             
             .merch-info { padding: 12px 8px; }
             .merch-name { font-size: 11px; }
@@ -1262,12 +1290,12 @@
         @media (max-width: 767px) {
             .nonamefest-banner {
                 height: auto;
-                min-height: 380px;
+                min-height: 400px;
             }
 
             .nonamefest-banner-wrapper {
                 height: auto;
-                min-height: 380px;
+                min-height: 400px;
             }
 
             .year-tabs {
@@ -1294,68 +1322,76 @@
             }
 
             .fest-content {
-                top: 50px;
+                top: 55px;
                 left: 10px;
                 right: 10px;
-                bottom: 10px;
+                bottom: 60px;
                 flex-direction: row;
                 flex-wrap: nowrap;
                 justify-content: center;
                 align-items: center;
-                gap: 8px;
+                gap: 10px;
             }
 
             .artists-section {
                 width: auto;
                 flex: 0 0 auto;
                 flex-direction: row;
-                gap: 5px;
+                gap: 8px;
             }
 
             .artists-grid {
-                grid-template-columns: repeat(2, 70px);
-                grid-template-rows: repeat(3, 70px);
-                gap: 4px;
+                grid-template-columns: repeat(2, 75px);
+                grid-template-rows: repeat(3, 75px);
+                gap: 5px;
             }
 
             .artist-card {
-                width: 70px;
-                height: 70px;
+                width: 75px;
+                height: 75px;
             }
 
             .next-column-btn {
-                width: 22px;
-                height: 70px;
-                font-size: 14px;
+                width: 25px;
+                height: 75px;
+                font-size: 16px;
             }
 
             .poster-section {
                 flex: 0 0 auto;
+                position: relative;
             }
 
             .poster-container {
-                width: 200px;
-                height: 200px;
+                width: 220px;
+                height: 220px;
             }
 
             .poster-container.portrait .main-poster {
-                width: 140px;
-                height: 200px;
+                width: 155px;
+                height: 220px;
             }
 
+            /* 修复按钮布局 */
             .ticket-layer {
-                padding: 10px 5px 5px;
-                position: relative;
-                bottom: 0;
-                background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 50%, transparent 100%);
+                position: absolute;
+                bottom: 5px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: auto;
+                padding: 8px 12px;
+                background: rgba(0,0,0,0.8);
+                border-radius: 4px;
+                z-index: 100;
+                pointer-events: none;
             }
 
             .ticket-btn {
-                padding: 6px 12px;
-                font-size: 10px;
+                padding: 6px 14px;
+                font-size: 11px;
                 letter-spacing: 1px;
-                min-width: auto;
                 white-space: nowrap;
+                pointer-events: auto;
             }
         }
 
@@ -1363,12 +1399,12 @@
         @media (max-width: 479px) {
             .nonamefest-banner {
                 height: auto;
-                min-height: 320px;
+                min-height: 340px;
             }
 
             .nonamefest-banner-wrapper {
                 height: auto;
-                min-height: 320px;
+                min-height: 340px;
             }
 
             .year-tabs {
@@ -1390,52 +1426,134 @@
             }
 
             .fest-content {
-                top: 40px;
+                top: 45px;
                 left: 5px;
                 right: 5px;
-                bottom: 8px;
+                bottom: 50px;
                 gap: 6px;
             }
 
             .artists-grid {
-                grid-template-columns: repeat(2, 60px);
-                grid-template-rows: repeat(3, 60px);
-                gap: 3px;
+                grid-template-columns: repeat(2, 65px);
+                grid-template-rows: repeat(3, 65px);
+                gap: 4px;
             }
 
             .artist-card {
-                width: 60px;
-                height: 60px;
+                width: 65px;
+                height: 65px;
             }
 
             .next-column-btn {
-                width: 18px;
-                height: 60px;
-                font-size: 12px;
+                width: 20px;
+                height: 65px;
+                font-size: 14px;
             }
 
             .poster-container {
-                width: 170px;
-                height: 170px;
+                width: 190px;
+                height: 190px;
             }
 
             .poster-container.portrait .main-poster {
-                width: 120px;
-                height: 170px;
+                width: 135px;
+                height: 190px;
             }
 
             .ticket-layer {
-                padding: 8px 4px 4px;
+                position: absolute;
+                bottom: 5px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: auto;
+                padding: 6px 10px;
+                background: rgba(0,0,0,0.8);
+                border-radius: 4px;
             }
 
             .ticket-btn {
-                padding: 5px 10px;
-                font-size: 9px;
+                padding: 5px 12px;
+                font-size: 10px;
                 letter-spacing: 0.5px;
             }
         }
 
         /* 超小屏手机 (< 320px) - 保持左右布局 */
+        @media (max-width: 319px) {
+            .nonamefest-banner {
+                height: auto;
+                min-height: 300px;
+            }
+
+            .nonamefest-banner-wrapper {
+                height: auto;
+                min-height: 300px;
+            }
+
+            .year-tabs {
+                padding: 4px 3px 0;
+                top: 4px;
+                left: 3px;
+                right: 3px;
+            }
+
+            .year-tab {
+                padding: 3px 5px;
+                font-size: 8px;
+            }
+
+            .fest-content {
+                top: 40px;
+                left: 3px;
+                right: 3px;
+                bottom: 45px;
+                gap: 4px;
+            }
+
+            .artists-grid {
+                grid-template-columns: repeat(2, 55px);
+                grid-template-rows: repeat(3, 55px);
+                gap: 3px;
+            }
+
+            .artist-card {
+                width: 55px;
+                height: 55px;
+            }
+
+            .next-column-btn {
+                width: 16px;
+                height: 55px;
+                font-size: 12px;
+            }
+
+            .poster-container {
+                width: 160px;
+                height: 160px;
+            }
+
+            .poster-container.portrait .main-poster {
+                width: 115px;
+                height: 160px;
+            }
+
+            .ticket-layer {
+                position: absolute;
+                bottom: 3px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: auto;
+                padding: 5px 8px;
+                background: rgba(0,0,0,0.8);
+                border-radius: 3px;
+            }
+
+            .ticket-btn {
+                padding: 4px 10px;
+                font-size: 9px;
+            }
+        }
+
         @media (max-width: 319px) {
             .nonamefest-banner {
                 height: auto;

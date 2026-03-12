@@ -150,22 +150,18 @@
             .hero-logo-img {
                 width: 75%;
                 max-width: 320px;
-                
-        }
-            
-        }
+                }
+            }
 
         @media (min-width: 769px) and (orientation: portrait) {
             .hero-logo-img { max-width: 660px; width: 60%; }
-            
-        }
+            }
 
         /* 电脑端竖屏/移动端音乐iframe高度调整 */
         @media (max-width: 1024px) and (min-width: 769px) and (orientation: portrait),
                (max-width: 768px) {
             .music-player-embed,
-            
-        }
+            }
 
         /* 视频打字机效果 */
         .video-typewriter-container { position: absolute; top: 62%; left: 0; right: 0; width: 100%; padding: 40px 60px 0; z-index: 10; text-align: center; display: flex; align-items: flex-start; justify-content: center; overflow: hidden; pointer-events: none; }
@@ -190,8 +186,7 @@
         @media (max-width: 480px) {
             .video-typewriter-container { padding: 3px 6px 0; top: 48%; left: 0.5%; right: 0.5%; width: 99%; min-height: 52%; max-height: 52%; }
             .video-typewriter-text { font-size: clamp(6.5px, 2.6vw, 9px); line-height: 1.0; letter-spacing: 0.5px; }
-            
-        }
+            }
         @media (max-width: 360px) {
             .video-typewriter-container { top: 46%; padding: 2px 4px 0; min-height: 54%; max-height: 54%; }
             .video-typewriter-text { font-size: clamp(6px, 2.8vw, 8px); line-height: 0.98; letter-spacing: 0.5px; }
@@ -248,7 +243,7 @@
         .music-player-side { background: rgba(0,0,0,0.7); border: 2px solid rgba(255,255,255,0.2); padding: 20px; text-align: center; backdrop-filter: blur(10px); transition: all 0.3s; cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
         .music-player-side:hover { border-color: var(--logo-red); box-shadow: 0 0 30px rgba(220, 38, 38, 0.3); }
         .music-player-title { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', 'Microsoft YaHei', sans-serif; font-size: 20px; letter-spacing: 4px; margin-bottom: 15px; color: var(--white); border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 10px; }
-        
+        .music-player-embed { width: 100%; border: none; background: rgba(0,0,0,0.3); }
         .music-center { text-align: center; padding: 20px; }
         .album-cover { width: 420px; height: 420px; background: var(--dark-gray); margin: 0 auto 30px; border: 3px solid var(--logo-red); box-shadow: 0 0 60px rgba(220, 38, 38, 0.6); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; transition: all 0.3s; cursor: pointer; touch-action: manipulation; }
         .album-cover:hover { transform: scale(1.02); box-shadow: 0 0 80px rgba(220, 38, 38, 0.8); }
@@ -324,8 +319,7 @@
             .merch-category { font-size: 10px; margin-bottom: 5px; text-shadow: -1px -1px 0 rgba(0,0,0,0.9), 1px -1px 0 rgba(0,0,0,0.9), -1px 1px 0 rgba(0,0,0,0.9), 1px 1px 0 rgba(0,0,0,0.9); }
             .merch-price { font-size: 14px; letter-spacing: 1px; text-shadow: -1px -1px 0 rgba(0,0,0,0.9), 1px -1px 0 rgba(0,0,0,0.9), -1px 1px 0 rgba(0,0,0,0.9), 1px 1px 0 rgba(0,0,0,0.9); }
             .merch-btn-container { margin-top: 30px; }
-            
-        }
+            }
         @media (max-width: 480px) {
             .merch-item { width: 100%; min-width: auto; }
             .merch-info { padding: 12px 8px; }
@@ -419,19 +413,37 @@
         .tour-btn.sold-out:hover { color: #666; transform: none; text-shadow: none; border-color: #444; }
         .tour-btn.limited { border-color: var(--logo-red); color: var(--logo-red); animation: pulse 1.5s infinite; box-shadow: 0 0 15px rgba(220, 38, 38, 0.3); }
         .tour-btn.limited:hover { color: var(--white); border-color: var(--logo-red); }
-        
+        .btn-music { padding: 18px 45px; font-size: 18px; }
         .silver-line { height: 3px; background: var(--deep-red); position: relative; overflow: hidden; box-shadow: 0 0 15px rgba(127, 29, 29, 0.4); }
 
         /* 响应式 */
         /* QQ音乐播放器样式 */
-
+        .qq-music-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            height: 655px;
+            overflow: hidden;
+        }
+        .qq-music-player {
+            width: 100%;
+            height: 60px;
+            border: none;
+            flex-shrink: 0;
+        }
 
         /* 桌面端 (1025px+) */
-        
+        @media (min-width: 1025px) {
+            .qq-music-list {
+                height: 655px;
+            }
+        }
 
         /* 桌面端竖屏/平板 (768px-1024px) */
         @media (max-width: 1024px) and (min-width: 769px) {
-            
+            .qq-music-list {
+                height: 537px;
+            }
             .qq-music-player.qq-music-hide-mobile {
                 display: none;
             }
@@ -439,7 +451,9 @@
 
         /* 平板/手机 (≤768px) */
         @media (max-width: 768px) {
-            
+            .qq-music-list {
+                height: 537px;
+            }
             .qq-music-player.qq-music-hide-mobile {
                 display: none;
             }
@@ -447,7 +461,9 @@
 
         /* 小屏手机 (≤480px) */
         @media (max-width: 480px) {
-            
+            .qq-music-list {
+                height: 537px;
+            }
             .qq-music-player.qq-music-hide-mobile,
             .qq-music-player.qq-music-hide-tablet {
                 display: none;
@@ -463,11 +479,10 @@
         }
         @media (max-width: 1024px) { 
             .members-grid { grid-template-columns: 1fr 1fr; }
-             
-             
+            .nav-links { gap: 25px; } 
+            .nav-links a { font-size: 14px; letter-spacing: 3px; } 
             .album-cover { width: 300px; height: 300px; } 
             .album-title { font-size: 36px; letter-spacing: 8px; }
-            
             .nav-skull { width: 50px; height: 50px; }
         }
         @media (max-width: 768px) {
@@ -476,7 +491,7 @@
             .hero { width: 100%; position: relative; overflow: hidden; }
             .hero-bg { position: relative; width: 100%; line-height: 0; }
             .hero-bg img { width: 100%; height: auto; display: block; }
-            
+            .hero-content { position: absolute; bottom: 8%; left: 0; right: 0; z-index: 10; text-align: center; width: 100%; padding: 0 15px; }
             .hero-logo-img { width: 80%; max-width: 360px; height: auto; filter: drop-shadow(0 0 15px rgba(220, 38, 38, 0.6)) drop-shadow(0 0 30px rgba(220, 38, 38, 0.4)); }
             @media (max-width: 768px) and (orientation: portrait) and (min-aspect-ratio: 1/2) {
                 .hero-logo-img { width: 53%; max-width: 240px; }
@@ -484,13 +499,13 @@
             @media (max-width: 380px) {
                 .hero-logo-img { width: 75%; max-width: 340px; }
                 .hero-logo-img { width: 80%; max-width: 320px; }
-                .footer-nav-container 
+                .footer-nav-container .nav-dragon { display: block; width: 20px; height: 20px; }
             }
             .reveal, .reveal.active, .reveal-logo, .reveal-logo.active { opacity: 1; animation: none; transform: none; filter: none; }
-            
-            
+            .nav-links { gap: 5px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding: 0 10px; justify-content: space-around; }
+            .nav-links a { font-size: 12px; white-space: nowrap; padding: 8px 2px; letter-spacing: 1px; }
             .nav-links a[href*="antiipa"] { letter-spacing: 0; font-size: 11px; }
-            
+            .nav-dragon { width: 35px; height: 35px; }
             .nav-dragon-left { margin-right: 8px; }
             .nav-dragon-right { margin-left: 8px; }
             .members-grid { grid-template-columns: 1fr 1fr; gap: 15px; max-width: 100%; }
@@ -503,36 +518,37 @@
             .tour-venue-col { order: 3; width: auto; max-width: 120px; text-align: center; flex: 0 1 auto; margin: 0 20px; color: var(--silver); white-space: normal; word-break: break-word; }
             .tour-country-col { order: 4; width: auto; text-align: center; flex: 0 0 auto; white-space: nowrap; }
             .tour-btn-col { order: 5; width: 100%; text-align: center; margin-top: 0; }
-             
-            
+            .tour-section { padding-top: 30px; } 
+            .section-title { font-size: 36px; letter-spacing: 8px; margin-bottom: 30px; }
             .album-cover { width: 260px; height: 260px; } 
             .album-title { font-size: 28px; letter-spacing: 6px; } 
             .music-section-inner, .video-section-inner { padding: 50px 20px; } 
-             
+            .banner-btn { padding: 8px 25px; font-size: 14px; bottom: 30px; } 
             .banner-btn-right { right: 20px; } 
             .footer-main { padding: 30px 20px; } 
             .subscribe-form { flex-direction: column; align-items: center; } 
             .subscribe-input { width: 100%; max-width: 280px; } 
             .footer-nav-container { flex-wrap: nowrap; gap: 8px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 0 10px; justify-content: space-between; }
             .footer-nav a { font-size: 10px; white-space: nowrap; letter-spacing: 1px; padding: 5px 2px; flex-shrink: 0; }
-            .footer-nav-container 
+            .footer-nav-container .nav-dragon { display: block; width: 35px; height: 35px; }
         }
         @media (max-width: 480px) {
             .video-typewriter-container { padding: 3px 6px 0; top: 48%; left: 0.5%; right: 0.5%; width: 99%; min-height: 52%; max-height: 52%; }
             .video-typewriter-text { font-size: clamp(6.5px, 2.6vw, 9px); line-height: 1.0; letter-spacing: 0.5px; }
-            
-        }
+            }
 
         /* 其他样式 */
         .video-player { -webkit-user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; }
         .video-player img { -webkit-user-drag: none; }
-        
+        .nav-dragon { image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges; }
         .dragon-clone { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0); filter: grayscale(0%) brightness(3) drop-shadow(0 0 60px #DC2626) drop-shadow(0 0 120px rgba(220,38,38,0.9)); z-index: 99999; pointer-events: none; opacity: 0; background-repeat: no-repeat; background-position: center; will-change: transform, opacity; }
         .dragon-clone.animate { animation: dragonFlash 1.2s ease-out forwards; }
         @keyframes dragonFlash { 0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; } 20% { transform: translate(-50%, -50%) scale(1.0); opacity: 1; } 50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; } 80% { transform: translate(-50%, -50%) scale(1.0); opacity: 1; } 100% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; } }
         .dragon-star-ring { position: fixed; top: 50%; left: 50%; width: 60vmin; height: 60vmin; background: rgba(220,38,38,0.9); clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); transform: translate(-50%, -50%) scale(0) rotate(0deg); z-index: 99998; animation: starExpand 1.2s ease-out forwards; will-change: transform, opacity; }
         @keyframes starExpand { 0% { transform: translate(-50%, -50%) scale(0) rotate(0deg); opacity: 0; } 30% { opacity: 1; } 100% { transform: translate(-50%, -50%) scale(3) rotate(180deg); opacity: 0; } }
-        
+        @media (max-width: 768px) and (orientation: portrait) {
+            
+        }
         .merch-item, .merch-img, .merch-img-hover { will-change: transform; contain: layout style paint; }
         .banner img, .hero-bg img { will-change: transform; content-visibility: auto; }
         #bannerVideo { will-change: opacity; }
@@ -548,48 +564,23 @@
         .music-video-section::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 80px; background: linear-gradient(to bottom, #000 0%, rgba(0,0,0,0.6) 60%, transparent 100%); z-index: 5; pointer-events: none; }
     
         /* 网易云播放器高度调整 */
+        @media (min-width: 769px) and (orientation: portrait) {
+            }
+        @media (max-width: 1024px) and (min-width: 769px) and (orientation: portrait),
+               (max-width: 768px) {
+            }
+    
+        
 
-
-        /* ===== 统一音乐播放器响应式样式 ===== */
-        .music-player-embed {
-            width: 100%;
-            max-width: 350px;
-            border-radius: 12px;
-        }
-
+        /* ===== 音乐播放器统一样式 ===== */
         .netease-player {
             height: 655px !important;
         }
 
-        .qq-music-list {
-            display: flex;
-            flex-direction: column;
-            gap: 0;
-            height: 655px;
-            overflow: hidden;
-        }
-
-        .qq-music-player {
-            width: 100%;
-            height: 60px;
-            border: none;
-            flex-shrink: 0;
-        }
-
-        /* 桌面端竖屏 */
-        @media (min-width: 769px) and (orientation: portrait) {
-            .netease-player { height: 655px !important; }
-            .qq-music-list { height: 655px; }
-        }
-
-        /* 平板 */
         @media (max-width: 1024px) and (min-width: 769px) {
             .netease-player { height: 537px !important; }
-            .qq-music-list { height: 537px; }
-            .qq-music-player.qq-music-hide-mobile { display: none; }
         }
 
-        /* 手机端 */
         @media (max-width: 768px) {
             .music-player-side {
                 max-width: 100%;
@@ -600,27 +591,19 @@
                 max-width: 100% !important;
             }
             .netease-player { 
-                height: 537px !important; 
                 width: 100% !important;
                 max-width: 100% !important;
+                height: 537px !important;
             }
-            .qq-music-list { height: 537px; }
-            .qq-music-player.qq-music-hide-mobile { display: none; }
             .music-content-new {
                 grid-template-columns: 1fr !important;
                 gap: 30px;
             }
         }
 
-        /* 小屏手机 */
         @media (max-width: 480px) {
-            .netease-player { height: 537px !important; }
-            .qq-music-list { height: 537px; }
-            .qq-music-player.qq-music-hide-mobile,
-            .qq-music-player.qq-music-hide-tablet { display: none; }
+            .netease-player { height: 480px !important; }
         }
-
-        /* ===== 其他优化样式 ===== */
 </style>
 </head>
 <body>
@@ -800,7 +783,7 @@
             <div class="music-content-new">
                 <div class="music-player-side reveal">
                     <h3 class="music-player-title">網易雲音樂</h3>
-                    <iframe class="music-player-embed netease-player" src="https://music.163.com/outchain/player?type=0&id=6844513901&auto=0&height=430" frameBorder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" scrolling="no"></iframe>
+                    <iframe class="music-player-embed netease-player" style="border-radius:12px;" src="https://music.163.com/outchain/player?type=0&id=6844513901&auto=0&height=430" frameBorder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" scrolling="no"></iframe>
                 </div>
                 <div class="music-center reveal">
                     <div class="album-cover"><img src="./image/releases/undersymphonicsiege.webp" alt="Under Symphonic Siege Album Cover"></div>
@@ -1225,7 +1208,8 @@
     </script>
 
     <script type="text/javascript">
-
+        
+        
 
         // 龙点击动画
         document.querySelectorAll('.nav-dragon').forEach(dragon => {
@@ -1616,6 +1600,14 @@
                 requestAnimationFrame(typeWriter);
             }
 
+            function init() {
+                if (element) {
+                    element.textContent = '';
+                    index = 0;
+                    lastTime = performance.now();
+                    requestAnimationFrame(typeWriter);
+                }
+            }
 
             if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', init);
@@ -1896,6 +1888,7 @@ document.addEventListener('keydown', (e) => {
             }
         });
     </script>
+
 
 <div class="merch-popup-overlay" id="merchPopup" onclick="closeMerchPopup(event)">
     <div class="merch-popup-content" onclick="event.stopPropagation()">

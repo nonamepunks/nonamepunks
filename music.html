@@ -8,6 +8,71 @@
     <link rel="shortcut icon" href="./image/toplogo.png" type="image/png">
     <link rel="apple-touch-icon" href="./image/toplogo.png">
     <style>
+        /* ===== 导航栏 - 移动端修复版 ===== */
+        .navbar { position: fixed; top: -100px; left: 0; width: 100%; background: rgba(0,0,0,0.7); border-bottom: none; z-index: 1000; padding: 4px 0; transition: top 0.3s steps(3); }
+        .navbar.visible { top: 0; }
+        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: center; align-items: center; padding: 0 30px; position: relative; }
+        .nav-skull { width: 68px; height: 68px; cursor: pointer; transition: all 0.3s; filter: grayscale(100%) brightness(0.8); object-fit: contain; }
+        .nav-skull:hover { filter: grayscale(0%) brightness(1.2) drop-shadow(0 0 15px var(--logo-red)); transform: scale(1.1) rotate(5deg); }
+        .nav-skull-left { margin-right: 20px; }
+        .nav-skull-right { margin-left: 20px; }
+        .nav-dragon { width: 50px; height: 50px; cursor: pointer; transition: all 0.2s; filter: grayscale(100%) brightness(0.8); object-fit: contain; }
+        .nav-dragon:hover { filter: grayscale(0%) brightness(1.2) drop-shadow(0 0 10px var(--logo-red)); transform: scale(1.1); }
+        .nav-dragon-left { margin-right: 40px; }
+        .nav-dragon-right { margin-left: 40px; }
+
+        .nav-links { display: flex; gap: 50px; list-style: none; justify-content: center; }
+        .nav-links a { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; color: var(--white); text-decoration: none; font-size: 18px; letter-spacing: 4px; text-transform: uppercase; position: relative; transition: all 0.1s; padding: 10px 0; }
+        .nav-links a:hover { color: var(--logo-red); text-shadow: -1px -1px 0 rgba(0,0,0,0.8), 1px -1px 0 rgba(0,0,0,0.8), -1px 1px 0 rgba(0,0,0,0.8), 1px 1px 0 rgba(0,0,0,0.8), 0 0 10px var(--logo-red), 0 0 20px var(--logo-red); transform: skewX(-5deg); }
+
+        /* 1200px以下 */
+        @media (max-width: 1200px) {
+            .nav-links { gap: 30px; }
+            .nav-links a { font-size: 16px; letter-spacing: 3px; }
+        }
+
+        /* 1024px以下 - 平板 */
+        @media (max-width: 1024px) {
+            .nav-links { gap: 20px; }
+            .nav-links a { font-size: 14px; letter-spacing: 2px; }
+            .nav-skull { width: 50px; height: 50px; }
+            .nav-dragon { width: 40px; height: 40px; }
+        }
+
+        /* 768px以下 - 移动端 */
+        @media (max-width: 768px) {
+            .nav-container { padding: 0 10px; justify-content: space-between; }
+            .nav-links { gap: 6px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; padding: 0 8px; justify-content: flex-start; width: 100%; -webkit-overflow-scrolling: touch; scroll-snap-type: x mandatory; }
+            .nav-links::-webkit-scrollbar { display: none; }
+            .nav-links li { flex-shrink: 0; scroll-snap-align: start; }
+            .nav-links a { font-size: clamp(9px, 2.5vw, 12px); white-space: nowrap; padding: 8px 4px; letter-spacing: 0.5px; display: block; }
+            .nav-links a[href*="antiipa"] { letter-spacing: 0.3px; font-size: clamp(9px, 2.3vw, 11px); }
+            .nav-dragon { width: 32px; height: 32px; }
+            .nav-dragon-left { margin-right: 6px; }
+            .nav-dragon-right { margin-left: 6px; }
+            .nav-skull { width: 40px; height: 40px; }
+            .nav-skull-left { margin-right: 8px; }
+            .nav-skull-right { margin-left: 8px; }
+        }
+
+        /* 480px以下 - 小屏手机 */
+        @media (max-width: 480px) {
+            .nav-links { gap: 4px; padding: 0 5px; }
+            .nav-links a { font-size: 10px; padding: 6px 3px; letter-spacing: 0.3px; }
+            .nav-links a[href*="antiipa"] { font-size: 9px; letter-spacing: 0.2px; }
+            .nav-dragon { width: 28px; height: 28px; }
+            .nav-skull { width: 36px; height: 36px; }
+        }
+
+        /* 360px以下 - 超小屏 */
+        @media (max-width: 360px) {
+            .nav-links { gap: 3px; padding: 0 3px; }
+            .nav-links a { font-size: 9px; padding: 5px 2px; letter-spacing: 0.2px; }
+            .nav-dragon { width: 24px; height: 24px; }
+            .nav-skull { width: 32px; height: 32px; }
+        }
+
+
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
         html {
     width: 100%;
@@ -24,25 +89,15 @@
         .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* 导航栏 - 与index完全一致 */
-        .navbar { position: fixed; top: -100px; left: 0; width: 100%; background: rgba(0,0,0,0.7); border-bottom: none; z-index: 1000; padding: 4px 0; transition: top 0.3s steps(3); }
         .navbar.visible { top: 0; }
-        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: center; align-items: center; padding: 0 30px; position: relative; }
-
         /* 骷髅图 - 放大到与导航栏高度一致 */
-        .nav-skull { width: 68px; height: 68px; cursor: pointer; transition: all 0.3s; filter: grayscale(100%) brightness(0.8); object-fit: contain; }
         .nav-skull:hover { filter: grayscale(0%) brightness(1.2) drop-shadow(0 0 15px var(--logo-red)); transform: scale(1.1) rotate(5deg); }
         .nav-skull-left { margin-right: 20px; }
         .nav-skull-right { margin-left: 20px; }
 
-        .nav-dragon { width: 50px; height: 50px; cursor: pointer; transition: all 0.2s; filter: grayscale(100%) brightness(0.8); object-fit: contain; }
         .nav-dragon:hover { filter: grayscale(0%) brightness(1.2) drop-shadow(0 0 10px var(--logo-red)); transform: scale(1.1); }
         .nav-dragon-left { margin-right: 40px; }
         .nav-dragon-right { margin-left: 40px; }
-
-        .nav-links { display: flex; gap: 50px; list-style: none; justify-content: center; }
-        .nav-links a { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; color: var(--white); text-decoration: none; font-size: 18px; letter-spacing: 4px; text-transform: uppercase; position: relative; transition: all 0.1s; padding: 10px 0; }
-        .nav-links a:hover { color: var(--logo-red); text-shadow: -1px -1px 0 rgba(0,0,0,0.8), 1px -1px 0 rgba(0,0,0,0.8), -1px 1px 0 rgba(0,0,0,0.8), 1px 1px 0 rgba(0,0,0,0.8), 0 0 10px var(--logo-red), 0 0 20px var(--logo-red); transform: skewX(-5deg); }
 
         /* 龙点击特效 - 与index完全一致 */
         .dragon-clone { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0); filter: grayscale(0%) brightness(3) drop-shadow(0 0 60px #DC2626) drop-shadow(0 0 120px rgba(220,38,38,0.9)); z-index: 99999; pointer-events: none; opacity: 0; background-repeat: no-repeat; background-position: center; will-change: transform, opacity; }
@@ -189,10 +244,6 @@
             .music-player-embed { height: 537px !important; }
         }
         @media (max-width: 1024px) {
-            .nav-links { gap: 25px; }
-            .nav-links a { font-size: 14px; letter-spacing: 2px; }
-            .nav-skull { width: 50px; height: 50px; }
-            .nav-dragon { width: 40px; height: 40px; }
             .album-cover-featured { width: 300px; height: 300px; }
             .album-title-featured { font-size: 36px; letter-spacing: 6px; }
             .album-item { margin-bottom: 40px; }
@@ -204,41 +255,14 @@
             .music-player-embed { height: 537px !important; }
         }
         @media (max-width: 768px) {
-            .nav-container {
-                padding: 0 5px;
-                justify-content: space-between;
-            }
             .nav-dragon-left { margin-right: 5px; }
             .nav-dragon-right { margin-left: 5px; }
             .nav-skull-left { margin-right: 5px; }
             .nav-skull-right { margin-left: 5px; }
-            .nav-skull { width: 45px; height: 45px; }
             .nav-skull-left { margin-right: 10px; }
             .nav-skull-right { margin-left: 10px; }
-            .nav-dragon { width: 35px; height: 35px; }
             .nav-dragon-left { margin-right: 15px; }
             .nav-dragon-right { margin-left: 15px; }
-            .nav-links { 
-                gap: 10px; 
-                flex-wrap: nowrap; 
-                overflow-x: auto; 
-                scrollbar-width: none; 
-                -ms-overflow-style: none;
-                padding: 0 5px; 
-                justify-content: flex-start;
-                width: 100%;
-                -webkit-overflow-scrolling: touch;
-            }
-            .nav-links::-webkit-scrollbar { display: none; }
-            .nav-links li { flex-shrink: 0; }
-            .nav-links a { 
-                font-size: 12px; 
-                white-space: nowrap; 
-                padding: 8px 4px; 
-                letter-spacing: 0.5px;
-                display: block;
-            }
-            .nav-links a[href*="antiipa"] { letter-spacing: 0; font-size: 11px; }
             .section-title { font-size: 32px; letter-spacing: 6px; }
             .album-cover-featured { width: 260px; height: 260px; }
             .album-title-featured { font-size: 24px; letter-spacing: 4px; }
